@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.geojson linguist-generated=true
+*.topojson linguist-generated=true
+*.pbix binary

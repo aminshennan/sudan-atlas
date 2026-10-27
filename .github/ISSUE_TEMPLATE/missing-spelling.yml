@@ -1,0 +1,39 @@
+name: Report a missing spelling
+description: A place name that Sudan Atlas failed to match, or matched to the wrong place.
+title: "Missing spelling: "
+labels: ["variant"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name as written
+      description: Exactly as it appears in your data (Arabic or English).
+      placeholder: "e.g. El Fasher, الفاشر"
+    validations:
+      required: true
+  - type: input
+    id: expected
+    attributes:
+      label: Correct place
+      description: The official name or P-code it should match, if you know it.
+      placeholder: "e.g. Al Fasher (North Darfur)"
+  - type: input
+    id: state
+    attributes:
+      label: State
+      description: The state the place is in, if known.
+  - type: dropdown
+    id: result
+    attributes:
+      label: What happened
+      options:
+        - No match
+        - Matched the wrong place
+        - Matched, but with low confidence
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Where this spelling comes from
+      description: The dataset, document or organisation that uses it (helps us record the source of every variant).

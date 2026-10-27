@@ -1,0 +1,13 @@
+Data licence
+
+The data files in data/ and powerbi/ are licensed under the
+Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+
+  Summary:    https://creativecommons.org/licenses/by/4.0/
+  Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+
+The data is derived from third-party sources. When you use it, credit
+Sudan Atlas and each original source listed in docs/SOURCES.md.
+
+The code in this repository is licensed separately under the MIT licence
+(see LICENSE).
