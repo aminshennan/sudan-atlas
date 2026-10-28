@@ -50,3 +50,20 @@ def test_missing_arabic_is_a_warning(frames):
     result = run(adm1, adm2)
     assert result.errors == []
     assert any("no Arabic name" in w and "SD02001" in w for w in result.warnings)
+
+
+def test_topojson_geometry_is_checked(cod_ab, monkeypatch):
+    import json
+    from pipeline import __main__ as cli, config
+
+    monkeypatch.setattr(config, "COD_AB_DIR", cod_ab)
+    cli.main(["build"])
+    path = config.BOUNDARIES_DIR / "light" / "adm2.topojson"
+    topo = json.loads(path.read_text())
+    # A closed bow-tie ring. TopoJSON arcs are delta-encoded: each point is an offset from the last.
+    topo["arcs"].append([[0, 0], [20_000, 20_000], [0, -20_000], [-20_000, 20_000], [0, -20_000]])
+    topo["objects"]["adm2"]["geometries"][0]["arcs"] = [[len(topo["arcs"]) - 1]]
+    path.write_text(json.dumps(topo))
+    result = validate.Result("light")
+    validate.check_topojson(path, 2, 4, result)
+    assert any("invalid geometry after quantization" in e for e in result.errors)

@@ -169,8 +169,15 @@ def check_topojson(path: Path, level: int, expected: int, result: Result) -> Non
     geometries = topo.get("objects", {}).get(f"adm{level}", {}).get("geometries", [])
     if len(geometries) != expected:
         result.errors.append(f"{path.name}: {len(geometries)} geometries, expected {expected}")
+        return
     if any(not (g.get("properties") or {}).get("pcode") for g in geometries):
         result.errors.append(f"{path.name}: geometries without a pcode property")
+        return
+    # Quantization can make a ring cross itself, so check the decoded geometry too.
+    decoded = gpd.read_file(path, layer=f"adm{level}").set_crs(4326, allow_override=True)
+    invalid = decoded.loc[~decoded.geometry.is_valid, "pcode"].tolist()
+    if invalid:
+        result.errors.append(f"{path.name}: invalid geometry after quantization for {invalid}")
 
 
 def validate(

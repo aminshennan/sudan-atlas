@@ -31,10 +31,13 @@ PARENT_CONTAINMENT_TOLERANCE = 0.001  # 0.1 %
 
 # mapshaper simplification per resolution: the share of removable vertices
 # kept, the coordinate precision written to GeoJSON, and TopoJSON quantization.
+# Precision and quantization are the coarsest values that keep every COD-AB
+# 2020 (v03) geometry valid; coarser grids snap close vertices together and
+# make rings cross themselves. Validation re-checks this on every build.
 RESOLUTIONS = {
-    "detailed": {"simplify": None, "precision": 0.000001, "quantization": 1_000_000},
-    "medium": {"simplify": "10%", "precision": 0.00001, "quantization": 100_000},
-    "light": {"simplify": "1.5%", "precision": 0.0001, "quantization": 10_000},
+    "detailed": {"simplify": None, "precision": 0.0000001, "quantization": 100_000_000},
+    "medium": {"simplify": "10%", "precision": 0.00001, "quantization": 1_000_000},
+    "light": {"simplify": "1.5%", "precision": 0.0001, "quantization": 100_000},
 }
 
 LEVELS = (1, 2)

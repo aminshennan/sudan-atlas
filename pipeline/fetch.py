@@ -102,6 +102,30 @@ def fetch_geoboundaries() -> dict:
     return manifest
 
 
+def register_local(archive: Path, note: str) -> dict:
+    """Copy a COD-AB archive downloaded by hand into data/raw/cod-ab/ and record it."""
+    body = archive.read_bytes()
+    target = config.COD_AB_DIR / archive.name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(body)
+    manifest = {
+        "source": "COD-AB Sudan (OCHA, via HDX)",
+        "dataset_url": f"https://data.humdata.org/dataset/{config.HDX_DATASET}",
+        "licence": "CC BY 3.0 IGO",
+        "obtained": note,
+        "downloaded_at": _now(),
+        "files": [{
+            "url": None,
+            "file": target.relative_to(config.ROOT).as_posix(),
+            "bytes": len(body),
+            "sha256": hashlib.sha256(body).hexdigest(),
+        }],
+    }
+    (config.COD_AB_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+    print(f"COD-AB: registered {target.name} ({len(body):,} bytes)")
+    return manifest
+
+
 def run() -> None:
     cod = fetch_cod_ab()
     print(f"COD-AB: {len(cod['files'])} file(s), format {cod['format']}, licence {cod['licence']!r}")

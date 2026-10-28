@@ -27,3 +27,25 @@ def test_reads_zipped_sources(cod_ab):
         zf.write(cod_ab / "sdn_cod_ab.gpkg", "inner/sdn_cod_ab.gpkg")
     (cod_ab / "sdn_cod_ab.gpkg").unlink()
     assert sorted(normalise.find_layers(cod_ab)) == [0, 1, 2]
+
+
+def test_reads_language_indexed_name_columns(cod_ab):
+    """COD-AB v03 layout: adm1_name / adm1_name1 with lang / lang1 naming the language."""
+    gpkg = cod_ab / "sdn_cod_ab.gpkg"
+    for layer, level in (("sdn_admin1", 1), ("sdn_admin2", 2)):
+        frame = gpd.read_file(gpkg, layer=layer)
+        renamed = frame.rename(columns={
+            f"ADM{level}_PCODE": f"adm{level}_pcode",
+            f"ADM{level}_EN": f"adm{level}_name1",  # English deliberately in the second slot
+            f"ADM{level}_AR": f"adm{level}_name",
+            "ADM1_PCODE": "adm1_pcode",
+            "ADM0_PCODE": "adm0_pcode",
+        })
+        renamed["lang"], renamed["lang1"] = "ar", "en"
+        renamed.to_file(gpkg, layer=layer, driver="GPKG")
+
+    report = normalise.run(cod_ab)
+    adm1 = gpd.read_file(config.INTERIM_DIR / "adm1.geojson").set_index("pcode")
+    assert adm1.loc["SD01", "name_en"] == "West State"
+    assert adm1.loc["SD01", "name_ar"] == "الولاية الغربية"
+    assert report["adm2"]["column_mapping"]["name_en"] == "adm2_name1"

@@ -1,11 +1,13 @@
-"""Command line: python -m pipeline [fetch|normalise|simplify|validate|manifest|build].
+"""Command line: python -m pipeline [fetch|import ARCHIVE|normalise|simplify|validate|manifest|build].
 
 `build` rebuilds data/boundaries/ from data/raw/ and validates it; it exits
 non-zero if any validation check fails. `fetch` downloads data/raw/ and is
-kept separate so a rebuild never depends on the network.
+kept separate so a rebuild never depends on the network. `import` registers
+a COD-AB archive downloaded by hand from HDX, when HDX is not reachable.
 """
 
 import sys
+from pathlib import Path
 
 from . import fetch, manifest, normalise, simplify, validate
 
@@ -25,6 +27,12 @@ def build() -> int:
 
 def main(argv: list[str]) -> int:
     step = argv[0] if argv else "build"
+    if step == "import":
+        if len(argv) != 2:
+            print(__doc__)
+            return 2
+        fetch.register_local(Path(argv[1]), "downloaded by hand from HDX and imported with `python -m pipeline import`")
+        return 0
     steps = {
         "fetch": lambda: fetch.run() or 0,
         "normalise": lambda: normalise.run() and 0,

@@ -89,20 +89,46 @@ def _clean(value) -> str | None:
     return text or None
 
 
+def _name_columns(raw: gpd.GeoDataFrame, level: int) -> dict[str, str]:
+    """Name columns by language.
+
+    Older COD-AB editions name them ADM1_EN, ADM1_AR. Newer ones use adm1_name,
+    adm1_name1, ... with lang, lang1, ... holding each column's language code.
+    """
+    columns = list(raw.columns)
+    found = {}
+    for suffix in ("", "1", "2", "3"):
+        name = _column(columns, rf"ADM{level}_NAME{suffix}")
+        lang = _column(columns, rf"LANG{suffix}")
+        if not name or not lang:
+            continue
+        codes = set(raw[lang].dropna().astype(str).str.lower())
+        if len(codes) == 1:
+            found.setdefault(codes.pop(), name)
+    for code in ("en", "ar"):
+        legacy = _column(columns, rf"ADM{level}_{code}")
+        if legacy:
+            found.setdefault(code, legacy)
+    return found
+
+
 def normalise_layer(source: dict, level: int) -> tuple[gpd.GeoDataFrame, dict]:
     columns = source["columns"]
+    raw = gpd.read_file(source["dataset"], layer=source["layer"])
+    names = _name_columns(raw, level)
     mapping = {
         "pcode": _column(columns, rf"ADM{level}_PCODE", rf"ADM{level}_PCOD"),
-        "name_en": _column(columns, rf"ADM{level}_EN", rf"ADM{level}_NAME", rf"ADM{level}_REF"),
-        "name_ar": _column(columns, rf"ADM{level}_AR"),
+        "name_en": names.get("en") or _column(columns, rf"ADM{level}_REF_NAME", rf"ADM{level}_REF"),
+        "name_ar": names.get("ar"),
         "parent_pcode": _column(columns, rf"ADM{level - 1}_PCODE", rf"ADM{level - 1}_PCOD") if level else None,
     }
     # The admin-0 layer is only the national outline for the gap check, so it
     # needs nothing beyond a P-code.
     if not mapping["pcode"] or (level > 0 and not mapping["name_en"]):
         raise SystemExit(f"Admin {level} layer lacks a P-code or English name column. Columns: {columns}")
+    if level > 0 and not mapping["name_ar"]:
+        print(f"WARNING: admin {level} layer has no Arabic name column. Columns: {columns}")
 
-    raw = gpd.read_file(source["dataset"], layer=source["layer"])
     if raw.crs is None:
         raise SystemExit(f"Admin {level} layer has no coordinate reference system")
     raw = raw.to_crs(4326)
@@ -130,11 +156,23 @@ def normalise_layer(source: dict, level: int) -> tuple[gpd.GeoDataFrame, dict]:
         "dataset": _display(Path(source["dataset"])),
         "layer": source["layer"],
         "column_mapping": mapping,
+        "edition": _edition(raw),
         "source_feature_count": int(len(raw)),
         "repaired_geometries": repaired,
         "missing_arabic_name": out.loc[out["name_ar"].isna(), ["pcode", "name_en"]].to_dict("records"),
     }
     return out, report
+
+
+def _edition(raw: gpd.GeoDataFrame) -> dict:
+    """COD-AB version and validity dates, when the layer records them."""
+    edition = {}
+    for key in ("version", "valid_on", "valid_to"):
+        column = _column(list(raw.columns), key, f"{key.replace('_', '')}")
+        if column:
+            values = sorted(set(raw[column].dropna().astype(str)))
+            edition[key] = values[0] if len(values) == 1 else values
+    return edition
 
 
 def _display(path: Path) -> str:

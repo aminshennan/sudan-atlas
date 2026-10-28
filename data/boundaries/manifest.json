@@ -1,0 +1,98 @@
+{
+  "name": "Sudan Atlas boundaries",
+  "version": "2026.1",
+  "licence": "CC BY 3.0 IGO (boundaries derived from OCHA COD-AB); see LICENSE-DATA",
+  "attribution": "OCHA Regional Office for Southern and Eastern Africa (ROSEA), via HDX; Sudan Atlas",
+  "schema": [
+    "pcode",
+    "name_en",
+    "name_ar",
+    "level",
+    "parent_pcode"
+  ],
+  "counts": {
+    "adm1": 19,
+    "adm2": 189
+  },
+  "resolutions": {
+    "detailed": {
+      "simplify": null,
+      "precision": 1e-07,
+      "quantization": 100000000
+    },
+    "medium": {
+      "simplify": "10%",
+      "precision": 1e-05,
+      "quantization": 1000000
+    },
+    "light": {
+      "simplify": "1.5%",
+      "precision": 0.0001,
+      "quantization": 100000
+    }
+  },
+  "sources": [
+    {
+      "source": "COD-AB Sudan (OCHA, via HDX)",
+      "dataset_url": "https://data.humdata.org/dataset/cod-ab-sdn",
+      "licence": "CC BY 3.0 IGO",
+      "downloaded_at": "2026-10-28T09:12:39Z",
+      "files": [
+        {
+          "file": "sdn_admin_boundaries.geojson.zip",
+          "sha256": "75330d4e12e53f966df0e5683e04f0919e9964952fbbf827f3729038e603c95e"
+        }
+      ]
+    }
+  ],
+  "files": {
+    "detailed/adm1.geojson": {
+      "bytes": 477564,
+      "sha256": "acbea4bda09a4bc79c771e0ed3f37f39df14896a1905efc1e00de4b95f62084c"
+    },
+    "detailed/adm1.topojson": {
+      "bytes": 189337,
+      "sha256": "cab8bd467a2671628190867f2315fb47378091ed69ca9195956b71a85eb746d4"
+    },
+    "detailed/adm2.geojson": {
+      "bytes": 851195,
+      "sha256": "a8014c913806400d327e2af4f6aad4ceebd4175b4ee40c6049d9c396d1331247"
+    },
+    "detailed/adm2.topojson": {
+      "bytes": 337493,
+      "sha256": "0efae36e89308756c46bb19451bde0f84583810810c80e8f605c940cb273687b"
+    },
+    "medium/adm1.geojson": {
+      "bytes": 33482,
+      "sha256": "b795092a9307c8efb03e4503c5c2f03e0e5af6e0a97fe056514f0c902d740615"
+    },
+    "medium/adm1.topojson": {
+      "bytes": 16698,
+      "sha256": "b3ae906719689ded868e7517933661a5636db97b2fde468770c57b0bf8903da9"
+    },
+    "medium/adm2.geojson": {
+      "bytes": 129630,
+      "sha256": "903e059dfd18a5d0d6f226f173ef407ba98d0234ca8b6113a0827633d5d37684"
+    },
+    "medium/adm2.topojson": {
+      "bytes": 74648,
+      "sha256": "0b88cceb49a8ea5fe081f97f68b471acff347b84707143b47bd26a64dd5f496a"
+    },
+    "light/adm1.geojson": {
+      "bytes": 13485,
+      "sha256": "a2be899b499fa2aecf473af5a1d24e7521088bf310019945482b0af827032205"
+    },
+    "light/adm1.topojson": {
+      "bytes": 8204,
+      "sha256": "aeffb88a318a62cd9c454937761adb7d50853ee0e87092c8d0fc7879e070b86f"
+    },
+    "light/adm2.geojson": {
+      "bytes": 66058,
+      "sha256": "2840335247810c5980a8a0bbc5d99a5bd8afb530051619c039d576274a8720fa"
+    },
+    "light/adm2.topojson": {
+      "bytes": 51083,
+      "sha256": "5661c37e410038517188862598bbfc6e7856248e59405e11dfd3853ce87b2e40"
+    }
+  }
+}

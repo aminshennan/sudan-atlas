@@ -1,6 +1,6 @@
 # Data policy
 
-> **Status: draft for review.** Facts marked _(to confirm on COD-AB)_ are filled in when the pipeline first runs on the COD-AB download.
+> **Status: draft for review.** Facts below are checked against COD-AB Sudan version v03 (valid from 31 August 2020).
 
 ## Principle: follow the UN dataset as published
 
@@ -16,15 +16,20 @@ Abyei is claimed by both Sudan and South Sudan and has a special administrative 
 
 Sudan Atlas keeps it exactly so:
 
-- Abyei is its own admin-1 feature, with its COD-AB P-code and names _(to confirm on COD-AB)_.
+- Abyei is its own admin-1 feature: `SD19`, "Abyei PCA" (إدارية أبيي), about 10,537 km².
+- It has a single admin-2 feature: `SD19001`, "Abyei PCA area".
 - It counts toward the 19 admin-1 features (18 states plus Abyei).
 - It is never merged into a neighbouring state, at any resolution.
 
+COD-AB also has a separate locality named **"Abyei" (`SD18087`) in West Kordofan**. This is a different feature from the Abyei PCA area. The matcher (Phase 2) must not resolve "Abyei" silently to either one; it returns both as alternatives unless a state hint decides it.
+
 ### Halaib Triangle
 
-The Halaib Triangle is claimed by both Sudan and Egypt. The COD-AB national outline includes it: the boundary runs north of the 22nd parallel to about 23.1°N along the Red Sea coast. The same holds for the Wadi Halfa salient on the Nile.
+The Halaib Triangle is claimed by both Sudan and Egypt. The COD-AB national outline includes it: the boundary runs north of the 22nd parallel to about 23.1°N along the Red Sea coast. COD-AB places it in **Red Sea State (`SD10`)** as its own locality, **`SD10066` "Hala'ib" (حلايب)**.
 
-Sudan Atlas keeps the COD-AB geometry unchanged, inside the admin-1 unit COD-AB assigns it to _(to confirm on COD-AB; expected Red Sea State)_. It is not marked or styled differently in the data. Map makers who need a different treatment can clip or restyle it themselves; we will document how.
+The **Wadi Halfa salient** on the Nile, also north of the 22nd parallel, is in Northern State (`SD17`), Halfa locality (`SD17014`). **Bir Tawil**, south of the 22nd parallel and claimed by neither country, lies outside the COD-AB outline.
+
+Sudan Atlas keeps the COD-AB geometry unchanged. Halaib is not marked or styled differently in the data. Map makers who need a different treatment can clip or restyle `SD10066` themselves; we will document how.
 
 ## Naming conventions
 
@@ -37,7 +42,9 @@ Sudan Atlas keeps the COD-AB geometry unchanged, inside the admin-1 unit COD-AB 
 
 - Localities are the building blocks. Each state is rebuilt by merging its localities, so a state border and the locality borders along it are the same line at every resolution. The difference from the COD-AB state polygons is measured and reported at each release.
 - Three resolutions: `detailed` (source geometry), `medium` (web pages) and `light` (thumbnails). They are simplified with mapshaper, which keeps shared borders identical between neighbours.
-- Each release is validated: valid geometry, no gaps or overlaps between neighbouring localities above 0.01 km², every locality inside its state, every `parent_pcode` present, and feature counts equal to the source.
+- Each release is validated: valid geometry (in both GeoJSON and TopoJSON), no gaps or overlaps between neighbouring localities above 0.01 km², every locality inside its state, every `parent_pcode` present, and feature counts equal to the source.
+- Coordinates are rounded as coarsely as possible while keeping every shape valid: 7 decimal places (about 1 cm) for `detailed`, 5 for `medium`, 4 for `light`. Coarser rounding was tested and made some COD-AB rings cross themselves.
+- Known source imperfections we keep rather than edit: one 1,696 m² gap between localities near 31.445°E, 9.898°N (below the 0.01 km² tolerance).
 
 ## Versioning
 
@@ -48,6 +55,6 @@ Sudan Atlas keeps the COD-AB geometry unchanged, inside the admin-1 unit COD-AB 
 
 ## Licence and attribution
 
-- Boundary files are derived from COD-AB and keep its licence, **Creative Commons Attribution 3.0 IGO (CC BY 3.0 IGO)** _(to confirm against the HDX licence on download)_, with attribution to OCHA.
+- Boundary files are derived from COD-AB and keep its licence, **Creative Commons Attribution 3.0 IGO (CC BY 3.0 IGO)**, with attribution to OCHA.
 - Sudan Atlas's own data (the gazetteer's variant spellings, the normalisation rules and the test cases) is licensed **CC BY 4.0**.
 - See [`LICENSE-DATA`](../LICENSE-DATA) for the attribution text.
