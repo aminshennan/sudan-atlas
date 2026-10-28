@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boundary Preview</title>
+<style>
+  :root {
+    --bg: #fbfaf7; --surface: #ffffff; --text: #1d1d1b; --muted: #6b6a66; --line: #e4e1da;
+    --fill: #d9e6df; --fill-hover: #9fc2b0; --stroke: #2f5d4a; --state: #1d1d1b; --warn: #b5541c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161715; --surface: #1f201e; --text: #ecebe7; --muted: #a09f9a; --line: #34352f;
+      --fill: #2c3d35; --fill-hover: #4a6b5b; --stroke: #9fc2b0; --state: #ecebe7; --warn: #e08a55;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #161715; --surface: #1f201e; --text: #ecebe7; --muted: #a09f9a; --line: #34352f;
+    --fill: #2c3d35; --fill-hover: #4a6b5b; --stroke: #9fc2b0; --state: #ecebe7; --warn: #e08a55;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", "Noto Sans Arabic", sans-serif; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  p.sub { color: var(--muted); margin: 0 0 20px; }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 20px; }
+  button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--surface); color: var(--text); cursor: pointer; }
+  button[aria-pressed="true"] { border-color: var(--stroke); box-shadow: inset 0 0 0 1px var(--stroke); }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 28px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: start; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; }
+  .table-wrap { overflow-x: auto; }
+  .row { display: grid; grid-template-columns: 180px repeat(3, minmax(0, 1fr)); gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--line); align-items: center; }
+  .row.head { font-weight: 600; color: var(--muted); border-bottom: 2px solid var(--line); }
+  .name strong { display: block; }
+  .name span { color: var(--muted); font-size: 0.85rem; }
+  svg { width: 100%; height: auto; display: block; background: var(--surface); border-radius: 6px; }
+  svg path.loc { fill: var(--fill); stroke: var(--stroke); stroke-width: 0.6; vector-effect: non-scaling-stroke; }
+  svg path.loc:hover { fill: var(--fill-hover); }
+  svg path.loc.no-ar { fill: var(--warn); fill-opacity: 0.35; }
+  svg path.state { fill: none; stroke: var(--state); stroke-width: 1.4; vector-effect: non-scaling-stroke; pointer-events: none; }
+  #tip { position: fixed; pointer-events: none; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 6px; padding: 6px 10px; font-size: 0.85rem; display: none; z-index: 2; max-width: 260px; }
+  .error { color: var(--warn); }
+  @media (max-width: 640px) {
+    .row { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .row .name { grid-column: 1 / -1; }
+    .row.head .name { display: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title">Sudan Atlas — boundary preview</h1>
+  <p class="sub" id="subtitle">Every state with its localities, at each resolution. Hover a locality for its codes and names.</p>
+  <div class="bar">
+    <button id="lang-en" aria-pressed="true">English</button>
+    <button id="lang-ar" aria-pressed="false">العربية</button>
+    <span class="sub" style="margin:0">Orange localities have no Arabic name.</span>
+  </div>
+  <div class="table-wrap"><table id="sizes"></table></div>
+  <div id="grid"></div>
+  <div id="tip"></div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+const base = new URLSearchParams(location.search).get("data") || "../../data/boundaries/";
+const resolutions = ["detailed", "medium", "light"];
+let lang = "en";
+const data = {};
+
+const name = (p) => (lang === "ar" ? p.name_ar || p.name_en : p.name_en);
+
+async function load() {
+  const manifest = await d3.json(base + "manifest.json");
+  for (const r of resolutions) {
+    const [a1, a2] = await Promise.all([d3.json(`${base}${r}/adm1.topojson`), d3.json(`${base}${r}/adm2.topojson`)]);
+    data[r] = { adm1: topojson.feature(a1, a1.objects.adm1).features, adm2: topojson.feature(a2, a2.objects.adm2).features };
+  }
+  sizes(manifest);
+  render();
+}
+
+function sizes(manifest) {
+  const kb = (n) => (n / 1024).toLocaleString(undefined, { maximumFractionDigits: 0 }) + " KB";
+  const rows = resolutions.map((r) => {
+    const f = (n) => manifest.files[`${r}/${n}`]?.bytes;
+    return `<tr><td>${r}</td><td>${kb(f("adm1.geojson"))}</td><td>${kb(f("adm1.topojson"))}</td><td>${kb(f("adm2.geojson"))}</td><td>${kb(f("adm2.topojson"))}</td></tr>`;
+  });
+  document.getElementById("sizes").innerHTML =
+    `<caption style="text-align:start;padding-bottom:6px">Data version ${manifest.version} · ${manifest.counts.adm1} states · ${manifest.counts.adm2} localities</caption>` +
+    `<tr><th>Resolution</th><th>States GeoJSON</th><th>States TopoJSON</th><th>Localities GeoJSON</th><th>Localities TopoJSON</th></tr>` + rows.join("");
+}
+
+function render() {
+  const grid = d3.select("#grid").html("").attr("lang", lang).attr("dir", lang === "ar" ? "rtl" : "ltr");
+  const head = grid.append("div").attr("class", "row head");
+  head.append("div").attr("class", "name").text(lang === "ar" ? "الولاية" : "State");
+  resolutions.forEach((r) => head.append("div").text(r));
+
+  const states = [...data.detailed.adm1].sort((a, b) => d3.ascending(a.properties.pcode, b.properties.pcode));
+  for (const state of states) {
+    const pcode = state.properties.pcode;
+    const row = grid.append("div").attr("class", "row");
+    const label = row.append("div").attr("class", "name");
+    label.append("strong").text(name(state.properties));
+    label.append("span").text(`${pcode} · ${data.detailed.adm2.filter((f) => f.properties.parent_pcode === pcode).length} localities`);
+    for (const r of resolutions) {
+      const own = data[r].adm1.find((f) => f.properties.pcode === pcode);
+      const kids = data[r].adm2.filter((f) => f.properties.parent_pcode === pcode);
+      const svg = row.append("svg").attr("viewBox", "0 0 240 180").attr("role", "img").attr("aria-label", `${name(state.properties)}, ${r}`);
+      if (!own) { svg.append("text").attr("x", 10).attr("y", 20).attr("class", "error").text("missing"); continue; }
+      const path = d3.geoPath(d3.geoMercator().fitExtent([[8, 8], [232, 172]], own));
+      svg.selectAll("path.loc").data(kids).join("path")
+        .attr("class", (d) => "loc" + (d.properties.name_ar ? "" : " no-ar"))
+        .attr("d", path)
+        .on("mousemove", tip).on("mouseleave", () => (document.getElementById("tip").style.display = "none"));
+      svg.append("path").attr("class", "state").attr("d", path(own));
+    }
+  }
+}
+
+function tip(event, d) {
+  const t = document.getElementById("tip");
+  const p = d.properties;
+  t.innerHTML = `<strong>${p.name_en}</strong><br><span dir="rtl">${p.name_ar || "— no Arabic name —"}</span><br>${p.pcode} · parent ${p.parent_pcode}`;
+  t.style.display = "block";
+  t.style.left = Math.min(event.clientX + 12, innerWidth - 270) + "px";
+  t.style.top = event.clientY + 12 + "px";
+}
+
+for (const l of ["en", "ar"]) {
+  document.getElementById(`lang-${l}`).addEventListener("click", () => {
+    lang = l;
+    document.getElementById("lang-en").setAttribute("aria-pressed", l === "en");
+    document.getElementById("lang-ar").setAttribute("aria-pressed", l === "ar");
+    render();
+  });
+}
+
+load().catch((e) => {
+  document.getElementById("grid").innerHTML = `<p class="error">Could not load boundary files from <code>${base}</code>: ${e.message}. Run <code>make data</code>, then <code>make preview</code>.</p>`;
+});
+</script>
+</body>
+</html>

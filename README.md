@@ -37,4 +37,15 @@ See [`docs/BRIEF.md`](docs/BRIEF.md) for the full plan.
 ## Licence
 
 - Code: [MIT](LICENSE)
-- Data: [CC BY 4.0](LICENSE-DATA), with attribution to each source listed in [`docs/SOURCES.md`](docs/SOURCES.md)
+- Boundaries: CC BY 3.0 IGO, derived from OCHA's COD-AB ([details](LICENSE-DATA))
+- Gazetteer additions (variant spellings, normalisation rules, test cases): CC BY 4.0
+- Sources are listed in [`docs/SOURCES.md`](docs/SOURCES.md). Boundary choices are documented in [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
+
+## Rebuilding the data
+
+```sh
+make setup   # Python venv + mapshaper
+make fetch   # download COD-AB from HDX into data/raw/
+make data    # rebuild and validate data/boundaries/
+make preview # then open http://localhost:8000/pipeline/preview/
+```

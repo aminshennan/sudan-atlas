@@ -1,13 +1,30 @@
-Data licence
+Data licences
 
-The data files in data/ and powerbi/ are licensed under the
-Creative Commons Attribution 4.0 International licence (CC BY 4.0).
+1. Boundary files (data/boundaries/, powerbi/ and the boundary files shipped
+   in the packages) are derived from the Common Operational Dataset for
+   Administrative Boundaries (COD-AB) for Sudan, published by the UN Office for
+   the Coordination of Humanitarian Affairs (OCHA) on the Humanitarian Data
+   Exchange. They are licensed under the Creative Commons Attribution 3.0 IGO
+   licence (CC BY 3.0 IGO).
 
-  Summary:    https://creativecommons.org/licenses/by/4.0/
-  Legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+     https://creativecommons.org/licenses/by/3.0/igo/
 
-The data is derived from third-party sources. When you use it, credit
-Sudan Atlas and each original source listed in docs/SOURCES.md.
+   Attribution: "Boundaries: OCHA (COD-AB Sudan), via HDX, processed by Sudan
+   Atlas."
 
-The code in this repository is licensed separately under the MIT licence
-(see LICENSE).
+2. Sudan Atlas's own data (the gazetteer's variant spellings, the
+   normalisation rules and the test cases in data/gazetteer/ and data/tests/)
+   is licensed under the Creative Commons Attribution 4.0 International
+   licence (CC BY 4.0).
+
+     https://creativecommons.org/licenses/by/4.0/
+
+   Attribution: "Sudan Atlas", plus the original source of each variant as
+   recorded in the data.
+
+The boundaries do not imply any opinion on the legal status of any country,
+territory or area, or on the delimitation of any frontier. See
+docs/DATA_POLICY.md.
+
+Every source is listed in docs/SOURCES.md. The code in this repository is
+licensed separately under the MIT licence (see LICENSE).

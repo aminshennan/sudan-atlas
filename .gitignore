@@ -34,3 +34,6 @@ Thumbs.db
 
 # Vercel
 .vercel/
+
+# Pipeline intermediates and reports
+build/

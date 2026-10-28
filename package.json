@@ -1,0 +1,15 @@
+{
+  "name": "sudan-atlas-workspace",
+  "private": true,
+  "description": "Workspace tooling for Sudan Atlas. Published packages live in packages/.",
+  "license": "MIT",
+  "scripts": {
+    "mapshaper": "mapshaper"
+  },
+  "devDependencies": {
+    "mapshaper": "0.7.85"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
