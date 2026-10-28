@@ -1,6 +1,6 @@
 # Data policy
 
-> **Status: draft for review.** Facts below are checked against COD-AB Sudan version v03 (valid from 31 August 2020).
+> **Status: approved for data release 2026.1** (28 October 2026). Facts below are checked against COD-AB Sudan version v03 (valid from 31 August 2020).
 
 ## Principle: follow the UN dataset as published
 

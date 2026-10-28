@@ -2,7 +2,7 @@
 
 Data releases are tagged `YYYY.N`. See [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
 
-## 2026.1 — unreleased (awaiting review)
+## 2026.1 — 2026-10-28
 
 First release of the boundary files.
 
