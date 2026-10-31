@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sudan Atlas Matcher Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Layout: a review queue. Progress and section tabs on top, then one card per item with its decision buttons. */
+  :root {
+    --bg: #f6f7f4; --surface: #ffffff; --text: #1b211e; --muted: #5d6762; --line: #dfe3de;
+    --accent: #2e5f4b; --accent-soft: #e3eee8; --good: #2b7a4b; --good-soft: #e2f2e8;
+    --warn: #a85a12; --warn-soft: #fbeedd; --bad: #b0372b; --bad-soft: #f8e4e1; --focus: #2e5f4b;
+    --font-body: "IBM Plex Sans", "IBM Plex Sans Arabic", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-ar: "IBM Plex Sans Arabic", "IBM Plex Sans", Tahoma, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #131715; --surface: #1c211e; --text: #e8ece9; --muted: #9ba5a0; --line: #2f3632;
+      --accent: #9cc4ae; --accent-soft: #24352d; --good: #7fd09f; --good-soft: #1e3427;
+      --warn: #e9a964; --warn-soft: #3a2a17; --bad: #f08b7f; --bad-soft: #3d2220; --focus: #9cc4ae;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131715; --surface: #1c211e; --text: #e8ece9; --muted: #9ba5a0; --line: #2f3632;
+    --accent: #9cc4ae; --accent-soft: #24352d; --good: #7fd09f; --good-soft: #1e3427;
+    --warn: #e9a964; --warn-soft: #3a2a17; --bad: #f08b7f; --bad-soft: #3d2220; --focus: #9cc4ae;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 var(--font-body); }
+  main { max-width: 900px; margin: 0 auto; padding-block: 20px 80px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    display: grid; gap: 16px; }
+  h1 { font-size: 1.45rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+  h2 { font-size: 1.05rem; margin: 0; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .small { font-size: 0.87rem; }
+  .ar { font-family: var(--font-ar); }
+  code, .code { font-family: var(--font-mono); font-size: 0.86em; }
+  a { color: var(--accent); }
+  header { display: grid; gap: 8px; }
+  #status { font-size: 0.88rem; padding: 6px 10px; border-radius: 6px; background: var(--accent-soft); justify-self: start; }
+  #status.warn { background: var(--warn-soft); color: var(--warn); }
+  .progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .progress div { display: grid; gap: 4px; font-size: 0.85rem; min-width: 0; }
+  .progress b { font-variant-numeric: tabular-nums; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--good); width: 0; transition: width .3s; }
+  nav { display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 3; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 10; }
+  nav a { padding: 10px 12px; text-decoration: none; color: var(--muted); border-bottom: 2px solid transparent; white-space: nowrap; font-weight: 500; }
+  nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  select, input[type="search"], input[type="text"] { font: inherit; padding: 7px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--text); min-width: 0; max-width: 100%; }
+  input[type="search"] { flex: 1 1 180px; }
+  button { font: inherit; padding: 7px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--text); cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--accent); }
+  button:disabled { opacity: .5; cursor: default; }
+  button[aria-pressed="true"].yes { background: var(--good-soft); border-color: var(--good); color: var(--good); font-weight: 600; }
+  button[aria-pressed="true"].no { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); font-weight: 600; }
+  button[aria-pressed="true"].change { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); font-weight: 600; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .intro { display: grid; gap: 6px; }
+  .list { display: grid; gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+  .card.done { border-color: color-mix(in srgb, var(--good) 40%, var(--line)); }
+  .card .top { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between; }
+  .card .input { font-size: 1.12rem; font-weight: 600; overflow-wrap: anywhere; }
+  .chip { font-size: 0.78rem; padding: 2px 8px; border-radius: 99px; background: var(--line); color: var(--muted); white-space: nowrap; }
+  .chip.unsure, .chip.disagree { background: var(--warn-soft); color: var(--warn); }
+  .chip.ok { background: var(--good-soft); color: var(--good); }
+  .chip.rej { background: var(--bad-soft); color: var(--bad); }
+  .row { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; font-size: 0.92rem; }
+  .row > span:first-child { color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .actions select { flex: 1 1 220px; }
+  .note { width: 100%; }
+  .group { display: grid; gap: 8px; }
+  .group-head { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; justify-content: space-between; padding-top: 6px; }
+  .variant { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+  .variant:first-of-type { border-top: 0; }
+  .variant .text { font-weight: 600; overflow-wrap: anywhere; }
+  .variant .src { font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
+  .empty { padding: 24px; text-align: center; color: var(--muted); }
+  @media (max-width: 560px) {
+    .progress { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .row { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .variant { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Sudan Atlas matcher review</h1>
+    <p class="muted">Phase 2 checkpoint: check the test-set answers I proposed and the spellings I collected. Your choices save as you go; tell me in the chat when you're done.</p>
+    <p id="status">Loading…</p>
+    <div class="progress" aria-label="Progress">
+      <div><span>Test cases <b id="p-cases">0/0</b></span><div class="bar"><span id="b-cases"></span></div></div>
+      <div><span>Spellings <b id="p-spellings">0/0</b></span><div class="bar"><span id="b-spellings"></span></div></div>
+      <div><span>Unlinked <b id="p-unlinked">0/0</b></span><div class="bar"><span id="b-unlinked"></span></div></div>
+      <div><span>Rules <b id="p-rules">0/0</b></span><div class="bar"><span id="b-rules"></span></div></div>
+    </div>
+  </header>
+
+  <nav aria-label="Sections">
+    <a href="#cases">Test cases</a>
+    <a href="#spellings">Spellings</a>
+    <a href="#unlinked">Unlinked</a>
+    <a href="#rules">Rules</a>
+  </nav>
+
+  <section id="view-cases" class="intro">
+    <p class="small muted">Each case is a real name from a public dataset. Confirm my proposed answer, pick a different place, or say it should match nothing. Cases marked <span class="chip unsure">unsure</span> need your call; <span class="chip disagree">matcher differs</span> means the matcher's answer doesn't match mine.</p>
+    <div class="toolbar">
+      <label class="small" for="case-filter">Show</label>
+      <select id="case-filter">
+        <option value="todo">Not reviewed</option>
+        <option value="unsure">Unsure</option>
+        <option value="disagree">Matcher differs</option>
+        <option value="done">Reviewed</option>
+        <option value="all">All</option>
+      </select>
+      <input id="case-search" type="search" placeholder="Search names, states, codes">
+    </div>
+    <p id="case-count" class="small muted"></p>
+    <div id="case-list" class="list"></div>
+  </section>
+
+  <section id="view-spellings" class="intro" hidden>
+    <p class="small muted">Other spellings of each place, from COD-AB, geoBoundaries, GeoNames and Wikidata. Keep the ones people really use for that place; reject anything wrong. A name kept for several places stays ambiguous unless a state hint decides it.</p>
+    <div class="toolbar">
+      <label class="small" for="sp-filter">Show</label>
+      <select id="sp-filter">
+        <option value="todo">Not reviewed</option>
+        <option value="shared">Shared by several places</option>
+        <option value="done">Reviewed</option>
+        <option value="all">All</option>
+      </select>
+      <input id="sp-search" type="search" placeholder="Search spellings or places">
+    </div>
+    <p id="sp-count" class="small muted"></p>
+    <div id="sp-list" class="list"></div>
+  </section>
+
+  <section id="view-unlinked" class="intro" hidden>
+    <p class="small muted">Records from GeoNames and Wikidata that I couldn't tie to one place with confidence. Most are old provinces or councils. If one is a current state or locality, pick it and its names become spellings of that place.</p>
+    <p id="ul-count" class="small muted"></p>
+    <div id="ul-list" class="list"></div>
+  </section>
+
+  <section id="view-rules" class="intro" hidden>
+    <p class="small muted">Spelling rules I added beyond the brief's list. Agree, or disagree and say why.</p>
+    <div id="rule-list" class="list"></div>
+  </section>
+</main>
+
+<script>
+const state = { data: null, places: {}, reviews: { cases: {}, spellings: {}, unlinked: {}, rules: {} }, db: null, canWrite: true, pending: {} };
+const COLLECTIONS = { cases: "case_reviews", spellings: "variant_reviews", unlinked: "link_reviews", rules: "rule_reviews" };
+const $ = (id) => document.getElementById(id);
+const el = (tag, attrs = {}, ...children) => {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v;
+    else if (k.startsWith("on")) node.addEventListener(k.slice(2), v);
+    else if (v !== null && v !== undefined && v !== false) node.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of children.flat()) if (c !== null && c !== undefined && c !== false) node.append(c.nodeType ? c : document.createTextNode(c));
+  return node;
+};
+const isArabic = (s) => /[؀-ۿ]/.test(s || "");
+const textEl = (tag, text, cls = "") => el(tag, { class: (cls + (isArabic(text) ? " ar" : "")).trim(), dir: "auto" }, text);
+const placeLabel = (p) => { const x = state.places[p]; return x ? `${x.name_en} · ${x.name_ar}` : p; };
+const stateName = (p) => { const x = state.places[p]; return x ? (x.level === 1 ? x.name_en : state.places[x.parent_pcode]?.name_en || "") : ""; };
+const DATASET_LINK = (id) => `https://data.humdata.org/dataset/${id}`;
+const sourceLink = (ref) => {
+  const [src, id] = ref.split(":");
+  if (src === "geonames") return `https://www.geonames.org/${id}`;
+  if (src === "wikidata") return `https://www.wikidata.org/wiki/${id}`;
+  return null;
+};
+
+/* ---------- saving ---------- */
+async function save(kind, id, body) {
+  state.reviews[kind][id] = { ...body, at: new Date().toISOString() };
+  refresh(kind, id);
+  if (!state.db || !state.canWrite) return;
+  const key = kind + "/" + id;
+  const prev = state.pending[key] || Promise.resolve();
+  state.pending[key] = prev.then(async () => {
+    try { await state.db.collection(COLLECTIONS[kind]).doc(id).set(state.reviews[kind][id]); }
+    catch (e) {
+      if (e && e.code === "invalid_argument") { state.canWrite = false; setStatus("This view can't save: open the page as its owner to save your review.", true); }
+      else if (e && e.code === "unavailable") { await new Promise((r) => setTimeout(r, 800 + Math.random() * 800)); try { await state.db.collection(COLLECTIONS[kind]).doc(id).set(state.reviews[kind][id]); } catch { setStatus("A save failed; your last choice may not be stored. Try it again.", true); } }
+      else setStatus("A save failed; your last choice may not be stored. Try it again.", true);
+    }
+  });
+  return state.pending[key];
+}
+function setStatus(text, warn = false) { $("status").textContent = text; $("status").classList.toggle("warn", warn); }
+
+/* ---------- progress ---------- */
+function progress() {
+  const d = state.data, r = state.reviews;
+  const set = (key, done, total) => { $("p-" + key).textContent = `${done}/${total}`; $("b-" + key).style.width = total ? `${(100 * done) / total}%` : "0"; };
+  set("cases", d.cases.filter((c) => r.cases[c.id]?.decision).length, d.cases.length);
+  set("spellings", d.variants.filter((v) => r.spellings[v.id]?.decision).length, d.variants.length);
+  set("unlinked", d.unlinked.filter((u) => r.unlinked[u.id]?.decision).length, d.unlinked.length);
+  set("rules", d.rules.filter((_, i) => r.rules["r" + i]?.decision).length, d.rules.length);
+}
+
+/* ---------- test cases ---------- */
+const disagrees = (c) => (c.matcher.pcode || "") !== (c.expected || "");
+function caseOrder(a, b) { return (b.unsure - a.unsure) || (disagrees(b) - disagrees(a)) || a.id.localeCompare(b.id); }
+function placeSelect(level, preferred, stateHint, current, onChange, label) {
+  const sel = el("select", { "aria-label": label, onchange: (e) => e.target.value && onChange(e.target.value) });
+  sel.append(el("option", { value: "" }, "Pick a different place…"));
+  const all = state.data.places.filter((p) => p.level === level);
+  const suggested = [...new Set(preferred)].filter((p) => state.places[p] && state.places[p].level === level);
+  if (suggested.length) sel.append(el("optgroup", { label: "Suggested" }, suggested.map((p) => el("option", { value: p }, `${state.places[p].name_en} (${p})`))));
+  if (level === 1) sel.append(el("optgroup", { label: "States" }, all.map((p) => el("option", { value: p.pcode }, `${p.name_en} · ${p.name_ar} (${p.pcode})`))));
+  else {
+    const states = state.data.places.filter((p) => p.level === 1).sort((a, b) => (b.pcode === stateHint) - (a.pcode === stateHint) || a.name_en.localeCompare(b.name_en));
+    for (const s of states) sel.append(el("optgroup", { label: s.name_en }, all.filter((p) => p.parent_pcode === s.pcode).map((p) => el("option", { value: p.pcode }, `${p.name_en} · ${p.name_ar} (${p.pcode})`))));
+  }
+  if (current) sel.value = current;
+  return sel;
+}
+function caseCard(c) {
+  const rev = state.reviews.cases[c.id] || {};
+  const card = el("article", { class: "card" + (rev.decision ? " done" : ""), id: "case-" + c.id });
+  const chips = el("div", { class: "actions" },
+    c.unsure ? el("span", { class: "chip unsure" }, "unsure") : null,
+    disagrees(c) ? el("span", { class: "chip disagree" }, "matcher differs") : null,
+    el("span", { class: "chip" + (rev.decision ? (rev.decision === "correct" ? " ok" : " rej") : "") },
+      rev.decision === "correct" ? "confirmed" : rev.decision === "change" ? `changed to ${rev.pcode}` : rev.decision === "no-match" ? "should match nothing" : "not reviewed"));
+  card.append(el("div", { class: "top" }, el("div", {}, textEl("span", c.input, "input")), chips));
+  card.append(el("div", { class: "row" }, el("span", {}, "From"),
+    el("span", {}, `${c.state ? "State: " + c.state + " · " : "No state given · "}${c.level === 1 ? "state column" : "locality column"} · `,
+      el("a", { href: DATASET_LINK(c.dataset_id), target: "_blank", rel: "noopener" }, c.dataset))));
+  const proposal = c.expected ? el("span", {}, el("span", { class: "code" }, c.expected), " ", textEl("span", placeLabel(c.expected)), c.level === 2 ? el("span", { class: "muted" }, ` (${stateName(c.expected)})`) : null)
+    : el("span", {}, "Should match nothing");
+  card.append(el("div", { class: "row" }, el("span", {}, "I propose"), proposal));
+  if (c.note) card.append(el("div", { class: "row small" }, el("span", {}, "Why"), el("span", { class: "muted" }, c.note)));
+  const m = c.matcher;
+  const mtext = m.pcode ? `${m.pcode} ${placeLabel(m.pcode)} (${m.method}, ${m.score.toFixed(2)})` : m.method === "ambiguous" ? `no single answer: ${m.alternatives.slice(0, 3).map((p) => state.places[p]?.name_en).join(", ")} are too close` : `no answer (best ${m.score.toFixed(2)})`;
+  card.append(el("div", { class: "row small" }, el("span", {}, "Matcher"), el("span", { class: disagrees(c) ? "" : "muted" }, mtext)));
+  const yes = el("button", { class: "yes", "aria-pressed": String(rev.decision === "correct"), onclick: () => save("cases", c.id, { decision: "correct", pcode: c.expected, note: rev.note || "" }) }, c.expected ? "Correct" : "Correct, no match");
+  const none = c.expected ? el("button", { class: "no", "aria-pressed": String(rev.decision === "no-match"), onclick: () => save("cases", c.id, { decision: "no-match", pcode: "", note: rev.note || "" }) }, "Should match nothing") : null;
+  const hintPcode = c.matcher.alternatives.concat(c.matcher.pcode || [], c.expected || []).map((p) => state.places[p]?.parent_pcode).find(Boolean);
+  const pick = placeSelect(c.level, [c.expected, m.pcode, ...m.alternatives].filter(Boolean), hintPcode, rev.decision === "change" ? rev.pcode : "",
+    (p) => save("cases", c.id, { decision: p === c.expected ? "correct" : "change", pcode: p, note: rev.note || "" }), `Different place for ${c.input}`);
+  card.append(el("div", { class: "actions" }, yes, none, pick));
+  const note = el("input", { type: "text", class: "note", placeholder: "Note for Claude (optional)", value: rev.note || "", "aria-label": `Note for ${c.input}`,
+    onchange: (e) => { const r = state.reviews.cases[c.id] || {}; save("cases", c.id, { decision: r.decision || "", pcode: r.pcode ?? "", note: e.target.value.trim() }); } });
+  card.append(note);
+  return card;
+}
+function renderCases() {
+  const f = $("case-filter").value, q = $("case-search").value.trim().toLowerCase();
+  const list = state.data.cases.filter((c) => {
+    const done = !!state.reviews.cases[c.id]?.decision;
+    if (f === "todo" && done) return false;
+    if (f === "done" && !done) return false;
+    if (f === "unsure" && !c.unsure) return false;
+    if (f === "disagree" && !disagrees(c)) return false;
+    if (!q) return true;
+    return [c.input, c.state, c.expected, c.id, c.dataset, c.expected && state.places[c.expected]?.name_en].join(" ").toLowerCase().includes(q);
+  }).sort(caseOrder);
+  $("case-count").textContent = `${list.length} case${list.length === 1 ? "" : "s"}`;
+  $("case-list").replaceChildren(...(list.length ? list.map(caseCard) : [el("p", { class: "empty" }, f === "todo" ? "All test cases reviewed. Thank you." : "Nothing here.")]));
+}
+
+/* ---------- spellings ---------- */
+function variantRow(v) {
+  const rev = state.reviews.spellings[v.id] || {};
+  const srcs = v.sources.map((s) => { const href = sourceLink(s.ref); const label = `${s.source} ${s.kind}`; return href ? el("a", { href, target: "_blank", rel: "noopener" }, label) : label; });
+  const src = el("div", { class: "src" }); srcs.forEach((s, i) => { if (i) src.append(", "); src.append(s); });
+  if (v.conflicts.length) src.append(el("div", {}, `Also the official name of ${v.conflicts.map((p) => state.places[p]?.name_en + " (" + p + ")").join(", ")}; a level filter tells them apart.`));
+  return el("div", { class: "variant", id: "sp-" + v.id },
+    el("div", {}, textEl("div", v.text, "text"), src),
+    el("div", { class: "actions" },
+      el("button", { class: "yes", "aria-pressed": String(rev.decision === "keep"), onclick: () => save("spellings", v.id, { decision: "keep" }) }, "Keep"),
+      el("button", { class: "no", "aria-pressed": String(rev.decision === "reject"), onclick: () => save("spellings", v.id, { decision: "reject" }) }, "Reject")));
+}
+function renderSpellings() {
+  const f = $("sp-filter").value, q = $("sp-search").value.trim().toLowerCase();
+  const shown = state.data.variants.filter((v) => {
+    const done = !!state.reviews.spellings[v.id]?.decision;
+    if (f === "todo" && done) return false;
+    if (f === "done" && !done) return false;
+    if (f === "shared" && v.pcodes.length < 2) return false;
+    if (!q) return true;
+    return [v.text, ...v.pcodes, ...v.pcodes.map((p) => state.places[p]?.name_en + " " + state.places[p]?.name_ar)].join(" ").toLowerCase().includes(q);
+  });
+  const groups = new Map();
+  for (const v of shown) { const key = v.pcodes.length > 1 ? "shared:" + v.pcodes.join(",") : v.pcodes[0]; if (!groups.has(key)) groups.set(key, []); groups.get(key).push(v); }
+  const cards = [...groups.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([key, vs]) => {
+    const pcodes = vs[0].pcodes;
+    const title = pcodes.length > 1 ? `Shared by ${pcodes.map((p) => state.places[p]?.name_en).join(", ")}` : `${state.places[pcodes[0]]?.name_en}`;
+    const sub = pcodes.length > 1 ? pcodes.join(", ") : `${state.places[pcodes[0]]?.name_ar} · ${pcodes[0]}${state.places[pcodes[0]]?.level === 2 ? " · " + stateName(pcodes[0]) : " · state"}`;
+    const open = vs.filter((v) => !state.reviews.spellings[v.id]?.decision);
+    const keepAll = el("button", { class: "small", disabled: !open.length, onclick: async (e) => { e.target.disabled = true; for (const v of open) await save("spellings", v.id, { decision: "keep" }); } }, `Keep the ${open.length} not reviewed`);
+    return el("article", { class: "card group" },
+      el("div", { class: "group-head" }, el("div", {}, el("h2", {}, title), el("p", { class: "small muted", dir: "auto" }, sub)), open.length > 1 ? keepAll : null),
+      el("div", {}, vs.map(variantRow)));
+  });
+  $("sp-count").textContent = `${shown.length} spelling${shown.length === 1 ? "" : "s"} in ${groups.size} group${groups.size === 1 ? "" : "s"}`;
+  $("sp-list").replaceChildren(...(cards.length ? cards : [el("p", { class: "empty" }, f === "todo" ? "All spellings reviewed. Thank you." : "Nothing here.")]));
+}
+
+/* ---------- unlinked ---------- */
+function renderUnlinked() {
+  const items = state.data.unlinked;
+  $("ul-count").textContent = `${items.length} records`;
+  $("ul-list").replaceChildren(...items.map((u) => {
+    const rev = state.reviews.unlinked[u.id] || {};
+    const href = sourceLink(u.id);
+    const chip = el("span", { class: "chip" + (rev.decision === "link" ? " ok" : rev.decision === "none" ? " rej" : "") },
+      rev.decision === "link" ? `linked to ${rev.pcode}` : rev.decision === "none" ? "not a current place" : "not reviewed");
+    return el("article", { class: "card" + (rev.decision ? " done" : "") },
+      el("div", { class: "top" }, textEl("span", u.names.join(" · ") || "(no name)", "input"), chip),
+      el("div", { class: "row small" }, el("span", {}, "Source"), el("span", {}, href ? el("a", { href, target: "_blank", rel: "noopener" }, u.id) : u.id, ` · ${u.level === 1 ? "state" : "locality"} level · ${u.reason}`)),
+      el("div", { class: "actions" },
+        el("button", { class: "no", "aria-pressed": String(rev.decision === "none"), onclick: () => save("unlinked", u.id, { decision: "none", pcode: "" }) }, "Not a current place"),
+        placeSelect(u.level, [], null, rev.decision === "link" ? rev.pcode : "", (p) => save("unlinked", u.id, { decision: "link", pcode: p }), `Place for ${u.names[0] || u.id}`)));
+  }));
+}
+
+/* ---------- rules ---------- */
+function renderRules() {
+  $("rule-list").replaceChildren(...state.data.rules.map((text, i) => {
+    const id = "r" + i, rev = state.reviews.rules[id] || {};
+    return el("article", { class: "card" + (rev.decision ? " done" : "") },
+      el("p", {}, text),
+      el("div", { class: "actions" },
+        el("button", { class: "yes", "aria-pressed": String(rev.decision === "agree"), onclick: () => save("rules", id, { decision: "agree", note: rev.note || "" }) }, "Agree"),
+        el("button", { class: "no", "aria-pressed": String(rev.decision === "disagree"), onclick: () => save("rules", id, { decision: "disagree", note: rev.note || "" }) }, "Disagree")),
+      el("input", { type: "text", class: "note", placeholder: "Why? (optional)", value: rev.note || "", "aria-label": `Note on rule ${i + 1}`,
+        onchange: (e) => { const r = state.reviews.rules[id] || {}; save("rules", id, { decision: r.decision || "", note: e.target.value.trim() }); } }));
+  }));
+}
+
+/* ---------- views ---------- */
+const VIEWS = { cases: renderCases, spellings: renderSpellings, unlinked: renderUnlinked, rules: renderRules };
+function currentView() { const h = location.hash.slice(1); return VIEWS[h] ? h : "cases"; }
+function showView() {
+  const v = currentView();
+  for (const k of Object.keys(VIEWS)) $("view-" + k).hidden = k !== v;
+  document.querySelectorAll("nav a").forEach((a) => { if (a.getAttribute("href") === "#" + v) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
+  VIEWS[v]();
+}
+function refresh(kind, id) {
+  progress();
+  if (currentView() !== kind) return;
+  if (kind === "cases") {
+    const node = document.getElementById("case-" + id), c = state.data.cases.find((x) => x.id === id);
+    if (node && c) node.replaceWith(caseCard(c));
+  } else if (kind === "spellings") {
+    const node = document.getElementById("sp-" + id), v = state.data.variants.find((x) => x.id === id);
+    if (node && v) node.replaceWith(variantRow(v));
+  } else VIEWS[kind]();
+}
+
+/* ---------- start ---------- */
+async function start() {
+  const res = await fetch("review-data.json");
+  state.data = await res.json();
+  for (const p of state.data.places) state.places[p.pcode] = p;
+  ["case-filter", "case-search"].forEach((id) => $(id).addEventListener("input", renderCases));
+  ["sp-filter", "sp-search"].forEach((id) => $(id).addEventListener("input", renderSpellings));
+  addEventListener("hashchange", showView);
+  progress(); showView();
+  setStatus("Connecting to saved reviews…");
+
+  const db = window.claude ? await window.claude.use("db") : null;
+  if (!db) { state.canWrite = false; setStatus("Saving isn't available in this view. Open the page on claude.ai, signed in as its owner.", true); return; }
+  state.db = db;
+  try { const user = await window.claude.use("user"); if (user) { const own = await user.isOwner(); if (own === false) { state.canWrite = false; setStatus("Read-only: only the page's owner can save review decisions.", true); } } } catch {}
+  const confirmed = new Set(), seen = new Set();
+  const timer = setTimeout(() => setStatus("Can't reach your saved reviews yet; choices you make now may not show earlier ones.", true), 10000);
+  for (const [kind, coll] of Object.entries(COLLECTIONS)) {
+    db.collection(coll).onSnapshot((snap) => {
+      const changes = snap.docChanges();
+      for (const ch of changes) {
+        if (ch.type === "removed") delete state.reviews[kind][ch.doc.id];
+        else state.reviews[kind][ch.doc.id] = { ...ch.doc.data() };
+      }
+      if (!snap.metadata.fromCache && !confirmed.has(kind)) {
+        confirmed.add(kind);
+        if (confirmed.size === Object.keys(COLLECTIONS).length) { clearTimeout(timer); if (state.canWrite) setStatus("Your choices save automatically."); }
+      }
+      if (!seen.has(kind)) { seen.add(kind); progress(); if (currentView() === kind) VIEWS[kind](); return; }
+      // Later deliveries (this page's own saves, or another tab's): update just those cards, so the list doesn't jump.
+      for (const ch of changes) refresh(kind, ch.doc.id);
+      if (!changes.length) progress();
+    }, () => { clearTimeout(timer); setStatus("Lost the connection to saved reviews. Reload the page to reconnect.", true); });
+  }
+}
+start().catch((e) => setStatus("Couldn't load the review data: " + e.message, true));
+</script>
+</body>
+</html>

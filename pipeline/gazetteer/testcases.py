@@ -217,6 +217,6 @@ def select() -> list[dict]:
 def write_cases(cases: list[dict], path=CASES_PATH) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=CASE_COLUMNS)
+        writer = csv.DictWriter(handle, fieldnames=CASE_COLUMNS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(cases)
