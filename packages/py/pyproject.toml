@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sudan-atlas"
+version = "0.0.0"
+description = "Official codes, names and boundaries for Sudan's states and localities, with a name matcher."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = ["rapidfuzz>=3.6"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

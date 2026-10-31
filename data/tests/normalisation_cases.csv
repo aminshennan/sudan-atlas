@@ -1,0 +1,27 @@
+input,expected_key,rule
+El Fasher,fasher,article removed
+Al-Fāshir,fashir,accent and hyphenated article removed
+Elfasher,fasher,glued article removed
+الفاشر,فاشر,Arabic al- prefix removed
+أبو جابرة,ابو جابره,alef with hamza and ta marbuta unified
+ريفى ود الحليو,ريفي ود حليو,alef maqsura unified; al- removed
+مُحَمَّد,محمد,diacritics removed
+كـسـلا,كسلا,tatweel removed
+ولاية كسلا,كسلا,generic word removed
+محلية أبو جابرة,ابو جابره,generic word removed
+مدينة كسلا,مدينه كسلا,مدينة kept: it is part of official names
+بلدية القضارف,مدينه قضارف,municipality synonym
+Kassala State,kasala,generic word removed; double letter collapsed
+El Hasaheesa,hasahesa,double letters collapsed
+Sheikan,shaikan,ei unified with ai
+Al Khowey,khowai,ey unified with ai
+Jebel Awlia,jebel aulia,aw unified with au
+Aj Jazirah,jazira,final h after a vowel dropped
+Ad Du'ayn,duain,apostrophe dropped; ay unified with ai
+BĀW,bau,accent removed; aw unified with au
+Um Durman,um durman,Um is not an article
+Khartoum North (Bahri),khartum shamal bahri,brackets split words; north synonym; ou unified with u
+QALLĀBĀT WEST,qalabat gharb,west synonym
+Tawila IDPs,tauila,generic word removed
+State,state,all words generic: kept as they are
+Al,al,all words are articles: kept as they are

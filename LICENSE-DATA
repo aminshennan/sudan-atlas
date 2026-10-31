@@ -20,7 +20,16 @@ Data licences
      https://creativecommons.org/licenses/by/4.0/
 
    Attribution: "Sudan Atlas", plus the original source of each variant as
-   recorded in the data.
+   recorded in the data. Variant spellings come from COD-AB and geoBoundaries
+   (CC BY 3.0 IGO), GeoNames (CC BY 4.0, www.geonames.org) and Wikidata (CC0).
+   The test cases contain place names from the HDX datasets listed in
+   docs/SOURCES.md, each under its own licence (CC BY, CC BY-IGO or CC0).
+
+3. Spellings taken from OpenStreetMap, if added, go in a separate file,
+   data/gazetteer/variants_osm.json, under the Open Database License (ODbL),
+   with attribution "© OpenStreetMap contributors".
+
+     https://opendatacommons.org/licenses/odbl/
 
 The boundaries do not imply any opinion on the legal status of any country,
 territory or area, or on the delimitation of any frontier. See

@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import ssl
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -102,6 +103,51 @@ def fetch_geoboundaries() -> dict:
     return manifest
 
 
+GEONAMES_FILES = {
+    "SD.zip": "https://download.geonames.org/export/dump/SD.zip",
+    "alternatenames-SD.zip": "https://download.geonames.org/export/dump/alternatenames/SD.zip",
+}
+WIKIDATA_SPARQL = "https://query.wikidata.org/sparql"
+
+
+def fetch_geonames() -> dict:
+    files = [_save(url, config.RAW_DIR / "geonames" / name) for name, url in GEONAMES_FILES.items()]
+    manifest = {
+        "source": "GeoNames (Sudan extract and alternate names)",
+        "dataset_url": "https://www.geonames.org/",
+        "licence": "CC BY 4.0",
+        "downloaded_at": _now(),
+        "files": files,
+    }
+    (config.RAW_DIR / "geonames" / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
+def fetch_wikidata() -> dict:
+    query = (config.ROOT / "pipeline" / "gazetteer" / "wikidata.rq").read_text()
+    url = f"{WIKIDATA_SPARQL}?{urllib.parse.urlencode({'query': query, 'format': 'json'})}"
+    request = urllib.request.Request(url, headers={
+        "User-Agent": "sudan-atlas-pipeline (https://github.com/aminshennan/sudan-atlas)",
+        "Accept": "application/sparql-results+json",
+    })
+    with urllib.request.urlopen(request, context=_context(), timeout=300) as response:
+        body = response.read()
+    target = config.RAW_DIR / "wikidata" / "items.json"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(body)
+    manifest = {
+        "source": "Wikidata: states and localities of Sudan",
+        "dataset_url": "https://www.wikidata.org/",
+        "query": "pipeline/gazetteer/wikidata.rq",
+        "licence": "CC0 1.0",
+        "downloaded_at": _now(),
+        "files": [{"url": WIKIDATA_SPARQL, "file": target.relative_to(config.ROOT).as_posix(), "bytes": len(body),
+                   "sha256": hashlib.sha256(body).hexdigest()}],
+    }
+    (target.parent / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
 def register_local(archive: Path, note: str) -> dict:
     """Copy a COD-AB archive downloaded by hand into data/raw/cod-ab/ and record it."""
     body = archive.read_bytes()
@@ -131,3 +177,7 @@ def run() -> None:
     print(f"COD-AB: {len(cod['files'])} file(s), format {cod['format']}, licence {cod['licence']!r}")
     gb = fetch_geoboundaries()
     print(f"geoBoundaries: {len(gb['files'])} file(s), licence {gb['licence']!r}")
+    gn = fetch_geonames()
+    print(f"GeoNames: {len(gn['files'])} file(s), licence {gn['licence']!r}")
+    wd = fetch_wikidata()
+    print(f"Wikidata: {wd['files'][0]['bytes']:,} bytes, licence {wd['licence']!r}")

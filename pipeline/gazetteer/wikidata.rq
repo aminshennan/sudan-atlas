@@ -1,0 +1,23 @@
+# Sudan's states (Q746290) and localities ("district of Sudan", Q505830), with English
+# and Arabic labels and aliases, location, parent, capital and cross-references.
+SELECT ?item ?class ?coord ?parent ?iso ?geonames ?capital ?capitalLabelEn ?capitalLabelAr
+       (GROUP_CONCAT(DISTINCT ?labEn; separator="|") AS ?labelsEn)
+       (GROUP_CONCAT(DISTINCT ?labAr; separator="|") AS ?labelsAr)
+       (GROUP_CONCAT(DISTINCT ?altEn; separator="|") AS ?aliasesEn)
+       (GROUP_CONCAT(DISTINCT ?altAr; separator="|") AS ?aliasesAr)
+WHERE {
+  VALUES ?class { wd:Q746290 wd:Q505830 }
+  ?item wdt:P31 ?class .
+  OPTIONAL { ?item wdt:P625 ?coord }
+  OPTIONAL { ?item wdt:P131 ?parent }
+  OPTIONAL { ?item wdt:P300 ?iso }
+  OPTIONAL { ?item wdt:P1566 ?geonames }
+  OPTIONAL { ?item wdt:P36 ?capital .
+             OPTIONAL { ?capital rdfs:label ?capitalLabelEn FILTER(lang(?capitalLabelEn)="en") }
+             OPTIONAL { ?capital rdfs:label ?capitalLabelAr FILTER(lang(?capitalLabelAr)="ar") } }
+  OPTIONAL { ?item rdfs:label ?labEn FILTER(lang(?labEn)="en") }
+  OPTIONAL { ?item rdfs:label ?labAr FILTER(lang(?labAr)="ar") }
+  OPTIONAL { ?item skos:altLabel ?altEn FILTER(lang(?altEn)="en") }
+  OPTIONAL { ?item skos:altLabel ?altAr FILTER(lang(?altAr)="ar") }
+}
+GROUP BY ?item ?class ?coord ?parent ?iso ?geonames ?capital ?capitalLabelEn ?capitalLabelAr

@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "description": "Rules that turn a place name into a matching key. The Python and TypeScript matchers both apply them, in this order, and must give identical keys. Each word is treated as Arabic if it contains an Arabic letter, otherwise as Latin.",
+  "general": {
+    "unicode_form": "NFKC",
+    "word_separators": "[\\s\\-_/,;:.()\\[\\]{}\"“”«»|+&]+",
+    "drop_characters": "['’‘`´ʿʾʼ]"
+  },
+  "arabic": {
+    "remove": {
+      "tatweel": "ـ",
+      "diacritics": "[ً-ٰٟۖ-ۭ]"
+    },
+    "replace": {
+      "أ": "ا",
+      "إ": "ا",
+      "آ": "ا",
+      "ٱ": "ا",
+      "ة": "ه",
+      "ى": "ي",
+      "ی": "ي",
+      "ک": "ك"
+    },
+    "strip_prefix": {
+      "prefix": "ال",
+      "min_remaining": 2
+    },
+    "generic_words": [
+      "ولاية",
+      "ولايه",
+      "محلية",
+      "محليه"
+    ],
+    "synonyms": {
+      "بلديه": "مدينه",
+      "شرقي": "شرق",
+      "شرقيه": "شرق",
+      "غربي": "غرب",
+      "غربيه": "غرب"
+    }
+  },
+  "latin": {
+    "lowercase": true,
+    "strip_accents": true,
+    "articles": [
+      "al",
+      "el",
+      "ad",
+      "ed",
+      "adh",
+      "edh",
+      "aj",
+      "ej",
+      "an",
+      "en",
+      "ar",
+      "er",
+      "as",
+      "es",
+      "ash",
+      "esh",
+      "at",
+      "et",
+      "ath",
+      "eth",
+      "az",
+      "ez"
+    ],
+    "glued_articles": {
+      "prefixes": [
+        "al",
+        "el"
+      ],
+      "min_remaining": 4
+    },
+    "collapse_double_letters": true,
+    "replace": [
+      [
+        "ou",
+        "u"
+      ],
+      [
+        "ei",
+        "ai"
+      ],
+      [
+        "ay",
+        "ai"
+      ],
+      [
+        "ey",
+        "ai"
+      ],
+      [
+        "aw",
+        "au"
+      ]
+    ],
+    "generic_words": [
+      "area",
+      "camp",
+      "camps",
+      "district",
+      "idp",
+      "idps",
+      "locality",
+      "mahalia",
+      "mahaliya",
+      "mahaliyah",
+      "mahaliyat",
+      "province",
+      "state",
+      "town",
+      "village",
+      "villages",
+      "wilaya",
+      "wilayah",
+      "wilayat"
+    ],
+    "synonyms": {
+      "north": "shamal",
+      "shimal": "shamal",
+      "shemal": "shamal",
+      "shamaliya": "shamal",
+      "shimaliya": "shamal",
+      "south": "janub",
+      "janoub": "janub",
+      "ganub": "janub",
+      "junub": "janub",
+      "janubiya": "janub",
+      "east": "sharg",
+      "sharq": "sharg",
+      "shareq": "sharg",
+      "shargi": "sharg",
+      "sharqi": "sharg",
+      "shargiah": "sharg",
+      "shargiya": "sharg",
+      "sharqiya": "sharg",
+      "west": "gharb",
+      "garb": "gharb",
+      "gharbi": "gharb",
+      "gharbyah": "gharb",
+      "gharbiya": "gharb",
+      "gharbia": "gharb",
+      "central": "wasat",
+      "middle": "wasat",
+      "rural": "reifi",
+      "reif": "reifi",
+      "rifi": "reifi",
+      "city": "madinat",
+      "madent": "madinat",
+      "madeinat": "madinat",
+      "medina": "madinat",
+      "municipality": "madinat",
+      "greater": "kubra",
+      "kobra": "kubra",
+      "kubrah": "kubra"
+    },
+    "skeleton": {
+      "description": "A consonant skeleton for fuzzy scoring only: letters that vary between transliterations of the same Arabic sound are merged, and vowels after the first letter are dropped.",
+      "replace": [
+        [
+          "gh",
+          "g"
+        ],
+        [
+          "q",
+          "g"
+        ],
+        [
+          "j",
+          "g"
+        ],
+        [
+          "kh",
+          "k"
+        ],
+        [
+          "dh",
+          "d"
+        ],
+        [
+          "th",
+          "t"
+        ],
+        [
+          "ph",
+          "f"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "y",
+          "i"
+        ]
+      ],
+      "vowels": "aeiou",
+      "min_length": 3
+    },
+    "final_h_after_vowel": true
+  },
+  "notes": {
+    "brief": "Alef forms, ta marbuta, alef maqsura, tatweel, diacritics and the al- prefix (Arabic); lowercase, article variants, doubled letters, ou/u and ei/ai/ay, punctuation (Latin) are from the build brief.",
+    "additions_for_review": [
+      "Arabic ی and ک (Persian keyboard forms) are mapped to ي and ك.",
+      "Latin accents are removed (BĀW -> baw), and apostrophes and ʿ are dropped (Ad Du'ayn -> duain after the other rules).",
+      "Generic words are dropped: state, locality, district, province, town, IDPs, camp, village(s), area, ولاية, محلية. مدينة is kept because two official names contain it.",
+      "A glued al/el (Elfasher, Alfashir) is stripped when at least four letters remain.",
+      "Synonyms: translated direction and descriptor words map to the transliterations official names use (north -> shamal, west -> gharb, rural -> reifi, city -> madinat, بلدية -> مدينة, غربية -> غرب).",
+      "Skeleton (fuzzy scoring only): q, gh and j count as g; kh as k; dh as d; th as t; w as u; y as i; vowels after the first letter are ignored.",
+      "ey and aw are unified with ai and au (Khowey / Khiwai, Baw / Bau, Awlia / Aulia).",
+      "A final h after a vowel is dropped (Jazirah / Gezira, Bandah / Banda, Jabrah / Jabra): the Latin counterpart of ة -> ه.",
+      "Synonyms are applied in an extra key: names are matched both with and without them, so a typo in a translated word (Centeral Darfur) still matches."
+    ]
+  }
+}
