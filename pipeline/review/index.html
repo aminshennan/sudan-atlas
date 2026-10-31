@@ -101,7 +101,7 @@
 <main>
   <header>
     <h1>Sudan Atlas matcher review</h1>
-    <p class="muted">Phase 2 checkpoint: check the test-set answers I proposed and the spellings I collected. Your choices save as you go; tell me in the chat when you're done.</p>
+    <p class="muted">Phase 2 checkpoint: check the test-set answers I proposed and the spellings I collected. Decisions tagged <span class="chip">agent review</span> came from an independent AI reviewer, not from you; tapping a choice replaces it with your own. Your choices save as you go; tell me in the chat when you're done.</p>
     <p id="status">Loading…</p>
     <div class="progress" aria-label="Progress">
       <div><span>Test cases <b id="p-cases">0/0</b></span><div class="bar"><span id="b-cases"></span></div></div>
@@ -181,6 +181,7 @@ const isArabic = (s) => /[؀-ۿ]/.test(s || "");
 const textEl = (tag, text, cls = "") => el(tag, { class: (cls + (isArabic(text) ? " ar" : "")).trim(), dir: "auto" }, text);
 const placeLabel = (p) => { const x = state.places[p]; return x ? `${x.name_en} · ${x.name_ar}` : p; };
 const stateName = (p) => { const x = state.places[p]; return x ? (x.level === 1 ? x.name_en : state.places[x.parent_pcode]?.name_en || "") : ""; };
+const byAgent = (rev) => (rev && rev.by === "agent" && rev.decision ? " · agent review" : "");
 const DATASET_LINK = (id) => `https://data.humdata.org/dataset/${id}`;
 const sourceLink = (ref) => {
   const [src, id] = ref.split(":");
@@ -191,7 +192,7 @@ const sourceLink = (ref) => {
 
 /* ---------- saving ---------- */
 async function save(kind, id, body) {
-  state.reviews[kind][id] = { ...body, at: new Date().toISOString() };
+  state.reviews[kind][id] = { ...body, by: "owner", at: new Date().toISOString() };
   refresh(kind, id);
   if (!state.db || !state.canWrite) return;
   const key = kind + "/" + id;
@@ -242,7 +243,7 @@ function caseCard(c) {
     c.unsure ? el("span", { class: "chip unsure" }, "unsure") : null,
     disagrees(c) ? el("span", { class: "chip disagree" }, "matcher differs") : null,
     el("span", { class: "chip" + (rev.decision ? (rev.decision === "correct" ? " ok" : " rej") : "") },
-      rev.decision === "correct" ? "confirmed" : rev.decision === "change" ? `changed to ${rev.pcode}` : rev.decision === "no-match" ? "should match nothing" : "not reviewed"));
+      (rev.decision === "correct" ? "confirmed" : rev.decision === "change" ? `changed to ${rev.pcode}` : rev.decision === "no-match" ? "should match nothing" : "not reviewed") + byAgent(rev)));
   card.append(el("div", { class: "top" }, el("div", {}, textEl("span", c.input, "input")), chips));
   card.append(el("div", { class: "row" }, el("span", {}, "From"),
     el("span", {}, `${c.state ? "State: " + c.state + " · " : "No state given · "}${c.level === 1 ? "state column" : "locality column"} · `,
@@ -254,6 +255,7 @@ function caseCard(c) {
   const m = c.matcher;
   const mtext = m.pcode ? `${m.pcode} ${placeLabel(m.pcode)} (${m.method}, ${m.score.toFixed(2)})` : m.method === "ambiguous" ? `no single answer: ${m.alternatives.slice(0, 3).map((p) => state.places[p]?.name_en).join(", ")} are too close` : `no answer (best ${m.score.toFixed(2)})`;
   card.append(el("div", { class: "row small" }, el("span", {}, "Matcher"), el("span", { class: disagrees(c) ? "" : "muted" }, mtext)));
+  if (rev.agent_note) card.append(el("div", { class: "row small" }, el("span", {}, "Agent"), el("span", {}, rev.agent_note + (rev.confidence ? ` (${rev.confidence} confidence)` : ""))));
   const yes = el("button", { class: "yes", "aria-pressed": String(rev.decision === "correct"), onclick: () => save("cases", c.id, { decision: "correct", pcode: c.expected, note: rev.note || "" }) }, c.expected ? "Correct" : "Correct, no match");
   const none = c.expected ? el("button", { class: "no", "aria-pressed": String(rev.decision === "no-match"), onclick: () => save("cases", c.id, { decision: "no-match", pcode: "", note: rev.note || "" }) }, "Should match nothing") : null;
   const hintPcode = c.matcher.alternatives.concat(c.matcher.pcode || [], c.expected || []).map((p) => state.places[p]?.parent_pcode).find(Boolean);
@@ -286,6 +288,7 @@ function variantRow(v) {
   const srcs = v.sources.map((s) => { const href = sourceLink(s.ref); const label = `${s.source} ${s.kind}`; return href ? el("a", { href, target: "_blank", rel: "noopener" }, label) : label; });
   const src = el("div", { class: "src" }); srcs.forEach((s, i) => { if (i) src.append(", "); src.append(s); });
   if (v.conflicts.length) src.append(el("div", {}, `Also the official name of ${v.conflicts.map((p) => state.places[p]?.name_en + " (" + p + ")").join(", ")}; a level filter tells them apart.`));
+  if (rev.by === "agent") src.append(el("div", {}, el("span", { class: "chip" }, "agent review"), rev.agent_note ? " " + rev.agent_note : ""));
   return el("div", { class: "variant", id: "sp-" + v.id },
     el("div", {}, textEl("div", v.text, "text"), src),
     el("div", { class: "actions" },
@@ -326,10 +329,11 @@ function renderUnlinked() {
     const rev = state.reviews.unlinked[u.id] || {};
     const href = sourceLink(u.id);
     const chip = el("span", { class: "chip" + (rev.decision === "link" ? " ok" : rev.decision === "none" ? " rej" : "") },
-      rev.decision === "link" ? `linked to ${rev.pcode}` : rev.decision === "none" ? "not a current place" : "not reviewed");
+      (rev.decision === "link" ? `linked to ${rev.pcode}` : rev.decision === "none" ? "not a current place" : "not reviewed") + byAgent(rev));
     return el("article", { class: "card" + (rev.decision ? " done" : "") },
       el("div", { class: "top" }, textEl("span", u.names.join(" · ") || "(no name)", "input"), chip),
       el("div", { class: "row small" }, el("span", {}, "Source"), el("span", {}, href ? el("a", { href, target: "_blank", rel: "noopener" }, u.id) : u.id, ` · ${u.level === 1 ? "state" : "locality"} level · ${u.reason}`)),
+      rev.agent_note ? el("div", { class: "row small" }, el("span", {}, "Agent"), el("span", {}, rev.agent_note)) : null,
       el("div", { class: "actions" },
         el("button", { class: "no", "aria-pressed": String(rev.decision === "none"), onclick: () => save("unlinked", u.id, { decision: "none", pcode: "" }) }, "Not a current place"),
         placeSelect(u.level, [], null, rev.decision === "link" ? rev.pcode : "", (p) => save("unlinked", u.id, { decision: "link", pcode: p }), `Place for ${u.names[0] || u.id}`)));
@@ -342,6 +346,7 @@ function renderRules() {
     const id = "r" + i, rev = state.reviews.rules[id] || {};
     return el("article", { class: "card" + (rev.decision ? " done" : "") },
       el("p", {}, text),
+      rev.agent_note ? el("p", { class: "small" }, el("span", { class: "chip" }, "agent review"), ` ${rev.decision}: ${rev.agent_note}`) : null,
       el("div", { class: "actions" },
         el("button", { class: "yes", "aria-pressed": String(rev.decision === "agree"), onclick: () => save("rules", id, { decision: "agree", note: rev.note || "" }) }, "Agree"),
         el("button", { class: "no", "aria-pressed": String(rev.decision === "disagree"), onclick: () => save("rules", id, { decision: "disagree", note: rev.note || "" }) }, "Disagree")),
