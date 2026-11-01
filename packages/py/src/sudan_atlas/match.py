@@ -24,7 +24,8 @@ VARIANT_SCORE = 0.98
 PART_PENALTY = 0.97  # a match on part of the input ("Bahri" in "Khartoum North (Bahri)") ranks below a full-name match
 SKELETON_WEIGHT = 0.9  # consonant skeletons agree ("Qallabat" / "Galabat"): strong evidence, but not as strong as spelling
 SUBSET_WEIGHT = 0.9  # every word of the shorter name appears in the longer ("Um Dam" / "Um Dam Haj Ahmed")
-SUBSET_MIN_LETTERS = 4  # ...but only when the shorter name is long enough to mean something
+SUBSET_MIN_LETTERS = 4  # ...but only when the shorter name is long enough to mean something:
+SUBSET_MIN_LETTERS_ONE_WORD = 5  # a single short word ("area", "abu", "wad") is in too many names to count
 
 
 def combined(normaliser):
@@ -36,8 +37,10 @@ def combined(normaliser):
         sa, sb = skeleton(a), skeleton(b)
         if sa and sb and sa != a:
             best = max(best, SKELETON_WEIGHT * fuzz.ratio(sa, sb))
-        if min(len(a.replace(" ", "")), len(b.replace(" ", ""))) >= SUBSET_MIN_LETTERS:
-            best = max(best, SUBSET_WEIGHT * fuzz.token_set_ratio(a, b))
+        shorter, longer = sorted((a.split(), b.split()), key=len)
+        minimum = SUBSET_MIN_LETTERS_ONE_WORD if len(shorter) == 1 else SUBSET_MIN_LETTERS
+        if len("".join(shorter)) >= minimum and set(shorter) < set(longer):
+            best = max(best, SUBSET_WEIGHT * 100)
         return best
 
     return score

@@ -7,6 +7,7 @@ The gazetteer turns messy Sudanese place names into official codes. It lives in 
 | `places.json` | One record per state (19) and locality (189): `pcode`, `level`, `name_en`, `name_ar`, `parent_pcode`, and a `point` inside the place | `make gazetteer`, from the released boundaries |
 | `variants.json` | Other spellings of a place, each with the sources it came from | `make gazetteer`, from COD-AB, geoBoundaries, GeoNames and Wikidata |
 | `normalisation.json` | The rules that turn a name into a matching key | Written by hand; reviewed with the variants |
+| `review.json` | Review decisions: spellings kept or rejected, and records linked by hand. Applied on every build, so they survive rebuilds | Review |
 | `variants_osm.json` | OpenStreetMap spellings, kept apart because they are ODbL | Not built yet |
 
 The test set is `data/tests/match_cases.csv`; `data/tests/normalisation_cases.csv` pins down the normalisation rules for both languages.
@@ -41,4 +42,11 @@ A variant that equals another place's official name is dropped, because it would
 
 ## Review status
 
-All variants have `"status": "proposed"` and all test labels `verified_by = claude` until reviewed. The threshold (provisionally 0.75) is fixed after the review. See `docs/MATCHER_EVALUATION.md` for the latest results.
+On 2026-10-31 an independent AI agent (not a person) reviewed everything:
+
+- **Spellings:** 409 kept and 16 rejected; rejected ones are left out of `variants.json` and listed in `review.json` with the reason. Spellings added since then have `"status": "proposed"`.
+- **Unlinked records:** 8 linked to a place by hand, 25 confirmed as not current places.
+- **Rules:** 8 agreed; dropping the word *area* was disagreed with (it made "Abyei Area" look like the West Kordofan locality), so it is no longer dropped.
+- **Test answers:** 291 confirmed, 8 changed (`data/tests/match_cases_review.json`); 2 cases are still marked UNSURE.
+
+The brief's checkpoint asks for the test answers to be verified by Amin; until then every label keeps `verified_by = claude`. The threshold (provisionally 0.75) is fixed after that review. See `docs/MATCHER_EVALUATION.md` for the latest results.

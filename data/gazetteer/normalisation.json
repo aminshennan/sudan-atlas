@@ -97,7 +97,6 @@
       ]
     ],
     "generic_words": [
-      "area",
       "camp",
       "camps",
       "district",
@@ -206,7 +205,7 @@
     "additions_for_review": [
       "Arabic ی and ک (Persian keyboard forms) are mapped to ي and ك.",
       "Latin accents are removed (BĀW -> baw), and apostrophes and ʿ are dropped (Ad Du'ayn -> duain after the other rules).",
-      "Generic words are dropped: state, locality, district, province, town, IDPs, camp, village(s), area, ولاية, محلية. مدينة is kept because two official names contain it.",
+      "Generic words are dropped: state, locality, district, province, town, IDPs, camp, village(s), ولاية, محلية. مدينة is kept because two official names contain it.",
       "A glued al/el (Elfasher, Alfashir) is stripped when at least four letters remain.",
       "Synonyms: translated direction and descriptor words map to the transliterations official names use (north -> shamal, west -> gharb, rural -> reifi, city -> madinat, بلدية -> مدينة, غربية -> غرب).",
       "Skeleton (fuzzy scoring only): q, gh and j count as g; kh as k; dh as d; th as t; w as u; y as i; vowels after the first letter are ignored.",

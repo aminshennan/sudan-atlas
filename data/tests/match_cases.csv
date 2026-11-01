@@ -83,11 +83,11 @@ c081,AL GAWZ,SOUTH KORDOFAN,2,SD07094,sudan-subnational-boundaries-and-tabular-d
 c082,AJ JABALEN,WHITE NILE,2,SD09051,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c083,ŢAWĪLAH,NORTH DARFUR,2,SD02170,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c084,KHARTOUM NORTH,KHARTOUM,2,SD01003,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Khartoum North = Bahri
-c085,NITAIFA,SOUTH DARFUR,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,UNSURE: old census name; no current locality clearly matches
+c085,NITAIFA,SOUTH DARFUR,2,SD03151,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"changed by agent review (high confidence): The source row itself gives NSO_NAME ""NITAIFA (نتيقة)"", i.e. Nitega; NITAIFA is a mis-transliteration (sudan_uscb_202101.xlsx)."
 c086,ALSSALAM,WHITE NILE,2,SD09049,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c087,AŢ ŢUWAYSHAH,NORTH DARFUR,2,SD02119,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c088,Second-order administrative division name,First-order administrative division name,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"negative: column header text, not a place"
-c089,EL MEILIG,GEZIRA,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,UNSURE: El Meilig was a rural council; which current locality?
+c089,EL MEILIG,GEZIRA,2,SD15035,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"changed by agent review (high confidence): The source row notes ""Al Kamlin."" with NSO_NAME ""ALKAMLEEN (محلية الكاملين)""; Al Kamlin is also the only v03 Gezira locality missing from the census list."
 c090,BABANŪSAH,WEST KORDOFAN,2,SD18100,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c091,ALSSALAM,SOUTH DARFUR,2,SD03166,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c092,HALFĀ AL GADĪDAH,KASSALA,2,SD11052,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
@@ -103,7 +103,7 @@ c101,AD DIWEM,WHITE NILE,2,SD09044,sudan-subnational-boundaries-and-tabular-data
 c102,BERGEIG,NORTHERN,2,SD17016,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c103,HILLAT ‘AGIG,RED SEA,2,SD10072,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c104,BĀRAH WEST,NORTH KORDOFAN,2,SD13029,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Bara West = Gharb Bara
-c105,NAIRTATY,CENTRAL DARFUR,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,UNSURE: Nertiti is not a COD-AB v03 locality name; which one holds it?
+c105,NAIRTATY,CENTRAL DARFUR,2,SD06131,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,changed by agent review (high confidence): The source row note says Nairtaty was split and the remaining Nairtaty is West Gabal Marra (Golo and Rokiro are listed separately) = Gharb Jabal Marrah.
 c106,RAHAD AL BARDĪ,SOUTH DARFUR,2,SD03158,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c107,AL FASHAQAA,GEDAREF,2,SD12075,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c108,NAHR ATBARA,KASSALA,2,SD11062,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
@@ -135,18 +135,18 @@ c133,Total,Total,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,L
 c134,El Dindir,,2,SD14040,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c135,Sharq El Nile,,2,SD01004,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c136,Janub El Gezira (S. El Gezira),,2,SD15031,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c137,Nertiti,Central Darfur,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,UNSURE: Nertiti is not a COD-AB v03 locality name; which one holds it?
+c137,Nertiti,Central Darfur,2,SD06131,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,changed by agent review (medium confidence): Nertiti town is the seat of West Jebel Marra (GeoNames 12157004 point falls in Gharb Jabal Marrah); the state is Central Darfur.
 c138,Sharg El Galabat,,2,SD12083,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: East Galabat = Galabat Ash-Shargiah
 c139,El Geneina,West Darfur,2,SD04115,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c140,Abu Jubaiha,,2,SD07088,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c141,Zaydab,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,UNSURE: Zaydab (Zeidab) is a town; which locality?
+c141,Zaydab,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (medium confidence): Zeidab is an administrative unit of Ad Damar locality (Wikipedia Ad-Damir), and the GeoNames Zeidab points fall inside Ad Damar; the UNHCR row is under River Nile."
 c142,El Quresha,,2,SD12076,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c143,El Roseires,,2,SD08107,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c144,Singa,,2,SD14043,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c145,Halfa El Jadeeda,Kassala,2,SD11052,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c146,Zalingei,,2,SD06138,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c147,Wasat Gedaref (Middle Gedaref),,2,SD12081,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c148,Ingaz,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,UNSURE: Ingaz; which place is meant?
+c148,Ingaz,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"UNSURE: Ingaz; which place is meant? | agent review, low confidence: Ingaz (Al Ingaz) under Al Gezira in UNHCR: I could not place it in one locality."
 c149,Habila,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: Habila is in West Darfur and South Kordofan; no state given
 c150,Ed Damer,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c151,Dimso,,2,SD03172,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
@@ -161,13 +161,13 @@ c159,Gharb El Galabat (W. EL Galabat),,2,SD12078,sudan-monthly-refugee-and-asylu
 c160,El Obeid,,2,SD13024,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: town: El Obeid is in Sheikan locality
 c161,El Daein,,2,SD05142,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c162,El Kamleen,,2,SD15035,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c163,Bagaair,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,UNSURE: Bagaair (Al Bagair) is a town; which locality?
+c163,Bagaair,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"UNSURE: Bagaair (Al Bagair) is a town; which locality? | agent review, low confidence: Al Bagair: the GeoNames points fall in both Sharg An Neel (Khartoum) and Al Kamlin, and the case has no state, so no single place is safe."
 c164,Khartoum North (Bahri),,2,SD01003,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: Khartoum North = Bahri
 c165,Al Tadamon,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: At Tadamon is in South Kordofan and Blue Nile; no state given
 c166,Sharg Sennar (E. Sennar),,2,SD14042,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c167,Rufaa,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: town: Rufaa is the seat of East Gezira (Sharg Al Jazirah); check
 c168,Bielel,,2,SD03162,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c169,Genaid,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,UNSURE: Genaid (Al Genaid) is a town; which locality?
+c169,Genaid,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (medium confidence): Al Guneid (GeoNames 6957938, 14.79N 33.31E, next to Rufaa) falls inside Sharg Al Jazirah; the UNHCR row is under Al Gezira."
 c170,Wad Banda,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c171,Al Khowey (Khuwei),,2,SD18105,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c172,Abu Hamed,River Nile,2,SD16008,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
@@ -175,17 +175,17 @@ c173,Lagawa,,2,SD18102,sudan-monthly-refugee-and-asylum-seeker-population-by-sit
 c174,Merawi,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: Merawi = Merwoe
 c175,El Radom,,2,SD03141,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c176,Basonda,,2,SD12077,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c177,Karima,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"UNSURE: Karima is a town, probably in Merwoe locality; check"
+c177,Karima,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (high confidence): Karima (GeoNames 371870, 18.55N 31.85E) lies across the river from Merowe, inside Merwoe locality; the UNHCR row is under Northern."
 c178,امبرو,North Darfur,2,SD02120,sudan-schools,Master File/locality_name,SD02120,claude,proposed from the dataset's own P-code
 c179,همشكوريب,Kassala,2,SD11058,sudan-schools,Master File/locality_name,SD11058,claude,proposed from the dataset's own P-code
 c180,بيضة,West Darfur,2,SD04111,sudan-schools,Master File/locality_name,SD04111,claude,proposed from the dataset's own P-code
 c181,قدير,South Kordofan,2,SD07108,sudan-schools,Master File/locality_name,SD07108,claude,proposed from the dataset's own P-code
 c182,السلام,White Nile,2,SD09049,sudan-schools,Master File/locality_name,SD09049,claude,proposed from the dataset's own P-code
-c183,بلدية نيالا,South Darfur,2,SD03167,sudan-schools,Master File/locality_name,SD03167,claude,"UNSURE: dataset says Nyala Janoub, but Nyala municipality spans both Nyala localities"
+c183,بلدية نيالا,South Darfur,2,SD03167,sudan-schools,Master File/locality_name,SD03167,claude,"settled by agent review (medium confidence): In this dataset بلدية نيالا sits beside a separate نيالا شمال, so it stands for Nyala Janoub, which matches the dataset P-code."
 c184,نهر عطبرة,Kassala,2,SD11062,sudan-schools,Master File/locality_name,SD11062,claude,proposed from the dataset's own P-code
 c185,القلابات الغربية,Gadarif,2,SD12078,sudan-schools,Master File/locality_name,SD12078,claude,proposed from the dataset's own P-code
 c186,ام دم,North Kordofan,2,SD13028,sudan-schools,Master File/locality_name,SD13028,claude,proposed from the dataset's own P-code
-c187,الواحة,North Darfur,2,SD02114,sudan-schools,Master File/locality_name,SD02114,claude,UNSURE: dataset says Al Fasher; Al Waha may be a newer locality
+c187,الواحة,North Darfur,2,,sudan-schools,Master File/locality_name,SD02114,claude,"changed by agent review (medium confidence): Al Waha is a separate nomad locality with no fixed area (HRW 2005), listed apart from Al Fasher in this dataset; no v03 locality holds it, so the dataset P-code is a stand-in. Same answer as c223."
 c188,التضامن,Blue Nile,2,SD08108,sudan-schools,Master File/locality_name,SD08108,claude,proposed from the dataset's own P-code
 c189,أبوزبد,West Kordofan,2,SD18028,sudan-schools,Master File/locality_name,SD18028,claude,proposed from the dataset's own P-code
 c190,السلام,West Kordofan,2,SD18086,sudan-schools,Master File/locality_name,SD18086,claude,proposed from the dataset's own P-code
@@ -221,7 +221,7 @@ c219,Ad Du'ayn IDPs,East Darfur,2,SD05142,sudan-acute-food-insecurity-country-da
 c220,Al Buram IDPs,South Kordofan,2,SD07099,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c221,Um Durein IDPs,South Kordofan,2,SD07091,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
 c222,At Tina IDPs,North Darfur,2,SD02171,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c223,Al Waha,North Darfur,2,,sudan-who-does-what-where-november-2020,Locality,,claude,UNSURE: Al Waha is not a COD-AB v03 locality; which one holds it?
+c223,Al Waha,North Darfur,2,,sudan-who-does-what-where-november-2020,Locality,,claude,"settled by agent review (medium confidence): Al Waha is a non-territorial nomad locality that is not in v03, and no single current locality holds it."
 c224,Total,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,negative: total row
 c225,Per cent,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,negative: not a place
 c226,Abyei PCA Box,,1,SD19,sudan-who-does-what-where-november-2020,State,,claude,proposed by Claude: Abyei PCA Box = Abyei PCA
@@ -257,12 +257,12 @@ c255,Blue Nile State,,1,SD08,sudan-acute-food-insecurity-country-data,Level 1,,c
 c256,Ganees East,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c257,Babanusa Town,,2,SD18100,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: town in its namesake locality
 c258,Um Hashima,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c259,Abu Matarig,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"UNSURE: Abu Matarig is a town, possibly the seat of Bahr Al Arab; check"
+c259,Abu Matarig,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (medium confidence): A site in Bahr Al Arab locality (the town is its seat), but this is a site column and the name is not a locality name."
 c260,Wad Banda Rural,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: rural part of Wad Bandah locality
 c261,Alagaya,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c262,Shag-Al-Gamous,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c263,Gedied (area),,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c264,Ed Dibebat,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"UNSURE: Ed Dibebat is a town, possibly the seat of Al Quoz; check"
+c264,Ed Dibebat,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (medium confidence): A site listed under Al Quoz; the town is not named after a locality, and the GeoNames point even falls in Ar Reif Ash Shargi."
 c265,Alganaa,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c266,Dabat Bosin,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c267,Wad Sherifai,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
@@ -275,7 +275,7 @@ c273,Abu Beteik,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,S
 c274,Hayi Elfadros and villages,Blue Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c275,Um Gargour,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
 c276,Qala El Nahal,,2,SD12079,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: Qala El Nahal = Gala'a Al Nahal
-c277,Dar El Selam 8,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,UNSURE: Dar El Selam 8 is a camp site; should it match Dar As Salam?
+c277,Dar El Selam 8,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (high confidence): A Khartoum (Jabal Aulia) collective site, not the North Darfur locality Dar As Salam."
 c278,Lubna village,White Nile,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
 c279,El Mieram,West Kordofan,2,SD18106,sudan-people-affected-by-floods,2022/Village Name,,claude,proposed by Claude: El Mieram = Al Meiram
 c280,"Aldaba, Alharafa",North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"

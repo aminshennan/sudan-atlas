@@ -30,7 +30,9 @@ from .places import PLACES_PATH, dump_records
 
 GAZETTEER_DIR = config.ROOT / "data" / "gazetteer"
 VARIANTS_PATH = GAZETTEER_DIR / "variants.json"
+REVIEW_PATH = GAZETTEER_DIR / "review.json"
 LINK_REPORT = config.REPORTS_DIR / "variant_links.json"
+REJECTED_REPORT = config.REPORTS_DIR / "variants_rejected.json"
 
 LINK_MIN_SCORE = 0.80  # within the parent state or near the record's location
 LINK_ANYWHERE_SCORE = 0.92  # fallback across the whole country: the name must be near-identical
@@ -245,8 +247,28 @@ def wikidata_items(state_links: dict[str, str]) -> list[Item]:
     return items
 
 
+def load_review() -> dict:
+    """Review decisions: spellings kept or rejected, and records linked (or not) by hand."""
+    if not REVIEW_PATH.exists():
+        return {"variants": {}, "links": {}}
+    review = json.loads(REVIEW_PATH.read_text())
+    return {
+        "variants": {(v["text"], tuple(v["pcodes"])): v["decision"] for v in review["variants"]},
+        "links": {l["ref"]: l for l in review["links"]},
+    }
+
+
 def build() -> tuple[list[dict], list[dict]]:
     places = {p["pcode"]: p for p in json.loads(PLACES_PATH.read_text())["places"]}
+    review = load_review()
+
+    def resolve(item: Item) -> tuple[str | None, float, str]:
+        decided = review["links"].get(item.ref)
+        if decided and decided["decision"] == "link":
+            return decided["pcode"], 1.0, "linked (review)"
+        if decided:
+            return None, 0.0, "not a current place (review)"
+        return linker.link(item)
     norm = Normaliser(json.loads((GAZETTEER_DIR / "normalisation.json").read_text()))
     cod_items, extra = cod_ab_items(places)
     linker = Linker(places, norm, extra)
@@ -276,7 +298,7 @@ def build() -> tuple[list[dict], list[dict]]:
             for pcode in pcodes:
                 collected.extend((t, "town", item.source, item.ref, pcode) for t in item.towns)
         else:
-            take(item, *linker.link(item))
+            take(item, *resolve(item))
 
     iso_links = {}
     gb1 = gpd.read_file(config.GEOBOUNDARIES_DIR / "geoBoundaries-SDN-ADM1.geojson")
@@ -291,14 +313,14 @@ def build() -> tuple[list[dict], list[dict]]:
         if item.iso in iso_links:
             pcode, score, outcome = iso_links[item.iso], 1.0, "linked (ISO 3166-2 code)"
         else:
-            pcode, score, outcome = linker.link(item)
+            pcode, score, outcome = resolve(item)
         take(item, pcode, score, outcome)
         if pcode:
             state_links[item.ref.split(":")[1]] = pcode
     for item in wikidata_items(state_links):
         if item.level != 2:
             continue
-        pcode, score, outcome = linker.link(item)
+        pcode, score, outcome = resolve(item)
         take(item, pcode, score, outcome)
         if pcode:
             collected.extend((t, "town", item.source, item.ref, pcode) for t in item.towns)
@@ -327,6 +349,7 @@ def build() -> tuple[list[dict], list[dict]]:
         if source_entry not in record["sources"]:
             record["sources"].append(source_entry)
 
+    rejected = []
     by_text = defaultdict(list)
     for record in merged.values():
         by_text[record["text"]].append(record)
@@ -336,14 +359,22 @@ def build() -> tuple[list[dict], list[dict]]:
         sources = [s for r in records for s in r["sources"]]
         key = norm.key(text)
         conflicts = sorted(official.get(key, set()) - set(pcodes))
+        decision = review["variants"].get((text, tuple(pcodes)))
+        if decision == "reject":
+            dropped.append({"text": text, "pcode": pcodes[0], "ref": sources[0]["ref"], "reason": "rejected in review"})
+            rejected.append({"text": text, "lang": records[0]["lang"], "pcodes": pcodes, "sources": sources})
+            continue
         entry = {"text": text, "lang": records[0]["lang"], "pcodes": pcodes,
-                 "sources": sorted(sources, key=lambda s: (s["source"], s["ref"])), "status": "proposed"}
+                 "sources": sorted(sources, key=lambda s: (s["source"], s["ref"])),
+                 "status": "kept" if decision == "keep" else "proposed"}
         if conflicts:
             entry["conflicts_with_official"] = conflicts
         variants.append(entry)
     variants.sort(key=lambda v: (v["pcodes"], v["lang"], v["text"]))
     links.extend({"ref": d["ref"], "level": places[d["pcode"]]["level"], "names": [d["text"]], "pcode": d["pcode"],
                   "score": None, "outcome": f"variant dropped: {d['reason']}"} for d in dropped)
+    config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    REJECTED_REPORT.write_text(json.dumps(rejected, indent=1, ensure_ascii=False))
     return variants, links
 
 

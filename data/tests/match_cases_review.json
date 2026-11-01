@@ -1,0 +1,2099 @@
+{
+ "description": "Second review of every proposed answer in match_cases.csv. Answers it changed were applied there.",
+ "reviewer": "independent AI agent (Claude), 2026-10-31; not yet confirmed by Amin",
+ "decisions": [
+  {
+   "id": "c001",
+   "decision": "correct",
+   "pcode": "SD02118",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Serief (SD02118)."
+  },
+  {
+   "id": "c002",
+   "decision": "correct",
+   "pcode": "SD01001",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Jebel Awlia (SD01001)."
+  },
+  {
+   "id": "c003",
+   "decision": "correct",
+   "pcode": "SD05140",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Jabrah (SD05140)."
+  },
+  {
+   "id": "c004",
+   "decision": "correct",
+   "pcode": "SD07106",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of At Tadamon - SK (SD07106)."
+  },
+  {
+   "id": "c005",
+   "decision": "correct",
+   "pcode": "SD10065",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Tawkar (SD10065)."
+  },
+  {
+   "id": "c006",
+   "decision": "correct",
+   "pcode": "SD14043",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sinja (SD14043)."
+  },
+  {
+   "id": "c007",
+   "decision": "correct",
+   "pcode": "SD06132",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Shamal Jabal Marrah (SD06132)."
+  },
+  {
+   "id": "c008",
+   "decision": "correct",
+   "pcode": "SD17015",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Delgo (SD17015)."
+  },
+  {
+   "id": "c009",
+   "decision": "correct",
+   "pcode": "SD05148",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Shia'ria (SD05148)."
+  },
+  {
+   "id": "c010",
+   "decision": "correct",
+   "pcode": "SD01004",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg An Neel (SD01004)."
+  },
+  {
+   "id": "c011",
+   "decision": "correct",
+   "pcode": "SD11060",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Khashm Elgirba (SD11060)."
+  },
+  {
+   "id": "c012",
+   "decision": "correct",
+   "pcode": "SD03141",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Radoum (SD03141)."
+  },
+  {
+   "id": "c013",
+   "decision": "correct",
+   "pcode": "SD02136",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Kadadah (SD02136)."
+  },
+  {
+   "id": "c014",
+   "decision": "correct",
+   "pcode": "SD11061",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Wad Elhilaiw (SD11061)."
+  },
+  {
+   "id": "c015",
+   "decision": "correct",
+   "pcode": "SD07089",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Talawdi (SD07089)."
+  },
+  {
+   "id": "c016",
+   "decision": "correct",
+   "pcode": "SD16011",
+   "confidence": "high",
+   "note": "Ed Damer = Ad Damar; the state \"Nile\" means River Nile."
+  },
+  {
+   "id": "c017",
+   "decision": "correct",
+   "pcode": "SD11062",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Nahr Atbara (SD11062)."
+  },
+  {
+   "id": "c018",
+   "decision": "correct",
+   "pcode": "SD15033",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg Al Jazirah (SD15033)."
+  },
+  {
+   "id": "c019",
+   "decision": "correct",
+   "pcode": "SD15031",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Janub Al Jazirah (SD15031)."
+  },
+  {
+   "id": "c020",
+   "decision": "correct",
+   "pcode": "SD15035",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Kamlin (SD15035)."
+  },
+  {
+   "id": "c021",
+   "decision": "correct",
+   "pcode": "SD03162",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Beliel (SD03162)."
+  },
+  {
+   "id": "c022",
+   "decision": "correct",
+   "pcode": "SD15032",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Algura (SD15032)."
+  },
+  {
+   "id": "c023",
+   "decision": "correct",
+   "pcode": "SD10063",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Dordieb (SD10063)."
+  },
+  {
+   "id": "c024",
+   "decision": "correct",
+   "pcode": "SD11059",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Telkok (SD11059)."
+  },
+  {
+   "id": "c025",
+   "decision": "correct",
+   "pcode": "SD08107",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ar Rusayris (SD08107)."
+  },
+  {
+   "id": "c026",
+   "decision": "correct",
+   "pcode": "SD03172",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Damso (SD03172)."
+  },
+  {
+   "id": "c027",
+   "decision": "correct",
+   "pcode": "SD02119",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of At Tawisha (SD02119)."
+  },
+  {
+   "id": "c028",
+   "decision": "correct",
+   "pcode": "SD12078",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Galabat Al Gharbyah - Kassab (SD12078)."
+  },
+  {
+   "id": "c029",
+   "decision": "correct",
+   "pcode": "SD07097",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ar Reif Ash Shargi (SD07097)."
+  },
+  {
+   "id": "c030",
+   "decision": "correct",
+   "pcode": "SD07104",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Kershola (SD07104)."
+  },
+  {
+   "id": "c031",
+   "decision": "correct",
+   "pcode": "SD06138",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Zalingi (SD06138)."
+  },
+  {
+   "id": "c032",
+   "decision": "correct",
+   "pcode": "SD03154",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Shattaya (SD03154)."
+  },
+  {
+   "id": "c033",
+   "decision": "correct",
+   "pcode": "SD02169",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Lait (SD02169)."
+  },
+  {
+   "id": "c034",
+   "decision": "correct",
+   "pcode": "SD02126",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kelemando (SD02126)."
+  },
+  {
+   "id": "c035",
+   "decision": "correct",
+   "pcode": "SD18105",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Khiwai (SD18105)."
+  },
+  {
+   "id": "c036",
+   "decision": "correct",
+   "pcode": "SD14042",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg Sennar (SD14042)."
+  },
+  {
+   "id": "c037",
+   "decision": "correct",
+   "pcode": "SD12076",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Qureisha (SD12076)."
+  },
+  {
+   "id": "c038",
+   "decision": "correct",
+   "pcode": "SD09045",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Rimta (SD09045)."
+  },
+  {
+   "id": "c039",
+   "decision": "correct",
+   "pcode": "SD13028",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Dam Haj Ahmed (SD13028)."
+  },
+  {
+   "id": "c040",
+   "decision": "correct",
+   "pcode": "SD13029",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Gharb Bara (SD13029)."
+  },
+  {
+   "id": "c041",
+   "decision": "correct",
+   "pcode": "SD13024",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sheikan (SD13024)."
+  },
+  {
+   "id": "c042",
+   "decision": "correct",
+   "pcode": "SD02168",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kernoi (SD02168)."
+  },
+  {
+   "id": "c043",
+   "decision": "correct",
+   "pcode": "SD02120",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Baru (SD02120)."
+  },
+  {
+   "id": "c044",
+   "decision": "correct",
+   "pcode": "SD08104",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Baw (SD08104)."
+  },
+  {
+   "id": "c045",
+   "decision": "correct",
+   "pcode": "SD09051",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Aj Jabalain (SD09051)."
+  },
+  {
+   "id": "c046",
+   "decision": "correct",
+   "pcode": "SD04122",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Habila - WD (SD04122)."
+  },
+  {
+   "id": "c047",
+   "decision": "correct",
+   "pcode": "SD11054",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Gharb Kassala (SD11054)."
+  },
+  {
+   "id": "c048",
+   "decision": "correct",
+   "pcode": "SD18022",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of An Nuhud (SD18022)."
+  },
+  {
+   "id": "c049",
+   "decision": "correct",
+   "pcode": "SD03151",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Nitega (SD03151)."
+  },
+  {
+   "id": "c050",
+   "decision": "correct",
+   "pcode": "SD03164",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Nyala Shimal (SD03164)."
+  },
+  {
+   "id": "c051",
+   "decision": "correct",
+   "pcode": "SD12083",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Galabat Ash-Shargiah (SD12083)."
+  },
+  {
+   "id": "c052",
+   "decision": "correct",
+   "pcode": "SD17019",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Dabbah (SD17019)."
+  },
+  {
+   "id": "c053",
+   "decision": "correct",
+   "pcode": "SD09050",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Gitaina (SD09050)."
+  },
+  {
+   "id": "c054",
+   "decision": "correct",
+   "pcode": "SD02116",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Koma (SD02116)."
+  },
+  {
+   "id": "c055",
+   "decision": "correct",
+   "pcode": "SD15030",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Medani Al Kubra (SD15030)."
+  },
+  {
+   "id": "c056",
+   "decision": "correct",
+   "pcode": "SD12073",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Butanah (SD12073)."
+  },
+  {
+   "id": "c057",
+   "decision": "correct",
+   "pcode": "SD18087",
+   "confidence": "high",
+   "note": "Abyei-Muglad is the West Kordofan locality SD18087, not the Abyei PCA."
+  },
+  {
+   "id": "c058",
+   "decision": "correct",
+   "pcode": "SD09044",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Diwaim (SD09044)."
+  },
+  {
+   "id": "c059",
+   "decision": "correct",
+   "pcode": "SD05152",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Firdous (SD05152)."
+  },
+  {
+   "id": "c060",
+   "decision": "correct",
+   "pcode": "SD10067",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Jubayt Elma'aadin (SD10067)."
+  },
+  {
+   "id": "c061",
+   "decision": "correct",
+   "pcode": "SD05142",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Du'ayn (SD05142)."
+  },
+  {
+   "id": "c062",
+   "decision": "correct",
+   "pcode": "SD13025",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Soudari (SD13025)."
+  },
+  {
+   "id": "c063",
+   "decision": "correct",
+   "pcode": "SD07103",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Habila - SK (SD07103)."
+  },
+  {
+   "id": "c064",
+   "decision": "correct",
+   "pcode": "SD07088",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Jubayhah (SD07088)."
+  },
+  {
+   "id": "c065",
+   "decision": "correct",
+   "pcode": "SD18104",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Idia (SD18104)."
+  },
+  {
+   "id": "c066",
+   "decision": "correct",
+   "pcode": "SD06112",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Bendasi (SD06112)."
+  },
+  {
+   "id": "c067",
+   "decision": "correct",
+   "pcode": "SD11058",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Hamashkureib (SD11058)."
+  },
+  {
+   "id": "c068",
+   "decision": "correct",
+   "pcode": "SD03147",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg Aj Jabal (SD03147)."
+  },
+  {
+   "id": "c069",
+   "decision": "correct",
+   "pcode": "SD16009",
+   "confidence": "high",
+   "note": "El Matammah = Al Matama; the state \"Nile\" means River Nile."
+  },
+  {
+   "id": "c070",
+   "decision": "correct",
+   "pcode": "SD18102",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Lagowa (SD18102)."
+  },
+  {
+   "id": "c071",
+   "decision": "correct",
+   "pcode": "SD13025",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Soudari (SD13025)."
+  },
+  {
+   "id": "c072",
+   "decision": "correct",
+   "pcode": "SD12078",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Galabat Al Gharbyah - Kassab (SD12078)."
+  },
+  {
+   "id": "c073",
+   "decision": "correct",
+   "pcode": "SD14040",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Dinder (SD14040)."
+  },
+  {
+   "id": "c074",
+   "decision": "correct",
+   "pcode": "SD09047",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kosti (SD09047)."
+  },
+  {
+   "id": "c075",
+   "decision": "correct",
+   "pcode": "SD03146",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Dafoug (SD03146)."
+  },
+  {
+   "id": "c076",
+   "decision": "correct",
+   "pcode": "SD10063",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Dordieb (SD10063)."
+  },
+  {
+   "id": "c077",
+   "decision": "correct",
+   "pcode": "SD15031",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Janub Al Jazirah (SD15031)."
+  },
+  {
+   "id": "c078",
+   "decision": "correct",
+   "pcode": "SD09050",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Gitaina (SD09050)."
+  },
+  {
+   "id": "c079",
+   "decision": "correct",
+   "pcode": "SD02168",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kernoi (SD02168)."
+  },
+  {
+   "id": "c080",
+   "decision": "correct",
+   "pcode": "SD01001",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Jebel Awlia (SD01001)."
+  },
+  {
+   "id": "c081",
+   "decision": "correct",
+   "pcode": "SD07094",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Quoz (SD07094)."
+  },
+  {
+   "id": "c082",
+   "decision": "correct",
+   "pcode": "SD09051",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Aj Jabalain (SD09051)."
+  },
+  {
+   "id": "c083",
+   "decision": "correct",
+   "pcode": "SD02170",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Tawila (SD02170)."
+  },
+  {
+   "id": "c084",
+   "decision": "correct",
+   "pcode": "SD01003",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Bahri (SD01003)."
+  },
+  {
+   "id": "c085",
+   "decision": "change",
+   "pcode": "SD03151",
+   "confidence": "high",
+   "note": "The source row itself gives NSO_NAME \"NITAIFA (نتيقة)\", i.e. Nitega; NITAIFA is a mis-transliteration (sudan_uscb_202101.xlsx)."
+  },
+  {
+   "id": "c086",
+   "decision": "correct",
+   "pcode": "SD09049",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Salam / Ar Rawat (SD09049)."
+  },
+  {
+   "id": "c087",
+   "decision": "correct",
+   "pcode": "SD02119",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of At Tawisha (SD02119)."
+  },
+  {
+   "id": "c088",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c089",
+   "decision": "change",
+   "pcode": "SD15035",
+   "confidence": "high",
+   "note": "The source row notes \"Al Kamlin.\" with NSO_NAME \"ALKAMLEEN (محلية الكاملين)\"; Al Kamlin is also the only v03 Gezira locality missing from the census list."
+  },
+  {
+   "id": "c090",
+   "decision": "correct",
+   "pcode": "SD18100",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Babanusa (SD18100)."
+  },
+  {
+   "id": "c091",
+   "decision": "correct",
+   "pcode": "SD03166",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Salam - SD (SD03166)."
+  },
+  {
+   "id": "c092",
+   "decision": "correct",
+   "pcode": "SD11052",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Halfa Aj Jadeedah (SD11052)."
+  },
+  {
+   "id": "c093",
+   "decision": "correct",
+   "pcode": "SD12084",
+   "confidence": "high",
+   "note": "The source row gives NSO_NAME \"ALRRAHA (محلية الرهد)\" = Ar Rahad, Gedaref."
+  },
+  {
+   "id": "c094",
+   "decision": "correct",
+   "pcode": "SD07108",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ghadeer (SD07108)."
+  },
+  {
+   "id": "c095",
+   "decision": "correct",
+   "pcode": "SD08105",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ed Damazine (SD08105)."
+  },
+  {
+   "id": "c096",
+   "decision": "correct",
+   "pcode": "SD02126",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kelemando (SD02126)."
+  },
+  {
+   "id": "c097",
+   "decision": "correct",
+   "pcode": "SD04125",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kereneik (SD04125)."
+  },
+  {
+   "id": "c098",
+   "decision": "correct",
+   "pcode": "SD11060",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Khashm Elgirba (SD11060)."
+  },
+  {
+   "id": "c099",
+   "decision": "correct",
+   "pcode": "SD16012",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Atbara (SD16012)."
+  },
+  {
+   "id": "c100",
+   "decision": "correct",
+   "pcode": "SD02118",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Serief (SD02118)."
+  },
+  {
+   "id": "c101",
+   "decision": "correct",
+   "pcode": "SD09044",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Diwaim (SD09044)."
+  },
+  {
+   "id": "c102",
+   "decision": "correct",
+   "pcode": "SD17016",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Burgaig (SD17016)."
+  },
+  {
+   "id": "c103",
+   "decision": "correct",
+   "pcode": "SD10072",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Agig (SD10072)."
+  },
+  {
+   "id": "c104",
+   "decision": "correct",
+   "pcode": "SD13029",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Gharb Bara (SD13029)."
+  },
+  {
+   "id": "c105",
+   "decision": "change",
+   "pcode": "SD06131",
+   "confidence": "high",
+   "note": "The source row note says Nairtaty was split and the remaining Nairtaty is West Gabal Marra (Golo and Rokiro are listed separately) = Gharb Jabal Marrah."
+  },
+  {
+   "id": "c106",
+   "decision": "correct",
+   "pcode": "SD03158",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Rehaid Albirdi (SD03158)."
+  },
+  {
+   "id": "c107",
+   "decision": "correct",
+   "pcode": "SD12075",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Fashaga (SD12075)."
+  },
+  {
+   "id": "c108",
+   "decision": "correct",
+   "pcode": "SD11062",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Nahr Atbara (SD11062)."
+  },
+  {
+   "id": "c109",
+   "decision": "correct",
+   "pcode": "SD16011",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Damar (SD16011)."
+  },
+  {
+   "id": "c110",
+   "decision": "correct",
+   "pcode": "SD12083",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Galabat Ash-Shargiah (SD12083)."
+  },
+  {
+   "id": "c111",
+   "decision": "correct",
+   "pcode": "SD03143",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ed Al Fursan (SD03143)."
+  },
+  {
+   "id": "c112",
+   "decision": "correct",
+   "pcode": "SD11061",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Wad Elhilaiw (SD11061)."
+  },
+  {
+   "id": "c113",
+   "decision": "correct",
+   "pcode": "SD09048",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Tendalti (SD09048)."
+  },
+  {
+   "id": "c114",
+   "decision": "correct",
+   "pcode": "SD11054",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Gharb Kassala (SD11054)."
+  },
+  {
+   "id": "c115",
+   "decision": "correct",
+   "pcode": "SD13026",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Bara (SD13026)."
+  },
+  {
+   "id": "c116",
+   "decision": "correct",
+   "pcode": "SD07097",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ar Reif Ash Shargi (SD07097)."
+  },
+  {
+   "id": "c117",
+   "decision": "correct",
+   "pcode": "SD11059",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Telkok (SD11059)."
+  },
+  {
+   "id": "c118",
+   "decision": "correct",
+   "pcode": "SD06135",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Dukhun (SD06135)."
+  },
+  {
+   "id": "c119",
+   "decision": "correct",
+   "pcode": "SD11055",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Aroma (SD11055)."
+  },
+  {
+   "id": "c120",
+   "decision": "correct",
+   "pcode": "SD07107",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Delami (SD07107)."
+  },
+  {
+   "id": "c121",
+   "decision": "correct",
+   "pcode": "SD14042",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg Sennar (SD14042)."
+  },
+  {
+   "id": "c122",
+   "decision": "correct",
+   "pcode": "SD16013",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Barbar (SD16013)."
+  },
+  {
+   "id": "c123",
+   "decision": "correct",
+   "pcode": "SD06132",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Shamal Jabal Marrah (SD06132)."
+  },
+  {
+   "id": "c124",
+   "decision": "correct",
+   "pcode": "SD18092",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Sunut (SD18092)."
+  },
+  {
+   "id": "c125",
+   "decision": "correct",
+   "pcode": "SD10069",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Ganab (SD10069)."
+  },
+  {
+   "id": "c126",
+   "decision": "correct",
+   "pcode": "SD05152",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Firdous (SD05152)."
+  },
+  {
+   "id": "c127",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Nyala town spans Nyala Shimal and Nyala Janoub."
+  },
+  {
+   "id": "c128",
+   "decision": "correct",
+   "pcode": "SD15036",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Manaqil (SD15036)."
+  },
+  {
+   "id": "c129",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "No state is given and three localities are called As Salam (the UNHCR source has El Salam in White Nile and West Kordofan)."
+  },
+  {
+   "id": "c130",
+   "decision": "correct",
+   "pcode": "SD18103",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Dibab (SD18103)."
+  },
+  {
+   "id": "c131",
+   "decision": "correct",
+   "pcode": "SD18021",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ghubaish (SD18021)."
+  },
+  {
+   "id": "c132",
+   "decision": "correct",
+   "pcode": "SD15037",
+   "confidence": "high",
+   "note": "24 Al Qurashi is the official long name of Al Qurashi locality."
+  },
+  {
+   "id": "c133",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c134",
+   "decision": "correct",
+   "pcode": "SD14040",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Dinder (SD14040)."
+  },
+  {
+   "id": "c135",
+   "decision": "correct",
+   "pcode": "SD01004",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg An Neel (SD01004)."
+  },
+  {
+   "id": "c136",
+   "decision": "correct",
+   "pcode": "SD15031",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Janub Al Jazirah (SD15031)."
+  },
+  {
+   "id": "c137",
+   "decision": "change",
+   "pcode": "SD06131",
+   "confidence": "medium",
+   "note": "Nertiti town is the seat of West Jebel Marra (GeoNames 12157004 point falls in Gharb Jabal Marrah); the state is Central Darfur."
+  },
+  {
+   "id": "c138",
+   "decision": "correct",
+   "pcode": "SD12083",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Galabat Ash-Shargiah (SD12083)."
+  },
+  {
+   "id": "c139",
+   "decision": "correct",
+   "pcode": "SD04115",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ag Geneina (SD04115)."
+  },
+  {
+   "id": "c140",
+   "decision": "correct",
+   "pcode": "SD07088",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Jubayhah (SD07088)."
+  },
+  {
+   "id": "c141",
+   "decision": "change",
+   "pcode": "SD16011",
+   "confidence": "medium",
+   "note": "Zeidab is an administrative unit of Ad Damar locality (Wikipedia Ad-Damir), and the GeoNames Zeidab points fall inside Ad Damar; the UNHCR row is under River Nile."
+  },
+  {
+   "id": "c142",
+   "decision": "correct",
+   "pcode": "SD12076",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Qureisha (SD12076)."
+  },
+  {
+   "id": "c143",
+   "decision": "correct",
+   "pcode": "SD08107",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ar Rusayris (SD08107)."
+  },
+  {
+   "id": "c144",
+   "decision": "correct",
+   "pcode": "SD14043",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sinja (SD14043)."
+  },
+  {
+   "id": "c145",
+   "decision": "correct",
+   "pcode": "SD11052",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Halfa Aj Jadeedah (SD11052)."
+  },
+  {
+   "id": "c146",
+   "decision": "correct",
+   "pcode": "SD06138",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Zalingi (SD06138)."
+  },
+  {
+   "id": "c147",
+   "decision": "correct",
+   "pcode": "SD12081",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Wasat Al Gedaref (SD12081)."
+  },
+  {
+   "id": "c148",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "low",
+   "note": "Ingaz (Al Ingaz) under Al Gezira in UNHCR: I could not place it in one locality."
+  },
+  {
+   "id": "c149",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "No state is given and Habila could be West Darfur or South Kordofan."
+  },
+  {
+   "id": "c150",
+   "decision": "correct",
+   "pcode": "SD16011",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Damar (SD16011)."
+  },
+  {
+   "id": "c151",
+   "decision": "correct",
+   "pcode": "SD03172",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Damso (SD03172)."
+  },
+  {
+   "id": "c152",
+   "decision": "correct",
+   "pcode": "SD12073",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Butanah (SD12073)."
+  },
+  {
+   "id": "c153",
+   "decision": "correct",
+   "pcode": "SD15034",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Hasahisa (SD15034)."
+  },
+  {
+   "id": "c154",
+   "decision": "correct",
+   "pcode": "SD13024",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sheikan (SD13024)."
+  },
+  {
+   "id": "c155",
+   "decision": "correct",
+   "pcode": "SD12074",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Fao (SD12074)."
+  },
+  {
+   "id": "c156",
+   "decision": "correct",
+   "pcode": "SD15030",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Medani Al Kubra (SD15030)."
+  },
+  {
+   "id": "c157",
+   "decision": "correct",
+   "pcode": "SD18087",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abyei (SD18087)."
+  },
+  {
+   "id": "c158",
+   "decision": "correct",
+   "pcode": "SD18022",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of An Nuhud (SD18022)."
+  },
+  {
+   "id": "c159",
+   "decision": "correct",
+   "pcode": "SD12078",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Galabat Al Gharbyah - Kassab (SD12078)."
+  },
+  {
+   "id": "c160",
+   "decision": "correct",
+   "pcode": "SD13024",
+   "confidence": "high",
+   "note": "El Obeid is the seat of Sheikan locality."
+  },
+  {
+   "id": "c161",
+   "decision": "correct",
+   "pcode": "SD05142",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Du'ayn (SD05142)."
+  },
+  {
+   "id": "c162",
+   "decision": "correct",
+   "pcode": "SD15035",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Kamlin (SD15035)."
+  },
+  {
+   "id": "c163",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "low",
+   "note": "Al Bagair: the GeoNames points fall in both Sharg An Neel (Khartoum) and Al Kamlin, and the case has no state, so no single place is safe."
+  },
+  {
+   "id": "c164",
+   "decision": "correct",
+   "pcode": "SD01003",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Bahri (SD01003)."
+  },
+  {
+   "id": "c165",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "No state is given and At Tadamon could be South Kordofan or Blue Nile."
+  },
+  {
+   "id": "c166",
+   "decision": "correct",
+   "pcode": "SD14042",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sharg Sennar (SD14042)."
+  },
+  {
+   "id": "c167",
+   "decision": "correct",
+   "pcode": "SD15033",
+   "confidence": "high",
+   "note": "Rufaa is the seat of Sharg Al Jazirah; the GeoNames point falls inside it."
+  },
+  {
+   "id": "c168",
+   "decision": "correct",
+   "pcode": "SD03162",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Beliel (SD03162)."
+  },
+  {
+   "id": "c169",
+   "decision": "change",
+   "pcode": "SD15033",
+   "confidence": "medium",
+   "note": "Al Guneid (GeoNames 6957938, 14.79N 33.31E, next to Rufaa) falls inside Sharg Al Jazirah; the UNHCR row is under Al Gezira."
+  },
+  {
+   "id": "c170",
+   "decision": "correct",
+   "pcode": "SD18029",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Wad Bandah (SD18029)."
+  },
+  {
+   "id": "c171",
+   "decision": "correct",
+   "pcode": "SD18105",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Khiwai (SD18105)."
+  },
+  {
+   "id": "c172",
+   "decision": "correct",
+   "pcode": "SD16008",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Hamad (SD16008)."
+  },
+  {
+   "id": "c173",
+   "decision": "correct",
+   "pcode": "SD18102",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Lagowa (SD18102)."
+  },
+  {
+   "id": "c174",
+   "decision": "correct",
+   "pcode": "SD17020",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Merwoe (SD17020)."
+  },
+  {
+   "id": "c175",
+   "decision": "correct",
+   "pcode": "SD03141",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Radoum (SD03141)."
+  },
+  {
+   "id": "c176",
+   "decision": "correct",
+   "pcode": "SD12077",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Basundah (SD12077)."
+  },
+  {
+   "id": "c177",
+   "decision": "change",
+   "pcode": "SD17020",
+   "confidence": "high",
+   "note": "Karima (GeoNames 371870, 18.55N 31.85E) lies across the river from Merowe, inside Merwoe locality; the UNHCR row is under Northern."
+  },
+  {
+   "id": "c178",
+   "decision": "correct",
+   "pcode": "SD02120",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Baru (SD02120)."
+  },
+  {
+   "id": "c179",
+   "decision": "correct",
+   "pcode": "SD11058",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Hamashkureib (SD11058)."
+  },
+  {
+   "id": "c180",
+   "decision": "correct",
+   "pcode": "SD04111",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Beida (SD04111)."
+  },
+  {
+   "id": "c181",
+   "decision": "correct",
+   "pcode": "SD07108",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ghadeer (SD07108)."
+  },
+  {
+   "id": "c182",
+   "decision": "correct",
+   "pcode": "SD09049",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Salam / Ar Rawat (SD09049)."
+  },
+  {
+   "id": "c183",
+   "decision": "correct",
+   "pcode": "SD03167",
+   "confidence": "medium",
+   "note": "In this dataset بلدية نيالا sits beside a separate نيالا شمال, so it stands for Nyala Janoub, which matches the dataset P-code."
+  },
+  {
+   "id": "c184",
+   "decision": "correct",
+   "pcode": "SD11062",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Nahr Atbara (SD11062)."
+  },
+  {
+   "id": "c185",
+   "decision": "correct",
+   "pcode": "SD12078",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Galabat Al Gharbyah - Kassab (SD12078)."
+  },
+  {
+   "id": "c186",
+   "decision": "correct",
+   "pcode": "SD13028",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Dam Haj Ahmed (SD13028)."
+  },
+  {
+   "id": "c187",
+   "decision": "no-match",
+   "pcode": "",
+   "confidence": "medium",
+   "note": "Al Waha is a separate nomad locality with no fixed area (HRW 2005), listed apart from Al Fasher in this dataset; no v03 locality holds it, so the dataset P-code is a stand-in. Same answer as c223."
+  },
+  {
+   "id": "c188",
+   "decision": "correct",
+   "pcode": "SD08108",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of At Tadamon - BN (SD08108)."
+  },
+  {
+   "id": "c189",
+   "decision": "correct",
+   "pcode": "SD18028",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Zabad (SD18028)."
+  },
+  {
+   "id": "c190",
+   "decision": "correct",
+   "pcode": "SD18086",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Salam - WK (SD18086)."
+  },
+  {
+   "id": "c191",
+   "decision": "correct",
+   "pcode": "SD05140",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Jabrah (SD05140)."
+  },
+  {
+   "id": "c192",
+   "decision": "correct",
+   "pcode": "SD14037",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Hujar (SD14037)."
+  },
+  {
+   "id": "c193",
+   "decision": "correct",
+   "pcode": "SD11061",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Wad Elhilaiw (SD11061)."
+  },
+  {
+   "id": "c194",
+   "decision": "correct",
+   "pcode": "SD02126",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kelemando (SD02126)."
+  },
+  {
+   "id": "c195",
+   "decision": "correct",
+   "pcode": "SD05165",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Yassin (SD05165)."
+  },
+  {
+   "id": "c196",
+   "decision": "correct",
+   "pcode": "SD16008",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Hamad (SD16008)."
+  },
+  {
+   "id": "c197",
+   "decision": "correct",
+   "pcode": "SD05155",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Karinka (SD05155)."
+  },
+  {
+   "id": "c198",
+   "decision": "correct",
+   "pcode": "SD07103",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Habila - SK (SD07103)."
+  },
+  {
+   "id": "c199",
+   "decision": "correct",
+   "pcode": "SD11059",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Telkok (SD11059)."
+  },
+  {
+   "id": "c200",
+   "decision": "correct",
+   "pcode": "SD08107",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ar Rusayris (SD08107)."
+  },
+  {
+   "id": "c201",
+   "decision": "correct",
+   "pcode": "SD04121",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Foro Baranga (SD04121)."
+  },
+  {
+   "id": "c202",
+   "decision": "correct",
+   "pcode": "SD03166",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of As Salam - SD (SD03166)."
+  },
+  {
+   "id": "c203",
+   "decision": "correct",
+   "pcode": "SD12079",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Gala'a Al Nahal (SD12079)."
+  },
+  {
+   "id": "c204",
+   "decision": "correct",
+   "pcode": "SD07106",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of At Tadamon - SK (SD07106)."
+  },
+  {
+   "id": "c205",
+   "decision": "correct",
+   "pcode": "SD11057",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Shamal Ad Delta (SD11057)."
+  },
+  {
+   "id": "c206",
+   "decision": "correct",
+   "pcode": "SD12080",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Madeinat Al Gedaref (SD12080)."
+  },
+  {
+   "id": "c207",
+   "decision": "correct",
+   "pcode": "SD11054",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Reifi Gharb Kassala (SD11054)."
+  },
+  {
+   "id": "c208",
+   "decision": "correct",
+   "pcode": "SD04122",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Habila - WD (SD04122)."
+  },
+  {
+   "id": "c209",
+   "decision": "correct",
+   "pcode": "SD01006",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Durman (SD01006)."
+  },
+  {
+   "id": "c210",
+   "decision": "correct",
+   "pcode": "SD14039",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Ad Dali (SD14039)."
+  },
+  {
+   "id": "c211",
+   "decision": "correct",
+   "pcode": "SD10069",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Ganab (SD10069)."
+  },
+  {
+   "id": "c212",
+   "decision": "correct",
+   "pcode": "SD02113",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Dar As Salam (SD02113)."
+  },
+  {
+   "id": "c213",
+   "decision": "correct",
+   "pcode": "SD02170",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c214",
+   "decision": "correct",
+   "pcode": "SD02120",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c215",
+   "decision": "correct",
+   "pcode": "SD11056",
+   "confidence": "high",
+   "note": "Reifi Kassala = Reifi Kassla."
+  },
+  {
+   "id": "c216",
+   "decision": "correct",
+   "pcode": "SD07098",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c217",
+   "decision": "correct",
+   "pcode": "SD12084",
+   "confidence": "high",
+   "note": "Ar Rahad in Gedaref."
+  },
+  {
+   "id": "c218",
+   "decision": "correct",
+   "pcode": "SD13030",
+   "confidence": "high",
+   "note": "Ar Rahad in North Kordofan."
+  },
+  {
+   "id": "c219",
+   "decision": "correct",
+   "pcode": "SD05142",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c220",
+   "decision": "correct",
+   "pcode": "SD07099",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c221",
+   "decision": "correct",
+   "pcode": "SD07091",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c222",
+   "decision": "correct",
+   "pcode": "SD02171",
+   "confidence": "medium",
+   "note": "IDP population of the named locality; it maps to that locality."
+  },
+  {
+   "id": "c223",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "medium",
+   "note": "Al Waha is a non-territorial nomad locality that is not in v03, and no single current locality holds it."
+  },
+  {
+   "id": "c224",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c225",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c226",
+   "decision": "correct",
+   "pcode": "SD19",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abyei PCA (SD19)."
+  },
+  {
+   "id": "c227",
+   "decision": "correct",
+   "pcode": "SD15",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Aj Jazirah (SD15)."
+  },
+  {
+   "id": "c228",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c229",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c230",
+   "decision": "correct",
+   "pcode": "SD12",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Gedaref (SD12)."
+  },
+  {
+   "id": "c231",
+   "decision": "correct",
+   "pcode": "SD16",
+   "confidence": "high",
+   "note": "Nile was the former name of River Nile State."
+  },
+  {
+   "id": "c232",
+   "decision": "correct",
+   "pcode": "SD14",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sennar (SD14)."
+  },
+  {
+   "id": "c233",
+   "decision": "correct",
+   "pcode": "SD19",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abyei PCA (SD19)."
+  },
+  {
+   "id": "c234",
+   "decision": "correct",
+   "pcode": "SD06",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Central Darfur (SD06)."
+  },
+  {
+   "id": "c235",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c236",
+   "decision": "correct",
+   "pcode": "SD07094",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Quoz (SD07094)."
+  },
+  {
+   "id": "c237",
+   "decision": "correct",
+   "pcode": "SD10065",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Tawkar (SD10065)."
+  },
+  {
+   "id": "c238",
+   "decision": "correct",
+   "pcode": "SD03161",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Buram (SD03161)."
+  },
+  {
+   "id": "c239",
+   "decision": "correct",
+   "pcode": "SD03146",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Dafoug (SD03146)."
+  },
+  {
+   "id": "c240",
+   "decision": "correct",
+   "pcode": "SD06132",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Shamal Jabal Marrah (SD06132)."
+  },
+  {
+   "id": "c241",
+   "decision": "correct",
+   "pcode": "SD02128",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kutum (SD02128)."
+  },
+  {
+   "id": "c242",
+   "decision": "correct",
+   "pcode": "SD13024",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sheikan (SD13024)."
+  },
+  {
+   "id": "c243",
+   "decision": "correct",
+   "pcode": "SD13026",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Bara (SD13026)."
+  },
+  {
+   "id": "c244",
+   "decision": "correct",
+   "pcode": "SD05152",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Firdous (SD05152)."
+  },
+  {
+   "id": "c245",
+   "decision": "correct",
+   "pcode": "SD05155",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Abu Karinka (SD05155)."
+  },
+  {
+   "id": "c246",
+   "decision": "correct",
+   "pcode": "SD01002",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Um Bada (SD01002)."
+  },
+  {
+   "id": "c247",
+   "decision": "correct",
+   "pcode": "SD02113",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Dar As Salam (SD02113)."
+  },
+  {
+   "id": "c248",
+   "decision": "correct",
+   "pcode": "SD14043",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Sinja (SD14043)."
+  },
+  {
+   "id": "c249",
+   "decision": "correct",
+   "pcode": "SD18106",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Meiram (SD18106)."
+  },
+  {
+   "id": "c250",
+   "decision": "correct",
+   "pcode": "SD02133",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Saraf Omra (SD02133)."
+  },
+  {
+   "id": "c251",
+   "decision": "correct",
+   "pcode": "SD02128",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kutum (SD02128)."
+  },
+  {
+   "id": "c252",
+   "decision": "correct",
+   "pcode": "SD18",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of West Kordofan (SD18)."
+  },
+  {
+   "id": "c253",
+   "decision": "correct",
+   "pcode": "SD12",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Gedaref (SD12)."
+  },
+  {
+   "id": "c254",
+   "decision": "correct",
+   "pcode": "SD11",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Kassala (SD11)."
+  },
+  {
+   "id": "c255",
+   "decision": "correct",
+   "pcode": "SD08",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Blue Nile (SD08)."
+  },
+  {
+   "id": "c256",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c257",
+   "decision": "correct",
+   "pcode": "SD18100",
+   "confidence": "medium",
+   "note": "Babanusa Town is the seat of its namesake locality, Babanusa."
+  },
+  {
+   "id": "c258",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c259",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "medium",
+   "note": "A site in Bahr Al Arab locality (the town is its seat), but this is a site column and the name is not a locality name."
+  },
+  {
+   "id": "c260",
+   "decision": "correct",
+   "pcode": "SD18029",
+   "confidence": "medium",
+   "note": "The rural part of the namesake Wad Bandah locality (UNHCR locality column: Wad Banda)."
+  },
+  {
+   "id": "c261",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c262",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c263",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c264",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "medium",
+   "note": "A site listed under Al Quoz; the town is not named after a locality, and the GeoNames point even falls in Ar Reif Ash Shargi."
+  },
+  {
+   "id": "c265",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c266",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c267",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c268",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c269",
+   "decision": "correct",
+   "pcode": "SD07105",
+   "confidence": "medium",
+   "note": "El Leri town is in its namesake locality, Al Leri."
+  },
+  {
+   "id": "c270",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c271",
+   "decision": "correct",
+   "pcode": "SD05165",
+   "confidence": "medium",
+   "note": "Yassin, with the Muhajiriya site in brackets; UNHCR locality column: Yassin."
+  },
+  {
+   "id": "c272",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c273",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c274",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c275",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c276",
+   "decision": "correct",
+   "pcode": "SD12079",
+   "confidence": "medium",
+   "note": "Qala El Nahal = Gala'a Al Nahal; the name is unique even without a state."
+  },
+  {
+   "id": "c277",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "A Khartoum (Jabal Aulia) collective site, not the North Darfur locality Dar As Salam."
+  },
+  {
+   "id": "c278",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c279",
+   "decision": "correct",
+   "pcode": "SD18106",
+   "confidence": "medium",
+   "note": "El Mieram is the namesake town of Al Meiram locality, West Kordofan."
+  },
+  {
+   "id": "c280",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c281",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c282",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c283",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c284",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c285",
+   "decision": "correct",
+   "pcode": "SD05142",
+   "confidence": "high",
+   "note": "Ed Daein town = Ad Du'ayn locality."
+  },
+  {
+   "id": "c286",
+   "decision": "correct",
+   "pcode": "SD17016",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Burgaig (SD17016)."
+  },
+  {
+   "id": "c287",
+   "decision": "correct",
+   "pcode": "SD15036",
+   "confidence": "high",
+   "note": "The name is a spelling, transliteration or translation of Al Manaqil (SD15036)."
+  },
+  {
+   "id": "c288",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c289",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c290",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c291",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c292",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c293",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c294",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c295",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c296",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c297",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Not a single locality or state (junk, header, total, camp, site or village)."
+  },
+  {
+   "id": "c298",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "Nyala town spans Nyala Shimal and Nyala Janoub."
+  },
+  {
+   "id": "c299",
+   "decision": "correct",
+   "pcode": "",
+   "confidence": "high",
+   "note": "A camp; As Serief locality is in North Darfur, not South Darfur."
+  }
+ ]
+}

@@ -35,8 +35,10 @@ def test_match_cases_are_well_formed():
 
 
 def test_matcher_accuracy_does_not_regress():
-    """Floors from the first evaluation (unverified labels). Raise them as the matcher improves."""
+    """Floors from the evaluation after the agent review of the labels (2026-10-31). The review made
+    the test set harder (it gave towns such as Karima and census names such as El Meilig real answers),
+    so these are below the first, unreviewed figures. Raise them as the matcher improves."""
     best = evaluate.run()
-    assert best["top1_accuracy"] >= 0.95
+    assert best["top1_accuracy"] >= 0.92
     assert best["false_match_rate"] <= 0.01
     assert best["top3_recall"] >= 0.98
