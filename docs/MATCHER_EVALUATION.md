@@ -57,29 +57,29 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 
 no answer: 20, ambiguous (no answer): 2, false match (should match nothing): 2
 
-| Case | Input | State hint | Expected | Got | Best candidates |
-| --- | --- | --- | --- | --- | --- |
-| c011 | Khashm Ghirba | Kassala | SD11060 Reifi Khashm Elgirba | none | Reifi Khashm Elgirba 0.81; Reifi Gharb Kassala 0.64; Reifi Hamashkureib 0.50 |
-| c033 | Ailliet | North Darfur | SD02169 Al Lait | none | Melit 0.73; Al Lait 0.60; At Tina 0.60 |
-| c065 | El Odaya | West Kordofan | SD18104 Al Idia | none | Al Idia 0.67; Al Dibab 0.60; Keilak 0.55 |
-| c068 | Sharg Jabel Marra | South Darfur | SD03147 Sharg Aj Jabal | none | Sharg Aj Jabal 0.81; As Salam - SD 0.53; Nyala Shimal 0.50 |
-| c081 | AL GAWZ | SOUTH KORDOFAN | SD07094 Al Quoz | none | Al Quoz 0.75; Ghadeer 0.40; Talawdi 0.36 |
-| c085 | NITAIFA | SOUTH DARFUR | SD03151 Nitega | none | Nitega 0.77; Nyala Shimal 0.62; Nyala Janoub 0.62 |
-| c089 | EL MEILIG | GEZIRA | SD15035 Al Kamlin | none | Al Kamlin 0.62; Al Manaqil 0.62; Medani Al Kubra 0.50 |
-| c101 | AD DIWEM | WHITE NILE | SD09044 Ad Diwaim | none | Ad Diwaim 0.80; Um Rimta 0.33; Tendalti 0.31 |
-| c103 | HILLAT ‘AGIG | RED SEA | SD10072 Agig | none | Agig 0.62; Hala'ib 0.53; Haya 0.46 |
-| c130 | Al Debab | — | SD18103 Al Dibab | none | Al Dibab 0.80; Ad Dabbah 0.67; Ad Du'ayn 0.60 |
-| c132 | 24 Gurashi | Al Gezira | SD15037 Al Qurashi | none | Al Qurashi 0.75; Um Algura 0.59; Janub Al Jazirah 0.48 |
-| c141 | Zaydab | — | SD16011 Ad Damar | none | Beida 0.73; Ad Dabbah 0.73; Gereida 0.62 |
-| c142 | El Quresha | — | SD12076 Al Qureisha | ambiguous | Al Qureisha 0.90; Al Qurashi 0.90; Ar Rashad 0.68 |
-| c167 | Rufaa | — | SD15033 Sharg Al Jazirah | none | As Salam / Ar Rawat 0.67; Al Fao 0.57; Ar Reif Ash Shargi 0.50 |
-| c169 | Genaid | — | SD15033 Sharg Al Jazirah | none | Gereida 0.77; Ag Geneina 0.77; Bendasi 0.62 |
-| c171 | Al Khowey (Khuwei) | — | SD18105 Al Khiwai | none | Al Khiwai 0.81; Ad Diwaim 0.65; Soudari 0.60 |
-| c177 | Karima | — | SD17020 Merwoe | none | Khartoum 0.77; Al Kurmuk 0.77; Al Koma 0.73 |
-| c183 | بلدية نيالا | South Darfur | SD03167 Nyala Janoub | ambiguous | Nyala Shimal 0.90; Nyala Janoub 0.90; Beliel 0.57 |
-| c203 | محلية النحل | Gadarif | SD12079 Gala'a Al Nahal | none | Gala'a Al Nahal 0.67; Al Butanah 0.25; Basundah 0.22 |
-| c211 | القنب والاوليب | Red Sea | SD10069 Al Ganab | none | Hala'ib 0.50; Al Ganab 0.43; Port Sudan 0.38 |
-| c265 | Alganaa | — | — | SD10069 Al Ganab | Al Ganab 0.89; Ag Geneina 0.73; Al Gitaina 0.73 |
-| c277 | Dar El Selam 8 | — | — | SD02113 Dar As Salam | Dar As Salam 0.82; As Salam - SD 0.67; Delami 0.67 |
-| c286 | Burgag twon/villages | Northern | SD17016 Al Burgaig | none | Al Burgaig 0.71; Delgo 0.50; Merwoe 0.38 |
-| c287 | Managil town, some 67 villages srounded | Aj Jazirah | SD15036 Al Manaqil | none | Al Manaqil 0.44; Medani Al Kubra 0.36; Janub Al Jazirah 0.32 |
+| Case | Input | State hint | Expected | Got | Cause | Best candidates |
+| --- | --- | --- | --- | --- | --- | --- |
+| c011 | Khashm Ghirba | Kassala | SD11060 Reifi Khashm Elgirba | none | right place ranked first, but its score 0.81 is below the threshold | Reifi Khashm Elgirba 0.81; Reifi Gharb Kassala 0.64; Reifi Hamashkureib 0.50 |
+| c033 | Ailliet | North Darfur | SD02169 Al Lait | none | Melit scores higher (0.73) than the right place (0.60) | Melit 0.73; Al Lait 0.60; At Tina 0.60 |
+| c065 | El Odaya | West Kordofan | SD18104 Al Idia | none | right place ranked first, but its score 0.67 is below the threshold | Al Idia 0.67; Al Dibab 0.60; Keilak 0.55 |
+| c068 | Sharg Jabel Marra | South Darfur | SD03147 Sharg Aj Jabal | none | right place ranked first, but its score 0.81 is below the threshold | Sharg Aj Jabal 0.81; As Salam - SD 0.53; Nyala Shimal 0.50 |
+| c081 | AL GAWZ | SOUTH KORDOFAN | SD07094 Al Quoz | none | right place ranked first, but its score 0.75 is below the threshold | Al Quoz 0.75; Ghadeer 0.40; Talawdi 0.36 |
+| c085 | NITAIFA | SOUTH DARFUR | SD03151 Nitega | none | right place ranked first, but its score 0.77 is below the threshold | Nitega 0.77; Nyala Shimal 0.62; Nyala Janoub 0.62 |
+| c089 | EL MEILIG | GEZIRA | SD15035 Al Kamlin | none | right place ranked first, but its score 0.62 is below the threshold | Al Kamlin 0.62; Al Manaqil 0.62; Medani Al Kubra 0.50 |
+| c101 | AD DIWEM | WHITE NILE | SD09044 Ad Diwaim | none | right place ranked first, but its score 0.80 is below the threshold | Ad Diwaim 0.80; Um Rimta 0.33; Tendalti 0.31 |
+| c103 | HILLAT ‘AGIG | RED SEA | SD10072 Agig | none | right place ranked first, but its score 0.62 is below the threshold | Agig 0.62; Hala'ib 0.53; Haya 0.46 |
+| c130 | Al Debab | — | SD18103 Al Dibab | none | right place ranked first, but its score 0.80 is below the threshold | Al Dibab 0.80; Ad Dabbah 0.67; Ad Du'ayn 0.60 |
+| c132 | 24 Gurashi | Al Gezira | SD15037 Al Qurashi | none | right place ranked first, but its score 0.75 is below the threshold | Al Qurashi 0.75; Um Algura 0.59; Janub Al Jazirah 0.48 |
+| c141 | Zaydab | — | SD16011 Ad Damar | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Beida 0.73; Ad Dabbah 0.73; Gereida 0.62 |
+| c142 | El Quresha | — | SD12076 Al Qureisha | ambiguous | right place ranked first, but Al Qurashi scores too close (0.90) to call | Al Qureisha 0.90; Al Qurashi 0.90; Ar Rashad 0.68 |
+| c167 | Rufaa | — | SD15033 Sharg Al Jazirah | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | As Salam / Ar Rawat 0.67; Al Fao 0.57; Ar Reif Ash Shargi 0.50 |
+| c169 | Genaid | — | SD15033 Sharg Al Jazirah | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Gereida 0.77; Ag Geneina 0.77; Bendasi 0.62 |
+| c171 | Al Khowey (Khuwei) | — | SD18105 Al Khiwai | none | right place ranked first, but its score 0.81 is below the threshold | Al Khiwai 0.81; Ad Diwaim 0.65; Soudari 0.60 |
+| c177 | Karima | — | SD17020 Merwoe | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Khartoum 0.77; Al Kurmuk 0.77; Al Koma 0.73 |
+| c183 | بلدية نيالا | South Darfur | SD03167 Nyala Janoub | ambiguous | right place ties with Nyala Shimal (0.90), so the matcher does not choose | Nyala Shimal 0.90; Nyala Janoub 0.90; Beliel 0.57 |
+| c203 | محلية النحل | Gadarif | SD12079 Gala'a Al Nahal | none | right place ranked first, but its score 0.67 is below the threshold | Gala'a Al Nahal 0.67; Al Butanah 0.25; Basundah 0.22 |
+| c211 | القنب والاوليب | Red Sea | SD10069 Al Ganab | none | Hala'ib scores higher (0.50) than the right place (0.43) | Hala'ib 0.50; Al Ganab 0.43; Port Sudan 0.38 |
+| c265 | Alganaa | — | — | SD10069 Al Ganab | resembles Al Ganab closely enough to pass the threshold; it is not that place | Al Ganab 0.89; Ag Geneina 0.73; Al Gitaina 0.73 |
+| c277 | Dar El Selam 8 | — | — | SD02113 Dar As Salam | resembles Dar As Salam closely enough to pass the threshold; it is not that place | Dar As Salam 0.82; As Salam - SD 0.67; Delami 0.67 |
+| c286 | Burgag twon/villages | Northern | SD17016 Al Burgaig | none | right place ranked first, but its score 0.71 is below the threshold | Al Burgaig 0.71; Delgo 0.50; Merwoe 0.38 |
+| c287 | Managil town, some 67 villages srounded | Aj Jazirah | SD15036 Al Manaqil | none | right place ranked first, but its score 0.44 is below the threshold | Al Manaqil 0.44; Medani Al Kubra 0.36; Janub Al Jazirah 0.32 |

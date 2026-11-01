@@ -89,6 +89,26 @@ def _failure_kind(case: dict, result: dict) -> str:
     return "wrong place"
 
 
+def _cause(case: dict, result: dict, ranked: list, places: dict, threshold: float) -> str:
+    """Why a case failed, from where the right place ranked and how it scored."""
+    expected = case["expected_pcode"]
+    if not expected:
+        return f"resembles {places[result['pcode']]['name_en']} closely enough to pass the threshold; it is not that place"
+    position = next((i for i, (p, _, _) in enumerate(ranked) if p == expected), None)
+    if position is None:
+        return "the right place is not among the candidates: the name (often a town) is not in the gazetteer"
+    score = ranked[position][1]
+    if position == 0:
+        if score < threshold:
+            return f"right place ranked first, but its score {score:.2f} is below the threshold"
+        runner = ranked[1]
+        return f"right place ranked first, but {places[runner[0]]['name_en']} scores too close ({runner[1]:.2f}) to call"
+    top = ranked[0]
+    if top[1] == score:
+        return f"right place ties with {places[top[0]]['name_en']} ({score:.2f}), so the matcher does not choose"
+    return f"{places[top[0]]['name_en']} scores higher ({top[1]:.2f}) than the right place ({score:.2f})"
+
+
 def _write_report(cases, grid, scorer, best, ranked) -> None:
     places = Gazetteer.load().places
     name = lambda p: f"{p} {places[p]['name_en']}" if p else "—"
@@ -131,9 +151,11 @@ def _write_report(cases, grid, scorer, best, ranked) -> None:
     counts = Counter(_failure_kind(c, r) for c, r, _ in failures)
     lines += ["## Every failure at the default setting", "",
               ", ".join(f"{k}: {v}" for k, v in counts.most_common()) or "None.", "",
-              "| Case | Input | State hint | Expected | Got | Best candidates |", "| --- | --- | --- | --- | --- | --- |"]
+              "| Case | Input | State hint | Expected | Got | Cause | Best candidates |",
+              "| --- | --- | --- | --- | --- | --- | --- |"]
     for c, r, rk in failures:
         got = name(r["pcode"]) if r["pcode"] else r["method"]
         cands = "; ".join(f"{places[p]['name_en']} {s:.2f}" for p, s, _ in rk[:3])
-        lines.append(f"| {c['id']} | {c['input_name']} | {c['state_hint'] or '—'} | {name(c['expected_pcode'])} | {got} | {cands} |")
+        cause = _cause(c, r, rk, places, best["threshold"])
+        lines.append(f"| {c['id']} | {c['input_name']} | {c['state_hint'] or '—'} | {name(c['expected_pcode'])} | {got} | {cause} | {cands} |")
     REPORT_PATH.write_text("\n".join(lines) + "\n")
