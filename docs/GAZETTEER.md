@@ -42,11 +42,7 @@ A variant that equals another place's official name is dropped, because it would
 
 ## Review status
 
-On 2026-10-31 an independent AI agent (not a person) reviewed everything:
+- **2026-10-31:** an independent AI agent reviewed everything: 409 spellings kept and 16 rejected, 8 unlinked records linked by hand and 25 confirmed as not current places, 8 of 9 rules agreed (dropping *area* was not, so it is no longer dropped), 291 test answers confirmed and 8 changed (`data/tests/match_cases_review.json`).
+- **2026-11-01:** Amin reviewed the agent-filled review page. He decided the 17 spellings added since (15 kept, 2 rejected) and the two cases still unsure (both should match nothing), and left the agent's other decisions in place. All test labels now carry `verified_by = amin`; `review.json` records who made each spelling decision.
 
-- **Spellings:** 409 kept and 16 rejected; rejected ones are left out of `variants.json` and listed in `review.json` with the reason. Spellings added since then have `"status": "proposed"`.
-- **Unlinked records:** 8 linked to a place by hand, 25 confirmed as not current places.
-- **Rules:** 8 agreed; dropping the word *area* was disagreed with (it made "Abyei Area" look like the West Kordofan locality), so it is no longer dropped.
-- **Test answers:** 291 confirmed, 8 changed (`data/tests/match_cases_review.json`); 2 cases are still marked UNSURE.
-
-The brief's checkpoint asks for the test answers to be verified by Amin; until then every label keeps `verified_by = claude`. The threshold (provisionally 0.75) is fixed after that review. See `docs/MATCHER_EVALUATION.md` for the latest results.
+Rejected spellings are left out of `variants.json`; spellings added by a later rebuild have `"status": "proposed"` until reviewed. The threshold is fixed with Amin; see `docs/MATCHER_EVALUATION.md` for the latest results.

@@ -28,19 +28,26 @@ SUBSET_MIN_LETTERS = 4  # ...but only when the shorter name is long enough to me
 SUBSET_MIN_LETTERS_ONE_WORD = 5  # a single short word ("area", "abu", "wad") is in too many names to count
 
 
+def contains_every_word(a: str, b: str) -> bool:
+    """Every word of the shorter name is a word of the longer one, and the shorter is long enough to mean something."""
+    shorter, longer = sorted((a.split(), b.split()), key=len)
+    minimum = SUBSET_MIN_LETTERS_ONE_WORD if len(shorter) == 1 else SUBSET_MIN_LETTERS
+    return len("".join(shorter)) >= minimum and set(shorter) < set(longer)
+
+
 def combined(normaliser):
     """The best of several views of two keys: spelling, word order, spacing, consonant skeleton and partial names."""
     skeleton = lru_cache(maxsize=None)(normaliser.skeleton)
 
     def score(a: str, b: str, **_) -> float:
         best = max(fuzz.ratio(a, b), fuzz.token_sort_ratio(a, b), fuzz.ratio(a.replace(" ", ""), b.replace(" ", "")))
+        if contains_every_word(a, b):
+            best = max(best, SUBSET_WEIGHT * 100)
         sa, sb = skeleton(a), skeleton(b)
         if sa and sb and sa != a:
             best = max(best, SKELETON_WEIGHT * fuzz.ratio(sa, sb))
-        shorter, longer = sorted((a.split(), b.split()), key=len)
-        minimum = SUBSET_MIN_LETTERS_ONE_WORD if len(shorter) == 1 else SUBSET_MIN_LETTERS
-        if len("".join(shorter)) >= minimum and set(shorter) < set(longer):
-            best = max(best, SUBSET_WEIGHT * 100)
+            if contains_every_word(sa, sb):  # "Khashm Ghirba" in "Reifi Khashm Elgirba"
+                best = max(best, SKELETON_WEIGHT * SUBSET_WEIGHT * 100)
         return best
 
     return score

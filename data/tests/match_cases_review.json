@@ -2095,5 +2095,6 @@
    "confidence": "high",
    "note": "A camp; As Serief locality is in North Darfur, not South Darfur."
   }
- ]
+ ],
+ "verification": "Amin reviewed the review page on 2026-11-01, where the agent's answers were shown for every case. He decided c148 and c163 (should match nothing) himself and left the agent's answers for the other 297, so all labels carry verified_by = amin."
 }

@@ -1,300 +1,300 @@
 id,input_name,state_hint,level,expected_pcode,source_dataset,source_detail,source_pcode,verified_by,notes
-c001,El Sireaf,North Darfur,2,SD02118,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c002,Jabal Aulia,Khartoum,2,SD01001,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c003,Abu Jabra,East Darfur,2,SD05140,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c004,Tadamon,South Kordofan,2,SD07106,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c005,Tokar,Red Sea,2,SD10065,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c006,Singa,Sennar,2,SD14043,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c007,Rokoro(North Jebel Marra),Central Darfur,2,SD06132,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,proposed by Claude: Rokoro is in North Jebel Marra = Shamal Jabal Marrah
-c008,Dalgo,Northern,2,SD17015,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c009,Sheiria,East Darfur,2,SD05148,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c010,Sharq El Nile,Khartoum,2,SD01004,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c011,Khashm Ghirba,Kassala,2,SD11060,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c012,El Radoom,South Darfur,2,SD03141,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c013,Umm Keddada,North Darfur,2,SD02136,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c014,Wad EL Helew,Kassala,2,SD11061,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c015,Talodi,South Kordofan,2,SD07089,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c016,Ed Damer,Nile,2,SD16011,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: state hint ""Nile"" is ambiguous; Ed Damer is Ad Damar in River Nile"
-c017,Nahr Atbara (Atbara River),Kassala,2,SD11062,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c018,Sharg El Gezira (E. El Gezira),Al Gezira,2,SD15033,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c019,Janub El Gezira (S. El Gezira),Al Gezira,2,SD15031,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c020,El Kamleen,Al Gezira,2,SD15035,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c021,Bielel,South Darfur,2,SD03162,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c022,Um El Qura,Al Gezira,2,SD15032,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c023,Dordeb,Red Sea,2,SD10063,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c024,Telkok,Kassala,2,SD11059,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c025,EL Roseires,Blue Nile,2,SD08107,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c026,Dimsu,South Darfur,2,SD03172,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c027,El Taweisha,North Darfur,2,SD02119,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c028,Gharb El Galabat (W. EL Galabat),Gedaref,2,SD12078,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c029,Reif Ashargi,South Kordofan,2,SD07097,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c030,Abu kashola,South Kordofan,2,SD07104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c031,Zalingei,Central Darfur,2,SD06138,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c032,Shattai,South Darfur,2,SD03154,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c033,Ailliet,North Darfur,2,SD02169,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c034,Kalimendo,North Darfur,2,SD02126,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c035,Al Khowey,West Kordofan,2,SD18105,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c036,Sharg Sennar (E. Sennar),Sennar,2,SD14042,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c037,El Quresha,Gedaref,2,SD12076,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c038,Umm Ramtta,White Nile,2,SD09045,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c039,Um Dam,North Kordofan,2,SD13028,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c040,Garb Bara,North Kordofan,2,SD13029,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c041,Shiekan,North Kordofan,2,SD13024,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c042,Kornoi,North Darfur,2,SD02168,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c043,Um Buru,North Darfur,2,SD02120,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c044,Bau,Blue Nile,2,SD08104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c045,El Jabalian,White Nile,2,SD09051,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c046,Habila,West Darfur,2,SD04122,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c047,Gharb Kassala (W. Kassala),Kassala,2,SD11054,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c048,El Nehoud,West Kordofan,2,SD18022,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c049,Niteaga,South Darfur,2,SD03151,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c050,Nyala North,South Darfur,2,SD03164,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,proposed by Claude: Nyala North = Nyala Shimal
-c051,Sharg El Galabat (E. El Galabat),Gedaref,2,SD12083,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,proposed by Claude: East Galabat = Galabat Ash-Shargiah
-c052,Al Daba,Northern,2,SD17019,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c053,El Gutaina,White Nile,2,SD09050,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c054,El Kuma,North Darfur,2,SD02116,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c055,Madani El Kobra (Greater Wad Madani),Al Gezira,2,SD15030,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c056,El Butana,Gedaref,2,SD12073,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c057,Abyei-Muglad locality (outside the Abyei PCA Area),West Kordofan,2,SD18087,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: the Abyei locality in West Kordofan, not the Abyei PCA area"
-c058,El Douiem,White Nile,2,SD09044,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c059,El Ferdous,East Darfur,2,SD05152,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c060,Jabiet Al Maadin,Red Sea,2,SD10067,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c061,Ed Daein,East Darfur,2,SD05142,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c062,Sodari,North Kordofan,2,SD13025,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c063,Habila,South Kordofan,2,SD07103,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c064,Abu Jubaiha,South Kordofan,2,SD07088,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c065,El Odaya,West Kordofan,2,SD18104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c066,Bindisi,Central Darfur,2,SD06112,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c067,Hamashkoreib,Kassala,2,SD11058,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c068,Sharg Jabel Marra,South Darfur,2,SD03147,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c069,El Matammah,Nile,2,SD16009,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: state hint ""Nile"" is ambiguous; Al Matama is in River Nile"
-c070,Lagawa,West Kordofan,2,SD18102,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c071,SAWDIRĪ,NORTH KORDOFAN,2,SD13025,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c072,QALLĀBĀT WEST,GEDAREF,2,SD12078,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Galabat West
-c073,AD DINDAR,SENNAR,2,SD14040,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c074,KŪSTĪ,WHITE NILE,2,SD09047,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c075,UMM DAFOG,SOUTH DARFUR,2,SD03146,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c076,DĒRUDĒB,RED SEA,2,SD10063,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c077,GEZIRA SOUTH,GEZIRA,2,SD15031,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Gezira South = Janub Al Jazirah
-c078,AL QIŢENA,WHITE NILE,2,SD09050,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c079,KARNOY,NORTH DARFUR,2,SD02168,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c080,JABAL AWLYA,KHARTOUM,2,SD01001,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c081,AL GAWZ,SOUTH KORDOFAN,2,SD07094,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Al Gawz = Al Quoz
-c082,AJ JABALEN,WHITE NILE,2,SD09051,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c083,ŢAWĪLAH,NORTH DARFUR,2,SD02170,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c084,KHARTOUM NORTH,KHARTOUM,2,SD01003,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Khartoum North = Bahri
-c085,NITAIFA,SOUTH DARFUR,2,SD03151,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"changed by agent review (high confidence): The source row itself gives NSO_NAME ""NITAIFA (نتيقة)"", i.e. Nitega; NITAIFA is a mis-transliteration (sudan_uscb_202101.xlsx)."
-c086,ALSSALAM,WHITE NILE,2,SD09049,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c087,AŢ ŢUWAYSHAH,NORTH DARFUR,2,SD02119,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c088,Second-order administrative division name,First-order administrative division name,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"negative: column header text, not a place"
-c089,EL MEILIG,GEZIRA,2,SD15035,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"changed by agent review (high confidence): The source row notes ""Al Kamlin."" with NSO_NAME ""ALKAMLEEN (محلية الكاملين)""; Al Kamlin is also the only v03 Gezira locality missing from the census list."
-c090,BABANŪSAH,WEST KORDOFAN,2,SD18100,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c091,ALSSALAM,SOUTH DARFUR,2,SD03166,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c092,HALFĀ AL GADĪDAH,KASSALA,2,SD11052,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c093,ALRRAHA,GEDAREF,2,SD12084,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c094,QADIR,SOUTH KORDOFAN,2,SD07108,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c095,ED DAMAZIN,BLUE NILE,2,SD08105,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c096,KALAMANDO,NORTH DARFUR,2,SD02126,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c097,AL KURAYNIK,WEST DARFUR,2,SD04125,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c098,KHASHM AL QIRBAH,KASSALA,2,SD11060,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c099,MADENT ATBARA,RIVER NILE,2,SD16012,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c100,AL SIRAIF,NORTH DARFUR,2,SD02118,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c101,AD DIWEM,WHITE NILE,2,SD09044,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c102,BERGEIG,NORTHERN,2,SD17016,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c103,HILLAT ‘AGIG,RED SEA,2,SD10072,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c104,BĀRAH WEST,NORTH KORDOFAN,2,SD13029,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Bara West = Gharb Bara
-c105,NAIRTATY,CENTRAL DARFUR,2,SD06131,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,changed by agent review (high confidence): The source row note says Nairtaty was split and the remaining Nairtaty is West Gabal Marra (Golo and Rokiro are listed separately) = Gharb Jabal Marrah.
-c106,RAHAD AL BARDĪ,SOUTH DARFUR,2,SD03158,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c107,AL FASHAQAA,GEDAREF,2,SD12075,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c108,NAHR ATBARA,KASSALA,2,SD11062,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c109,ED DAMER,RIVER NILE,2,SD16011,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c110,QALLĀBĀT EAST,GEDAREF,2,SD12083,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c111,ID-ALFURSAAN,SOUTH DARFUR,2,SD03143,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c112,WAD AL ḨULAYWAH,KASSALA,2,SD11061,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c113,TANDALTĪ,WHITE NILE,2,SD09048,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c114,KASSALA WEST,KASSALA,2,SD11054,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Kassala West = Reifi Gharb Kassala
-c115,BĀRAH,NORTH KORDOFAN,2,SD13026,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c116,ALRIF ALSHARGIU,SOUTH KORDOFAN,2,SD07097,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c117,TALKOOK,KASSALA,2,SD11059,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c118,OM DUKHON,CENTRAL DARFUR,2,SD06135,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c119,AROMA RURAL,KASSALA,2,SD11055,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c120,DALLAMI,SOUTH KORDOFAN,2,SD07107,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c121,SENNAR SHAREQ,SENNAR,2,SD14042,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c122,BERBER,RIVER NILE,2,SD16013,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c123,ROKIRO,CENTRAL DARFUR,2,SD06132,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,proposed by Claude: Rokero is in North Jebel Marra = Shamal Jabal Marrah
-c124,ALSSUNOOT,WEST KORDOFAN,2,SD18092,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c125,AL GHANIB,RED SEA,2,SD10069,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c126,El Ferdous,,2,SD05152,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c127,Nyala,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: Nyala town spans Nyala Shimal and Nyala Janoub; should not pick one
-c128,El Manageel,,2,SD15036,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c129,El Salam,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: three localities are called As Salam; no state given
-c130,Al Debab,,2,SD18103,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c131,Gubaysh,,2,SD18021,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c132,24 Gurashi,Al Gezira,2,SD15037,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: town: 24 Al Gurashi is in Al Qurashi locality; check
-c133,Total,Total,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,negative: total row
-c134,El Dindir,,2,SD14040,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c135,Sharq El Nile,,2,SD01004,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c136,Janub El Gezira (S. El Gezira),,2,SD15031,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c137,Nertiti,Central Darfur,2,SD06131,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,changed by agent review (medium confidence): Nertiti town is the seat of West Jebel Marra (GeoNames 12157004 point falls in Gharb Jabal Marrah); the state is Central Darfur.
-c138,Sharg El Galabat,,2,SD12083,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: East Galabat = Galabat Ash-Shargiah
-c139,El Geneina,West Darfur,2,SD04115,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c140,Abu Jubaiha,,2,SD07088,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c141,Zaydab,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (medium confidence): Zeidab is an administrative unit of Ad Damar locality (Wikipedia Ad-Damir), and the GeoNames Zeidab points fall inside Ad Damar; the UNHCR row is under River Nile."
-c142,El Quresha,,2,SD12076,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c143,El Roseires,,2,SD08107,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c144,Singa,,2,SD14043,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c145,Halfa El Jadeeda,Kassala,2,SD11052,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c146,Zalingei,,2,SD06138,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c147,Wasat Gedaref (Middle Gedaref),,2,SD12081,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c148,Ingaz,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"UNSURE: Ingaz; which place is meant? | agent review, low confidence: Ingaz (Al Ingaz) under Al Gezira in UNHCR: I could not place it in one locality."
-c149,Habila,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: Habila is in West Darfur and South Kordofan; no state given
-c150,Ed Damer,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c151,Dimso,,2,SD03172,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c152,El Butana,,2,SD12073,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c153,El Hasaheesa,,2,SD15034,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c154,Shiekan,,2,SD13024,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c155,El Faw,,2,SD12074,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: El Faw = Al Fao (Gedaref)
-c156,Madani El Kobra,,2,SD15030,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c157,Abyei-Muglad,,2,SD18087,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c158,El Nuhud (Nehoud),,2,SD18022,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c159,Gharb El Galabat (W. EL Galabat),,2,SD12078,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: West Galabat = Al Galabat Al Gharbyah - Kassab
-c160,El Obeid,,2,SD13024,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: town: El Obeid is in Sheikan locality
-c161,El Daein,,2,SD05142,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c162,El Kamleen,,2,SD15035,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c163,Bagaair,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"UNSURE: Bagaair (Al Bagair) is a town; which locality? | agent review, low confidence: Al Bagair: the GeoNames points fall in both Sharg An Neel (Khartoum) and Al Kamlin, and the case has no state, so no single place is safe."
-c164,Khartoum North (Bahri),,2,SD01003,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: Khartoum North = Bahri
-c165,Al Tadamon,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,ambiguous: At Tadamon is in South Kordofan and Blue Nile; no state given
-c166,Sharg Sennar (E. Sennar),,2,SD14042,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c167,Rufaa,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: town: Rufaa is the seat of East Gezira (Sharg Al Jazirah); check
-c168,Bielel,,2,SD03162,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c169,Genaid,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (medium confidence): Al Guneid (GeoNames 6957938, 14.79N 33.31E, next to Rufaa) falls inside Sharg Al Jazirah; the UNHCR row is under Al Gezira."
-c170,Wad Banda,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c171,Al Khowey (Khuwei),,2,SD18105,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c172,Abu Hamed,River Nile,2,SD16008,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c173,Lagawa,,2,SD18102,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c174,Merawi,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,proposed by Claude: Merawi = Merwoe
-c175,El Radom,,2,SD03141,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c176,Basonda,,2,SD12077,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c177,Karima,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"changed by agent review (high confidence): Karima (GeoNames 371870, 18.55N 31.85E) lies across the river from Merowe, inside Merwoe locality; the UNHCR row is under Northern."
-c178,امبرو,North Darfur,2,SD02120,sudan-schools,Master File/locality_name,SD02120,claude,proposed from the dataset's own P-code
-c179,همشكوريب,Kassala,2,SD11058,sudan-schools,Master File/locality_name,SD11058,claude,proposed from the dataset's own P-code
-c180,بيضة,West Darfur,2,SD04111,sudan-schools,Master File/locality_name,SD04111,claude,proposed from the dataset's own P-code
-c181,قدير,South Kordofan,2,SD07108,sudan-schools,Master File/locality_name,SD07108,claude,proposed from the dataset's own P-code
-c182,السلام,White Nile,2,SD09049,sudan-schools,Master File/locality_name,SD09049,claude,proposed from the dataset's own P-code
-c183,بلدية نيالا,South Darfur,2,SD03167,sudan-schools,Master File/locality_name,SD03167,claude,"settled by agent review (medium confidence): In this dataset بلدية نيالا sits beside a separate نيالا شمال, so it stands for Nyala Janoub, which matches the dataset P-code."
-c184,نهر عطبرة,Kassala,2,SD11062,sudan-schools,Master File/locality_name,SD11062,claude,proposed from the dataset's own P-code
-c185,القلابات الغربية,Gadarif,2,SD12078,sudan-schools,Master File/locality_name,SD12078,claude,proposed from the dataset's own P-code
-c186,ام دم,North Kordofan,2,SD13028,sudan-schools,Master File/locality_name,SD13028,claude,proposed from the dataset's own P-code
-c187,الواحة,North Darfur,2,,sudan-schools,Master File/locality_name,SD02114,claude,"changed by agent review (medium confidence): Al Waha is a separate nomad locality with no fixed area (HRW 2005), listed apart from Al Fasher in this dataset; no v03 locality holds it, so the dataset P-code is a stand-in. Same answer as c223."
-c188,التضامن,Blue Nile,2,SD08108,sudan-schools,Master File/locality_name,SD08108,claude,proposed from the dataset's own P-code
-c189,أبوزبد,West Kordofan,2,SD18028,sudan-schools,Master File/locality_name,SD18028,claude,proposed from the dataset's own P-code
-c190,السلام,West Kordofan,2,SD18086,sudan-schools,Master File/locality_name,SD18086,claude,proposed from the dataset's own P-code
-c191,ابوجابرة,East Darfur,2,SD05140,sudan-schools,Master File/locality_name,SD05140,claude,proposed from the dataset's own P-code
-c192,ابوحجار,Sinnar,2,SD14037,sudan-schools,Master File/locality_name,SD14037,claude,proposed from the dataset's own P-code
-c193,ودالحليو,Kassala,2,SD11061,sudan-schools,Master File/locality_name,SD11061,claude,proposed from the dataset's own P-code
-c194,كليمندو,North Darfur,2,SD02126,sudan-schools,Master File/locality_name,SD02126,claude,proposed from the dataset's own P-code
-c195,ياسين,East Darfur,2,SD05165,sudan-schools,Master File/locality_name,SD05165,claude,proposed from the dataset's own P-code
-c196,ابوحمد,River Nile,2,SD16008,sudan-schools,Master File/locality_name,SD16008,claude,proposed from the dataset's own P-code
-c197,ابوكارنكا,East Darfur,2,SD05155,sudan-schools,Master File/locality_name,SD05155,claude,proposed from the dataset's own P-code
-c198,هبيلا,South Kordofan,2,SD07103,sudan-schools,Master File/locality_name,SD07103,claude,proposed from the dataset's own P-code
-c199,تلكوك,Kassala,2,SD11059,sudan-schools,Master File/locality_name,SD11059,claude,proposed from the dataset's own P-code
-c200,الرصيرص,Blue Nile,2,SD08107,sudan-schools,Master File/locality_name,SD08107,claude,proposed from the dataset's own P-code
-c201,فوربرنقا,West Darfur,2,SD04121,sudan-schools,Master File/locality_name,SD04121,claude,proposed from the dataset's own P-code
-c202,السلام,South Darfur,2,SD03166,sudan-schools,Master File/locality_name,SD03166,claude,proposed from the dataset's own P-code
-c203,محلية النحل,Gadarif,2,SD12079,sudan-schools,Master File/locality_name,SD12079,claude,proposed from the dataset's own P-code
-c204,التضامن,South Kordofan,2,SD07106,sudan-schools,Master File/locality_name,SD07106,claude,proposed from the dataset's own P-code
-c205,شمال الدلتا,Kassala,2,SD11057,sudan-schools,Master File/locality_name,SD11057,claude,proposed from the dataset's own P-code
-c206,بلدية القضارف,Gadarif,2,SD12080,sudan-schools,Master File/locality_name,SD12080,claude,proposed from the dataset's own P-code
-c207,غرب كسلا,Kassala,2,SD11054,sudan-schools,Master File/locality_name,SD11054,claude,proposed from the dataset's own P-code
-c208,هبيلا,West Darfur,2,SD04122,sudan-schools,Master File/locality_name,SD04122,claude,proposed from the dataset's own P-code
-c209,امدرمان,Khartoum,2,SD01006,sudan-schools,Master File/locality_name,SD01006,claude,proposed from the dataset's own P-code
-c210,الدالى والمزموم,Sinnar,2,SD14039,sudan-schools,Master File/locality_name,SD14039,claude,proposed from the dataset's own P-code
-c211,القنب والاوليب,Red Sea,2,SD10069,sudan-schools,Master File/locality_name,SD10069,claude,proposed from the dataset's own P-code
-c212,دارالسلام,North Darfur,2,SD02113,sudan-schools,Master File/locality_name,SD02113,claude,proposed from the dataset's own P-code
-c213,Tawila IDPs,North Darfur,2,SD02170,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c214,Um Baru IDPs,North Darfur,2,SD02120,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c215,Reifi Kassala,Kassala,2,SD11056,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c216,Kadugli IDPs,South Kordofan,2,SD07098,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c217,Ar Rahad - GD,Gedaref,2,SD12084,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c218,Ar Rahad - NK,North Kordofan,2,SD13030,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c219,Ad Du'ayn IDPs,East Darfur,2,SD05142,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c220,Al Buram IDPs,South Kordofan,2,SD07099,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c221,Um Durein IDPs,South Kordofan,2,SD07091,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c222,At Tina IDPs,North Darfur,2,SD02171,sudan-acute-food-insecurity-country-data,Area,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c223,Al Waha,North Darfur,2,,sudan-who-does-what-where-november-2020,Locality,,claude,"settled by agent review (medium confidence): Al Waha is a non-territorial nomad locality that is not in v03, and no single current locality holds it."
-c224,Total,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,negative: total row
-c225,Per cent,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,negative: not a place
-c226,Abyei PCA Box,,1,SD19,sudan-who-does-what-where-november-2020,State,,claude,proposed by Claude: Abyei PCA Box = Abyei PCA
-c227,Al Gezira,,1,SD15,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,proposed by Claude: Al Gezira = Aj Jazirah
-c228,TOTALS,,1,,sudan-people-reached-by-locality-jan-dec-2019_hrp,STATE,,claude,negative: total row
-c229,First-order administrative division name,,1,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM1_NAME,,claude,negative: column header text
-c230,Gadarif,,1,SD12,sudan-schools,Master File/state_name,SD12,claude,proposed from the dataset's own P-code
-c231,Nile,,1,SD16,sudan-people-reached-by-locality-jan-dec-2019_hrp,STATE,,claude,"proposed by Claude: ""Nile"" is the former name of River Nile State (Nile State); GeoNames records it"
-c232,Sinnar,,1,SD14,sudan-schools,Master File/state_name,SD14,claude,proposed from the dataset's own P-code
-c233,ABYEI AREA,,1,SD19,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM1_NAME,,claude,proposed by Claude: Abyei Area = Abyei PCA
-c234,Centeral Darfur,,1,SD06,sudan-who-does-what-where-november-2020,State,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c235,Grand Total,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,claude,negative: total row
-c236,Al Quoz,South Kordofan,2,SD07094,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD07094,claude,proposed from the dataset's own P-code
-c237,Tawkar,Red Sea,2,SD10065,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD10065,claude,proposed from the dataset's own P-code
-c238,Buram,South Darfur,2,SD03161,sudan-displacement-situation-countrywide-idps-iom-dtm,Returnees Masterlist (ADMIN2)/Locality Of Return,SD03161,claude,proposed from the dataset's own P-code
-c239,Um Dafoug,South Darfur,2,SD03146,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD03146,claude,proposed from the dataset's own P-code
-c240,Shamal Jabal Marrah,Central Darfur,2,SD06132,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD06132,claude,proposed from the dataset's own P-code
-c241,Kutum,North Darfur,2,SD02128,sudan-displacement-situation-countrywide-idps-iom-dtm,Returnees Masterlist (ADMIN2)/Locality Of Return,SD02128,claude,proposed from the dataset's own P-code
-c242,Sheikan,North Kordofan,2,SD13024,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD13024,claude,proposed from the dataset's own P-code
-c243,Bara,North Kordofan,2,SD13026,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD13026,claude,proposed from the dataset's own P-code
-c244,الفردوس,East Darfur,2,SD05152,sudan-schools,Master File/locality_name,SD05152,claude,proposed from the dataset's own P-code
-c245,أبو كارنكا,East Darfur,2,SD05155,sudan-schools,Master File/locality_name,SD05155,claude,proposed from the dataset's own P-code
-c246,امبدة,Khartoum,2,SD01002,sudan-schools,Master File/locality_name,SD01002,claude,proposed from the dataset's own P-code
-c247,دار السلام,North Darfur,2,SD02113,sudan-schools,Master File/locality_name,SD02113,claude,proposed from the dataset's own P-code
-c248,سنجة,Sinnar,2,SD14043,sudan-schools,Master File/locality_name,SD14043,claude,proposed from the dataset's own P-code
-c249,الميرم,West Kordofan,2,SD18106,sudan-schools,Master File/locality_name,SD18106,claude,proposed from the dataset's own P-code
-c250,سرف عمرة,North Darfur,2,SD02133,sudan-schools,Master File/locality_name,SD02133,claude,proposed from the dataset's own P-code
-c251,كتم,North Darfur,2,SD02128,sudan-schools,Master File/locality_name,SD02128,claude,proposed from the dataset's own P-code
-c252,West Kordofan,,1,SD18,sudan-acute-food-insecurity-country-data,Level 1,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c253,Gedaref,,1,SD12,sudan-acute-food-insecurity-country-data,Level 1,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c254,Kassala,,1,SD11,sudan-acute-food-insecurity-country-data,Level 1,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c255,Blue Nile State,,1,SD08,sudan-acute-food-insecurity-country-data,Level 1,,claude,"proposed by Claude: closest official name in the stated state, judged correct"
-c256,Ganees East,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c257,Babanusa Town,,2,SD18100,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: town in its namesake locality
-c258,Um Hashima,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c259,Abu Matarig,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (medium confidence): A site in Bahr Al Arab locality (the town is its seat), but this is a site column and the name is not a locality name."
-c260,Wad Banda Rural,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: rural part of Wad Bandah locality
-c261,Alagaya,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c262,Shag-Al-Gamous,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c263,Gedied (area),,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c264,Ed Dibebat,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (medium confidence): A site listed under Al Quoz; the town is not named after a locality, and the GeoNames point even falls in Ar Reif Ash Shargi."
-c265,Alganaa,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c266,Dabat Bosin,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c267,Wad Sherifai,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c268,Um Sangour,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c269,El Leri Town,,2,SD07105,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: town in its namesake locality
-c270,El Hajez,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c271,Yassin (Muhajiriya),,2,SD05165,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"proposed by Claude: Yassin, with a site name in brackets"
-c272,Bantiu,Khartoum,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c273,Abu Beteik,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c274,Hayi Elfadros and villages,Blue Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c275,Um Gargour,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"negative: a camp, site or village name, not a locality"
-c276,Qala El Nahal,,2,SD12079,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,proposed by Claude: Qala El Nahal = Gala'a Al Nahal
-c277,Dar El Selam 8,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"settled by agent review (high confidence): A Khartoum (Jabal Aulia) collective site, not the North Darfur locality Dar As Salam."
-c278,Lubna village,White Nile,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c279,El Mieram,West Kordofan,2,SD18106,sudan-people-affected-by-floods,2022/Village Name,,claude,proposed by Claude: El Mieram = Al Meiram
-c280,"Aldaba, Alharafa",North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c281,Umdoban,North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c282,"sortod,Bangadad",Northern,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c283,Al Mazrob,North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c284,Jumeiza Komora,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c285,Ed Daein town,East Darfur,2,SD05142,sudan-people-affected-by-floods,2022/Village Name,,claude,proposed by Claude: town in its namesake locality
-c286,Burgag twon/villages,Northern,2,SD17016,sudan-people-affected-by-floods,2022/Village Name,,claude,"proposed by Claude: Burgag = Al Burgaig, with extra words"
-c287,"Managil town, some 67 villages srounded",Aj Jazirah,2,SD15036,sudan-people-affected-by-floods,2022/Village Name,,claude,"proposed by Claude: Managil = Al Manaqil, with extra words"
-c288,"Al Takamul, Jadeen and Um Slgora",Khartoum,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c289,JM,Central Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c290,Dereige camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c291,Otash camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c292,twon /villages,Northern,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c293,Wadi Akhdar,North Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c294,Selinga village,Central Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c295,Albugaa,Khartoum,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c296,Fama,West Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c297,33 villages,White Nile,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
-c298,Nyala town,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,ambiguous: Nyala town spans Nyala Shimal and Nyala Janoub; should not pick one
-c299,As Sereif IDP camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,claude,"negative: a camp, site or village name, not a locality"
+c001,El Sireaf,North Darfur,2,SD02118,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c002,Jabal Aulia,Khartoum,2,SD01001,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c003,Abu Jabra,East Darfur,2,SD05140,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c004,Tadamon,South Kordofan,2,SD07106,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c005,Tokar,Red Sea,2,SD10065,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c006,Singa,Sennar,2,SD14043,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c007,Rokoro(North Jebel Marra),Central Darfur,2,SD06132,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,proposed by Claude: Rokoro is in North Jebel Marra = Shamal Jabal Marrah
+c008,Dalgo,Northern,2,SD17015,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c009,Sheiria,East Darfur,2,SD05148,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c010,Sharq El Nile,Khartoum,2,SD01004,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c011,Khashm Ghirba,Kassala,2,SD11060,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c012,El Radoom,South Darfur,2,SD03141,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c013,Umm Keddada,North Darfur,2,SD02136,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c014,Wad EL Helew,Kassala,2,SD11061,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c015,Talodi,South Kordofan,2,SD07089,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c016,Ed Damer,Nile,2,SD16011,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: state hint ""Nile"" is ambiguous; Ed Damer is Ad Damar in River Nile"
+c017,Nahr Atbara (Atbara River),Kassala,2,SD11062,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c018,Sharg El Gezira (E. El Gezira),Al Gezira,2,SD15033,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c019,Janub El Gezira (S. El Gezira),Al Gezira,2,SD15031,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c020,El Kamleen,Al Gezira,2,SD15035,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c021,Bielel,South Darfur,2,SD03162,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c022,Um El Qura,Al Gezira,2,SD15032,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c023,Dordeb,Red Sea,2,SD10063,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c024,Telkok,Kassala,2,SD11059,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c025,EL Roseires,Blue Nile,2,SD08107,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c026,Dimsu,South Darfur,2,SD03172,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c027,El Taweisha,North Darfur,2,SD02119,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c028,Gharb El Galabat (W. EL Galabat),Gedaref,2,SD12078,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c029,Reif Ashargi,South Kordofan,2,SD07097,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c030,Abu kashola,South Kordofan,2,SD07104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c031,Zalingei,Central Darfur,2,SD06138,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c032,Shattai,South Darfur,2,SD03154,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c033,Ailliet,North Darfur,2,SD02169,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c034,Kalimendo,North Darfur,2,SD02126,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c035,Al Khowey,West Kordofan,2,SD18105,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c036,Sharg Sennar (E. Sennar),Sennar,2,SD14042,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c037,El Quresha,Gedaref,2,SD12076,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c038,Umm Ramtta,White Nile,2,SD09045,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c039,Um Dam,North Kordofan,2,SD13028,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c040,Garb Bara,North Kordofan,2,SD13029,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c041,Shiekan,North Kordofan,2,SD13024,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c042,Kornoi,North Darfur,2,SD02168,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c043,Um Buru,North Darfur,2,SD02120,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c044,Bau,Blue Nile,2,SD08104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c045,El Jabalian,White Nile,2,SD09051,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c046,Habila,West Darfur,2,SD04122,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c047,Gharb Kassala (W. Kassala),Kassala,2,SD11054,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c048,El Nehoud,West Kordofan,2,SD18022,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c049,Niteaga,South Darfur,2,SD03151,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c050,Nyala North,South Darfur,2,SD03164,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,proposed by Claude: Nyala North = Nyala Shimal
+c051,Sharg El Galabat (E. El Galabat),Gedaref,2,SD12083,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,proposed by Claude: East Galabat = Galabat Ash-Shargiah
+c052,Al Daba,Northern,2,SD17019,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c053,El Gutaina,White Nile,2,SD09050,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c054,El Kuma,North Darfur,2,SD02116,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c055,Madani El Kobra (Greater Wad Madani),Al Gezira,2,SD15030,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c056,El Butana,Gedaref,2,SD12073,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c057,Abyei-Muglad locality (outside the Abyei PCA Area),West Kordofan,2,SD18087,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: the Abyei locality in West Kordofan, not the Abyei PCA area"
+c058,El Douiem,White Nile,2,SD09044,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c059,El Ferdous,East Darfur,2,SD05152,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c060,Jabiet Al Maadin,Red Sea,2,SD10067,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c061,Ed Daein,East Darfur,2,SD05142,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c062,Sodari,North Kordofan,2,SD13025,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c063,Habila,South Kordofan,2,SD07103,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c064,Abu Jubaiha,South Kordofan,2,SD07088,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c065,El Odaya,West Kordofan,2,SD18104,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c066,Bindisi,Central Darfur,2,SD06112,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c067,Hamashkoreib,Kassala,2,SD11058,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c068,Sharg Jabel Marra,South Darfur,2,SD03147,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c069,El Matammah,Nile,2,SD16009,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: state hint ""Nile"" is ambiguous; Al Matama is in River Nile"
+c070,Lagawa,West Kordofan,2,SD18102,sudan-people-reached-by-locality-jan-dec-2019_hrp,LOCALITY,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c071,SAWDIRĪ,NORTH KORDOFAN,2,SD13025,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c072,QALLĀBĀT WEST,GEDAREF,2,SD12078,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Galabat West
+c073,AD DINDAR,SENNAR,2,SD14040,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c074,KŪSTĪ,WHITE NILE,2,SD09047,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c075,UMM DAFOG,SOUTH DARFUR,2,SD03146,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c076,DĒRUDĒB,RED SEA,2,SD10063,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c077,GEZIRA SOUTH,GEZIRA,2,SD15031,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Gezira South = Janub Al Jazirah
+c078,AL QIŢENA,WHITE NILE,2,SD09050,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c079,KARNOY,NORTH DARFUR,2,SD02168,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c080,JABAL AWLYA,KHARTOUM,2,SD01001,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c081,AL GAWZ,SOUTH KORDOFAN,2,SD07094,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Al Gawz = Al Quoz
+c082,AJ JABALEN,WHITE NILE,2,SD09051,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c083,ŢAWĪLAH,NORTH DARFUR,2,SD02170,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c084,KHARTOUM NORTH,KHARTOUM,2,SD01003,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Khartoum North = Bahri
+c085,NITAIFA,SOUTH DARFUR,2,SD03151,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"changed by agent review (high confidence): The source row itself gives NSO_NAME ""NITAIFA (نتيقة)"", i.e. Nitega; NITAIFA is a mis-transliteration (sudan_uscb_202101.xlsx)."
+c086,ALSSALAM,WHITE NILE,2,SD09049,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c087,AŢ ŢUWAYSHAH,NORTH DARFUR,2,SD02119,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c088,Second-order administrative division name,First-order administrative division name,2,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"negative: column header text, not a place"
+c089,EL MEILIG,GEZIRA,2,SD15035,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"changed by agent review (high confidence): The source row notes ""Al Kamlin."" with NSO_NAME ""ALKAMLEEN (محلية الكاملين)""; Al Kamlin is also the only v03 Gezira locality missing from the census list."
+c090,BABANŪSAH,WEST KORDOFAN,2,SD18100,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c091,ALSSALAM,SOUTH DARFUR,2,SD03166,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c092,HALFĀ AL GADĪDAH,KASSALA,2,SD11052,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c093,ALRRAHA,GEDAREF,2,SD12084,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c094,QADIR,SOUTH KORDOFAN,2,SD07108,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c095,ED DAMAZIN,BLUE NILE,2,SD08105,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c096,KALAMANDO,NORTH DARFUR,2,SD02126,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c097,AL KURAYNIK,WEST DARFUR,2,SD04125,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c098,KHASHM AL QIRBAH,KASSALA,2,SD11060,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c099,MADENT ATBARA,RIVER NILE,2,SD16012,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c100,AL SIRAIF,NORTH DARFUR,2,SD02118,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c101,AD DIWEM,WHITE NILE,2,SD09044,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c102,BERGEIG,NORTHERN,2,SD17016,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c103,HILLAT ‘AGIG,RED SEA,2,SD10072,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c104,BĀRAH WEST,NORTH KORDOFAN,2,SD13029,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Bara West = Gharb Bara
+c105,NAIRTATY,CENTRAL DARFUR,2,SD06131,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,changed by agent review (high confidence): The source row note says Nairtaty was split and the remaining Nairtaty is West Gabal Marra (Golo and Rokiro are listed separately) = Gharb Jabal Marrah.
+c106,RAHAD AL BARDĪ,SOUTH DARFUR,2,SD03158,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c107,AL FASHAQAA,GEDAREF,2,SD12075,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c108,NAHR ATBARA,KASSALA,2,SD11062,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c109,ED DAMER,RIVER NILE,2,SD16011,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c110,QALLĀBĀT EAST,GEDAREF,2,SD12083,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c111,ID-ALFURSAAN,SOUTH DARFUR,2,SD03143,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c112,WAD AL ḨULAYWAH,KASSALA,2,SD11061,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c113,TANDALTĪ,WHITE NILE,2,SD09048,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c114,KASSALA WEST,KASSALA,2,SD11054,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Kassala West = Reifi Gharb Kassala
+c115,BĀRAH,NORTH KORDOFAN,2,SD13026,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c116,ALRIF ALSHARGIU,SOUTH KORDOFAN,2,SD07097,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c117,TALKOOK,KASSALA,2,SD11059,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c118,OM DUKHON,CENTRAL DARFUR,2,SD06135,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c119,AROMA RURAL,KASSALA,2,SD11055,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c120,DALLAMI,SOUTH KORDOFAN,2,SD07107,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c121,SENNAR SHAREQ,SENNAR,2,SD14042,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c122,BERBER,RIVER NILE,2,SD16013,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c123,ROKIRO,CENTRAL DARFUR,2,SD06132,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,proposed by Claude: Rokero is in North Jebel Marra = Shamal Jabal Marrah
+c124,ALSSUNOOT,WEST KORDOFAN,2,SD18092,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c125,AL GHANIB,RED SEA,2,SD10069,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM2_NAME,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c126,El Ferdous,,2,SD05152,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c127,Nyala,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,ambiguous: Nyala town spans Nyala Shimal and Nyala Janoub; should not pick one
+c128,El Manageel,,2,SD15036,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c129,El Salam,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,ambiguous: three localities are called As Salam; no state given
+c130,Al Debab,,2,SD18103,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c131,Gubaysh,,2,SD18021,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c132,24 Gurashi,Al Gezira,2,SD15037,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: town: 24 Al Gurashi is in Al Qurashi locality; check
+c133,Total,Total,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,negative: total row
+c134,El Dindir,,2,SD14040,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c135,Sharq El Nile,,2,SD01004,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c136,Janub El Gezira (S. El Gezira),,2,SD15031,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c137,Nertiti,Central Darfur,2,SD06131,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,changed by agent review (medium confidence): Nertiti town is the seat of West Jebel Marra (GeoNames 12157004 point falls in Gharb Jabal Marrah); the state is Central Darfur.
+c138,Sharg El Galabat,,2,SD12083,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: East Galabat = Galabat Ash-Shargiah
+c139,El Geneina,West Darfur,2,SD04115,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c140,Abu Jubaiha,,2,SD07088,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c141,Zaydab,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"changed by agent review (medium confidence): Zeidab is an administrative unit of Ad Damar locality (Wikipedia Ad-Damir), and the GeoNames Zeidab points fall inside Ad Damar; the UNHCR row is under River Nile."
+c142,El Quresha,,2,SD12076,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c143,El Roseires,,2,SD08107,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c144,Singa,,2,SD14043,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c145,Halfa El Jadeeda,Kassala,2,SD11052,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c146,Zalingei,,2,SD06138,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c147,Wasat Gedaref (Middle Gedaref),,2,SD12081,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c148,Ingaz,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,decided by Amin: should match nothing (no single place for Ingaz)
+c149,Habila,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,ambiguous: Habila is in West Darfur and South Kordofan; no state given
+c150,Ed Damer,,2,SD16011,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c151,Dimso,,2,SD03172,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c152,El Butana,,2,SD12073,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c153,El Hasaheesa,,2,SD15034,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c154,Shiekan,,2,SD13024,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c155,El Faw,,2,SD12074,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: El Faw = Al Fao (Gedaref)
+c156,Madani El Kobra,,2,SD15030,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c157,Abyei-Muglad,,2,SD18087,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c158,El Nuhud (Nehoud),,2,SD18022,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c159,Gharb El Galabat (W. EL Galabat),,2,SD12078,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: West Galabat = Al Galabat Al Gharbyah - Kassab
+c160,El Obeid,,2,SD13024,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: town: El Obeid is in Sheikan locality
+c161,El Daein,,2,SD05142,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c162,El Kamleen,,2,SD15035,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c163,Bagaair,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,decided by Amin: should match nothing (Al Bagair spans Sharg An Neel and Al Kamlin)
+c164,Khartoum North (Bahri),,2,SD01003,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: Khartoum North = Bahri
+c165,Al Tadamon,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,ambiguous: At Tadamon is in South Kordofan and Blue Nile; no state given
+c166,Sharg Sennar (E. Sennar),,2,SD14042,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c167,Rufaa,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: town: Rufaa is the seat of East Gezira (Sharg Al Jazirah); check
+c168,Bielel,,2,SD03162,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c169,Genaid,,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"changed by agent review (medium confidence): Al Guneid (GeoNames 6957938, 14.79N 33.31E, next to Rufaa) falls inside Sharg Al Jazirah; the UNHCR row is under Al Gezira."
+c170,Wad Banda,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c171,Al Khowey (Khuwei),,2,SD18105,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c172,Abu Hamed,River Nile,2,SD16008,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c173,Lagawa,,2,SD18102,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c174,Merawi,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: Merawi = Merwoe
+c175,El Radom,,2,SD03141,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c176,Basonda,,2,SD12077,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c177,Karima,,2,SD17020,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"changed by agent review (high confidence): Karima (GeoNames 371870, 18.55N 31.85E) lies across the river from Merowe, inside Merwoe locality; the UNHCR row is under Northern."
+c178,امبرو,North Darfur,2,SD02120,sudan-schools,Master File/locality_name,SD02120,amin,proposed from the dataset's own P-code
+c179,همشكوريب,Kassala,2,SD11058,sudan-schools,Master File/locality_name,SD11058,amin,proposed from the dataset's own P-code
+c180,بيضة,West Darfur,2,SD04111,sudan-schools,Master File/locality_name,SD04111,amin,proposed from the dataset's own P-code
+c181,قدير,South Kordofan,2,SD07108,sudan-schools,Master File/locality_name,SD07108,amin,proposed from the dataset's own P-code
+c182,السلام,White Nile,2,SD09049,sudan-schools,Master File/locality_name,SD09049,amin,proposed from the dataset's own P-code
+c183,بلدية نيالا,South Darfur,2,SD03167,sudan-schools,Master File/locality_name,SD03167,amin,"settled by agent review (medium confidence): In this dataset بلدية نيالا sits beside a separate نيالا شمال, so it stands for Nyala Janoub, which matches the dataset P-code."
+c184,نهر عطبرة,Kassala,2,SD11062,sudan-schools,Master File/locality_name,SD11062,amin,proposed from the dataset's own P-code
+c185,القلابات الغربية,Gadarif,2,SD12078,sudan-schools,Master File/locality_name,SD12078,amin,proposed from the dataset's own P-code
+c186,ام دم,North Kordofan,2,SD13028,sudan-schools,Master File/locality_name,SD13028,amin,proposed from the dataset's own P-code
+c187,الواحة,North Darfur,2,,sudan-schools,Master File/locality_name,SD02114,amin,"changed by agent review (medium confidence): Al Waha is a separate nomad locality with no fixed area (HRW 2005), listed apart from Al Fasher in this dataset; no v03 locality holds it, so the dataset P-code is a stand-in. Same answer as c223."
+c188,التضامن,Blue Nile,2,SD08108,sudan-schools,Master File/locality_name,SD08108,amin,proposed from the dataset's own P-code
+c189,أبوزبد,West Kordofan,2,SD18028,sudan-schools,Master File/locality_name,SD18028,amin,proposed from the dataset's own P-code
+c190,السلام,West Kordofan,2,SD18086,sudan-schools,Master File/locality_name,SD18086,amin,proposed from the dataset's own P-code
+c191,ابوجابرة,East Darfur,2,SD05140,sudan-schools,Master File/locality_name,SD05140,amin,proposed from the dataset's own P-code
+c192,ابوحجار,Sinnar,2,SD14037,sudan-schools,Master File/locality_name,SD14037,amin,proposed from the dataset's own P-code
+c193,ودالحليو,Kassala,2,SD11061,sudan-schools,Master File/locality_name,SD11061,amin,proposed from the dataset's own P-code
+c194,كليمندو,North Darfur,2,SD02126,sudan-schools,Master File/locality_name,SD02126,amin,proposed from the dataset's own P-code
+c195,ياسين,East Darfur,2,SD05165,sudan-schools,Master File/locality_name,SD05165,amin,proposed from the dataset's own P-code
+c196,ابوحمد,River Nile,2,SD16008,sudan-schools,Master File/locality_name,SD16008,amin,proposed from the dataset's own P-code
+c197,ابوكارنكا,East Darfur,2,SD05155,sudan-schools,Master File/locality_name,SD05155,amin,proposed from the dataset's own P-code
+c198,هبيلا,South Kordofan,2,SD07103,sudan-schools,Master File/locality_name,SD07103,amin,proposed from the dataset's own P-code
+c199,تلكوك,Kassala,2,SD11059,sudan-schools,Master File/locality_name,SD11059,amin,proposed from the dataset's own P-code
+c200,الرصيرص,Blue Nile,2,SD08107,sudan-schools,Master File/locality_name,SD08107,amin,proposed from the dataset's own P-code
+c201,فوربرنقا,West Darfur,2,SD04121,sudan-schools,Master File/locality_name,SD04121,amin,proposed from the dataset's own P-code
+c202,السلام,South Darfur,2,SD03166,sudan-schools,Master File/locality_name,SD03166,amin,proposed from the dataset's own P-code
+c203,محلية النحل,Gadarif,2,SD12079,sudan-schools,Master File/locality_name,SD12079,amin,proposed from the dataset's own P-code
+c204,التضامن,South Kordofan,2,SD07106,sudan-schools,Master File/locality_name,SD07106,amin,proposed from the dataset's own P-code
+c205,شمال الدلتا,Kassala,2,SD11057,sudan-schools,Master File/locality_name,SD11057,amin,proposed from the dataset's own P-code
+c206,بلدية القضارف,Gadarif,2,SD12080,sudan-schools,Master File/locality_name,SD12080,amin,proposed from the dataset's own P-code
+c207,غرب كسلا,Kassala,2,SD11054,sudan-schools,Master File/locality_name,SD11054,amin,proposed from the dataset's own P-code
+c208,هبيلا,West Darfur,2,SD04122,sudan-schools,Master File/locality_name,SD04122,amin,proposed from the dataset's own P-code
+c209,امدرمان,Khartoum,2,SD01006,sudan-schools,Master File/locality_name,SD01006,amin,proposed from the dataset's own P-code
+c210,الدالى والمزموم,Sinnar,2,SD14039,sudan-schools,Master File/locality_name,SD14039,amin,proposed from the dataset's own P-code
+c211,القنب والاوليب,Red Sea,2,SD10069,sudan-schools,Master File/locality_name,SD10069,amin,proposed from the dataset's own P-code
+c212,دارالسلام,North Darfur,2,SD02113,sudan-schools,Master File/locality_name,SD02113,amin,proposed from the dataset's own P-code
+c213,Tawila IDPs,North Darfur,2,SD02170,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c214,Um Baru IDPs,North Darfur,2,SD02120,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c215,Reifi Kassala,Kassala,2,SD11056,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c216,Kadugli IDPs,South Kordofan,2,SD07098,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c217,Ar Rahad - GD,Gedaref,2,SD12084,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c218,Ar Rahad - NK,North Kordofan,2,SD13030,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c219,Ad Du'ayn IDPs,East Darfur,2,SD05142,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c220,Al Buram IDPs,South Kordofan,2,SD07099,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c221,Um Durein IDPs,South Kordofan,2,SD07091,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c222,At Tina IDPs,North Darfur,2,SD02171,sudan-acute-food-insecurity-country-data,Area,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c223,Al Waha,North Darfur,2,,sudan-who-does-what-where-november-2020,Locality,,amin,"settled by agent review (medium confidence): Al Waha is a non-territorial nomad locality that is not in v03, and no single current locality holds it."
+c224,Total,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,amin,negative: total row
+c225,Per cent,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,amin,negative: not a place
+c226,Abyei PCA Box,,1,SD19,sudan-who-does-what-where-november-2020,State,,amin,proposed by Claude: Abyei PCA Box = Abyei PCA
+c227,Al Gezira,,1,SD15,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,amin,proposed by Claude: Al Gezira = Aj Jazirah
+c228,TOTALS,,1,,sudan-people-reached-by-locality-jan-dec-2019_hrp,STATE,,amin,negative: total row
+c229,First-order administrative division name,,1,,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM1_NAME,,amin,negative: column header text
+c230,Gadarif,,1,SD12,sudan-schools,Master File/state_name,SD12,amin,proposed from the dataset's own P-code
+c231,Nile,,1,SD16,sudan-people-reached-by-locality-jan-dec-2019_hrp,STATE,,amin,"proposed by Claude: ""Nile"" is the former name of River Nile State (Nile State); GeoNames records it"
+c232,Sinnar,,1,SD14,sudan-schools,Master File/state_name,SD14,amin,proposed from the dataset's own P-code
+c233,ABYEI AREA,,1,SD19,sudan-subnational-boundaries-and-tabular-data,Population Estimates_2020Geog/ADM1_NAME,,amin,proposed by Claude: Abyei Area = Abyei PCA
+c234,Centeral Darfur,,1,SD06,sudan-who-does-what-where-november-2020,State,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c235,Grand Total,,1,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,State,,amin,negative: total row
+c236,Al Quoz,South Kordofan,2,SD07094,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD07094,amin,proposed from the dataset's own P-code
+c237,Tawkar,Red Sea,2,SD10065,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD10065,amin,proposed from the dataset's own P-code
+c238,Buram,South Darfur,2,SD03161,sudan-displacement-situation-countrywide-idps-iom-dtm,Returnees Masterlist (ADMIN2)/Locality Of Return,SD03161,amin,proposed from the dataset's own P-code
+c239,Um Dafoug,South Darfur,2,SD03146,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD03146,amin,proposed from the dataset's own P-code
+c240,Shamal Jabal Marrah,Central Darfur,2,SD06132,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD06132,amin,proposed from the dataset's own P-code
+c241,Kutum,North Darfur,2,SD02128,sudan-displacement-situation-countrywide-idps-iom-dtm,Returnees Masterlist (ADMIN2)/Locality Of Return,SD02128,amin,proposed from the dataset's own P-code
+c242,Sheikan,North Kordofan,2,SD13024,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD13024,amin,proposed from the dataset's own P-code
+c243,Bara,North Kordofan,2,SD13026,sudan-displacement-situation-countrywide-idps-iom-dtm,IDPs Masterlist (ADMIN2)/LOCALITY OF DISPLACEMENT,SD13026,amin,proposed from the dataset's own P-code
+c244,الفردوس,East Darfur,2,SD05152,sudan-schools,Master File/locality_name,SD05152,amin,proposed from the dataset's own P-code
+c245,أبو كارنكا,East Darfur,2,SD05155,sudan-schools,Master File/locality_name,SD05155,amin,proposed from the dataset's own P-code
+c246,امبدة,Khartoum,2,SD01002,sudan-schools,Master File/locality_name,SD01002,amin,proposed from the dataset's own P-code
+c247,دار السلام,North Darfur,2,SD02113,sudan-schools,Master File/locality_name,SD02113,amin,proposed from the dataset's own P-code
+c248,سنجة,Sinnar,2,SD14043,sudan-schools,Master File/locality_name,SD14043,amin,proposed from the dataset's own P-code
+c249,الميرم,West Kordofan,2,SD18106,sudan-schools,Master File/locality_name,SD18106,amin,proposed from the dataset's own P-code
+c250,سرف عمرة,North Darfur,2,SD02133,sudan-schools,Master File/locality_name,SD02133,amin,proposed from the dataset's own P-code
+c251,كتم,North Darfur,2,SD02128,sudan-schools,Master File/locality_name,SD02128,amin,proposed from the dataset's own P-code
+c252,West Kordofan,,1,SD18,sudan-acute-food-insecurity-country-data,Level 1,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c253,Gedaref,,1,SD12,sudan-acute-food-insecurity-country-data,Level 1,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c254,Kassala,,1,SD11,sudan-acute-food-insecurity-country-data,Level 1,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c255,Blue Nile State,,1,SD08,sudan-acute-food-insecurity-country-data,Level 1,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
+c256,Ganees East,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c257,Babanusa Town,,2,SD18100,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: town in its namesake locality
+c258,Um Hashima,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c259,Abu Matarig,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"settled by agent review (medium confidence): A site in Bahr Al Arab locality (the town is its seat), but this is a site column and the name is not a locality name."
+c260,Wad Banda Rural,,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: rural part of Wad Bandah locality
+c261,Alagaya,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c262,Shag-Al-Gamous,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c263,Gedied (area),,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c264,Ed Dibebat,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"settled by agent review (medium confidence): A site listed under Al Quoz; the town is not named after a locality, and the GeoNames point even falls in Ar Reif Ash Shargi."
+c265,Alganaa,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c266,Dabat Bosin,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c267,Wad Sherifai,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c268,Um Sangour,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c269,El Leri Town,,2,SD07105,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: town in its namesake locality
+c270,El Hajez,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c271,Yassin (Muhajiriya),,2,SD05165,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"proposed by Claude: Yassin, with a site name in brackets"
+c272,Bantiu,Khartoum,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c273,Abu Beteik,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c274,Hayi Elfadros and villages,Blue Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c275,Um Gargour,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
+c276,Qala El Nahal,,2,SD12079,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: Qala El Nahal = Gala'a Al Nahal
+c277,Dar El Selam 8,,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"settled by agent review (high confidence): A Khartoum (Jabal Aulia) collective site, not the North Darfur locality Dar As Salam."
+c278,Lubna village,White Nile,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c279,El Mieram,West Kordofan,2,SD18106,sudan-people-affected-by-floods,2022/Village Name,,amin,proposed by Claude: El Mieram = Al Meiram
+c280,"Aldaba, Alharafa",North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c281,Umdoban,North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c282,"sortod,Bangadad",Northern,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c283,Al Mazrob,North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c284,Jumeiza Komora,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c285,Ed Daein town,East Darfur,2,SD05142,sudan-people-affected-by-floods,2022/Village Name,,amin,proposed by Claude: town in its namesake locality
+c286,Burgag twon/villages,Northern,2,SD17016,sudan-people-affected-by-floods,2022/Village Name,,amin,"proposed by Claude: Burgag = Al Burgaig, with extra words"
+c287,"Managil town, some 67 villages srounded",Aj Jazirah,2,SD15036,sudan-people-affected-by-floods,2022/Village Name,,amin,"proposed by Claude: Managil = Al Manaqil, with extra words"
+c288,"Al Takamul, Jadeen and Um Slgora",Khartoum,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c289,JM,Central Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c290,Dereige camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c291,Otash camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c292,twon /villages,Northern,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c293,Wadi Akhdar,North Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c294,Selinga village,Central Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c295,Albugaa,Khartoum,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c296,Fama,West Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c297,33 villages,White Nile,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
+c298,Nyala town,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,ambiguous: Nyala town spans Nyala Shimal and Nyala Janoub; should not pick one
+c299,As Sereif IDP camp,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
