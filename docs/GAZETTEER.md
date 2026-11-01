@@ -7,7 +7,7 @@ The gazetteer turns messy Sudanese place names into official codes. It lives in 
 | `places.json` | One record per state (19) and locality (189): `pcode`, `level`, `name_en`, `name_ar`, `parent_pcode`, and a `point` inside the place | `make gazetteer`, from the released boundaries |
 | `variants.json` | Other spellings of a place, each with the sources it came from | `make gazetteer`, from COD-AB, geoBoundaries, GeoNames and Wikidata |
 | `normalisation.json` | The rules that turn a name into a matching key | Written by hand; reviewed with the variants |
-| `review.json` | Review decisions: spellings kept or rejected, and records linked by hand. Applied on every build, so they survive rebuilds | Review |
+| `review.json` | Review decisions: spellings kept, rejected or added, and records linked by hand. Applied on every build, so they survive rebuilds | Review |
 | `variants_osm.json` | Town names from OpenStreetMap, kept apart because they are ODbL (© OpenStreetMap contributors) | `make gazetteer`, from the HOT export on HDX |
 
 The test set is `data/tests/match_cases.csv`; `data/tests/normalisation_cases.csv` pins down the normalisation rules for both languages.
@@ -49,7 +49,7 @@ People often write the town, not the locality. Common towns are spellings of a l
 3. otherwise nowhere, if another locality in the same state is named more like it (a likeness of 0.75 or more; *Kuma*, a town in Melit, would be mistaken for Al Koma); these are listed in `build/reports/variant_links.json`;
 4. otherwise the locality containing it.
 
-The likeness measure cannot settle every case (*Kuma* and *El Barun* score the same, but only the first is confusable), so reviewers place towns by hand in `review.json` where the rule is wrong, and reject town names that would be read as a locality in another state (*Adeila*, a town in Um Dukhun, and Adila in East Darfur). OpenStreetMap often packs several names into one tag; they are split on `;`, `,`, `،` and `/`.
+The likeness measure cannot settle every case (*Kuma* and *El Barun* score the same, but only the first is confusable), so reviewers place towns by hand in `review.json` where the rule is wrong (a town on a boundary can be shared by both localities), and reject town names that would be read as a locality in another state (*Adeila*, a town in Um Dukhun, and Adila in East Darfur). OpenStreetMap often packs several names into one tag; they are split on `;`, `,`, `،` and `/`.
 
 A town named exactly like another locality (*Kosti* the town, whose point falls in As Salam / Ar Rawat) is dropped: the name means the locality.
 
@@ -58,5 +58,6 @@ A town named exactly like another locality (*Kosti* the town, whose point falls 
 - **2026-10-31:** an independent AI agent reviewed everything: 409 spellings kept and 16 rejected, 8 unlinked records linked by hand and 25 confirmed as not current places, 8 of 9 rules agreed (dropping *area* was not, so it is no longer dropped), 291 test answers confirmed and 8 changed (`data/tests/match_cases_review.json`).
 - **2026-11-01:** Amin reviewed the agent-filled review page. He decided the 17 spellings added since (15 kept, 2 rejected) and the two cases still unsure (both should match nothing), and left the agent's other decisions in place. `review.json` records who made each spelling decision.
 - **2026-11-01, later:** town names were added and the UNHCR file's blank states were filled in. Four test answers changed as a result: c165 (Al Tadamon, now with its state) and c259, c264, c283 (towns that now count as their locality). A second agent review confirmed all four, which carry `verified_by = claude` until Amin re-checks them. It also reviewed the 791 new spellings (734 kept, 57 rejected) and the 15 town names dropped as confusable (8 confirmed, 7 placed by hand). All spellings are now reviewed.
+- **2026-11-01, final recheck:** four agents rechecked all 208 places against the boundaries, placing every town point in its locality. Every place's names and state were confirmed. Seven towns that sit on a locality boundary, or are reported in a neighbouring locality, are now shared between both localities (Abu Gomra, Gallabat, Barankwa, Kenana, and three West Darfur villages), so the matcher asks rather than guesses. Two spellings were rejected (*But*, *Almazroub*) and two added (*Bout*, and *ريفي وسط القضارف* for a Wikidata typo). Invisible direction marks and stray Arabic vowel marks are now dropped from names.
 
 Rejections apply to each spelling-and-place pair, so a later, correct link of the same spelling to another place is not rejected with it. Rejected spellings are left out; spellings added by a rebuild have `"status": "proposed"` until reviewed. The threshold, 0.82, was agreed with Amin on 2026-11-01, together with the accuracy targets: top-1 accuracy at least 91 %, top-3 recall at least 98 %, false matches at most 1 % (`pipeline/gazetteer/evaluate.py`). See `docs/MATCHER_EVALUATION.md` for the results.

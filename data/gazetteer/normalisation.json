@@ -4,7 +4,7 @@
   "general": {
     "unicode_form": "NFKC",
     "word_separators": "[ \\t\\n\\r\\f\\v\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\-_/,;:.()\\[\\]{}\"“”«»|+&]+",
-    "drop_characters": "['’‘`´ʿʾʼ]",
+    "drop_characters": "['’‘`´ʿʾʼ\\u200b-\\u200f\\u202a-\\u202e\\u2066-\\u2069\\ufeff]",
     "note": "Patterns are written to mean the same in Python's re and JavaScript's RegExp: no \\s, \\w or \\b, whose meaning differs between them."
   },
   "arabic": {

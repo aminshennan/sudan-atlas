@@ -332,7 +332,7 @@ function renderUnlinked() {
     const rev = rv("unlinked", u.id, u);
     const href = sourceLink(u.id);
     const chip = el("span", { class: "chip" + (rev.decision === "link" ? " ok" : rev.decision === "none" ? " rej" : "") },
-      (rev.decision === "link" ? `linked to ${rev.pcode}` : rev.decision === "none" ? "not a current place" : "not reviewed") + byAgent(rev));
+      (rev.decision === "link" ? `linked to ${(rev.pcode || "").split(",").join(" and ")}` : rev.decision === "none" ? "not a current place" : "not reviewed") + byAgent(rev));
     return el("article", { class: "card" + (rev.decision ? " done" : "") },
       el("div", { class: "top" }, textEl("span", u.names.join(" · ") || "(no name)", "input"), chip),
       el("div", { class: "row small" }, el("span", {}, "Source"), el("span", {}, href ? el("a", { href, target: "_blank", rel: "noopener" }, u.id) : u.id, ` · ${u.level === 1 ? "state" : "locality"} level · ${u.reason}`)),

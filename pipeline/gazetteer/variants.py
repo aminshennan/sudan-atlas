@@ -71,9 +71,15 @@ class Item:
     iso: str = ""
 
 
+# Bidirectional and zero-width marks (GeoNames "جنوب دارفور" carries a left-to-right mark) and Arabic
+# vowel marks, which turn up as stray noise ("As Sِanţah", "أم ضواًبان"). Neither belongs in a stored spelling.
+INVISIBLE_MARKS = re.compile("[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff\u064b-\u0652]")
+
+
 def clean_name(text: str) -> str:
     """A source name without Wikipedia-style disambiguators, or '' for junk such as '#N/A District'."""
-    text = re.sub(r"\s+", " ", DISAMBIGUATOR.sub("", text or "")).strip()
+    text = INVISIBLE_MARKS.sub("", text or "")
+    text = re.sub(r"\s+", " ", DISAMBIGUATOR.sub("", text)).strip()
     return "" if JUNK_NAME.search(text) else text
 
 
@@ -301,14 +307,16 @@ def wikidata_items(state_links: dict[str, str]) -> list[Item]:
 def load_review() -> dict:
     """Review decisions: spellings kept or rejected, and records linked (or not) by hand."""
     if not REVIEW_PATH.exists():
-        return {"variants": {}, "links": {}}
+        return {"variants": {}, "rejected_pairs": set(), "links": {}, "additions": []}
     review = json.loads(REVIEW_PATH.read_text())
     return {
-        "variants": {(v["text"], tuple(v["pcodes"])): v["decision"] for v in review["variants"]},
+        "variants": {(clean_name(v["text"]), tuple(v["pcodes"])): v["decision"] for v in review["variants"]},
         # A rejection applies to each spelling-place pair, so a later, correct link of the same
         # spelling to another place (Tendelti the town in Tendalti) is not rejected with it.
-        "rejected_pairs": {(v["text"], p) for v in review["variants"] if v["decision"] == "reject" for p in v["pcodes"]},
+        "rejected_pairs": {(clean_name(v["text"]), p) for v in review["variants"] if v["decision"] == "reject" for p in v["pcodes"]},
         "links": {l["ref"]: l for l in review["links"]},
+        # Spellings a reviewer added that no source gives, such as a corrected typo.
+        "additions": review.get("additions", []),
     }
 
 
@@ -345,8 +353,8 @@ def build() -> tuple[list[dict], list[dict]]:
 
     def town(item: Item) -> None:
         decided = review["links"].get(item.ref)
-        if decided:  # a reviewer placed this town by hand, or confirmed it belongs nowhere
-            pcodes, outcome = ([decided["pcode"]], "town (review)") if decided["decision"] == "link" else ([], "town dropped (review)")
+        if decided:  # a reviewer placed this town by hand (in one locality or shared by several), or dropped it
+            pcodes, outcome = (decided["pcode"].split(","), "town (review)") if decided["decision"] == "link" else ([], "town dropped (review)")
         else:
             pcodes, outcome = linker.towns(item.towns, item.point)
         links.append({"ref": item.ref, "level": 2, "names": item.towns[:3], "pcode": ",".join(pcodes) or None,
@@ -386,6 +394,9 @@ def build() -> tuple[list[dict], list[dict]]:
         take(item, pcode, score, outcome)
         if pcode:
             collected.extend((t, "town", item.source, item.ref, pcode) for t in item.towns)
+
+    for n, added in enumerate(review["additions"], 1):
+        collected.extend((added["text"], "review", "review", f"review:addition/{n}", pcode) for pcode in added["pcodes"])
 
     official = defaultdict(set)
     for pcode, place in places.items():
@@ -438,12 +449,13 @@ def _merge(collected, places, official, norm, review, dropped, rejected) -> list
     variants = []
     for text, records in by_text.items():
         pcodes = sorted({p for r in records for p in r["pcodes"]})
-        sources = [s for r in records for s in r["sources"]]
+        sources = list({json.dumps(s, sort_keys=True): s for r in records for s in r["sources"]}.values())
         conflicts = sorted(official.get(norm.key(text), set()) - set(pcodes))
         decision = review["variants"].get((text, tuple(pcodes)))
         entry = {"text": text, "lang": records[0]["lang"], "pcodes": pcodes,
                  "sources": sorted(sources, key=lambda s: (s["source"], s["ref"])),
-                 "status": "kept" if decision == "keep" else "proposed"}
+                 # A reviewer's own addition is reviewed by definition.
+                 "status": "kept" if decision == "keep" or all(s["source"] == "review" for s in sources) else "proposed"}
         if conflicts:
             entry["conflicts_with_official"] = conflicts
         variants.append(entry)
