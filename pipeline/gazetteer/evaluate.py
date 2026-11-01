@@ -12,13 +12,15 @@ import json
 from collections import Counter
 
 from sudan_atlas.gazetteer import Gazetteer
-from sudan_atlas.match import DEFAULT_MARGIN, SCORERS, Matcher
+from sudan_atlas.match import DEFAULT_MARGIN, DEFAULT_THRESHOLD, SCORERS, Matcher
 
 from .. import config
 from .testcases import CASES_PATH, load_cases
 
 MAX_FALSE_MATCH_RATE = 0.01
-THRESHOLDS = [0.70, 0.75, 0.80, 0.82, 0.85, 0.88, 0.90, 0.92, 0.95]
+THRESHOLDS = [0.70, 0.75, 0.78, 0.80, 0.82, 0.85, 0.88, 0.90, 0.92, 0.95]
+# Agreed accuracy targets (Phase 2 checkpoint, 2026-11-01), at the default setting with state hints.
+TARGETS = {"top1_accuracy": 0.91, "top3_recall": 0.98, "false_match_rate": 0.01}
 REPORT_PATH = config.ROOT / "docs" / "MATCHER_EVALUATION.md"
 RESULTS_PATH = config.REPORTS_DIR / "match_evaluation.json"
 
@@ -60,21 +62,16 @@ def run() -> dict:
             ranked_by[(scorer, hints)] = ranked
             grid[(scorer, hints)] = [score(cases, ranked, matcher, t) for t in THRESHOLDS]
 
-    # The candidate setting: best top-1 accuracy with a false-match rate of at most 1 %, using state hints.
-    # Stricter than the brief's 2 % starting point: a wrong answer costs more than no answer.
-    def pick(rows):
-        allowed = [r for r in rows if r["false_match_rate"] <= MAX_FALSE_MATCH_RATE]
-        return max(allowed or rows, key=lambda r: (r["top1_accuracy"], -r["false_match_rate"], r["threshold"]))
-
-    best_scorer, best = max(((s, pick(grid[(s, True)])) for s in SCORERS),
-                            key=lambda sr: (sr[1]["top1_accuracy"], -sr[1]["false_match_rate"]))
+    # Report the default setting: the combined scorer at the agreed threshold, with state hints.
+    best_scorer = "combined"
+    best = next(r for r in grid[(best_scorer, True)] if r["threshold"] == DEFAULT_THRESHOLD)
     _write_report(cases, grid, best_scorer, best, ranked_by[(best_scorer, True)])
     summary = {f"{s}/{'hints' if h else 'no-hints'}": [{k: v for k, v in r.items() if k != "results"} for r in rows]
                for (s, h), rows in grid.items()}
     config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    RESULTS_PATH.write_text(json.dumps({"candidate": {"scorer": best_scorer, "threshold": best["threshold"]},
+    RESULTS_PATH.write_text(json.dumps({"default": {"scorer": best_scorer, "threshold": best["threshold"]},
                                         "grid": summary}, indent=1))
-    print(f"evaluated {len(cases)} cases; candidate setting: {best_scorer} at {best['threshold']:.2f} -> "
+    print(f"evaluated {len(cases)} cases; default setting: {best_scorer} at {best['threshold']:.2f} -> "
           f"top-1 {best['top1_accuracy']:.1%}, top-3 {best['top3_recall']:.1%}, false matches {best['false_match_rate']:.1%}")
     return best
 
@@ -104,20 +101,18 @@ def _write_report(cases, grid, scorer, best, ranked) -> None:
         f"Cases that should match a place: **{best['should_match']}**. Cases that should match nothing: "
         f"**{len(cases) - best['should_match']}**.",
         "",
-        "**Labels are not yet verified.** Every expected answer was proposed by Claude (`verified_by = claude`). "
-        "These figures will change once the labels are checked.",
+        "Labels were proposed by Claude, checked by an independent AI agent, and verified by Amin (`verified_by = amin`).",
         "",
-        "## Candidate setting",
+        "## Default setting",
         "",
-        f"The best top-1 accuracy with a false-match rate of at most {MAX_FALSE_MATCH_RATE:.0%}, using state hints: scorer **{scorer}**, "
-        f"threshold **{best['threshold']:.2f}**, margin {DEFAULT_MARGIN:.2f}. The threshold is set only after the test-set review.",
+        f"Scorer **{scorer}**, threshold **{best['threshold']:.2f}** (agreed with Amin on 2026-11-01), margin {DEFAULT_MARGIN:.2f}, with state hints.",
         "",
-        "| Measure | Result |",
-        "| --- | --- |",
-        f"| Top-1 accuracy | {_pct(best['top1_accuracy'])} |",
-        f"| Top-3 recall | {_pct(best['top3_recall'])} |",
-        f"| False-match rate | {_pct(best['false_match_rate'])} ({best['false_matches']} of {best['cases']}) |",
-        f"| Matchable cases left without an answer | {best['no_answer_on_matchable']} |",
+        "| Measure | Result | Agreed target |",
+        "| --- | --- | --- |",
+        f"| Top-1 accuracy | {_pct(best['top1_accuracy'])} | at least {_pct(TARGETS['top1_accuracy'])} |",
+        f"| Top-3 recall | {_pct(best['top3_recall'])} | at least {_pct(TARGETS['top3_recall'])} |",
+        f"| False-match rate | {_pct(best['false_match_rate'])} ({best['false_matches']} of {best['cases']}) | at most {_pct(TARGETS['false_match_rate'])} |",
+        f"| Matchable cases left without an answer | {best['no_answer_on_matchable']} | — |",
         "",
         "## Every setting",
         "",
@@ -134,7 +129,7 @@ def _write_report(cases, grid, scorer, best, ranked) -> None:
         lines.append("")
     failures = [(c, r, rk) for c, r, rk in zip(cases, best["results"], ranked) if r["pcode"] != (c["expected_pcode"] or None)]
     counts = Counter(_failure_kind(c, r) for c, r, _ in failures)
-    lines += ["## Every failure at the candidate setting", "",
+    lines += ["## Every failure at the default setting", "",
               ", ".join(f"{k}: {v}" for k, v in counts.most_common()) or "None.", "",
               "| Case | Input | State hint | Expected | Got | Best candidates |", "| --- | --- | --- | --- | --- | --- |"]
     for c, r, rk in failures:

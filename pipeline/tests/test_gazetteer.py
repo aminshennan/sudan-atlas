@@ -34,11 +34,9 @@ def test_match_cases_are_well_formed():
         assert c["level"] in ("1", "2")
 
 
-def test_matcher_accuracy_does_not_regress():
-    """Floors from the evaluation after the agent review of the labels (2026-10-31). The review made
-    the test set harder (it gave towns such as Karima and census names such as El Meilig real answers),
-    so these are below the first, unreviewed figures. Raise them as the matcher improves."""
+def test_matcher_meets_the_agreed_targets():
+    """The accuracy targets agreed at the Phase 2 checkpoint (pipeline/gazetteer/evaluate.py: TARGETS)."""
     best = evaluate.run()
-    assert best["top1_accuracy"] >= 0.91
-    assert best["false_match_rate"] <= 0.01
-    assert best["top3_recall"] >= 0.98
+    assert best["top1_accuracy"] >= evaluate.TARGETS["top1_accuracy"]
+    assert best["top3_recall"] >= evaluate.TARGETS["top3_recall"]
+    assert best["false_match_rate"] <= evaluate.TARGETS["false_match_rate"]

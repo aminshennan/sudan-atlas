@@ -14,9 +14,9 @@ from rapidfuzz import fuzz, process
 from .gazetteer import Gazetteer
 from .normalise import Normaliser
 
-# Provisional: the best setting on the unverified test set (docs/MATCHER_EVALUATION.md).
-# The final threshold is set after the test-set review.
-DEFAULT_THRESHOLD = 0.75
+# Agreed with Amin on 2026-11-01 after the test-set review: 91.2 % top-1 accuracy with
+# 0.7 % false matches on data/tests/match_cases.csv (docs/MATCHER_EVALUATION.md).
+DEFAULT_THRESHOLD = 0.82
 DEFAULT_MARGIN = 0.05
 
 EXACT_SCORE = 1.0

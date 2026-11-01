@@ -4,18 +4,18 @@
 
 Test cases used: **299** (cases marked UNSURE are left out until checked). Cases that should match a place: **249**. Cases that should match nothing: **50**.
 
-**Labels are not yet verified.** Every expected answer was proposed by Claude (`verified_by = claude`). These figures will change once the labels are checked.
+Labels were proposed by Claude, checked by an independent AI agent, and verified by Amin (`verified_by = amin`).
 
-## Candidate setting
+## Default setting
 
-The best top-1 accuracy with a false-match rate of at most 1%, using state hints: scorer **combined**, threshold **0.82**, margin 0.05. The threshold is set only after the test-set review.
+Scorer **combined**, threshold **0.82** (agreed with Amin on 2026-11-01), margin 0.05, with state hints.
 
-| Measure | Result |
-| --- | --- |
-| Top-1 accuracy | 91.2% |
-| Top-3 recall | 98.4% |
-| False-match rate | 0.7% (2 of 299) |
-| Matchable cases left without an answer | 22 |
+| Measure | Result | Agreed target |
+| --- | --- | --- |
+| Top-1 accuracy | 91.2% | at least 91.0% |
+| Top-3 recall | 98.4% | at least 98.0% |
+| False-match rate | 0.7% (2 of 299) | at most 1.0% |
+| Matchable cases left without an answer | 22 | — |
 
 ## Every setting
 
@@ -27,6 +27,7 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 | --- | --- | --- | --- | --- |
 | 0.70 | 87.6% / 3.0% | 88.8% / 2.7% | 90.8% / 4.3% | 94.8% / 1.7% |
 | 0.75 | 84.3% / 1.3% | 85.5% / 1.3% | 88.0% / 4.0% | 94.4% / 1.3% |
+| 0.78 | 81.5% / 1.0% | 83.1% / 1.0% | 85.9% / 4.0% | 93.2% / 1.0% |
 | 0.80 | 81.5% / 1.0% | 83.1% / 1.0% | 85.5% / 4.0% | 93.2% / 1.0% |
 | 0.82 | 73.9% / 0.3% | 75.5% / 0.3% | 79.5% / 3.3% | 91.2% / 0.7% |
 | 0.85 | 67.5% / 0.3% | 68.7% / 0.3% | 73.1% / 3.3% | 88.8% / 0.3% |
@@ -42,6 +43,7 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 | --- | --- | --- | --- | --- |
 | 0.70 | 79.5% / 6.0% | 80.7% / 5.4% | 75.1% / 8.4% | 85.5% / 4.0% |
 | 0.75 | 77.1% / 3.3% | 78.3% / 3.0% | 73.9% / 6.4% | 85.1% / 3.0% |
+| 0.78 | 75.1% / 2.0% | 76.7% / 2.3% | 73.1% / 5.4% | 83.9% / 2.0% |
 | 0.80 | 75.1% / 2.0% | 76.7% / 2.0% | 73.1% / 5.4% | 83.9% / 2.0% |
 | 0.82 | 67.9% / 1.3% | 69.5% / 1.3% | 67.5% / 4.7% | 82.3% / 1.7% |
 | 0.85 | 61.4% / 0.7% | 62.7% / 0.7% | 61.4% / 4.0% | 79.9% / 1.0% |
@@ -51,7 +53,7 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 | 0.95 | 45.4% / 0.0% | 48.2% / 0.0% | 45.8% / 0.0% | 51.4% / 0.0% |
 | Top-3 recall | 90.8% | 94.0% | 95.2% | 96.0% |
 
-## Every failure at the candidate setting
+## Every failure at the default setting
 
 no answer: 20, ambiguous (no answer): 2, false match (should match nothing): 2
 
