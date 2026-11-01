@@ -1,15 +1,37 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "sudan-atlas"
-version = "0.0.0"
-description = "Official codes, names and boundaries for Sudan's states and localities, with a name matcher."
+version = "0.1.0"
+description = "Official codes, names and boundaries for Sudan's states and localities, with a matcher for messy Arabic and English place names."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0"
+license-files = ["LICENSE", "LICENSE-DATA"]
+authors = [{ name = "Amin Shennan" }]
+keywords = ["sudan", "gazetteer", "p-code", "cod-ab", "geojson", "arabic", "place names", "geocoding"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: GIS",
+    "Natural Language :: Arabic",
+    "Natural Language :: English",
+]
 dependencies = ["rapidfuzz>=3.6"]
+
+[project.optional-dependencies]
+geo = ["geopandas>=1.0"]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://github.com/aminshennan/sudan-atlas"
+Source = "https://github.com/aminshennan/sudan-atlas/tree/main/packages/py"
+Issues = "https://github.com/aminshennan/sudan-atlas/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+sudan_atlas = ["data/*.json", "data/LICENSE*", "data/boundaries/*.json", "data/boundaries/*/*.geojson", "data/boundaries/*/*.topojson"]

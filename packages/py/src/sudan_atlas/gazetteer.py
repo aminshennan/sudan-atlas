@@ -8,6 +8,18 @@ from pathlib import Path
 VARIANT_FILES = ("variants.json", "variants_osm.json")
 
 
+def boundaries_dir() -> Path:
+    """The boundaries folder: next to the gazetteer data (bundled copy or $SUDAN_ATLAS_DATA), or the repository's data/boundaries."""
+    beside = data_dir() / "boundaries"
+    if (beside / "manifest.json").exists():
+        return beside
+    for parent in Path(__file__).resolve().parents:
+        candidate = parent / "data" / "boundaries"
+        if (candidate / "manifest.json").exists():
+            return candidate
+    raise FileNotFoundError("Boundary data not found. Run packages/sync_data.py, or set SUDAN_ATLAS_DATA.")
+
+
 def data_dir() -> Path:
     """The gazetteer folder: $SUDAN_ATLAS_DATA, the copy bundled with the package, or the repository's data/gazetteer."""
     if os.environ.get("SUDAN_ATLAS_DATA"):

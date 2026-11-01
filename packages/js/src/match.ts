@@ -1,0 +1,265 @@
+// Match a messy Sudanese state or locality name to its official record.
+// The twin of packages/py/src/sudan_atlas/match.py: the same steps and the same arithmetic,
+// so both return identical results (checked against data/tests/match_results.json).
+
+import { Normaliser } from "./normalise.js";
+import { gazetteer, type Gazetteer, type Place } from "./gazetteer.js";
+
+// Agreed at the Phase 2 checkpoint: 91.2 % top-1 accuracy with 0.7 % false matches.
+export const DEFAULT_THRESHOLD = 0.82;
+export const DEFAULT_MARGIN = 0.05;
+
+const EXACT_SCORE = 1.0;
+const VARIANT_SCORE = 0.98;
+const PART_PENALTY = 0.97;
+const SKELETON_WEIGHT = 0.9;
+const SUBSET_WEIGHT = 0.9;
+const SUBSET_MIN_LETTERS = 4;
+const SUBSET_MIN_LETTERS_ONE_WORD = 5;
+
+export type Method = "exact" | "variant" | "fuzzy" | "ambiguous" | "none";
+
+export interface Candidate {
+  pcode: string;
+  name_en: string;
+  name_ar: string;
+  level: number;
+  score: number;
+}
+
+export interface MatchResult {
+  pcode: string | null;
+  name_en: string | null;
+  name_ar: string | null;
+  level: number | null;
+  score: number;
+  method: Method;
+  alternatives: Candidate[];
+}
+
+export interface MatchOptions {
+  /** The state the place is in: a P-code (SD15) or a name in any spelling. */
+  stateHint?: string | null;
+  /** 1 for states, 2 for localities; omit to search both. */
+  level?: 1 | 2 | null;
+}
+
+/** Round half up to four decimals, the same way in both languages. */
+export const round4 = (x: number): number => Math.floor(x * 10000 + 0.5) / 10000;
+
+/** Insertions plus deletions needed to turn a into b (2 x length minus twice their longest common subsequence). */
+function indel(a: string, b: string): number {
+  if (!a.length || !b.length) return a.length + b.length;
+  let previous = new Array<number>(b.length + 1).fill(0);
+  for (let i = 1; i <= a.length; i++) {
+    const current = new Array<number>(b.length + 1).fill(0);
+    for (let j = 1; j <= b.length; j++) {
+      current[j] = a[i - 1] === b[j - 1] ? previous[j - 1] + 1 : Math.max(previous[j], current[j - 1]);
+    }
+    previous = current;
+  }
+  return a.length + b.length - 2 * previous[b.length];
+}
+
+/** Similarity from 0 to 100: 100 * (1 - insertions and deletions needed / total length). */
+export function ratio(a: string, b: string): number {
+  const total = a.length + b.length;
+  return total === 0 ? 100.0 : 100 * (1 - indel(a, b) / total);
+}
+
+const sortWords = (s: string) => s.split(" ").sort((x, y) => (x < y ? -1 : x > y ? 1 : 0)).join(" ");
+
+export function tokenSortRatio(a: string, b: string): number {
+  return ratio(sortWords(a), sortWords(b));
+}
+
+/** Every word of the shorter name is a word of the longer one, and the shorter is long enough to mean something. */
+export function containsEveryWord(a: string, b: string): boolean {
+  const wa = a.split(" ");
+  const wb = b.split(" ");
+  const [shorter, longer] = wb.length < wa.length ? [wb, wa] : [wa, wb];
+  const minimum = shorter.length === 1 ? SUBSET_MIN_LETTERS_ONE_WORD : SUBSET_MIN_LETTERS;
+  if (shorter.join("").length < minimum) return false;
+  const s = new Set(shorter);
+  const l = new Set(longer);
+  for (const w of s) if (!l.has(w)) return false;
+  return s.size < l.size;
+}
+
+function combined(normaliser: Normaliser) {
+  const cache = new Map<string, string>();
+  const skeleton = (key: string) => {
+    let value = cache.get(key);
+    if (value === undefined) cache.set(key, (value = normaliser.skeleton(key)));
+    return value;
+  };
+  return (a: string, b: string): number => {
+    let best = Math.max(ratio(a, b), tokenSortRatio(a, b), ratio(a.replaceAll(" ", ""), b.replaceAll(" ", "")));
+    if (containsEveryWord(a, b)) best = Math.max(best, SUBSET_WEIGHT * 100);
+    const sa = skeleton(a);
+    const sb = skeleton(b);
+    if (sa && sb && sa !== a) {
+      best = Math.max(best, SKELETON_WEIGHT * ratio(sa, sb));
+      if (containsEveryWord(sa, sb)) best = Math.max(best, SKELETON_WEIGHT * SUBSET_WEIGHT * 100);
+    }
+    return best;
+  };
+}
+
+export interface MatcherOptions {
+  threshold?: number;
+  margin?: number;
+}
+
+export class Matcher {
+  readonly normaliser: Normaliser;
+  threshold: number;
+  margin: number;
+  private readonly places: Map<string, Place>;
+  private readonly index = new Map<string, Map<string, "exact" | "variant">>();
+  private readonly choicesCache = new Map<string, string[]>();
+  private readonly scorer: (a: string, b: string) => number;
+
+  constructor(data: Gazetteer = gazetteer, options: MatcherOptions = {}) {
+    this.normaliser = new Normaliser(data.rules);
+    this.threshold = options.threshold ?? DEFAULT_THRESHOLD;
+    this.margin = options.margin ?? DEFAULT_MARGIN;
+    this.scorer = combined(this.normaliser);
+    this.places = new Map(data.places.map((p) => [p.pcode, p]));
+    for (const place of data.places) {
+      for (const name of [place.name_en, place.name_ar]) this.add(name, place.pcode, "exact");
+    }
+    for (const variant of data.variants) {
+      for (const pcode of variant.pcodes) if (this.places.has(pcode)) this.add(variant.text, pcode, "variant");
+    }
+  }
+
+  private add(name: string, pcode: string, method: "exact" | "variant"): void {
+    for (const key of this.normaliser.keys(name)) {
+      if (!key) continue;
+      let current = this.index.get(key);
+      if (!current) this.index.set(key, (current = new Map()));
+      if (current.get(pcode) !== "exact") current.set(pcode, method);
+    }
+  }
+
+  private choices(script: string, allowed: Set<string> | null): string[] {
+    const cacheKey = `${script}|${allowed ? [...allowed].sort().join(",") : "*"}`;
+    let found = this.choicesCache.get(cacheKey);
+    if (!found) {
+      found = [];
+      for (const [key, pcodes] of this.index) {
+        if (this.normaliser.script(key) !== script) continue;
+        if (allowed && ![...pcodes.keys()].some((p) => allowed.has(p))) continue;
+        found.push(key);
+      }
+      this.choicesCache.set(cacheKey, found);
+    }
+    return found;
+  }
+
+  private allowed(level: number | null, state: string | null): Set<string> | null {
+    if (level == null && state == null) return null;
+    const result = new Set<string>();
+    for (const p of this.places.values()) {
+      if ((level == null || p.level === level) && (state == null || p.pcode === state || p.parent_pcode === state)) {
+        result.add(p.pcode);
+      }
+    }
+    return result;
+  }
+
+  /** The state P-code a hint names (a P-code or a name in any spelling), or null. */
+  resolveState(hint: string | null | undefined): string | null {
+    if (!hint) return null;
+    const text = String(hint).trim();
+    const upper = text.toUpperCase();
+    if (this.places.get(upper)?.level === 1) return upper;
+    return this.match(text, { level: 1 }).pcode;
+  }
+
+  private inputs(name: string): [string, number][] {
+    const inputs: [string, number][] = [[name, 1.0]];
+    const inside = [...name.matchAll(/\(([^)]*)\)/g)].map((m) => m[1]);
+    const outside = name.replace(/\([^)]*\)/g, " ");
+    const parts = [...inside, outside, ...(outside.includes("/") ? outside.split("/") : [])];
+    for (const part of parts) {
+      if (part.trim() && part.trim() !== name.trim()) inputs.push([part, PART_PENALTY]);
+    }
+    return inputs;
+  }
+
+  /** Best [score, method] per P-code for name, within the allowed level and state. */
+  candidates(name: string, level: number | null = null, state: string | null = null): Map<string, [number, Method]> {
+    const allowed = this.allowed(level, state);
+    const best = new Map<string, [number, Method]>();
+    const offer = (pcode: string, score: number, method: Method) => {
+      if (allowed && !allowed.has(pcode)) return;
+      score = round4(score);
+      const current = best.get(pcode);
+      if (!current || score > current[0]) best.set(pcode, [score, method]);
+    };
+    const keys: [string, number][] = [];
+    for (const [text, weight] of this.inputs(name)) {
+      for (const key of this.normaliser.keys(text)) if (key) keys.push([key, weight]);
+    }
+    for (const [key, weight] of keys) {
+      for (const [pcode, method] of this.index.get(key) ?? []) {
+        offer(pcode, (method === "exact" ? EXACT_SCORE : VARIANT_SCORE) * weight, method);
+      }
+      for (const choice of this.choices(this.normaliser.script(key), allowed)) {
+        if (choice === key) continue;
+        const score = this.scorer(key, choice);
+        for (const pcode of this.index.get(choice)!.keys()) offer(pcode, (score / 100) * weight, "fuzzy");
+      }
+    }
+    return best;
+  }
+
+  /** Every candidate as [pcode, score, method], best first. */
+  rank(name: string, options: MatchOptions = {}): [string, number, Method][] {
+    const state = options.stateHint ? this.resolveState(options.stateHint) : null;
+    const found = this.candidates(String(name ?? ""), options.level ?? null, state);
+    return [...found.entries()]
+      .map(([pcode, [score, method]]) => [pcode, score, method] as [string, number, Method])
+      .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0));
+  }
+
+  /** Turn ranked candidates into a result: a match only above the threshold and clear of the runner-up. */
+  decide(ranked: [string, number, Method][]): MatchResult {
+    const record = (pcode: string, score: number): Candidate => {
+      const place = this.places.get(pcode)!;
+      return { pcode, name_en: place.name_en, name_ar: place.name_ar, level: place.level, score };
+    };
+    let outcome: Method = "none";
+    if (ranked.length) {
+      const [top, score, method] = ranked[0];
+      const runnerUp = ranked.length > 1 ? ranked[1][1] : 0.0;
+      if (score >= this.threshold && score - runnerUp >= this.margin) {
+        return { ...record(top, score), method, alternatives: ranked.slice(1, 4).map(([p, s]) => record(p, s)) };
+      }
+      outcome = score >= this.threshold ? "ambiguous" : "none";
+    }
+    return {
+      pcode: null, name_en: null, name_ar: null, level: null,
+      score: ranked.length ? ranked[0][1] : 0.0, method: outcome,
+      alternatives: ranked.slice(0, 3).map(([p, s]) => record(p, s)),
+    };
+  }
+
+  /**
+   * The official record for name, or no match plus up to three alternatives.
+   * method is exact, variant or fuzzy for a match, and ambiguous or none otherwise.
+   */
+  match(name: string, options: MatchOptions = {}): MatchResult {
+    return this.decide(this.rank(name, options));
+  }
+}
+
+let defaultMatcher: Matcher | undefined;
+
+/** Match name with the bundled gazetteer and default settings. */
+export function match(name: string, options: MatchOptions = {}): MatchResult {
+  defaultMatcher ??= new Matcher();
+  return defaultMatcher.match(name, options);
+}

@@ -1,0 +1,38 @@
+{
+  "name": "sudan-atlas",
+  "version": "0.1.0",
+  "description": "Official codes, names and boundaries for Sudan's states and localities, with a matcher for messy Arabic and English place names.",
+  "keywords": ["sudan", "gazetteer", "p-code", "cod-ab", "geojson", "topojson", "arabic", "place names", "geocoding"],
+  "license": "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0",
+  "repository": { "type": "git", "url": "git+https://github.com/aminshennan/sudan-atlas.git", "directory": "packages/js" },
+  "homepage": "https://github.com/aminshennan/sudan-atlas#readme",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./data/*": "./data/*",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "data", "README.md", "LICENSE", "LICENSE-DATA"],
+  "sideEffects": false,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "data": "node scripts/copy-data.mjs",
+    "build": "node scripts/copy-data.mjs && node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node scripts/copy-data.mjs && vitest run",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.12"
+  }
+}

@@ -2,7 +2,44 @@
 
 An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's states and localities as maps — for websites, apps, Python and Power BI.
 
-> **Status:** early development. Nothing is published yet.
+> **Status:** data release 2026.1; packages 0.1.0 are ready to publish. Website coming next.
+
+## Quick start
+
+**JavaScript** (`npm install sudan-atlas`)
+
+```js
+import { match, getFeature } from "sudan-atlas";
+match("El Hasaheesa", { stateHint: "Al Gezira", level: 2 }).pcode; // "SD15034"
+const shape = await getFeature("SD15034", "medium");               // GeoJSON Feature
+```
+
+**Python** (`pip install sudan-atlas`, or `"sudan-atlas[geo]"` for GeoDataFrames)
+
+```python
+from sudan_atlas import match, get_localities
+match("الفاشر", level=2)["pcode"]  # 'SD02114'
+get_localities("SD15")              # the localities of Aj Jazirah
+```
+
+**Power BI**: add a Shape map, load [`powerbi/sudan_states.topojson`](powerbi/) as a custom map, and put your P-code column in Location. Step-by-step guide: [`powerbi/README.md`](powerbi/README.md).
+
+**In a browser with no build step**: `import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js"`; the data files are on jsDelivr too, under `…/sudan-atlas@0.1.0/data/`.
+
+Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a [state-and-locality picker](examples/dropdown/), and a [Python notebook](examples/python/sudan_atlas_quickstart.ipynb).
+
+## What a match returns
+
+```js
+{
+  pcode: "SD15034", name_en: "Al Hasahisa", name_ar: "الحصاحيصا", level: 2,
+  score: 0.9,            // 0 to 1
+  method: "fuzzy",         // exact, variant or fuzzy; ambiguous or none when there is no match
+  alternatives: [ ... ]    // the next three candidates, each with pcode, names, level and score
+}
+```
+
+When the best candidate scores below 0.82, or another place scores almost as high, `pcode` is `null` (`None` in Python) and `alternatives` lists the candidates: the matcher never guesses silently. A state hint (a P-code or a state name in any spelling) and a level (1 = state, 2 = locality) settle most ambiguity. On real names from public datasets the matcher finds the right place 91 % of the time, and the right place is among the top three 98 % of the time; see [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md).
 
 ## What it does
 
@@ -21,7 +58,7 @@ packages/py/   PyPI package: same API (Python)
 powerbi/       TopoJSON for the Shape map + build guide
 site/          website + map-maker
 examples/      D3 map, dropdown form, Python notebook
-docs/          BRIEF.md, DATA_POLICY.md, SOURCES.md
+docs/          BRIEF.md, DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
 ```
 
 ## Roadmap
@@ -41,11 +78,18 @@ See [`docs/BRIEF.md`](docs/BRIEF.md) for the full plan.
 - Gazetteer additions (variant spellings, normalisation rules, test cases): CC BY 4.0
 - Sources are listed in [`docs/SOURCES.md`](docs/SOURCES.md). Boundary choices are documented in [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
 
-## Rebuilding the data
+## Rebuilding the data and packages
 
 ```sh
-make setup   # Python venv + mapshaper
-make fetch   # download COD-AB from HDX into data/raw/
-make data    # rebuild and validate data/boundaries/
-make preview # then open http://localhost:8000/pipeline/preview/
+make setup      # Python venv, mapshaper and the JS package's tools
+make fetch      # download COD-AB, GeoNames and Wikidata into data/raw/
+make data       # rebuild and validate data/boundaries/
+make gazetteer  # rebuild data/gazetteer/ (places and spellings)
+make evaluate   # measure the matcher; writes docs/MATCHER_EVALUATION.md
+make golden     # write the results both packages must reproduce
+make packages   # build the npm and PyPI packages
+make test       # Python tests;  make test-js for the TypeScript package
+make preview    # then open http://localhost:8000/pipeline/preview/
 ```
+
+Publishing steps: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).

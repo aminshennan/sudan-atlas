@@ -23,35 +23,35 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 
 **With state hints**
 
-| Threshold | ratio | token_sort | wratio | combined |
-| --- | --- | --- | --- | --- |
-| 0.70 | 87.6% / 3.0% | 88.8% / 2.7% | 90.8% / 4.3% | 94.8% / 1.7% |
-| 0.75 | 84.3% / 1.3% | 85.5% / 1.3% | 88.0% / 4.0% | 94.4% / 1.3% |
-| 0.78 | 81.5% / 1.0% | 83.1% / 1.0% | 85.9% / 4.0% | 93.2% / 1.0% |
-| 0.80 | 81.5% / 1.0% | 83.1% / 1.0% | 85.5% / 4.0% | 93.2% / 1.0% |
-| 0.82 | 73.9% / 0.3% | 75.5% / 0.3% | 79.5% / 3.3% | 91.2% / 0.7% |
-| 0.85 | 67.5% / 0.3% | 68.7% / 0.3% | 73.1% / 3.3% | 88.8% / 0.3% |
-| 0.88 | 61.8% / 0.3% | 63.1% / 0.3% | 66.7% / 0.7% | 85.9% / 0.3% |
-| 0.90 | 59.4% / 0.0% | 60.6% / 0.0% | 64.7% / 0.3% | 85.1% / 0.0% |
-| 0.92 | 58.2% / 0.0% | 59.8% / 0.0% | 59.8% / 0.0% | 61.4% / 0.0% |
-| 0.95 | 51.0% / 0.0% | 53.8% / 0.0% | 51.4% / 0.0% | 57.0% / 0.0% |
-| Top-3 recall | 96.8% | 98.0% | 98.4% | 98.4% |
+| Threshold | ratio | token_sort | combined |
+| --- | --- | --- | --- |
+| 0.70 | 87.6% / 3.0% | 88.8% / 2.7% | 94.8% / 1.7% |
+| 0.75 | 84.3% / 1.3% | 85.5% / 1.3% | 94.4% / 1.3% |
+| 0.78 | 81.5% / 1.0% | 83.1% / 1.0% | 93.2% / 1.0% |
+| 0.80 | 81.5% / 1.0% | 83.1% / 1.0% | 93.2% / 1.0% |
+| 0.82 | 73.9% / 0.3% | 75.5% / 0.3% | 91.2% / 0.7% |
+| 0.85 | 67.5% / 0.3% | 68.7% / 0.3% | 88.8% / 0.3% |
+| 0.88 | 61.8% / 0.3% | 63.1% / 0.3% | 85.9% / 0.3% |
+| 0.90 | 59.4% / 0.0% | 60.6% / 0.0% | 85.1% / 0.0% |
+| 0.92 | 58.2% / 0.0% | 59.8% / 0.0% | 61.4% / 0.0% |
+| 0.95 | 51.0% / 0.0% | 53.8% / 0.0% | 57.0% / 0.0% |
+| Top-3 recall | 96.8% | 98.0% | 98.4% |
 
 **Without state hints**
 
-| Threshold | ratio | token_sort | wratio | combined |
-| --- | --- | --- | --- | --- |
-| 0.70 | 79.5% / 6.0% | 80.7% / 5.4% | 75.1% / 8.4% | 85.5% / 4.0% |
-| 0.75 | 77.1% / 3.3% | 78.3% / 3.0% | 73.9% / 6.4% | 85.1% / 3.0% |
-| 0.78 | 75.1% / 2.0% | 76.7% / 2.3% | 73.1% / 5.4% | 83.9% / 2.0% |
-| 0.80 | 75.1% / 2.0% | 76.7% / 2.0% | 73.1% / 5.4% | 83.9% / 2.0% |
-| 0.82 | 67.9% / 1.3% | 69.5% / 1.3% | 67.5% / 4.7% | 82.3% / 1.7% |
-| 0.85 | 61.4% / 0.7% | 62.7% / 0.7% | 61.4% / 4.0% | 79.9% / 1.0% |
-| 0.88 | 55.8% / 0.7% | 57.0% / 0.7% | 57.8% / 1.3% | 77.1% / 1.0% |
-| 0.90 | 53.8% / 0.0% | 55.0% / 0.0% | 57.0% / 0.7% | 76.7% / 0.3% |
-| 0.92 | 52.6% / 0.0% | 54.2% / 0.0% | 54.2% / 0.0% | 55.8% / 0.0% |
-| 0.95 | 45.4% / 0.0% | 48.2% / 0.0% | 45.8% / 0.0% | 51.4% / 0.0% |
-| Top-3 recall | 90.8% | 94.0% | 95.2% | 96.0% |
+| Threshold | ratio | token_sort | combined |
+| --- | --- | --- | --- |
+| 0.70 | 79.5% / 6.0% | 80.7% / 5.4% | 85.5% / 4.0% |
+| 0.75 | 77.1% / 3.3% | 78.3% / 3.0% | 85.1% / 3.0% |
+| 0.78 | 75.1% / 2.0% | 76.7% / 2.3% | 83.9% / 2.0% |
+| 0.80 | 75.1% / 2.0% | 76.7% / 2.0% | 83.9% / 2.0% |
+| 0.82 | 67.9% / 1.3% | 69.5% / 1.3% | 82.3% / 1.7% |
+| 0.85 | 61.4% / 0.7% | 62.7% / 0.7% | 79.9% / 1.0% |
+| 0.88 | 55.8% / 0.7% | 57.0% / 0.7% | 77.1% / 1.0% |
+| 0.90 | 53.8% / 0.0% | 55.0% / 0.0% | 76.7% / 0.3% |
+| 0.92 | 52.6% / 0.0% | 54.2% / 0.0% | 55.8% / 0.0% |
+| 0.95 | 45.4% / 0.0% | 48.2% / 0.0% | 51.4% / 0.0% |
+| Top-3 recall | 90.8% | 94.0% | 96.0% |
 
 ## Every failure at the default setting
 
@@ -70,12 +70,12 @@ no answer: 20, ambiguous (no answer): 2, false match (should match nothing): 2
 | c103 | HILLAT ‘AGIG | RED SEA | SD10072 Agig | none | right place ranked first, but its score 0.62 is below the threshold | Agig 0.62; Hala'ib 0.53; Haya 0.46 |
 | c130 | Al Debab | — | SD18103 Al Dibab | none | right place ranked first, but its score 0.80 is below the threshold | Al Dibab 0.80; Ad Dabbah 0.67; Ad Du'ayn 0.60 |
 | c132 | 24 Gurashi | Al Gezira | SD15037 Al Qurashi | none | right place ranked first, but its score 0.75 is below the threshold | Al Qurashi 0.75; Um Algura 0.59; Janub Al Jazirah 0.48 |
-| c141 | Zaydab | — | SD16011 Ad Damar | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Beida 0.73; Ad Dabbah 0.73; Gereida 0.62 |
+| c141 | Zaydab | — | SD16011 Ad Damar | none | Beida scores higher (0.73) than the right place (0.36) | Beida 0.73; Ad Dabbah 0.73; Gereida 0.62 |
 | c142 | El Quresha | — | SD12076 Al Qureisha | ambiguous | right place ranked first, but Al Qurashi scores too close (0.90) to call | Al Qureisha 0.90; Al Qurashi 0.90; Ar Rashad 0.68 |
-| c167 | Rufaa | — | SD15033 Sharg Al Jazirah | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | As Salam / Ar Rawat 0.67; Al Fao 0.57; Ar Reif Ash Shargi 0.50 |
-| c169 | Genaid | — | SD15033 Sharg Al Jazirah | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Gereida 0.77; Ag Geneina 0.77; Bendasi 0.62 |
+| c167 | Rufaa | — | SD15033 Sharg Al Jazirah | none | As Salam / Ar Rawat scores higher (0.67) than the right place (0.29) | As Salam / Ar Rawat 0.67; Al Fao 0.57; Ar Reif Ash Shargi 0.50 |
+| c169 | Genaid | — | SD15033 Sharg Al Jazirah | none | Gereida scores higher (0.77) than the right place (0.38) | Gereida 0.77; Ag Geneina 0.77; Bendasi 0.62 |
 | c171 | Al Khowey (Khuwei) | — | SD18105 Al Khiwai | none | right place ranked first, but its score 0.81 is below the threshold | Al Khiwai 0.81; Ad Diwaim 0.65; Soudari 0.60 |
-| c177 | Karima | — | SD17020 Merwoe | none | the right place is not among the candidates: the name (often a town) is not in the gazetteer | Khartoum 0.77; Al Kurmuk 0.77; Al Koma 0.73 |
+| c177 | Karima | — | SD17020 Merwoe | none | Khartoum scores higher (0.77) than the right place (0.50) | Khartoum 0.77; Al Kurmuk 0.77; Al Koma 0.73 |
 | c183 | بلدية نيالا | South Darfur | SD03167 Nyala Janoub | ambiguous | right place ties with Nyala Shimal (0.90), so the matcher does not choose | Nyala Shimal 0.90; Nyala Janoub 0.90; Beliel 0.57 |
 | c203 | محلية النحل | Gadarif | SD12079 Gala'a Al Nahal | none | right place ranked first, but its score 0.67 is below the threshold | Gala'a Al Nahal 0.67; Al Butanah 0.25; Basundah 0.22 |
 | c211 | القنب والاوليب | Red Sea | SD10069 Al Ganab | none | Hala'ib scores higher (0.50) than the right place (0.43) | Hala'ib 0.50; Al Ganab 0.43; Port Sudan 0.38 |

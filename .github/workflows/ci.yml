@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Python pipeline and package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r pipeline/requirements.txt
+          npm ci
+      - name: Test (includes the matcher's agreed accuracy targets and the shared results file)
+        run: make test
+      - name: Build and check the PyPI package
+        run: |
+          .venv/bin/python packages/sync_data.py
+          .venv/bin/python -m build packages/py -o packages/py/dist
+          .venv/bin/twine check packages/py/dist/*
+
+  javascript:
+    name: TypeScript package
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/js
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install
+        run: npm ci
+      - name: Type check
+        run: npm run typecheck
+      - name: Test (includes identical results to the Python matcher)
+        run: npm test
+      - name: Build and pack
+        run: |
+          npm run build
+          npm pack --dry-run

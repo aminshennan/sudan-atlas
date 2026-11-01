@@ -26,7 +26,7 @@ from sudan_atlas import match
 
 match("El Hasaheesa", state_hint="Al Gezira", level=2)
 # {'pcode': 'SD15034', 'name_en': 'Al Hasahisa', 'name_ar': 'الحصاحيصا', 'level': 2,
-#  'score': 0.875, 'method': 'fuzzy', 'alternatives': [...]}
+#  'score': 0.9, 'method': 'fuzzy', 'alternatives': [...]}
 ```
 
 ## How variants are collected

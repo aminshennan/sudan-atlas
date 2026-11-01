@@ -3,8 +3,9 @@
   "description": "Rules that turn a place name into a matching key. The Python and TypeScript matchers both apply them, in this order, and must give identical keys. Each word is treated as Arabic if it contains an Arabic letter, otherwise as Latin.",
   "general": {
     "unicode_form": "NFKC",
-    "word_separators": "[\\s\\-_/,;:.()\\[\\]{}\"“”«»|+&]+",
-    "drop_characters": "['’‘`´ʿʾʼ]"
+    "word_separators": "[ \\t\\n\\r\\f\\v\\u00a0\\u1680\\u2000-\\u200a\\u2028\\u2029\\u202f\\u205f\\u3000\\-_/,;:.()\\[\\]{}\"“”«»|+&]+",
+    "drop_characters": "['’‘`´ʿʾʼ]",
+    "note": "Patterns are written to mean the same in Python's re and JavaScript's RegExp: no \\s, \\w or \\b, whose meaning differs between them."
   },
   "arabic": {
     "remove": {

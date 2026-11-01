@@ -94,7 +94,8 @@ class Normaliser:
     def _latin(self, word: str, strip: bool, synonyms: bool) -> str:
         rules = self.rules["latin"]
         if rules["strip_accents"]:
-            word = "".join(c for c in unicodedata.normalize("NFKD", word) if not unicodedata.combining(c))
+            # Drop nonspacing marks (category Mn), as the TypeScript matcher's /\p{Mn}/u does.
+            word = "".join(c for c in unicodedata.normalize("NFKD", word) if unicodedata.category(c) != "Mn")
         if rules["lowercase"]:
             word = word.lower()
         word = re.sub(r"[^a-z0-9]", "", word)

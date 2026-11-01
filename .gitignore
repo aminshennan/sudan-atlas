@@ -37,3 +37,15 @@ Thumbs.db
 
 # Pipeline intermediates and reports
 build/
+
+# Package copies of data/ (made by packages/sync_data.py)
+packages/py/src/sudan_atlas/data/
+packages/js/data/
+packages/py/LICENSE
+packages/py/LICENSE-DATA
+packages/js/LICENSE
+packages/js/LICENSE-DATA
+packages/js/dist/
+packages/py/dist/
+packages/py/build/
+*.tgz

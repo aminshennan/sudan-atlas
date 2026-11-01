@@ -40,3 +40,9 @@ def test_matcher_meets_the_agreed_targets():
     assert best["top1_accuracy"] >= evaluate.TARGETS["top1_accuracy"]
     assert best["top3_recall"] >= evaluate.TARGETS["top3_recall"]
     assert best["false_match_rate"] <= evaluate.TARGETS["false_match_rate"]
+
+
+def test_golden_results_are_current():
+    """data/tests/match_results.json must match what the Python matcher returns now (regenerate: make golden)."""
+    from pipeline.gazetteer import golden
+    assert golden.GOLDEN_PATH.read_text(encoding="utf-8") == golden.render(golden.results())

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sudan Choropleth Example</title>
+<style>
+  :root { --bg: #f6f7f4; --surface: #fff; --text: #1b211e; --muted: #5d6762; --line: #dfe3de; --warn: #a85a12; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #131715; --surface: #1c211e; --text: #e8ece9; --muted: #9ba5a0; --line: #2f3632; --warn: #e9a964; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 system-ui, "Segoe UI", "Noto Sans Arabic", sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 16px; }
+  h1 { margin: 0; font-size: 1.4rem; }
+  p { margin: 0; color: var(--muted); }
+  .layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 16px; align-items: start; }
+  svg { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+  svg path { stroke: var(--surface); stroke-width: 0.8; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; background: var(--surface); }
+  th, td { text-align: start; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+  td.num { text-align: end; font-variant-numeric: tabular-nums; }
+  .warn { color: var(--warn); }
+  button { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--text); cursor: pointer; }
+  @media (max-width: 720px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Sudan Atlas: a choropleth from a messy spreadsheet</h1>
+  <p>The table holds state names as people type them. <code>match()</code> turns each into an official P-code, then D3 colours the map. The values are made-up examples.</p>
+  <div><button id="lang" type="button">العربية</button></div>
+  <div class="layout">
+    <svg id="map" viewBox="0 0 600 560" role="img" aria-label="Map of Sudan's states"></svg>
+    <table id="rows"><thead><tr><th>As typed</th><th>Matched</th><th class="num">Value</th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script type="module">
+// The package's browser build. (?lib= and ?data= let you test against a local build instead.)
+const params = new URLSearchParams(location.search);
+const atlas = await import(params.get("lib") || "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js");
+const dataUrl = new URL(params.get("data") || atlas.CDN_DATA_URL, location.href).href;
+
+// Example rows, spelled the way they turn up in real spreadsheets. The values are made up.
+const rows = [
+  ["Khartoum State", 120], ["Al Gezira", 95], ["Gadarif", 60], ["Kassala", 72], ["N. Darfur", 140],
+  ["South Darfur", 130], ["Centeral Darfur", 88], ["West Darfour", 110], ["East Darfur", 40], ["North Kordofan", 55],
+  ["Sth Kordofan", 101], ["West Kordofan", 47], ["White Nile", 66], ["Blue Nile", 79], ["Sennar", 52],
+  ["River Nile", 30], ["Northern", 18], ["Red Sea", 35], ["Abyei PCA Box", 25],
+];
+const matched = rows.map(([name, value]) => ({ name, value, result: atlas.match(name, { level: 1 }) }));
+const values = new Map(matched.filter((m) => m.result.pcode).map((m) => [m.result.pcode, m.value]));
+
+const topo = await d3.json(new URL("boundaries/medium/adm1.topojson", dataUrl).href);
+const states = topojson.feature(topo, topo.objects.adm1);
+const path = d3.geoPath(d3.geoMercator().fitExtent([[10, 10], [590, 550]], states));
+const colour = d3.scaleSequential(d3.interpolateYlGnBu).domain([0, d3.max(values.values())]);
+let lang = "en";
+
+const svg = d3.select("#map");
+svg.selectAll("path").data(states.features).join("path")
+  .attr("d", path)
+  .attr("fill", (f) => (values.has(f.properties.pcode) ? colour(values.get(f.properties.pcode)) : "#ccc"))
+  .append("title");
+
+function render() {
+  const label = (r) => (lang === "ar" ? r.name_ar : r.name_en);
+  svg.selectAll("title").text((f) => `${lang === "ar" ? f.properties.name_ar : f.properties.name_en}: ${values.get(f.properties.pcode) ?? "no data"}`);
+  d3.select("#rows tbody").selectAll("tr").data(matched).join("tr").html("")
+    .call((tr) => {
+      tr.append("td").text((m) => m.name);
+      tr.append("td").attr("dir", "auto").attr("class", (m) => (m.result.pcode ? "" : "warn"))
+        .text((m) => (m.result.pcode ? `${label(m.result)} (${m.result.pcode})` : `No match: ${m.result.method}`));
+      tr.append("td").attr("class", "num").text((m) => m.value);
+    });
+  document.getElementById("lang").textContent = lang === "ar" ? "English" : "العربية";
+}
+document.getElementById("lang").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; render(); });
+render();
+</script>
+</body>
+</html>

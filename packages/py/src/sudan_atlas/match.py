@@ -4,12 +4,17 @@ Order: exact match on the normalised official names, then the variants table,
 then fuzzy matching, all restricted to one state when a state hint is given.
 The matcher never guesses silently: below the threshold, or when two places
 score too close to call, it returns no match plus the best alternatives.
+
+The TypeScript matcher (packages/js) implements exactly the same steps and
+arithmetic, and both must return identical results for data/tests/match_cases.csv.
+Keep them in step: every scoring rule here has its twin in packages/js/src/match.ts.
 """
 
+import math
 import re
 from functools import lru_cache
 
-from rapidfuzz import fuzz, process
+from rapidfuzz.distance import Indel
 
 from .gazetteer import Gazetteer
 from .normalise import Normaliser
@@ -28,9 +33,25 @@ SUBSET_MIN_LETTERS = 4  # ...but only when the shorter name is long enough to me
 SUBSET_MIN_LETTERS_ONE_WORD = 5  # a single short word ("area", "abu", "wad") is in too many names to count
 
 
+def round4(x: float) -> float:
+    """Round half up to four decimals, the same way in both languages (Python's round() rounds half to even)."""
+    return math.floor(x * 10000 + 0.5) / 10000
+
+
+def ratio(a: str, b: str) -> float:
+    """Similarity from 0 to 100: 100 * (1 - insertions and deletions needed / total length)."""
+    total = len(a) + len(b)
+    return 100.0 if total == 0 else 100 * (1 - Indel.distance(a, b) / total)
+
+
+def token_sort_ratio(a: str, b: str) -> float:
+    """ratio with each name's words sorted, so word order does not matter."""
+    return ratio(" ".join(sorted(a.split(" "))), " ".join(sorted(b.split(" "))))
+
+
 def contains_every_word(a: str, b: str) -> bool:
     """Every word of the shorter name is a word of the longer one, and the shorter is long enough to mean something."""
-    shorter, longer = sorted((a.split(), b.split()), key=len)
+    shorter, longer = sorted((a.split(" "), b.split(" ")), key=len)
     minimum = SUBSET_MIN_LETTERS_ONE_WORD if len(shorter) == 1 else SUBSET_MIN_LETTERS
     return len("".join(shorter)) >= minimum and set(shorter) < set(longer)
 
@@ -39,13 +60,13 @@ def combined(normaliser):
     """The best of several views of two keys: spelling, word order, spacing, consonant skeleton and partial names."""
     skeleton = lru_cache(maxsize=None)(normaliser.skeleton)
 
-    def score(a: str, b: str, **_) -> float:
-        best = max(fuzz.ratio(a, b), fuzz.token_sort_ratio(a, b), fuzz.ratio(a.replace(" ", ""), b.replace(" ", "")))
+    def score(a: str, b: str) -> float:
+        best = max(ratio(a, b), token_sort_ratio(a, b), ratio(a.replace(" ", ""), b.replace(" ", "")))
         if contains_every_word(a, b):
             best = max(best, SUBSET_WEIGHT * 100)
         sa, sb = skeleton(a), skeleton(b)
         if sa and sb and sa != a:
-            best = max(best, SKELETON_WEIGHT * fuzz.ratio(sa, sb))
+            best = max(best, SKELETON_WEIGHT * ratio(sa, sb))
             if contains_every_word(sa, sb):  # "Khashm Ghirba" in "Reifi Khashm Elgirba"
                 best = max(best, SKELETON_WEIGHT * SUBSET_WEIGHT * 100)
         return best
@@ -54,13 +75,10 @@ def combined(normaliser):
 
 
 SCORERS = {
-    "ratio": lambda _: fuzz.ratio,
-    "token_sort": lambda _: fuzz.token_sort_ratio,
-    "wratio": lambda _: fuzz.WRatio,
+    "ratio": lambda _: ratio,
+    "token_sort": lambda _: token_sort_ratio,
     "combined": combined,
 }
-
-PARTS = re.compile(r"\(([^)]*)\)|/")
 
 
 class Matcher:
@@ -132,17 +150,18 @@ class Matcher:
         def offer(pcode: str, score: float, method: str) -> None:
             if allowed is not None and pcode not in allowed:
                 return
+            score = round4(score)
             if pcode not in best or score > best[pcode][0]:
-                best[pcode] = (round(score, 4), method)
+                best[pcode] = (score, method)
 
         keys = [(key, weight) for text, weight in self._inputs(name) for key in self.normaliser.keys(text) if key]
         for key, weight in keys:
             for pcode, method in self._index.get(key, {}).items():
                 offer(pcode, (EXACT_SCORE if method == "exact" else VARIANT_SCORE) * weight, method)
-            choices = self._fuzzy_choices(self.normaliser.script(key), allowed)
-            for choice, score, _ in process.extract(key, choices, scorer=self.scorer, limit=10):
+            for choice in self._fuzzy_choices(self.normaliser.script(key), allowed):
                 if choice == key:
                     continue
+                score = self.scorer(key, choice)
                 for pcode in self._index[choice]:
                     offer(pcode, score / 100 * weight, "fuzzy")
         return best
