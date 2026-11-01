@@ -39,7 +39,9 @@ VARIANTS_PATH = GAZETTEER_DIR / "variants.json"
 OSM_VARIANTS_PATH = GAZETTEER_DIR / "variants_osm.json"
 OSM_EXPORT = config.RAW_DIR / "osm" / "hotosm_sdn_populated_places_osm_gpkg.zip"
 TOWN_MIN_POPULATION = 10_000  # GeoNames towns at least this size count as common town names
-TOWN_NAMESAKE_SCORE = 0.75  # a town this like a nearby locality's name belongs to that locality (Kuma -> Al Koma)
+TOWN_NAMESAKE_SCORE = 0.80  # a town this like a nearby locality's name belongs to it (Merowe -> Merwoe; Bulbul, 0.75 like Beliel, does not)
+TOWN_CONFUSABLE_SCORE = 0.75  # a town this like another locality's name in its state would be read as it (Kuma -> Al Koma)
+OSM_NAME_SEPARATORS = re.compile(r"\s*[;,،/]\s*")  # OSM packs several names into one tag ("Shabasha;Shabashah")
 OSM_TOWN_PLACES = ("city", "town")
 REVIEW_PATH = GAZETTEER_DIR / "review.json"
 LINK_REPORT = config.REPORTS_DIR / "variant_links.json"
@@ -151,7 +153,10 @@ class Linker:
         """Localities a town name stands for, and why: the nearby ones whose names begin with it (Nyala -> Nyala
         Shimal, Nyala Janoub); else the nearby locality it is named like, since a town is usually the seat of its
         namesake and its point can fall just over a border; else none, if a locality elsewhere in the same state is
-        named like it (Kuma, a town in Melit, would be mistaken for Al Koma); else the locality containing it."""
+        named like it (Kuma, a town in Melit, would be mistaken for Al Koma); else the locality containing it.
+        The check stays within the state: across all 189 localities, short consonant skeletons coincide by chance
+        (Kuraymah would look like Karrari). Cross-state look-alikes (Adeila, a town in Um Dukhun, and Adila in
+        East Darfur) are settled in review instead."""
         projected = gpd.GeoSeries([point], crs=4326).to_crs(config.AREA_CRS).iloc[0]
         nearby = [p for p, pl in self.places.items() if pl["level"] == 2 and self.shapes[p].distance(projected) <= LINK_RADIUS_M]
         keys = {self.norm.key(n) for n in names} - {""}
@@ -170,7 +175,7 @@ class Linker:
         state = self.places[inside]["parent_pcode"]
         own = likeness(inside)  # Kassala town in Madeinat Kassala is named like its own locality: keep it
         alike = [p for p, pl in self.places.items()
-                 if pl["parent_pcode"] == state and p != inside and likeness(p) >= TOWN_NAMESAKE_SCORE and likeness(p) > own]
+                 if pl["parent_pcode"] == state and p != inside and likeness(p) >= TOWN_CONFUSABLE_SCORE and likeness(p) > own]
         if alike:
             return [], f"town dropped: named like {', '.join(alike)} elsewhere in the state"
         return [inside], "town"
@@ -253,7 +258,8 @@ def osm_items() -> list[Item]:
     items = []
     for row in frame.itertuples():
         # name_latin is a machine transliteration of the Arabic ("lsnwT"), so only real name tags are used.
-        names = list(dict.fromkeys(n for n in (row.name, row.name_en, row.name_ar) if isinstance(n, str) and n))
+        names = list(dict.fromkeys(part for n in (row.name, row.name_en, row.name_ar) if isinstance(n, str)
+                                   for part in OSM_NAME_SEPARATORS.split(n) if part))
         if names:
             items.append(Item("osm", f"osm:{row.id}", 2, [], point=row.geometry.representative_point(), towns=names))
     return items
@@ -338,7 +344,11 @@ def build() -> tuple[list[dict], list[dict]]:
             take(item, pcode, 1.0 if pcode else 0.0, "linked (same shape)" if pcode else "outside every place")
 
     def town(item: Item) -> None:
-        pcodes, outcome = linker.towns(item.towns, item.point)
+        decided = review["links"].get(item.ref)
+        if decided:  # a reviewer placed this town by hand, or confirmed it belongs nowhere
+            pcodes, outcome = ([decided["pcode"]], "town (review)") if decided["decision"] == "link" else ([], "town dropped (review)")
+        else:
+            pcodes, outcome = linker.towns(item.towns, item.point)
         links.append({"ref": item.ref, "level": 2, "names": item.towns[:3], "pcode": ",".join(pcodes) or None,
                       "score": None, "outcome": outcome})
         for pcode in pcodes:

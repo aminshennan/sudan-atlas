@@ -45,9 +45,11 @@ A variant that equals another place's official name is dropped, because it would
 People often write the town, not the locality. Common towns are spellings of a locality: GeoNames towns with a recorded population of 10,000 or more (in `variants.json`), and OpenStreetMap places tagged city or town (in `variants_osm.json`). Each town goes to:
 
 1. the nearby localities whose names begin with it (*Nyala* → Nyala Shimal and Nyala Janoub, so the name stays ambiguous without more information);
-2. otherwise the nearby locality it is named like, within 30 km, since a town is usually the seat of its namesake and its point can fall just over a border (*Merowe* → Merwoe, *Aroma* → Reifi Aroma);
-3. otherwise nowhere, if a locality elsewhere in the same state is named more like it (*Kuma*, a town in Melit, would be mistaken for Al Koma); these are listed in `build/reports/variant_links.json`;
+2. otherwise the nearby locality it is named like (a likeness of 0.80 or more, within 30 km), since a town is usually the seat of its namesake and its point can fall just over a border (*Merowe* → Merwoe, *Aroma* → Reifi Aroma; *Bulbul*, 0.75 like Beliel, is not moved);
+3. otherwise nowhere, if another locality in the same state is named more like it (a likeness of 0.75 or more; *Kuma*, a town in Melit, would be mistaken for Al Koma); these are listed in `build/reports/variant_links.json`;
 4. otherwise the locality containing it.
+
+The likeness measure cannot settle every case (*Kuma* and *El Barun* score the same, but only the first is confusable), so reviewers place towns by hand in `review.json` where the rule is wrong, and reject town names that would be read as a locality in another state (*Adeila*, a town in Um Dukhun, and Adila in East Darfur). OpenStreetMap often packs several names into one tag; they are split on `;`, `,`, `،` and `/`.
 
 A town named exactly like another locality (*Kosti* the town, whose point falls in As Salam / Ar Rawat) is dropped: the name means the locality.
 
@@ -55,6 +57,6 @@ A town named exactly like another locality (*Kosti* the town, whose point falls 
 
 - **2026-10-31:** an independent AI agent reviewed everything: 409 spellings kept and 16 rejected, 8 unlinked records linked by hand and 25 confirmed as not current places, 8 of 9 rules agreed (dropping *area* was not, so it is no longer dropped), 291 test answers confirmed and 8 changed (`data/tests/match_cases_review.json`).
 - **2026-11-01:** Amin reviewed the agent-filled review page. He decided the 17 spellings added since (15 kept, 2 rejected) and the two cases still unsure (both should match nothing), and left the agent's other decisions in place. `review.json` records who made each spelling decision.
-- **2026-11-01, later:** town names were added and the UNHCR file's blank states were filled in. Four test answers changed as a result and carry `verified_by = claude` until re-checked: c165 (Al Tadamon, now with its state) and c259, c264, c283 (towns that now count as their locality). Spellings: 424 kept, 791 proposed (mostly the new town names).
+- **2026-11-01, later:** town names were added and the UNHCR file's blank states were filled in. Four test answers changed as a result: c165 (Al Tadamon, now with its state) and c259, c264, c283 (towns that now count as their locality). A second agent review confirmed all four, which carry `verified_by = claude` until Amin re-checks them. It also reviewed the 791 new spellings (734 kept, 57 rejected) and the 15 town names dropped as confusable (8 confirmed, 7 placed by hand). All spellings are now reviewed.
 
 Rejections apply to each spelling-and-place pair, so a later, correct link of the same spelling to another place is not rejected with it. Rejected spellings are left out; spellings added by a rebuild have `"status": "proposed"` until reviewed. The threshold, 0.82, was agreed with Amin on 2026-11-01, together with the accuracy targets: top-1 accuracy at least 91 %, top-3 recall at least 98 %, false matches at most 1 % (`pipeline/gazetteer/evaluate.py`). See `docs/MATCHER_EVALUATION.md` for the results.

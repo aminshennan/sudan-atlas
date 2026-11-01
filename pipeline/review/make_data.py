@@ -36,7 +36,9 @@ DATASETS = {
 
 REVIEW = json.loads((G / "review.json").read_text()) if (G / "review.json").exists() else {"variants": [], "links": [], "rules": []}
 CASE_REVIEW_PATH = ROOT / "data" / "tests" / "match_cases_review.json"
-CASE_REVIEW = {d["id"]: d for d in json.loads(CASE_REVIEW_PATH.read_text())["decisions"]} if CASE_REVIEW_PATH.exists() else {}
+_case_review = json.loads(CASE_REVIEW_PATH.read_text()) if CASE_REVIEW_PATH.exists() else {}
+CASE_REVIEW = {d["id"]: d for d in _case_review.get("decisions", [])}
+SECOND_REVIEW = {d["id"]: d for d in _case_review.get("second_review", {}).get("decisions", [])}
 
 
 def agent(decision: str, **extra) -> dict:
@@ -47,9 +49,9 @@ cases = []
 for c in testcases.load_cases():
     r = matcher.match(c["input_name"], state_hint=c["state_hint"] or None, level=int(c["level"]))
     note = c["notes"]
-    a = CASE_REVIEW.get(c["id"])
+    a = SECOND_REVIEW.get(c["id"]) if c["verified_by"] == "claude" else CASE_REVIEW.get(c["id"])
     review = None
-    if a and not note.startswith("UNSURE") and c["verified_by"] != "claude":
+    if a and not note.startswith("UNSURE"):
         # Agent changes are already applied to the CSV, so against the current answer they read as "correct".
         changed = a["decision"] in ("change", "no-match")
         review = agent("correct", pcode=c["expected_pcode"], confidence=a["confidence"],
@@ -71,6 +73,9 @@ out_variants = []
 for v in variants + [{**r, "rejected": True} for r in rejected]:
     vid = "v" + hashlib.sha1((v["text"] + "|" + ",".join(v["pcodes"])).encode()).hexdigest()[:10]
     d = variant_decisions.get((v["text"], tuple(v["pcodes"])))
+    if d is None and v.get("rejected"):  # rejections apply per spelling and place, as in the build
+        d = next((r for r in REVIEW["variants"] if r["text"] == v["text"] and r["decision"] == "reject"
+                  and set(v["pcodes"]) <= set(r["pcodes"])), None)
     out_variants.append({"id": vid, "text": v["text"], "lang": v["lang"], "pcodes": v["pcodes"],
                          "sources": [{"source": s["source"], "ref": s["ref"], "kind": s["kind"]} for s in v["sources"]],
                          "conflicts": v.get("conflicts_with_official", []),

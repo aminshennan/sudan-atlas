@@ -12,10 +12,10 @@ Scorer **combined**, threshold **0.82** (agreed with Amin on 2026-11-01), margin
 
 | Measure | Result | Agreed target |
 | --- | --- | --- |
-| Top-1 accuracy | 94.5% | at least 91.0% |
+| Top-1 accuracy | 94.9% | at least 91.0% |
 | Top-3 recall | 99.6% | at least 98.0% |
 | False-match rate | 0.0% (0 of 299) | at most 1.0% |
-| Matchable cases left without an answer | 14 | — |
+| Matchable cases left without an answer | 13 | — |
 
 ## Every setting
 
@@ -25,43 +25,42 @@ Top-1 accuracy / false-match rate. Top-3 recall does not depend on the threshold
 
 | Threshold | ratio | token_sort | combined |
 | --- | --- | --- | --- |
-| 0.70 | 91.7% / 2.7% | 94.1% / 1.7% | 96.8% / 1.7% |
-| 0.75 | 89.7% / 0.7% | 92.1% / 0.0% | 96.4% / 0.0% |
-| 0.78 | 87.4% / 0.7% | 89.7% / 0.0% | 95.3% / 0.0% |
-| 0.80 | 87.4% / 0.7% | 89.7% / 0.0% | 95.3% / 0.0% |
-| 0.82 | 80.6% / 0.7% | 83.0% / 0.0% | 94.5% / 0.0% |
-| 0.85 | 73.5% / 0.0% | 75.9% / 0.0% | 92.1% / 0.0% |
-| 0.88 | 68.4% / 0.0% | 70.4% / 0.0% | 88.9% / 0.0% |
-| 0.90 | 66.0% / 0.0% | 68.0% / 0.0% | 87.7% / 0.0% |
-| 0.92 | 66.0% / 0.0% | 68.0% / 0.0% | 69.2% / 0.0% |
-| 0.95 | 60.1% / 0.0% | 62.8% / 0.0% | 65.6% / 0.0% |
+| 0.70 | 92.1% / 2.3% | 94.5% / 1.3% | 97.2% / 1.3% |
+| 0.75 | 90.1% / 0.7% | 92.5% / 0.0% | 96.8% / 0.0% |
+| 0.78 | 87.7% / 0.7% | 90.1% / 0.0% | 95.7% / 0.0% |
+| 0.80 | 87.7% / 0.7% | 90.1% / 0.0% | 95.7% / 0.0% |
+| 0.82 | 81.0% / 0.7% | 83.4% / 0.0% | 94.9% / 0.0% |
+| 0.85 | 73.9% / 0.0% | 76.3% / 0.0% | 92.5% / 0.0% |
+| 0.88 | 68.8% / 0.0% | 70.8% / 0.0% | 89.3% / 0.0% |
+| 0.90 | 66.4% / 0.0% | 68.4% / 0.0% | 88.1% / 0.0% |
+| 0.92 | 66.4% / 0.0% | 68.4% / 0.0% | 69.6% / 0.0% |
+| 0.95 | 60.5% / 0.0% | 63.2% / 0.0% | 66.0% / 0.0% |
 | Top-3 recall | 98.4% | 100.0% | 99.6% |
 
 **Without state hints**
 
 | Threshold | ratio | token_sort | combined |
 | --- | --- | --- | --- |
-| 0.70 | 81.4% / 7.4% | 83.4% / 6.0% | 85.8% / 5.4% |
-| 0.75 | 80.6% / 5.4% | 82.6% / 4.7% | 85.4% / 4.7% |
-| 0.78 | 79.4% / 4.0% | 81.8% / 3.3% | 84.2% / 3.7% |
-| 0.80 | 79.4% / 4.0% | 81.8% / 3.3% | 84.2% / 3.7% |
-| 0.82 | 73.5% / 3.0% | 75.9% / 2.3% | 84.2% / 2.7% |
-| 0.85 | 66.8% / 1.7% | 69.2% / 1.7% | 81.8% / 2.0% |
-| 0.88 | 61.7% / 1.7% | 63.6% / 1.7% | 78.7% / 2.0% |
-| 0.90 | 60.1% / 0.3% | 62.1% / 0.3% | 78.3% / 0.7% |
-| 0.92 | 60.1% / 0.3% | 62.1% / 0.3% | 63.2% / 0.3% |
-| 0.95 | 54.2% / 0.3% | 56.9% / 0.3% | 59.7% / 0.3% |
+| 0.70 | 82.2% / 6.0% | 84.2% / 5.7% | 86.6% / 4.7% |
+| 0.75 | 81.4% / 4.7% | 83.4% / 4.7% | 86.2% / 4.3% |
+| 0.78 | 80.2% / 3.7% | 82.6% / 3.0% | 85.0% / 3.3% |
+| 0.80 | 80.2% / 3.7% | 82.6% / 3.0% | 85.0% / 3.3% |
+| 0.82 | 74.3% / 2.7% | 76.7% / 2.0% | 85.0% / 2.3% |
+| 0.85 | 67.6% / 1.3% | 70.0% / 1.3% | 82.6% / 1.7% |
+| 0.88 | 62.5% / 1.3% | 64.4% / 1.3% | 79.4% / 1.7% |
+| 0.90 | 60.5% / 0.0% | 62.5% / 0.0% | 78.7% / 0.3% |
+| 0.92 | 60.5% / 0.0% | 62.5% / 0.0% | 63.6% / 0.0% |
+| 0.95 | 54.5% / 0.0% | 57.3% / 0.0% | 60.1% / 0.0% |
 | Top-3 recall | 94.9% | 98.0% | 98.0% |
 
 ## Every failure at the default setting
 
-no answer: 12, ambiguous (no answer): 2
+no answer: 12, ambiguous (no answer): 1
 
 | Case | Input | State hint | Expected | Got | Cause | Best candidates |
 | --- | --- | --- | --- | --- | --- | --- |
 | c065 | El Odaya | West Kordofan | SD18104 Al Idia | none | right place ranked first, but its score 0.67 is below the threshold | Al Idia 0.67; Al Dibab 0.60; Keilak 0.55 |
 | c068 | Sharg Jabel Marra | South Darfur | SD03147 Sharg Aj Jabal | none | right place ranked first, but its score 0.81 is below the threshold | Sharg Aj Jabal 0.81; Tulus 0.61; As Salam - SD 0.53 |
-| c074 | KŪSTĪ | WHITE NILE | SD09047 Kosti | ambiguous | right place ties with Rabak (0.98), so the matcher does not choose | Rabak 0.98; Kosti 0.98; Al Gitaina 0.50 |
 | c081 | AL GAWZ | SOUTH KORDOFAN | SD07094 Al Quoz | none | right place ranked first, but its score 0.75 is below the threshold | Al Quoz 0.75; Al Leri 0.55; Heiban 0.44 |
 | c085 | NITAIFA | SOUTH DARFUR | SD03151 Nitega | none | right place ranked first, but its score 0.77 is below the threshold | Nitega 0.77; Nyala Shimal 0.62; Nyala Janoub 0.62 |
 | c103 | HILLAT ‘AGIG | RED SEA | SD10072 Agig | none | right place ranked first, but its score 0.62 is below the threshold | Agig 0.62; Hala'ib 0.53; Haya 0.46 |

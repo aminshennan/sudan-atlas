@@ -163,7 +163,7 @@ c161,El Daein,East Darfur,2,SD05142,sudan-monthly-refugee-and-asylum-seeker-popu
 c162,El Kamleen,Al Gezira,2,SD15035,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
 c163,Bagaair,Al Gezira,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,decided by Amin: should match nothing (Al Bagair spans Sharg An Neel and Al Kamlin)
 c164,Khartoum North (Bahri),Khartoum,2,SD01003,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: Khartoum North = Bahri
-c165,Al Tadamon,South Kordofan,2,SD07106,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"state filled down from the sheet (South Kordofan), so At Tadamon - SK; was ""should match nothing"" without a state. Needs re-checking."
+c165,Al Tadamon,South Kordofan,2,SD07106,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,claude,"state filled down from the sheet (South Kordofan), so At Tadamon - SK; was ""should match nothing"" without a state. Confirmed by the second agent review (high confidence); awaiting Amin."
 c166,Sharg Sennar (E. Sennar),Sennar,2,SD14042,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
 c167,Rufaa,Al Gezira,2,SD15033,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,proposed by Claude: town: Rufaa is the seat of East Gezira (Sharg Al Jazirah); check
 c168,Bielel,South Darfur,2,SD03162,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Locality,,amin,"proposed by Claude: closest official name in the stated state, judged correct"
@@ -257,12 +257,12 @@ c255,Blue Nile State,,1,SD08,sudan-acute-food-insecurity-country-data,Level 1,,a
 c256,Ganees East,Blue Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
 c257,Babanusa Town,West Kordofan,2,SD18100,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: town in its namesake locality
 c258,Um Hashima,South Kordofan,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
-c259,Abu Matarig,East Darfur,2,SD05160,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"town names now count as their locality: Abu Matarig is a town in Bahr Al Arab locality (agent review; OSM); was ""should match nothing"". Needs re-checking."
+c259,Abu Matarig,East Darfur,2,SD05160,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"town names now count as their locality: Abu Matarig is a town in Bahr Al Arab locality (agent review; OSM); was ""should match nothing"". Confirmed by the second agent review (high confidence); awaiting Amin."
 c260,Wad Banda Rural,West Kordofan,2,SD18029,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,proposed by Claude: rural part of Wad Bandah locality
 c261,Alagaya,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
 c262,Shag-Al-Gamous,North Darfur,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
 c263,Gedied (area),South Kordofan,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
-c264,Ed Dibebat,South Kordofan,2,SD07094,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"town names now count as their locality: Ed Dibebat (Ad Dibaybat) is a town in Al Quoz locality (agent review); was ""should match nothing"". Needs re-checking."
+c264,Ed Dibebat,South Kordofan,2,SD07094,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,claude,"town names now count as their locality: Ed Dibebat (Ad Dibaybat) is a town in Al Quoz locality (agent review); was ""should match nothing"". Confirmed by the second agent review (high confidence); awaiting Amin."
 c265,Alganaa,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
 c266,Dabat Bosin,White Nile,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
 c267,Wad Sherifai,Kassala,2,,sudan-monthly-refugee-and-asylum-seeker-population-by-site,Site,,amin,"negative: a camp, site or village name, not a locality"
@@ -281,7 +281,7 @@ c279,El Mieram,West Kordofan,2,SD18106,sudan-people-affected-by-floods,2022/Vill
 c280,"Aldaba, Alharafa",North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
 c281,Umdoban,North Kordofan,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
 c282,"sortod,Bangadad",Northern,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
-c283,Al Mazrob,North Kordofan,2,SD13029,sudan-people-affected-by-floods,2022/Village Name,,claude,"town names now count as their locality: Al Mazrob (Al Mazroub) is a town in Gharb Bara locality (OSM); was ""should match nothing"". Needs re-checking."
+c283,Al Mazrob,North Kordofan,2,SD13029,sudan-people-affected-by-floods,2022/Village Name,,claude,"town names now count as their locality: Al Mazrob (Al Mazroub) is a town in Gharb Bara locality (OSM); was ""should match nothing"". Confirmed by the second agent review (high confidence); awaiting Amin."
 c284,Jumeiza Komora,South Darfur,2,,sudan-people-affected-by-floods,2022/Village Name,,amin,"negative: a camp, site or village name, not a locality"
 c285,Ed Daein town,East Darfur,2,SD05142,sudan-people-affected-by-floods,2022/Village Name,,amin,proposed by Claude: town in its namesake locality
 c286,Burgag twon/villages,Northern,2,SD17016,sudan-people-affected-by-floods,2022/Village Name,,amin,"proposed by Claude: Burgag = Al Burgaig, with extra words"

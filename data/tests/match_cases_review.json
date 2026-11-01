@@ -2096,5 +2096,39 @@
    "note": "A camp; As Serief locality is in North Darfur, not South Darfur."
   }
  ],
- "verification": "Amin reviewed the review page on 2026-11-01, where the agent's answers were shown for every case. He decided c148 and c163 (should match nothing) himself and left the agent's answers for the other 297, so all labels carry verified_by = amin."
+ "verification": "Amin reviewed the review page on 2026-11-01, where the agent's answers were shown for every case. He decided c148 and c163 (should match nothing) himself and left the agent's answers for the other 297, so all labels carry verified_by = amin.",
+ "second_review": {
+  "date": "2026-11-01",
+  "reviewer": "independent AI agent (Claude)",
+  "decisions": [
+   {
+    "id": "c165",
+    "decision": "correct",
+    "pcode": "SD07106",
+    "confidence": "high",
+    "note": "Raw sheet row sits in the South Kordofan block (with Abu Jubaiha, Al Quoz, Dilling); Locality and Site are both 'Al Tadamon', so it is At Tadamon - SK."
+   },
+   {
+    "id": "c259",
+    "decision": "correct",
+    "pcode": "SD05160",
+    "confidence": "high",
+    "note": "Abu Matarig (OSM node/4034496333) is inside the Bahr Al Arab polygon and is its seat; the same row's locality column reads 'Bahr Alarab'."
+   },
+   {
+    "id": "c264",
+    "decision": "correct",
+    "pcode": "SD07094",
+    "confidence": "high",
+    "note": "Ad Dibeibat (OSM node/2082551810, about 12.51N 29.80E) is inside the Al Quoz polygon and is its seat; the same row's locality column reads 'Al Quoz'."
+   },
+   {
+    "id": "c283",
+    "decision": "correct",
+    "pcode": "SD13029",
+    "confidence": "high",
+    "note": "Al Mazroub, North Kordofan (OSM node/7730430502, GeoNames 379116, about 13.9N 29.3E) is inside Gharb Bara; the same row's locality is 'Gharb Bara'. The other Al Mazroub is in East Darfur (Adila), which the state rules out."
+   }
+  ]
+ }
 }
