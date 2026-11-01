@@ -53,7 +53,7 @@ jobs:
         run: |
           make packages
           .venv/bin/twine check packages/py/dist/*
-          (cd packages/js && npm pack --pack-destination ../../npm-dist)
+          mkdir -p npm-dist && (cd packages/js && npm pack --pack-destination ../../npm-dist)
       - uses: actions/upload-artifact@v4
         with:
           name: pypi
