@@ -2,7 +2,7 @@
 
 An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's states and localities as maps — for websites, apps, Python and Power BI.
 
-> **Status:** data release 2026.1; packages 0.1.0 are ready to publish. Website coming next.
+> **Status:** data release 2026.1; packages on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/). Website coming next.
 
 ## Quick start
 
@@ -24,7 +24,7 @@ get_localities("SD15")              # the localities of Aj Jazirah
 
 **Power BI**: add a Shape map, load [`powerbi/sudan_states.topojson`](powerbi/) as a custom map, and put your P-code column in Location. Step-by-step guide: [`powerbi/README.md`](powerbi/README.md).
 
-**In a browser with no build step**: `import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js"`; the data files are on jsDelivr too, under `…/sudan-atlas@0.1.0/data/`.
+**In a browser with no build step**: `import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js"`; the data files are on jsDelivr too, under `…/sudan-atlas@0.1/data/`.
 
 Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a [state-and-locality picker](examples/dropdown/), and a [Python notebook](examples/python/sudan_atlas_quickstart.ipynb).
 

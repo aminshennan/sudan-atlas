@@ -37,7 +37,7 @@
 <script type="module">
 // The package's browser build. (?lib= and ?data= let you test against a local build instead.)
 const params = new URLSearchParams(location.search);
-const atlas = await import(params.get("lib") || "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js");
+const atlas = await import(params.get("lib") || "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js");
 const dataUrl = new URL(params.get("data") || atlas.CDN_DATA_URL, location.href).href;
 
 // Example rows, spelled the way they turn up in real spreadsheets. The values are made up.

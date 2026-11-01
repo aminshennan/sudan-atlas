@@ -22,7 +22,7 @@ In a browser with no build step:
 
 ```html
 <script type="module">
-  import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js";
+  import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js";
 </script>
 ```
 
@@ -36,7 +36,7 @@ The Python package (`pip install sudan-atlas`) returns identical results.
 
 ## Boundaries
 
-`getFeature` loads boundary files only when first asked. In Node it reads them from this package; in a browser it fetches them from jsDelivr. To serve them yourself, copy the package's `data/` folder and call `setDataUrl("/static/sudan-atlas/")`. The raw files are also at `https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/data/boundaries/{detailed|medium|light}/adm{1|2}.{geojson|topojson}`.
+`getFeature` loads boundary files only when first asked. In Node it reads them from this package; in a browser it fetches them from jsDelivr. To serve them yourself, copy the package's `data/` folder and call `setDataUrl("/static/sudan-atlas/")`. The raw files are also at `https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/boundaries/{detailed|medium|light}/adm{1|2}.{geojson|topojson}`.
 
 ## Licences and sources
 

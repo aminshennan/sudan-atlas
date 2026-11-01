@@ -34,7 +34,7 @@
 </main>
 <script type="module">
 const params = new URLSearchParams(location.search);
-const atlas = await import(params.get("lib") || "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/dist/index.js");
+const atlas = await import(params.get("lib") || "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js");
 const $ = (id) => document.getElementById(id);
 const label = (p) => ($("arabic").checked ? p.name_ar : p.name_en);
 
