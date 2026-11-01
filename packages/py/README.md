@@ -32,4 +32,4 @@ The npm package (`npm install sudan-atlas`) returns identical results.
 
 ## Licences and sources
 
-Code: MIT. Boundaries: CC BY 3.0 IGO, from OCHA's COD-AB for Sudan (version v03); credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas". Spellings and rules: CC BY 4.0, with sources including GeoNames (CC BY 4.0) and Wikidata (CC0). Boundaries do not imply any opinion on the legal status of any territory. Details: https://github.com/aminshennan/sudan-atlas
+Code: MIT. Boundaries: CC BY 3.0 IGO, from OCHA's COD-AB for Sudan (version v03); credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas". Spellings and rules: CC BY 4.0, with sources including GeoNames (CC BY 4.0) and Wikidata (CC0); town spellings from OpenStreetMap are kept in a separate file under the ODbL (© OpenStreetMap contributors). Boundaries do not imply any opinion on the legal status of any territory. Details: https://github.com/aminshennan/sudan-atlas

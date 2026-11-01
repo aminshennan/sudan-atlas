@@ -148,6 +148,28 @@ def fetch_wikidata() -> dict:
     return manifest
 
 
+OSM_DATASET = "hotosm_sdn_populated_places"
+
+
+def fetch_osm() -> dict:
+    """OpenStreetMap populated places for Sudan: the Humanitarian OpenStreetMap Team's export on HDX (ODbL)."""
+    meta = json.loads(_get(f"{config.HDX_API}?id={OSM_DATASET}"))["result"]
+    resource = next(r for r in meta["resources"] if (r.get("format") or "").lower() == "geopackage")
+    name = resource["url"].rsplit("/", 1)[-1].split("?", 1)[0]
+    files = [_save(resource["url"], config.RAW_DIR / "osm" / name)]
+    manifest = {
+        "source": "OpenStreetMap populated places of Sudan (Humanitarian OpenStreetMap Team export)",
+        "dataset_url": f"https://data.humdata.org/dataset/{OSM_DATASET}",
+        "dataset_last_modified": meta.get("last_modified"),
+        "licence": meta.get("license_title"),
+        "attribution": "© OpenStreetMap contributors",
+        "downloaded_at": _now(),
+        "files": files,
+    }
+    (config.RAW_DIR / "osm" / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
 def register_local(archive: Path, note: str) -> dict:
     """Copy a COD-AB archive downloaded by hand into data/raw/cod-ab/ and record it."""
     body = archive.read_bytes()
@@ -181,3 +203,5 @@ def run() -> None:
     print(f"GeoNames: {len(gn['files'])} file(s), licence {gn['licence']!r}")
     wd = fetch_wikidata()
     print(f"Wikidata: {wd['files'][0]['bytes']:,} bytes, licence {wd['licence']!r}")
+    osm = fetch_osm()
+    print(f"OpenStreetMap: {osm['files'][0]['bytes']:,} bytes, licence {osm['licence']!r}")

@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[2]
 G = ROOT / "data" / "gazetteer"
 places = json.loads((G / "places.json").read_text())["places"]
 variants = json.loads((G / "variants.json").read_text())["variants"]
+if (G / "variants_osm.json").exists():
+    variants += json.loads((G / "variants_osm.json").read_text())["variants"]
 rules = json.loads((G / "normalisation.json").read_text())
 links = json.loads((ROOT / "build" / "reports" / "variant_links.json").read_text())
 matcher = Matcher()
@@ -47,7 +49,7 @@ for c in testcases.load_cases():
     note = c["notes"]
     a = CASE_REVIEW.get(c["id"])
     review = None
-    if a and not note.startswith("UNSURE"):
+    if a and not note.startswith("UNSURE") and c["verified_by"] != "claude":
         # Agent changes are already applied to the CSV, so against the current answer they read as "correct".
         changed = a["decision"] in ("change", "no-match")
         review = agent("correct", pcode=c["expected_pcode"], confidence=a["confidence"],

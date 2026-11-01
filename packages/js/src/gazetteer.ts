@@ -1,6 +1,8 @@
 // The bundled gazetteer: places, variant spellings and normalisation rules (inlined at build time).
 import placesDocument from "../data/places.json";
 import variantsDocument from "../data/variants.json";
+// OpenStreetMap spellings, kept in their own file under the ODbL (© OpenStreetMap contributors).
+import osmVariantsDocument from "../data/variants_osm.json";
 import rules from "../data/normalisation.json";
 import type { NormalisationRules } from "./normalise.js";
 
@@ -29,6 +31,6 @@ export interface Gazetteer {
 export const gazetteer: Gazetteer = {
   version: placesDocument.version,
   places: placesDocument.places as Place[],
-  variants: variantsDocument.variants as Variant[],
+  variants: [...variantsDocument.variants, ...osmVariantsDocument.variants] as Variant[],
   rules: rules as unknown as NormalisationRules,
 };

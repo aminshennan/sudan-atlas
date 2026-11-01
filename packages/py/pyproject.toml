@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Official codes, names and boundaries for Sudan's states and localities, with a matcher for messy Arabic and English place names."
 readme = "README.md"
 requires-python = ">=3.11"
-license = "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0"
+license = "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0 AND ODbL-1.0"
 license-files = ["LICENSE", "LICENSE-DATA"]
 authors = [{ name = "Amin Shennan" }]
 keywords = ["sudan", "gazetteer", "p-code", "cod-ab", "geojson", "arabic", "place names", "geocoding"]

@@ -6,6 +6,11 @@ Sources, each recorded on every variant:
 - geonames: GeoNames admin features with their English and Arabic alternate names,
   and state capitals as town names for the locality that contains them.
 - wikidata: labels and aliases of Sudan's states and localities, and locality capitals.
+- towns: GeoNames towns with a recorded population of 10,000 or more, and OpenStreetMap places
+  tagged city or town, each as a spelling of the locality it lies in.
+
+OpenStreetMap spellings are ODbL, so they are built separately into variants_osm.json and never
+mixed into variants.json (CC BY 4.0).
 
 External records are linked to a P-code by name similarity, limited to the parent state
 or to places near the record's location; records that do not link clearly are reported,
@@ -23,6 +28,7 @@ from dataclasses import dataclass, field
 import geopandas as gpd
 from rapidfuzz import fuzz
 from shapely.geometry import Point
+from sudan_atlas.match import combined
 from sudan_atlas.normalise import Normaliser
 
 from .. import config
@@ -30,6 +36,11 @@ from .places import PLACES_PATH, dump_records
 
 GAZETTEER_DIR = config.ROOT / "data" / "gazetteer"
 VARIANTS_PATH = GAZETTEER_DIR / "variants.json"
+OSM_VARIANTS_PATH = GAZETTEER_DIR / "variants_osm.json"
+OSM_EXPORT = config.RAW_DIR / "osm" / "hotosm_sdn_populated_places_osm_gpkg.zip"
+TOWN_MIN_POPULATION = 10_000  # GeoNames towns at least this size count as common town names
+TOWN_NAMESAKE_SCORE = 0.75  # a town this like a nearby locality's name belongs to that locality (Kuma -> Al Koma)
+OSM_TOWN_PLACES = ("city", "town")
 REVIEW_PATH = GAZETTEER_DIR / "review.json"
 LINK_REPORT = config.REPORTS_DIR / "variant_links.json"
 REJECTED_REPORT = config.REPORTS_DIR / "variants_rejected.json"
@@ -69,6 +80,7 @@ class Linker:
         self.places = places
         self.norm = normaliser
         self.names = {p: [pl["name_en"], pl["name_ar"], *extra_names.get(p, [])] for p, pl in places.items()}
+        self._namesake_scorer = combined(normaliser)
         self.state_names = sorted(
             {n for pl in places.values() if pl["level"] == 1 for n in (pl["name_en"], pl["name_ar"])}, key=len, reverse=True)
         frames = [gpd.read_file(config.BOUNDARIES_DIR / "detailed" / f"adm{lvl}.geojson") for lvl in config.LEVELS]
@@ -135,18 +147,33 @@ class Linker:
         pcode, score, outcome = self._decide(self._rank(names, level), LINK_ANYWHERE_SCORE)
         return (pcode, score, "linked (name match anywhere)") if pcode else (None, score, outcome)
 
-    def towns(self, names: list[str], point: Point) -> list[str]:
-        """Localities a town name stands for: the nearby ones whose names begin with it (Nyala -> Nyala Shimal,
-        Nyala Janoub), otherwise the locality containing the town."""
+    def towns(self, names: list[str], point: Point) -> tuple[list[str], str]:
+        """Localities a town name stands for, and why: the nearby ones whose names begin with it (Nyala -> Nyala
+        Shimal, Nyala Janoub); else the nearby locality it is named like, since a town is usually the seat of its
+        namesake and its point can fall just over a border; else none, if a locality elsewhere in the same state is
+        named like it (Kuma, a town in Melit, would be mistaken for Al Koma); else the locality containing it."""
         projected = gpd.GeoSeries([point], crs=4326).to_crs(config.AREA_CRS).iloc[0]
         nearby = [p for p, pl in self.places.items() if pl["level"] == 2 and self.shapes[p].distance(projected) <= LINK_RADIUS_M]
         keys = {self.norm.key(n) for n in names} - {""}
         starts = sorted({p for p in nearby for o in self.names[p] for k in keys
                          if self.norm.key(o).startswith(k + " ") or self.norm.key(o) == k})
         if len(starts) >= 1:
-            return starts
+            return starts, "town"
+        likeness = lambda p: max((self._namesake_scorer(k, self.norm.key(o)) for k in keys for o in self.names[p]
+                                  if self.norm.key(o) and self.norm.script(k) == self.norm.script(o)), default=0) / 100
+        scored = sorted(((likeness(p), p) for p in nearby), reverse=True)
+        if scored and scored[0][0] >= TOWN_NAMESAKE_SCORE and (len(scored) == 1 or scored[1][0] < scored[0][0]):
+            return [scored[0][1]], "town (named like a nearby locality)"
         inside = self.containing(point, 2)
-        return [inside] if inside else []
+        if not inside:
+            return [], "town outside every locality"
+        state = self.places[inside]["parent_pcode"]
+        own = likeness(inside)  # Kassala town in Madeinat Kassala is named like its own locality: keep it
+        alike = [p for p, pl in self.places.items()
+                 if pl["parent_pcode"] == state and p != inside and likeness(p) >= TOWN_NAMESAKE_SCORE and likeness(p) > own]
+        if alike:
+            return [], f"town dropped: named like {', '.join(alike)} elsewhere in the state"
+        return [inside], "town"
 
 
 def _script(text: str, norm: Normaliser) -> str:
@@ -208,9 +235,27 @@ def geonames_items() -> list[Item]:
         names = [(row["name"], "name"), (row["asciiname"], "name")] + alternates[row["geonameid"]]
         if row["fcode"] in ("ADM1", "ADM2"):
             items.append(Item("geonames", f"geonames:{row['geonameid']}", int(row["fcode"][-1]), names, point=point))
-        elif row["fcode"] in ("PPLC", "PPLA"):
+        elif row["fcode"] in ("PPLC", "PPLA") or (
+                row["fclass"] == "P" and int(row["population"] or 0) >= TOWN_MIN_POPULATION):
             items.append(Item("geonames", f"geonames:{row['geonameid']}", 2, [], point=point,
                               towns=[n for n, _ in names]))
+    return items
+
+
+def osm_items() -> list[Item]:
+    """OpenStreetMap places tagged city or town (Humanitarian OpenStreetMap Team export, ODbL)."""
+    if not OSM_EXPORT.exists():
+        return []
+    with zipfile.ZipFile(OSM_EXPORT) as zf:
+        member = next(n for n in zf.namelist() if n.endswith(".gpkg"))
+    frame = gpd.read_file(f"/vsizip/{OSM_EXPORT}/{member}")
+    frame = frame[frame["place"].isin(OSM_TOWN_PLACES)].to_crs(4326)
+    items = []
+    for row in frame.itertuples():
+        # name_latin is a machine transliteration of the Arabic ("lsnwT"), so only real name tags are used.
+        names = list(dict.fromkeys(n for n in (row.name, row.name_en, row.name_ar) if isinstance(n, str) and n))
+        if names:
+            items.append(Item("osm", f"osm:{row.id}", 2, [], point=row.geometry.representative_point(), towns=names))
     return items
 
 
@@ -254,6 +299,9 @@ def load_review() -> dict:
     review = json.loads(REVIEW_PATH.read_text())
     return {
         "variants": {(v["text"], tuple(v["pcodes"])): v["decision"] for v in review["variants"]},
+        # A rejection applies to each spelling-place pair, so a later, correct link of the same
+        # spelling to another place (Tendelti the town in Tendalti) is not rejected with it.
+        "rejected_pairs": {(v["text"], p) for v in review["variants"] if v["decision"] == "reject" for p in v["pcodes"]},
         "links": {l["ref"]: l for l in review["links"]},
     }
 
@@ -289,16 +337,20 @@ def build() -> tuple[list[dict], list[dict]]:
             pcode = linker.containing(item.point, item.level)
             take(item, pcode, 1.0 if pcode else 0.0, "linked (same shape)" if pcode else "outside every place")
 
-    gn_items = geonames_items()
-    for item in gn_items:
+    def town(item: Item) -> None:
+        pcodes, outcome = linker.towns(item.towns, item.point)
+        links.append({"ref": item.ref, "level": 2, "names": item.towns[:3], "pcode": ",".join(pcodes) or None,
+                      "score": None, "outcome": outcome})
+        for pcode in pcodes:
+            collected.extend((t, "town", item.source, item.ref, pcode) for t in item.towns)
+
+    for item in geonames_items():
         if item.towns:
-            pcodes = linker.towns(item.towns, item.point)
-            links.append({"ref": item.ref, "level": 2, "names": item.towns[:3], "pcode": ",".join(pcodes) or None,
-                          "score": None, "outcome": "town" if pcodes else "town outside every locality"})
-            for pcode in pcodes:
-                collected.extend((t, "town", item.source, item.ref, pcode) for t in item.towns)
+            town(item)
         else:
             take(item, *resolve(item))
+    for item in osm_items():
+        town(item)
 
     iso_links = {}
     gb1 = gpd.read_file(config.GEOBOUNDARIES_DIR / "geoBoundaries-SDN-ADM1.geojson")
@@ -330,18 +382,39 @@ def build() -> tuple[list[dict], list[dict]]:
         for name in (place["name_en"], place["name_ar"]):
             official[norm.key(name)].add(pcode)
 
+    dropped, rejected = [], []
+    variants = _merge([c for c in collected if c[2] != "osm"], places, official, norm, review, dropped, rejected)
+    main = {(v["text"], tuple(v["pcodes"])) for v in variants}
+    osm_variants = [v for v in _merge([c for c in collected if c[2] == "osm"], places, official, norm, review, dropped, rejected)
+                    if (v["text"], tuple(v["pcodes"])) not in main]
+    links.extend({"ref": d["ref"], "level": places[d["pcode"]]["level"], "names": [d["text"]], "pcode": d["pcode"],
+                  "score": None, "outcome": f"variant dropped: {d['reason']}"} for d in dropped)
+    config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
+    REJECTED_REPORT.write_text(json.dumps(rejected, indent=1, ensure_ascii=False))
+    return variants, osm_variants, links
+
+
+def _merge(collected, places, official, norm, review, dropped, rejected) -> list[dict]:
+    """Group collected (text, kind, source, ref, pcode) rows into variant records, applying the review."""
     merged: dict[tuple[str, str], dict] = {}
-    dropped = []
     for text, kind, source, ref, pcode in collected:
         text = clean_name(text)
         key = norm.key(text)
         if not key or pcode in official.get(key, set()):
             continue  # empty, junk, or just the official name again
+        if (text, pcode) in review["rejected_pairs"]:
+            if not any(d["text"] == text and d["pcode"] == pcode for d in dropped):
+                dropped.append({"text": text, "pcode": pcode, "ref": ref, "reason": "rejected in review"})
+                rejected.append({"text": text, "lang": _script(text, norm), "pcodes": [pcode],
+                                 "sources": [{"source": source, "ref": ref, "kind": kind}]})
+            continue
         others = sorted(official.get(key, set()) - {pcode})
-        if others and kind != "town":
-            # Equal to another place's official name: almost always a mislink, and it would make that name
-            # ambiguous. Town names are the exception: "Kassala" is both the state and the town in the
-            # Madeinat Kassala locality, and a level filter tells them apart. Report, don't keep.
+        same_level = [o for o in others if places[o]["level"] == places[pcode]["level"]]
+        if same_level or (others and kind != "town"):
+            # Equal to another place's official name: almost always a mislink (or a town whose point falls just
+            # outside its namesake locality, like Kosti), and it would make that name ambiguous. A town named
+            # like a place at another level is kept: "Kassala" is both the state and the town in the Madeinat
+            # Kassala locality, and a level filter tells them apart. Report, don't keep.
             dropped.append({"text": text, "pcode": pcode, "ref": ref, "reason": f"official name of {others}"})
             continue
         record = merged.setdefault((text, pcode), {"text": text, "lang": _script(text, norm), "pcodes": [pcode], "sources": []})
@@ -349,7 +422,6 @@ def build() -> tuple[list[dict], list[dict]]:
         if source_entry not in record["sources"]:
             record["sources"].append(source_entry)
 
-    rejected = []
     by_text = defaultdict(list)
     for record in merged.values():
         by_text[record["text"]].append(record)
@@ -357,13 +429,8 @@ def build() -> tuple[list[dict], list[dict]]:
     for text, records in by_text.items():
         pcodes = sorted({p for r in records for p in r["pcodes"]})
         sources = [s for r in records for s in r["sources"]]
-        key = norm.key(text)
-        conflicts = sorted(official.get(key, set()) - set(pcodes))
+        conflicts = sorted(official.get(norm.key(text), set()) - set(pcodes))
         decision = review["variants"].get((text, tuple(pcodes)))
-        if decision == "reject":
-            dropped.append({"text": text, "pcode": pcodes[0], "ref": sources[0]["ref"], "reason": "rejected in review"})
-            rejected.append({"text": text, "lang": records[0]["lang"], "pcodes": pcodes, "sources": sources})
-            continue
         entry = {"text": text, "lang": records[0]["lang"], "pcodes": pcodes,
                  "sources": sorted(sources, key=lambda s: (s["source"], s["ref"])),
                  "status": "kept" if decision == "keep" else "proposed"}
@@ -371,18 +438,20 @@ def build() -> tuple[list[dict], list[dict]]:
             entry["conflicts_with_official"] = conflicts
         variants.append(entry)
     variants.sort(key=lambda v: (v["pcodes"], v["lang"], v["text"]))
-    links.extend({"ref": d["ref"], "level": places[d["pcode"]]["level"], "names": [d["text"]], "pcode": d["pcode"],
-                  "score": None, "outcome": f"variant dropped: {d['reason']}"} for d in dropped)
-    config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    REJECTED_REPORT.write_text(json.dumps(rejected, indent=1, ensure_ascii=False))
-    return variants, links
+    return variants
 
 
 def run() -> list[dict]:
-    variants, links = build()
+    variants, osm_variants, links = build()
     VARIANTS_PATH.write_text(dump_records(
         {"version": config.DATA_VERSION, "licence": "CC BY 4.0 (Sudan Atlas); sources: COD-AB (CC BY 3.0 IGO), geoBoundaries (CC BY 3.0 IGO), GeoNames (CC BY 4.0), Wikidata (CC0)"},
         "variants", variants))
+    if osm_variants:
+        OSM_VARIANTS_PATH.write_text(dump_records(
+            {"version": config.DATA_VERSION, "licence": "ODbL 1.0 (Open Database License); © OpenStreetMap contributors",
+             "source": "OpenStreetMap places tagged city or town, via the Humanitarian OpenStreetMap Team export on HDX"},
+            "variants", osm_variants))
+        print(f"OSM variants: {len(osm_variants)} -> {OSM_VARIANTS_PATH.relative_to(config.ROOT)}")
     config.REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     LINK_REPORT.write_text(json.dumps(links, indent=1, ensure_ascii=False))
     outcomes = defaultdict(int)

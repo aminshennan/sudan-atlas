@@ -25,9 +25,11 @@ Data licences
    The test cases contain place names from the HDX datasets listed in
    docs/SOURCES.md, each under its own licence (CC BY, CC BY-IGO or CC0).
 
-3. Spellings taken from OpenStreetMap, if added, go in a separate file,
-   data/gazetteer/variants_osm.json, under the Open Database License (ODbL),
-   with attribution "© OpenStreetMap contributors".
+3. Spellings taken from OpenStreetMap (places tagged city or town, from the
+   Humanitarian OpenStreetMap Team's export on HDX) are kept in a separate file,
+   data/gazetteer/variants_osm.json, under the Open Database License (ODbL 1.0),
+   with attribution "© OpenStreetMap contributors". The packages ship this file
+   alongside the others; it is never merged into variants.json.
 
      https://opendatacommons.org/licenses/odbl/
 

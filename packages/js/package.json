@@ -2,9 +2,23 @@
   "name": "sudan-atlas",
   "version": "0.1.0",
   "description": "Official codes, names and boundaries for Sudan's states and localities, with a matcher for messy Arabic and English place names.",
-  "keywords": ["sudan", "gazetteer", "p-code", "cod-ab", "geojson", "topojson", "arabic", "place names", "geocoding"],
-  "license": "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0",
-  "repository": { "type": "git", "url": "git+https://github.com/aminshennan/sudan-atlas.git", "directory": "packages/js" },
+  "keywords": [
+    "sudan",
+    "gazetteer",
+    "p-code",
+    "cod-ab",
+    "geojson",
+    "topojson",
+    "arabic",
+    "place names",
+    "geocoding"
+  ],
+  "license": "MIT AND CC-BY-3.0-IGO AND CC-BY-4.0 AND ODbL-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aminshennan/sudan-atlas.git",
+    "directory": "packages/js"
+  },
   "homepage": "https://github.com/aminshennan/sudan-atlas#readme",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -19,9 +33,17 @@
     "./data/*": "./data/*",
     "./package.json": "./package.json"
   },
-  "files": ["dist", "data", "README.md", "LICENSE", "LICENSE-DATA"],
+  "files": [
+    "dist",
+    "data",
+    "README.md",
+    "LICENSE",
+    "LICENSE-DATA"
+  ],
   "sideEffects": false,
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "data": "node scripts/copy-data.mjs",
     "build": "node scripts/copy-data.mjs && node scripts/build.mjs",

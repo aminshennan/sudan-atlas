@@ -34,6 +34,7 @@ class Source:
     state_pcode: str | None = None
     pcode: str | None = None
     file_glob: str = "*.xlsx"
+    fill_state_down: bool = False  # the state column uses merged cells: blank rows belong to the state above
 
 
 SOURCES = [
@@ -43,9 +44,9 @@ SOURCES = [
     Source("sudan-acute-food-insecurity-country-data", 0, 0, None, "Level 1", 1, file_glob="ipc_sdn_area_wide_latest.csv"),
     Source("sudan-displacement-situation-countrywide-idps-iom-dtm", "IDPs Masterlist (ADMIN2)", 3, "STATE OF DISPLACEMET", "LOCALITY OF DISPLACEMENT", 2, "STATE CODE", "LOCALITY_ CODE"),
     Source("sudan-displacement-situation-countrywide-idps-iom-dtm", "Returnees Masterlist (ADMIN2)", 3, "State of Return", "Locality Of Return", 2, "State Code", "Locality Code"),
-    Source("sudan-monthly-refugee-and-asylum-seeker-population-by-site", 0, 3, "State", "Locality", 2),
+    Source("sudan-monthly-refugee-and-asylum-seeker-population-by-site", 0, 3, "State", "Locality", 2, fill_state_down=True),
     Source("sudan-monthly-refugee-and-asylum-seeker-population-by-site", 0, 3, None, "State", 1),
-    Source("sudan-monthly-refugee-and-asylum-seeker-population-by-site", 0, 3, "State", "Site", 2),
+    Source("sudan-monthly-refugee-and-asylum-seeker-population-by-site", 0, 3, "State", "Site", 2, fill_state_down=True),
     Source("sudan-people-affected-by-floods", "2021", 0, "State", "Locality", 2),
     Source("sudan-people-affected-by-floods", "2022", 0, "State", "Locality", 2),
     Source("sudan-people-affected-by-floods", "2023", 0, "State", "Locality", 2),
@@ -114,6 +115,8 @@ def pool() -> list[dict]:
     rows = {}
     for source in SOURCES:
         frame = _read(source)
+        if source.fill_state_down:
+            frame[source.state] = frame[source.state].replace("", pd.NA).ffill().fillna("")
         for record in frame.to_dict("records"):
             name = _clean(record.get(source.name))
             if not name or name.startswith("#"):

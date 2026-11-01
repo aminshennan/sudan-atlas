@@ -39,7 +39,7 @@ Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a
 }
 ```
 
-When the best candidate scores below 0.82, or another place scores almost as high, `pcode` is `null` (`None` in Python) and `alternatives` lists the candidates: the matcher never guesses silently. A state hint (a P-code or a state name in any spelling) and a level (1 = state, 2 = locality) settle most ambiguity. On real names from public datasets the matcher finds the right place 91 % of the time, and the right place is among the top three 98 % of the time; see [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md).
+When the best candidate scores below 0.82, or another place scores almost as high, `pcode` is `null` (`None` in Python) and `alternatives` lists the candidates: the matcher never guesses silently. A state hint (a P-code or a state name in any spelling) and a level (1 = state, 2 = locality) settle most ambiguity. On real names from public datasets the matcher finds the right place 94 % of the time, named no wrong place on the 299 test cases, and puts the right place among its top three more than 99 % of the time; see [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md).
 
 ## What it does
 

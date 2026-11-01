@@ -5,8 +5,9 @@ Every dataset used to build Sudan Atlas, with its URL, download date and licence
 | Source | URL | Downloaded | Licence | Used for |
 | --- | --- | --- | --- | --- |
 | COD-AB Sudan (OCHA ROSEA, via HDX), version v03, valid from 2020-08-31 | https://data.humdata.org/dataset/cod-ab-sdn | 2026-10-28 (by hand) | CC BY 3.0 IGO | Admin 0–2 boundaries, P-codes, English and Arabic names |
-| GeoNames: Sudan extract and alternate names | https://www.geonames.org/ (`export/dump/SD.zip`, `export/dump/alternatenames/SD.zip`) | 2026-10-31 | CC BY 4.0 | Variant spellings (`data/gazetteer/variants.json`), state capitals as town names |
+| GeoNames: Sudan extract and alternate names | https://www.geonames.org/ (`export/dump/SD.zip`, `export/dump/alternatenames/SD.zip`) | 2026-10-31 | CC BY 4.0 | Variant spellings (`data/gazetteer/variants.json`), and towns with a recorded population of 10,000 or more as town names |
 | Wikidata: states (Q746290) and localities (Q505830) of Sudan | https://www.wikidata.org/ (query: `pipeline/gazetteer/wikidata.rq`) | 2026-10-31 | CC0 1.0 | Variant spellings, locality capitals as town names |
+| OpenStreetMap populated places of Sudan (Humanitarian OpenStreetMap Team export) | https://data.humdata.org/dataset/hotosm_sdn_populated_places | 2026-11-01 | ODbL 1.0, © OpenStreetMap contributors | Town names (places tagged city or town), kept separately in `data/gazetteer/variants_osm.json` |
 | geoBoundaries gbOpen SDN (ADM0–ADM2) | https://github.com/wmgeolab/geoBoundaries (`releaseData/gbOpen/SDN`) | 2026-10-28 | CC BY 3.0 IGO | Cross-check of the boundaries; its spellings (such as "Gezira") are variants |
 
 ## Notes
@@ -32,4 +33,4 @@ Every dataset used to build Sudan Atlas, with its URL, download date and licence
 | Sudan Subnational Population and Housing Data Tables with Administrative Boundaries, Based on National Census and Surveys | U.S. Census Bureau | https://data.humdata.org/dataset/sudan-subnational-boundaries-and-tabular-data | `Sudan_uscb_202101.xlsx` | Creative Commons Attribution International (CC BY) |
 | Sudan Who does What & Where November 2020 | OCHA Sudan | https://data.humdata.org/dataset/sudan-who-does-what-where-november-2020 | `cleaned_compiled_Nov_3ws.xlsx` | Creative Commons Attribution International (CC BY) |
 
-The floods dataset's 2024 file is a Google Sheet; its 2021–2023 Excel file is used instead.
+The floods dataset's 2024 file is a Google Sheet; its 2021–2023 Excel file is used instead. In the UNHCR file the state column uses merged cells, so each blank state is filled down from the row above.
