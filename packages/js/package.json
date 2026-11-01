@@ -47,7 +47,7 @@
   "scripts": {
     "data": "node scripts/copy-data.mjs",
     "build": "node scripts/copy-data.mjs && node scripts/build.mjs",
-    "typecheck": "tsc -p tsconfig.json",
+    "typecheck": "node scripts/copy-data.mjs && tsc -p tsconfig.json",
     "test": "node scripts/copy-data.mjs && vitest run",
     "prepublishOnly": "npm run build && npm test"
   },
