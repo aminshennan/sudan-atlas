@@ -30,7 +30,7 @@ def test_match_cases_are_well_formed():
     assert len({c["id"] for c in cases}) == len(cases)
     for c in cases:
         assert c["expected_pcode"] == "" or c["expected_pcode"] in places
-        assert c["verified_by"] in ("claude", "amin")
+        assert c["verified_by"] in ("agent", "amin")
         assert c["level"] in ("1", "2")
 
 

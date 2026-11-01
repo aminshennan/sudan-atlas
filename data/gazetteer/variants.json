@@ -117,6 +117,7 @@
   {"text": "Jabal Mūn", "lang": "en", "pcodes": ["SD04123"], "sources": [{"source": "geonames", "ref": "geonames:13727714", "kind": "alternate-name"}], "status": "kept"},
   {"text": "Jebel Mun", "lang": "en", "pcodes": ["SD04123"], "sources": [{"source": "wikidata", "ref": "wikidata:Q136696520", "kind": "label"}], "status": "kept"},
   {"text": "Kuraynik", "lang": "en", "pcodes": ["SD04125"], "sources": [{"source": "geonames", "ref": "geonames:13727722", "kind": "alternate-name"}], "status": "kept"},
+  {"text": "ارمانكول", "lang": "ar", "pcodes": ["SD04134"], "sources": [{"source": "review", "ref": "review:addition/3", "kind": "review"}], "status": "kept"},
   {"text": "Eastern Darfur", "lang": "en", "pcodes": ["SD05"], "sources": [{"source": "geonames", "ref": "geonames:8394435", "kind": "alternate-name"}], "status": "kept"},
   {"text": "Eastern Darfur State", "lang": "en", "pcodes": ["SD05"], "sources": [{"source": "geonames", "ref": "geonames:8394435", "kind": "alternate-name"}], "status": "kept"},
   {"text": "Adayala District", "lang": "en", "pcodes": ["SD05139"], "sources": [{"source": "wikidata", "ref": "wikidata:Q60489010", "kind": "label"}], "status": "kept"},

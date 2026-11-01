@@ -58,7 +58,7 @@ packages/py/   PyPI package: same API (Python)
 powerbi/       TopoJSON for the Shape map + build guide
 site/          website + map-maker
 examples/      D3 map, dropdown form, Python notebook
-docs/          BRIEF.md, DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
+docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
 ```
 
 ## Roadmap
@@ -69,7 +69,6 @@ docs/          BRIEF.md, DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALU
 4. Website and map-maker
 5. Hosted API (only if users ask)
 
-See [`docs/BRIEF.md`](docs/BRIEF.md) for the full plan.
 
 ## Licence
 

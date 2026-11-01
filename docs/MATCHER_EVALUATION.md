@@ -4,7 +4,7 @@
 
 Test cases used: **299** (cases marked UNSURE are left out until checked). Cases that should match a place: **253**. Cases that should match nothing: **46**.
 
-Labels were proposed by Claude, checked by an independent AI agent, and verified by Amin (`verified_by = amin`).
+Labels were proposed by an AI agent, checked by a second, independent AI agent, and verified by Amin (`verified_by = amin`).
 
 ## Default setting
 

@@ -1,6 +1,6 @@
 {
  "description": "Review decisions applied when variants.json is built. A spelling listed as reject is dropped; keep marks it reviewed. Links attach an external record the automatic linking left out ('none' records it as not a current place). A town link's pcode may list several P-codes, separated by commas, when the town is shared by localities. Additions are spellings a reviewer added that no source gives, such as a corrected typo.",
- "reviewer": "Independent AI agent (Claude) reviewed everything on 2026-10-31. Amin reviewed the agent-filled review page on 2026-11-01, decided the 17 spellings added after it ('by': 'amin'), and agreed with every rule. 'by' names who made each decision. A second agent review on 2026-11-01 covered the town names and OpenStreetMap spellings added later.",
+ "reviewer": "An independent AI agent reviewed everything on 2026-10-31. Amin reviewed the agent-filled review page on 2026-11-01, decided the 17 spellings added after it ('by': 'amin'), and agreed with every rule. 'by' names who made each decision. A second agent review on 2026-11-01 covered the town names and OpenStreetMap spellings added later.",
  "rules_amin": "Amin agreed with all 9 rules on 2026-10-31, before the agent's review; rule 3 was then changed to keep 'area' after the agent's objection.",
  "variants": [
   {"text": "Khartoum State, Sudan", "pcodes": ["SD01"], "decision": "keep", "by": "agent"},
@@ -257,7 +257,7 @@
   {"text": "Al-Junaynah", "pcodes": ["SD04115"], "decision": "keep", "by": "agent"},
   {"text": "Arbokonei", "pcodes": ["SD04115"], "decision": "keep", "by": "agent"},
   {"text": "Ardamata", "pcodes": ["SD04115"], "decision": "keep", "by": "agent"},
-  {"text": "Armankul", "pcodes": ["SD04115", "SD04134"], "decision": "keep", "by": "agent", "note": "Shared in the final recheck."},
+  {"text": "Armankul", "pcodes": ["SD04134"], "decision": "keep", "by": "agent", "note": "Single link to Sirba after the third agent review."},
   {"text": "Banjedeed east", "pcodes": ["SD04115"], "decision": "keep", "by": "agent"},
   {"text": "Birkat Tayr", "pcodes": ["SD04115", "SD04125"], "decision": "keep", "by": "agent", "note": "Shared in the final recheck."},
   {"text": "Birkat Ţayr", "pcodes": ["SD04115", "SD04125"], "decision": "keep", "by": "agent", "note": "Shared in the final recheck."},
@@ -668,11 +668,11 @@
   {"text": "Al Jabalian District", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "AlSharak", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "At Tibun", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
-  {"text": "Kenana", "pcodes": ["SD09046", "SD09051"], "decision": "keep", "by": "agent", "note": "Shared in the final recheck."},
+  {"text": "Kenana", "pcodes": ["SD09051"], "decision": "keep", "by": "agent", "note": "Single link to Aj Jabalain after the third agent review."},
   {"text": "Kilu Arba`a", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "Sufayyah", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "Şufayyah", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
-  {"text": "الكنانة", "pcodes": ["SD09046", "SD09051"], "decision": "keep", "by": "agent", "note": "Shared in the final recheck."},
+  {"text": "الكنانة", "pcodes": ["SD09051"], "decision": "keep", "by": "agent", "note": "Single link to Aj Jabalain after the third agent review."},
   {"text": "صفية", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "قرية الشراك", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
   {"text": "كيل أربع", "pcodes": ["SD09051"], "decision": "keep", "by": "agent"},
@@ -1319,10 +1319,10 @@
   {"ref": "osm:node/4339052110", "names": ["القلابات", "Gallabat"], "decision": "link", "pcode": "SD12077,SD12083", "note": "Final recheck: Gallabat town lies just inside Basundah but is the namesake of Galabat Ash-Shargiah; shared.", "by": "agent"},
   {"ref": "osm:node/3313263698", "names": ["Barankwa"], "decision": "link", "pcode": "SD14037,SD14041", "note": "Final recheck: One village with two OSM points either side of the Abu Hujar / As Suki boundary; both spellings shared.", "by": "agent"},
   {"ref": "osm:node/7730433379", "names": ["Barankawa", "برنكو"], "decision": "link", "pcode": "SD14037,SD14041", "note": "Final recheck: One village with two OSM points either side of the Abu Hujar / As Suki boundary; both spellings shared.", "by": "agent"},
-  {"ref": "osm:node/7730430538", "names": ["Birkat Tayr", "Birkat Ţayr", "بركة طير"], "decision": "link", "pcode": "SD04115,SD04125", "note": "Final recheck: Point 0.1 km inside Ag Geneina with coordinates rounded to about 1 km; the OSM extract places it in Kereneik. Shared.", "by": "agent"},
-  {"ref": "osm:node/7730426959", "names": ["Armankul"], "decision": "link", "pcode": "SD04115,SD04134", "note": "Final recheck: Point 0.8 km inside Ag Geneina; the OSM extract places it in Sirba. Shared.", "by": "agent"},
-  {"ref": "osm:node/7730426933", "names": ["Sarafayah", "Sarafāyah", "سرفاية"], "decision": "link", "pcode": "SD04115,SD04134", "note": "Final recheck: Point 0.6 km inside Ag Geneina; the OSM extract places it in Sirba. Shared.", "by": "agent"},
-  {"ref": "osm:node/3992351175", "names": ["Kenana", "الكنانة"], "decision": "link", "pcode": "SD09046,SD09051", "note": "Final recheck: Point 7.9 km inside Aj Jabalain, but Kenana and its sugar estate are widely described as in Rabak; shared.", "by": "agent"}
+  {"ref": "osm:node/7730430538", "names": ["Birkat Tayr", "Birkat Ţayr", "بركة طير"], "decision": "link", "pcode": "SD04115,SD04125", "note": "Final recheck: Point 0.1 km inside Ag Geneina with coordinates rounded to about 1 km; the OSM extract places it in Kereneik. Shared. Third agent review: kept shared, no source settles it.", "by": "agent"},
+  {"ref": "osm:node/7730426959", "names": ["Armankul"], "decision": "link", "pcode": "SD04134", "note": "Third agent review, 2026-11-01: Armankul is in Sirba: the point is only 0.75 km inside Ag Geneina (within boundary error), while the OSM town tag, the schools list and news reports of the Armankul camp all say Sirba.", "by": "agent"},
+  {"ref": "osm:node/7730426933", "names": ["Sarafayah", "Sarafāyah", "سرفاية"], "decision": "link", "pcode": "SD04115,SD04134", "note": "Final recheck: Point 0.6 km inside Ag Geneina; the OSM extract places it in Sirba. Shared. Third agent review: kept shared, no source settles it.", "by": "agent"},
+  {"ref": "osm:node/3992351175", "names": ["Kenana", "الكنانة"], "decision": "link", "pcode": "SD09051", "note": "Third agent review, 2026-11-01: Kenana is in Aj Jabalain: 7.8 km inside it and 13.9 km from Rabak; the US Census Bureau 2021 table lists \"Kinana\" under Aj Jabalain, the schools list codes Kenana schools SD09051, and OSM tags it Aj Jabalain. \"In Rabak\" reports mean near Rabak town.", "by": "agent"}
  ],
  "rules": [
   {"rule": "Arabic ی and ک (Persian keyboard forms) are mapped to ي and ك.", "decision": "agree", "note": "Persian-keyboard ی/ک are common in typed Arabic; mapping to ي/ك is safe", "by": "agent"},
@@ -1337,6 +1337,7 @@
  ],
  "additions": [
   {"text": "Bout", "pcodes": ["SD08108"], "by": "agent", "note": "Final recheck: Common English spelling of Bout (بوط), the town in At Tadamon, Blue Nile."},
-  {"text": "ريفي وسط القضارف", "pcodes": ["SD12081"], "by": "agent", "note": "Final recheck: Correct spelling of the Wikidata label \"ريفي وسط القضارق\" (ق typed for ف)."}
+  {"text": "ريفي وسط القضارف", "pcodes": ["SD12081"], "by": "agent", "note": "Final recheck: Correct spelling of the Wikidata label \"ريفي وسط القضارق\" (ق typed for ف)."},
+  {"text": "ارمانكول", "pcodes": ["SD04134"], "by": "agent", "note": "Third agent review, 2026-11-01: Arabic spelling of Armankul (OSM node/13357352273), in Sirba."}
  ]
 }

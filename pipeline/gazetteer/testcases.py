@@ -2,7 +2,7 @@
 
 `pool` extracts every distinct (name, state) pair, with the dataset's own P-code when it has
 one, into build/reports/test_pool.csv. The labelled test set, data/tests/match_cases.csv, is
-chosen and labelled from that pool; each label is proposed (verified_by = claude) and then
+chosen and labelled from that pool; each label is proposed (verified_by = agent) and then
 checked by a person (verified_by = amin).
 
 These datasets are kept out of variants.json, so the test measures the matcher honestly.
@@ -207,7 +207,7 @@ def select() -> list[dict]:
             pcode = r["source_pcode"] if r["source_pcode"] in places else ""
             chosen.append({**{c: "" for c in CASE_COLUMNS}, **{k: r[k] for k in ("input_name", "state_hint", "level",
                           "source_dataset", "source_detail", "source_pcode")},
-                          "expected_pcode": pcode, "verified_by": "claude",
+                          "expected_pcode": pcode, "verified_by": "agent",
                           "notes": "proposed from the dataset's own P-code" if pcode else ("negative: " if kind == "negative" else "")})
             taken += 1
             if taken == count:

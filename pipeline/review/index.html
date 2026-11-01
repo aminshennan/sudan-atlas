@@ -264,7 +264,7 @@ function caseCard(c) {
   const pick = placeSelect(c.level, [c.expected, m.pcode, ...m.alternatives].filter(Boolean), hintPcode, rev.decision === "change" ? rev.pcode : "",
     (p) => save("cases", c.id, { decision: p === c.expected ? "correct" : "change", pcode: p, note: rev.note || "" }), `Different place for ${c.input}`);
   card.append(el("div", { class: "actions" }, yes, none, pick));
-  const note = el("input", { type: "text", class: "note", placeholder: "Note for Claude (optional)", value: rev.note || "", "aria-label": `Note for ${c.input}`,
+  const note = el("input", { type: "text", class: "note", placeholder: "Note (optional)", value: rev.note || "", "aria-label": `Note for ${c.input}`,
     onchange: (e) => { const r = rv("cases", c.id, c); save("cases", c.id, { decision: r.decision || "", pcode: r.pcode ?? "", note: e.target.value.trim() }); } });
   card.append(note);
   return card;

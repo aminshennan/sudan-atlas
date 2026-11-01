@@ -121,7 +121,7 @@ def _write_report(cases, grid, scorer, best, ranked) -> None:
         f"Cases that should match a place: **{best['should_match']}**. Cases that should match nothing: "
         f"**{len(cases) - best['should_match']}**.",
         "",
-        "Labels were proposed by Claude, checked by an independent AI agent, and verified by Amin (`verified_by = amin`).",
+        "Labels were proposed by an AI agent, checked by a second, independent AI agent, and verified by Amin (`verified_by = amin`).",
         "",
         "## Default setting",
         "",

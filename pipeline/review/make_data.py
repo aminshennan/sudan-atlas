@@ -1,7 +1,7 @@
 """Bundle what the review page shows into build/review/review-data.json.
 
 The page (pipeline/review/index.html) and this file are published together as a private
-review artifact; decisions are saved in that artifact's database and read back by Claude.
+review artifact; decisions are saved in that artifact's database and read back from it.
 Run from the repository root: PYTHONPATH=. .venv/bin/python pipeline/review/make_data.py
 """
 import hashlib
@@ -49,7 +49,7 @@ cases = []
 for c in testcases.load_cases():
     r = matcher.match(c["input_name"], state_hint=c["state_hint"] or None, level=int(c["level"]))
     note = c["notes"]
-    a = SECOND_REVIEW.get(c["id"]) if c["verified_by"] == "claude" else CASE_REVIEW.get(c["id"])
+    a = SECOND_REVIEW.get(c["id"]) if c["verified_by"] == "agent" else CASE_REVIEW.get(c["id"])
     review = None
     if a and not note.startswith("UNSURE"):
         # Agent changes are already applied to the CSV, so against the current answer they read as "correct".
@@ -61,7 +61,7 @@ for c in testcases.load_cases():
         "expected": c["expected_pcode"], "dataset": DATASETS.get(c["source_dataset"], c["source_dataset"]),
         "dataset_id": c["source_dataset"], "column": c["source_detail"], "source_pcode": c["source_pcode"],
         "unsure": note.startswith("UNSURE"),
-        "note": note.replace("UNSURE: ", "").replace("proposed by Claude: ", ""),
+        "note": note.replace("UNSURE: ", "").replace("proposed by an AI agent: ", ""),
         "matcher": {"pcode": r["pcode"], "method": r["method"], "score": round(r["score"], 2),
                     "alternatives": [a["pcode"] for a in r["alternatives"]]},
         "agent": review,

@@ -1,6 +1,6 @@
 {
  "description": "Second review of every proposed answer in match_cases.csv. Answers it changed were applied there.",
- "reviewer": "independent AI agent (Claude), 2026-10-31; not yet confirmed by Amin",
+ "reviewer": "independent AI agent, 2026-10-31; then reviewed by Amin",
  "decisions": [
   {
    "id": "c001",
@@ -2099,7 +2099,7 @@
  "verification": "Amin reviewed the review page on 2026-11-01, where the agent's answers were shown for every case. He decided c148 and c163 (should match nothing) himself and left the agent's answers for the other 297, so all labels carry verified_by = amin.",
  "second_review": {
   "date": "2026-11-01",
-  "reviewer": "independent AI agent (Claude)",
+  "reviewer": "a second independent AI agent",
   "decisions": [
    {
     "id": "c165",
@@ -2128,6 +2128,40 @@
     "pcode": "SD13029",
     "confidence": "high",
     "note": "Al Mazroub, North Kordofan (OSM node/7730430502, GeoNames 379116, about 13.9N 29.3E) is inside Gharb Bara; the same row's locality is 'Gharb Bara'. The other Al Mazroub is in East Darfur (Adila), which the state rules out."
+   }
+  ]
+ },
+ "third_review": {
+  "date": "2026-11-01",
+  "reviewer": "a third independent AI agent, asked for by Amin in place of his own re-check of the four cases",
+  "decisions": [
+   {
+    "id": "c165",
+    "decision": "correct",
+    "pcode": "SD07106",
+    "confidence": "high",
+    "note": "UNHCR sheet 'RefAsy population' row 117: Locality='Al Tadamon', Site='Al Tadamon'. Column A merged range A107:A124 = 'South Kordofan' (block with Abu Jubaiha, Al Quoz, Dilling, El Leri, Habila, Kadugli, Rashad), so the filled-down state is real. Blue Nile is a separate block (A132:A136) and has its own row 133 'At Tadamon - BN'. So At Tadamon - SK."
+   },
+   {
+    "id": "c259",
+    "decision": "correct",
+    "pcode": "SD05160",
+    "confidence": "high",
+    "note": "UNHCR row 44: State block A39:A50 = East Darfur, Locality merged B44:B47 = 'Bahr Alarab', Site 'Abu Matarig'. OSM node/4034496333 (place=town, ابو مطارق) is 18.6 km inside Bahr Al Arab (nearest other: Al Firdous). USCB 2021 table lists admin-3 'ABU MATARIQ (أبو مطارق)' under EAST DARFUR > BAHR-ALARAB; schools data codes 'Abo Matarig' schools SD05160."
+   },
+   {
+    "id": "c264",
+    "decision": "correct",
+    "pcode": "SD07094",
+    "confidence": "high",
+    "note": "UNHCR row 114: State block A107:A124 = South Kordofan, Locality merged B114:B116 = 'Al Quoz', Site 'Ed Dibebat'. The town Ad Dibeibat = OSM node/2082551810 (الدبيبات, place=city, 12.510N 29.801E), 14.8 km inside Al Quoz (nearest boundary is the West Kordofan/Abu Zabad line; 20.4 km to Dilling). The earlier 'GeoNames point in Ar Reif Ash Shargi' is a DIFFERENT place: GN 7001941 'Addibēbāt' (PPL, 11.260N 29.899E, ~140 km further south, 13.5 km inside Ar Reif Ash Shargi; OSM copies it as hamlet node/7730429862). GeoNames has no populated-place record for the Al Quoz town at all (only the Al Quoz ADM2 record 13711219). Corroboration: USCB admin-3 'AL DIBAIBAT (الدبيبات)' under SOUTH KORDOFAN > AL GAWZ; urban schools 'Al Dabaibat' coded SD07094; DTM flash alert 'Al Quoz - Dibebat town' (2 June 2025); Sudan Tribune calls Dibeibat the administrative centre of Al-Goz locality. Not a boundary town, so no sharing. Other same-named places (hamlet in Ar Reif Ash Shargi, Ad Dubaybat in Kosti, El Debibat in As Sunut) are excluded by the state hint or are hamlets."
+   },
+   {
+    "id": "c283",
+    "decision": "correct",
+    "pcode": "SD13029",
+    "confidence": "high",
+    "note": "Floods file sheet '2022' row 92: State 'North Kordofan', Locality 'Gharb Bara', Village 'Al Mazrob' (row 5 is a duplicate entry 'El Mazrob' with the same figures). OSM node/7730430502 (المزروب, place=town, 13.902N 29.319E) is 14.1 km inside Gharb Bara (nearest other: Soudari). USCB lists admin-3 'AL MAZRUB (المزروب)' under NORTH KORDOFAN > BARAH WEST. The East Darfur Almazroub (Adila, way/344130457) and the White Nile hamlet (Tendalti) are ruled out by the state hint."
    }
   ]
  }
