@@ -36,6 +36,7 @@ Setting it up needs accounts, so Amin does it once. npm requires a package to ex
    - Repository: `sudan-atlas`
    - Workflow filename: `release.yml`
    - Environment: leave empty
+   - Allowed actions: **Publish**. With only *Stage publish* allowed, the workflow fails with "OIDC permission denied for this action".
 
    npm's documentation says a new trusted publisher must be used for a successful publish within two days, so set it up shortly before the next release.
 
