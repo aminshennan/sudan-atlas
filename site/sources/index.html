@@ -2,11 +2,47 @@
 <html lang="en" dir="ltr">
 <head>
 <!-- include:head -->
-<title>Sudan Atlas</title>
+<title>Data and sources · Sudan Atlas</title>
+<meta name="description" content="Where Sudan Atlas's boundaries, P-codes and spellings come from, how disputed areas are shown, licences and downloads.">
+<meta property="og:title" content="Data and sources · Sudan Atlas">
 </head>
 <body data-page="sources">
 <!-- include:header -->
-<main id="main" class="container" style="padding-block: 64px"><h1>Coming soon</h1></main>
+<main id="main" class="container prose">
+  <p class="eyebrow">Data and sources</p>
+  <h1>Where the data comes from</h1>
+  <p class="lead">Sudan Atlas follows the UN's published boundaries exactly, adds the many ways people spell each place, and documents every source.</p>
+
+  <h2>Boundaries and P-codes</h2>
+  <p>The boundaries, P-codes and official English and Arabic names come from OCHA's <a href="https://data.humdata.org/dataset/cod-ab-sdn">Common Operational Dataset for Sudan (COD-AB), version v03</a>, published on the Humanitarian Data Exchange under CC BY 3.0 IGO. It has 19 admin-1 units (18 states and the Abyei PCA area) and 189 localities. We do not redraw, add or remove boundaries, and we never change an official name or P-code.</p>
+  <p>Three detail levels are provided: <strong>detailed</strong> (the source geometry), <strong>medium</strong> and <strong>light</strong> (simplified for the web, with borders between neighbours kept identical). Every release is checked for valid shapes, gaps and overlaps, and matching counts.</p>
+
+  <h2>Disputed areas</h2>
+  <p>Boundaries are shown for humanitarian, research and practical use. <strong>They do not imply any opinion on the legal status of any country, territory or area, or on the delimitation of any frontier.</strong> Where an area is disputed, we keep the COD-AB treatment:</p>
+  <ul>
+    <li><strong>Abyei</strong> is its own admin-1 unit, <code>SD19</code> "Abyei PCA", never merged into a state. It is different from the locality named Abyei (<code>SD18087</code>) in West Kordofan; the matcher asks which one you mean.</li>
+    <li><strong>The Halaib Triangle</strong> is in Red Sea State as the locality <code>SD10066</code> "Hala'ib", as in COD-AB, and is not styled differently.</li>
+  </ul>
+
+  <h2>Spellings</h2>
+  <p>To match names written any way, Sudan Atlas keeps 1,178 reviewed spellings of the 208 places, from <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0), <a href="https://www.wikidata.org/">Wikidata</a> (CC0) and <a href="https://www.openstreetmap.org/">OpenStreetMap</a> (ODbL, © OpenStreetMap contributors, kept in a separate file). Every spelling was reviewed before release; towns on a locality border point to both localities, so the matcher asks rather than guesses.</p>
+
+  <h2>Licences</h2>
+  <ul>
+    <li>Boundary files: CC BY 3.0 IGO. Credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas".</li>
+    <li>Sudan Atlas's own data (spellings, matching rules, test cases): CC BY 4.0.</li>
+    <li>OpenStreetMap spellings: ODbL 1.0, © OpenStreetMap contributors.</li>
+    <li>Software: MIT.</li>
+  </ul>
+
+  <h2>Versions and downloads</h2>
+  <p>Data releases are named by year and number. The current release is <strong>2026.1</strong>, used by packages version 0.1.1. A new release is made when COD-AB changes or when we fix anything; each has a changelog.</p>
+  <ul>
+    <li><a href="https://github.com/aminshennan/sudan-atlas/releases/tag/2026.1">Release 2026.1 on GitHub</a>: all boundary files as GeoJSON and TopoJSON</li>
+    <li><a href="https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/">The data files on jsDelivr</a></li>
+    <li><a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/SOURCES.md">Full source list</a> with download dates and file hashes, and the <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/DATA_POLICY.md">data policy</a></li>
+  </ul>
+</main>
 <!-- include:footer -->
 <script type="module" src="/src/pages/stub.ts"></script>
 </body>

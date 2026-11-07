@@ -2,11 +2,30 @@
 <html lang="en" dir="ltr">
 <head>
 <!-- include:head -->
-<title>Sudan Atlas</title>
+<title>About · Sudan Atlas</title>
+<meta name="description" content="Sudan Atlas is an open toolkit that turns messy Sudanese place names into official codes and maps. Free, open source and private by design.">
+<meta property="og:title" content="About · Sudan Atlas">
 </head>
 <body data-page="about">
 <!-- include:header -->
-<main id="main" class="container" style="padding-block: 64px"><h1>Coming soon</h1></main>
+<main id="main" class="container prose">
+  <p class="eyebrow">About</p>
+  <h1>Why Sudan Atlas exists</h1>
+  <p class="lead">The same place in Sudan is written a dozen ways across reports and spreadsheets: El Fasher, Al Fashir, Elfasher, الفاشر. Joining datasets, or simply putting them on a map, means cleaning those names by hand every time.</p>
+  <p>Sudan Atlas does that cleaning once, openly, for everyone. It matches names to the official P-codes used across the humanitarian system, gives the names in Arabic and English, and draws the boundaries, so analysts, journalists, researchers and developers can spend their time on the data instead.</p>
+
+  <h2>Private by design</h2>
+  <p>The map-maker runs entirely in your browser. The files you open are never uploaded, stored or seen by anyone. The site counts page visits and how many maps are exported, never what is in them.</p>
+
+  <h2>Open</h2>
+  <p>Everything is free and open: the code under the MIT licence, the data under Creative Commons. The packages are on <a href="https://pypi.org/project/sudan-atlas/">PyPI</a> and <a href="https://www.npmjs.com/package/sudan-atlas">npm</a>, and the source is on <a href="https://github.com/aminshennan/sudan-atlas">GitHub</a>.</p>
+
+  <h2>Help improve it</h2>
+  <p>Found a spelling the matcher misses, or a name that should match differently? <a href="https://github.com/aminshennan/sudan-atlas/issues/new">Open an issue on GitHub</a> with the name as written and the place it refers to. Every new spelling is reviewed before it is added.</p>
+
+  <h2>Who made it</h2>
+  <p>Sudan Atlas is made by <a href="https://github.com/aminshennan">Amin Shennan</a>.</p>
+</main>
 <!-- include:footer -->
 <script type="module" src="/src/pages/stub.ts"></script>
 </body>

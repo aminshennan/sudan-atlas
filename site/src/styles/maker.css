@@ -21,14 +21,6 @@
 .maker__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .maker__actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
 
-.table-wrap { overflow-x: auto; border: 1px solid var(--mist); border-radius: var(--radius); }
-.table { width: 100%; border-collapse: collapse; font-size: 14px; }
-.table th { text-align: start; font-weight: 600; font-size: 12px; color: var(--muted); padding: 10px 12px; background: var(--surface); border-bottom: 1px solid var(--mist); white-space: nowrap; }
-.table td { padding: 10px 12px; border-bottom: 1px solid var(--surface); vertical-align: middle; }
-.table tr:last-child td { border-bottom: 0; }
-.table code { font-size: 12.5px; }
-.table select { min-height: 38px; max-width: 380px; padding: 0 8px; border: 1px solid #d4d4d8; border-radius: 6px; background: var(--white); }
-
 .matching { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 64px 16px; text-align: center; }
 .matching[hidden] { display: none; }
 .review__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 20px; }

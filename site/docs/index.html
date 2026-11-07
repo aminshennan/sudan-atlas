@@ -2,12 +2,313 @@
 <html lang="en" dir="ltr">
 <head>
 <!-- include:head -->
-<title>Sudan Atlas</title>
+<title>Documentation · Sudan Atlas</title>
+<meta name="description" content="How to use the sudan-atlas packages for Python and JavaScript after installing: match Sudanese place names to P-codes, list states and localities, and draw boundaries.">
+<meta property="og:title" content="Documentation · Sudan Atlas">
 </head>
 <body data-page="docs">
 <!-- include:header -->
-<main id="main" class="container" style="padding-block: 64px"><h1>Coming soon</h1></main>
+<main id="main" class="container docs">
+  <nav class="docs__nav" aria-label="Documentation">
+    <p class="docs__nav-title">Start here</p>
+    <a href="#install">Install</a>
+    <a href="#first-match">Your first match</a>
+    <a href="#first-map">Your first map</a>
+    <p class="docs__nav-title">How-to guides</p>
+    <a href="#add-pcodes">Add P-codes to a spreadsheet</a>
+    <a href="#state-hint">Use a state hint</a>
+    <a href="#ambiguous">Handle uncertain names</a>
+    <a href="#geopandas">Maps with GeoPandas</a>
+    <a href="#browser">Use it in a web page</a>
+    <a href="#self-host">Serve the boundary files yourself</a>
+    <a href="#no-code">Without code: the map-maker</a>
+    <p class="docs__nav-title">Reference</p>
+    <a href="#ref-match">match()</a>
+    <a href="#ref-matcher">Matcher</a>
+    <a href="#ref-places">States and localities</a>
+    <a href="#ref-features">Boundaries</a>
+    <a href="#ref-pcodes">P-codes</a>
+    <a href="#ref-files">Data files</a>
+    <a href="#ref-versions">Versions and constants</a>
+    <p class="docs__nav-title">Explanation</p>
+    <a href="#how-matching">How matching works</a>
+    <a href="#accuracy">How accurate it is</a>
+    <a href="#sources">Sources and licences</a>
+  </nav>
+
+  <article class="docs__body">
+    <header class="docs__intro">
+      <p class="eyebrow">Documentation</p>
+      <h1>Using Sudan Atlas in your code</h1>
+      <p class="lead">One package for Python and one for JavaScript, with the same data and identical results. They match Sudanese place names written any way, in Arabic or English, to official P-codes, and give you the names and boundaries of Sudan's 19 states and 189 localities.</p>
+      <div class="lang-pick" role="group" aria-label="Code examples in">
+        <span class="muted small">Show examples in</span>
+        <div class="segmented">
+          <button type="button" data-code-lang="py" aria-pressed="true">Python</button>
+          <button type="button" data-code-lang="js" aria-pressed="false">JavaScript</button>
+        </div>
+      </div>
+    </header>
+
+    <section id="install">
+      <h2>Install</h2>
+      <div class="code" data-lang="py"><pre><code>pip install sudan-atlas            # matcher, names and boundaries
+pip install "sudan-atlas[geo]"     # adds GeoDataFrames (needs geopandas)</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>npm install sudan-atlas</code></pre></div>
+      <p>Python 3.11 or later; Node 18 or later, or any modern browser. The place names, spellings and boundary files ship inside the package, so Python and Node work offline; in a browser the boundary files are fetched when first needed.</p>
+    </section>
+
+    <section id="first-match">
+      <h2>Your first match</h2>
+      <p>Give <code>match</code> a name as it appears in your data. It returns the official place, its P-code, a score from 0 to 1 and how it was matched.</p>
+      <div class="code" data-lang="py"><pre><code>from sudan_atlas import match
+
+match("Elfasher", level=2)
+# {'pcode': 'SD02114', 'name_en': 'Al Fasher', 'name_ar': 'الفاشر', 'level': 2,
+#  'score': 1.0, 'method': 'exact', 'alternatives': [...]}
+
+match("الفاشر")["pcode"]      # 'SD02114'</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>import { match } from "sudan-atlas";
+
+match("Elfasher", { level: 2 });
+// { pcode: "SD02114", name_en: "Al Fasher", name_ar: "الفاشر", level: 2,
+//   score: 1, method: "exact", alternatives: [...] }
+
+match("الفاشر").pcode;        // "SD02114"</code></pre></div>
+      <p><code>level</code> is 1 for states and 2 for localities. Set it whenever you know it: "Kassala" is both a state and a locality, so <code>match("Kassala")</code> can't choose, while <code>match("Kassala", level=1)</code> returns <code>SD11</code>.</p>
+    </section>
+
+    <section id="first-map">
+      <h2>Your first map</h2>
+      <p>Boundaries come as GeoJSON features in three detail levels: <code>detailed</code>, <code>medium</code> (the default) and <code>light</code>.</p>
+      <div class="code" data-lang="py"><pre><code>from sudan_atlas import geo        # needs the [geo] extra
+
+localities = geo.localities("SD02")            # North Darfur's 17 localities
+ax = localities.plot(edgecolor="white", color="#2c7fb8")
+localities.apply(lambda r: ax.annotate(r.name_en, r.geometry.representative_point().coords[0],
+                                       ha="center", fontsize=7), axis=1)</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>import { getLocalities, getFeature } from "sudan-atlas";
+import { geoConicEqualArea, geoPath } from "d3-geo";
+
+const features = await Promise.all(getLocalities("SD02").map((p) =&gt; getFeature(p.pcode, "light")));
+const collection = { type: "FeatureCollection", features };
+const path = geoPath(geoConicEqualArea().parallels([9, 21]).rotate([-30, 0]).fitSize([600, 600], collection));
+const svg = features.map((f) =&gt; `&lt;path d="${path(f)}" fill="#2c7fb8" stroke="white"/&gt;`).join("");</code></pre></div>
+    </section>
+
+    <section id="add-pcodes">
+      <h2>Add P-codes to a spreadsheet</h2>
+      <p>Match each distinct name once, then join the result back. Keep the method and score columns so you can review the uncertain rows.</p>
+      <div class="code" data-lang="py"><pre><code>import pandas as pd
+from sudan_atlas import match
+
+df = pd.read_csv("sites.csv")                     # columns: state, locality, people
+results = {
+    (loc, st): match(loc, state_hint=st, level=2)
+    for loc, st in df[["locality", "state"]].drop_duplicates().itertuples(index=False)
+}
+df["pcode"] = [results[k]["pcode"] for k in zip(df.locality, df.state)]
+df["match_method"] = [results[k]["method"] for k in zip(df.locality, df.state)]
+df["match_score"] = [results[k]["score"] for k in zip(df.locality, df.state)]
+
+df[df.pcode.isna()]       # rows to look at: no match, or a name that could be two places</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>import { match } from "sudan-atlas";
+
+const cache = new Map();
+for (const row of rows) {                       // rows: [{ state, locality, people }, ...]
+  const key = `${row.locality}|${row.state}`;
+  if (!cache.has(key)) cache.set(key, match(row.locality, { stateHint: row.state, level: 2 }));
+  const r = cache.get(key);
+  Object.assign(row, { pcode: r.pcode, match_method: r.method, match_score: r.score });
+}
+const toReview = rows.filter((row) =&gt; row.pcode === null);</code></pre></div>
+    </section>
+
+    <section id="state-hint">
+      <h2>Use a state hint</h2>
+      <p>If your data has a state column, pass it. The matcher then looks only inside that state, which settles most look-alike names. The hint can be a P-code (<code>SD15</code>) or a state name in any spelling (<code>Al Gezira</code>, <code>الجزيرة</code>).</p>
+      <div class="code" data-lang="py"><pre><code>match("El Hasaheesa", state_hint="Al Gezira", level=2)["pcode"]   # 'SD15034' (Al Hasahisa)
+match("Nyala Shimal", state_hint="SD03", level=2)["pcode"]        # 'SD03164'</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>match("El Hasaheesa", { stateHint: "Al Gezira", level: 2 }).pcode;   // "SD15034" (Al Hasahisa)
+match("Nyala Shimal", { stateHint: "SD03", level: 2 }).pcode;        // "SD03164"</code></pre></div>
+    </section>
+
+    <section id="ambiguous">
+      <h2>Handle uncertain names</h2>
+      <p>The matcher never guesses silently. When the best place scores below the threshold, or a second place scores almost as high, <code>pcode</code> is empty and <code>alternatives</code> lists the best three candidates for a person to choose from.</p>
+      <div class="code" data-lang="py"><pre><code>r = match("Gallabat")
+r["pcode"], r["method"]                       # (None, 'ambiguous')
+[(a["pcode"], a["name_en"]) for a in r["alternatives"]]
+# [('SD12077', 'Basundah'), ('SD12083', 'Galabat Ash-Shargiah'), ('SD12078', 'Al Galabat Al Gharbyah - Kassab')]</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>const r = match("Gallabat");
+[r.pcode, r.method];                          // [null, "ambiguous"]
+r.alternatives.map((a) =&gt; [a.pcode, a.name_en]);
+// [["SD12077", "Basundah"], ["SD12083", "Galabat Ash-Shargiah"], ["SD12078", "Al Galabat Al Gharbyah - Kassab"]]</code></pre></div>
+      <p>Gallabat town lies on the boundary between two localities, so both are offered. Decide with your own knowledge of the data, and store your decision so the next run doesn't ask again.</p>
+    </section>
+
+    <section id="geopandas">
+      <h2>Maps with GeoPandas</h2>
+      <p>With the <code>[geo]</code> extra, <code>geo.states()</code> and <code>geo.localities()</code> return GeoDataFrames in EPSG:4326 with the columns <code>pcode</code>, <code>name_en</code>, <code>name_ar</code>, <code>level</code>, <code>parent_pcode</code> and <code>geometry</code>. Join your data on <code>pcode</code>, never on names.</p>
+      <div class="code" data-lang="py"><pre><code>from sudan_atlas import geo
+
+states = geo.states(resolution="light")
+states.merge(my_totals, on="pcode", how="left").plot(column="people", legend=True, missing_kwds={"color": "#d4d4d8"})</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>// GeoPandas is Python only. In JavaScript, use getFeature() with any mapping library
+// (D3, Leaflet, MapLibre): every feature is plain GeoJSON with the same properties.</code></pre></div>
+    </section>
+
+    <section id="browser">
+      <h2>Use it in a web page</h2>
+      <p>No build step needed: import the package from jsDelivr. Boundary files are fetched from the same place when you first ask for them.</p>
+      <div class="code" data-lang="js"><pre><code>&lt;script type="module"&gt;
+  import { match, getFeature } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js";
+  console.log(match("Omdurmaan", { level: 2 }).pcode);   // "SD01006"
+&lt;/script&gt;</code></pre></div>
+      <div class="code" data-lang="py"><pre><code># In the browser, use the JavaScript package (switch the examples above to JavaScript).</code></pre></div>
+    </section>
+
+    <section id="self-host">
+      <h2>Serve the boundary files yourself</h2>
+      <p>In Node and Python the files are read from the package itself. In a browser they come from jsDelivr unless you copy the package's <code>data/</code> folder to your own server and point the package at it.</p>
+      <div class="code" data-lang="js"><pre><code>import { setDataUrl, getFeature } from "sudan-atlas";
+
+setDataUrl("/static/sudan-atlas/");                 // your copy of node_modules/sudan-atlas/data/
+const khartoum = await getFeature("SD01", "medium");</code></pre></div>
+      <div class="code" data-lang="py"><pre><code># Not needed in Python: get_feature() reads the files bundled with the package.</code></pre></div>
+    </section>
+
+    <section id="no-code">
+      <h2>Without code: the map-maker</h2>
+      <p>The <a href="/maker/">map-maker</a> does all of this in your browser: upload a CSV or Excel file, check the uncertain matches, then download a map and your file with P-codes added. Nothing is uploaded.</p>
+    </section>
+
+    <section id="ref-match">
+      <h2>Reference: <code>match()</code></h2>
+      <div class="code" data-lang="py"><pre><code>match(name: str, state_hint: str | None = None, level: int | None = None) -&gt; dict</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>match(name: string, options?: { stateHint?: string | null; level?: 1 | 2 | null }): MatchResult</code></pre></div>
+      <table class="table">
+        <thead><tr><th>Field</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>pcode</code></td><td>The P-code of the match, or empty (<code>None</code> / <code>null</code>) when there is no confident answer.</td></tr>
+          <tr><td><code>name_en</code>, <code>name_ar</code>, <code>level</code></td><td>The official English and Arabic names and the level (1 state, 2 locality) of the match.</td></tr>
+          <tr><td><code>score</code></td><td>Similarity of the best candidate, from 0 to 1, rounded to four decimals.</td></tr>
+          <tr><td><code>method</code></td><td><code>exact</code> (an official name), <code>variant</code> (a known spelling), <code>fuzzy</code> (a close spelling), <code>ambiguous</code> (two places too close to call) or <code>none</code> (nothing close enough).</td></tr>
+          <tr><td><code>alternatives</code></td><td>The next best candidates (up to three), each with <code>pcode</code>, <code>name_en</code>, <code>name_ar</code>, <code>level</code> and <code>score</code>.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ref-matcher">
+      <h2>Reference: <code>Matcher</code></h2>
+      <p><code>match()</code> uses a shared matcher with the default settings. Create your own to change them.</p>
+      <div class="code" data-lang="py"><pre><code>from sudan_atlas import Matcher
+
+strict = Matcher(threshold=0.9, margin=0.08)
+strict.match("Kornoi", state_hint="North Darfur", level=2)</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>import { Matcher } from "sudan-atlas";
+
+const strict = new Matcher(undefined, { threshold: 0.9, margin: 0.08 });
+strict.match("Kornoi", { stateHint: "North Darfur", level: 2 });</code></pre></div>
+      <p><code>threshold</code> (default 0.82) is the lowest score accepted as a match. <code>margin</code> (default 0.05) is how far ahead of the second place the best candidate must be; closer than that, the result is <code>ambiguous</code>.</p>
+    </section>
+
+    <section id="ref-places">
+      <h2>Reference: states and localities</h2>
+      <table class="table">
+        <thead><tr><th>Python</th><th>JavaScript</th><th>Returns</th></tr></thead>
+        <tbody>
+          <tr><td><code>get_states()</code></td><td><code>getStates()</code></td><td>The 19 admin-1 units (18 states and the Abyei PCA area), sorted by P-code.</td></tr>
+          <tr><td><code>get_localities(state_pcode=None)</code></td><td><code>getLocalities(statePcode?)</code></td><td>All 189 localities, or those of one state.</td></tr>
+          <tr><td>–</td><td><code>getPlace(pcode)</code></td><td>One place by P-code, or <code>undefined</code>.</td></tr>
+        </tbody>
+      </table>
+      <p>Each place has <code>pcode</code>, <code>name_en</code>, <code>name_ar</code>, <code>level</code>, <code>parent_pcode</code> (<code>SD</code> for states) and <code>point</code>, a <code>[longitude, latitude]</code> inside the place that is good for a label.</p>
+      <div class="code" data-lang="py"><pre><code>get_states()[0]
+# {'pcode': 'SD01', 'name_en': 'Khartoum', 'name_ar': 'الخرطوم', 'level': 1,
+#  'parent_pcode': 'SD', 'point': [33.1352, 15.915]}</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>getStates()[0];
+// { pcode: "SD01", name_en: "Khartoum", name_ar: "الخرطوم", level: 1,
+//   parent_pcode: "SD", point: [33.1352, 15.915] }</code></pre></div>
+    </section>
+
+    <section id="ref-features">
+      <h2>Reference: boundaries</h2>
+      <table class="table">
+        <thead><tr><th>Python</th><th>JavaScript</th><th>Returns</th></tr></thead>
+        <tbody>
+          <tr><td><code>get_feature(pcode, resolution="medium")</code></td><td><code>await getFeature(pcode, resolution = "medium")</code></td><td>A GeoJSON Feature with the place's properties.</td></tr>
+          <tr><td><code>geo.states(resolution="medium")</code></td><td>–</td><td>GeoDataFrame of the 19 states (needs <code>[geo]</code>).</td></tr>
+          <tr><td><code>geo.localities(state_pcode=None, resolution="medium")</code></td><td>–</td><td>GeoDataFrame of localities (needs <code>[geo]</code>).</td></tr>
+          <tr><td>–</td><td><code>setDataUrl(url)</code></td><td>Load boundary files from your own address (browser).</td></tr>
+        </tbody>
+      </table>
+      <p><code>resolution</code> is <code>detailed</code> (the COD-AB geometry), <code>medium</code> or <code>light</code> (simplified for web maps, with shared borders kept intact).</p>
+    </section>
+
+    <section id="ref-pcodes">
+      <h2>Reference: P-codes</h2>
+      <p>P-codes are the official codes from OCHA's Common Operational Datasets. <code>SD</code> is Sudan; a state adds two digits (<code>SD15</code>, Aj Jazirah); a locality adds three more (<code>SD15034</code>, Al Hasahisa). Join datasets on P-codes, never on names: names have many spellings, P-codes have one.</p>
+    </section>
+
+    <section id="ref-files">
+      <h2>Reference: data files</h2>
+      <p>The same files are in both packages and in the repository's <code>data/</code> folder, and on jsDelivr under <code>https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/</code>.</p>
+      <table class="table">
+        <thead><tr><th>Path</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td><code>boundaries/{detailed|medium|light}/adm{1|2}.geojson</code></td><td>States (adm1) and localities (adm2) as GeoJSON, EPSG:4326.</td></tr>
+          <tr><td><code>boundaries/{detailed|medium|light}/adm{1|2}.topojson</code></td><td>The same as TopoJSON, smaller for the web.</td></tr>
+          <tr><td><code>places.json</code></td><td>The 208 places with names, levels, parents and label points.</td></tr>
+          <tr><td><code>variants.json</code>, <code>variants_osm.json</code></td><td>Known spellings of each place, with their sources (the OpenStreetMap ones under the ODbL).</td></tr>
+          <tr><td><code>normalisation.json</code></td><td>The rules that turn a name into a matching key, shared by both packages.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="ref-versions">
+      <h2>Reference: versions and constants</h2>
+      <table class="table">
+        <thead><tr><th>Python</th><th>JavaScript</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td><code>sudan_atlas.__version__</code></td><td><code>VERSION</code></td><td>The package version (0.1.1).</td></tr>
+          <tr><td><code>DATA_VERSION</code></td><td><code>DATA_VERSION</code></td><td>The data release (2026.1).</td></tr>
+          <tr><td><code>RESOLUTIONS</code></td><td><code>RESOLUTIONS</code></td><td><code>detailed</code>, <code>medium</code>, <code>light</code>.</td></tr>
+          <tr><td>–</td><td><code>DEFAULT_THRESHOLD</code>, <code>DEFAULT_MARGIN</code></td><td>0.82 and 0.05.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="how-matching">
+      <h2>How matching works</h2>
+      <ol>
+        <li><strong>Normalise.</strong> Both the input and every known name become a matching key: Arabic letter forms are unified (أ إ آ → ا, ة → ه, ى → ي), diacritics and articles (Al-, El-, ال) are set aside, common transliteration differences are merged (ou/u, ei/ai), and words such as "locality" or "محلية" are dropped.</li>
+        <li><strong>Exact.</strong> The key is compared with the official English and Arabic names of every place.</li>
+        <li><strong>Known spellings.</strong> Then with more than a thousand reviewed spellings gathered from GeoNames, Wikidata, OpenStreetMap and humanitarian datasets.</li>
+        <li><strong>Fuzzy.</strong> Then with every name by similarity, which catches typos and new spellings.</li>
+        <li><strong>Decide.</strong> The best candidate is accepted only if it scores at least 0.82 and is at least 0.05 ahead of the next place. Otherwise you get the candidates and the decision is yours.</li>
+      </ol>
+      <p>The Python and JavaScript matchers share the same rules file and are tested against the same expected results, so they return identical answers.</p>
+    </section>
+
+    <section id="accuracy">
+      <h2>How accurate it is</h2>
+      <p>On 299 real names taken from humanitarian datasets (IOM, UNHCR, OCHA, IPC and the US Census Bureau), each checked by hand:</p>
+      <ul class="stats">
+        <li><strong>94.9%</strong> matched to the right place first time</li>
+        <li><strong>99.6%</strong> had the right place among the top three</li>
+        <li><strong>0</strong> matched to a wrong place: when it isn't sure, it asks</li>
+      </ul>
+      <p>The full evaluation is in <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/MATCHER_EVALUATION.md">MATCHER_EVALUATION.md</a>.</p>
+    </section>
+
+    <section id="sources">
+      <h2>Sources and licences</h2>
+      <p>Boundaries and P-codes: OCHA's Common Operational Dataset for Sudan (COD-AB, version v03), CC BY 3.0 IGO. Spellings: GeoNames (CC BY 4.0), Wikidata (CC0) and OpenStreetMap (ODbL, kept in a separate file). Code: MIT. Sudan Atlas's own data: CC BY 4.0. Boundaries do not imply any opinion on the legal status of any territory. More on the <a href="/sources/">data and sources</a> page.</p>
+    </section>
+  </article>
+</main>
 <!-- include:footer -->
-<script type="module" src="/src/pages/stub.ts"></script>
+<script type="module" src="/src/pages/docs.ts"></script>
 </body>
 </html>
