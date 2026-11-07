@@ -108,8 +108,18 @@
       <button type="button" class="btn btn--ghost btn--small" data-go="3" data-i18n="mk.back.review">Back to the matches</button>
     </div>
     <div class="maker__map">
-      <div data-mk-map></div>
-      <div class="legend" data-legend></div>
+      <div class="maker__viz">
+        <div data-mk-map></div>
+        <aside class="ranking panel" aria-labelledby="rank-title" data-ranking hidden>
+          <h3 id="rank-title" class="ranking__title" data-i18n="mk.rank">Ranking</h3>
+          <p class="ranking__sub" data-rank-sub></p>
+          <div class="ranking__scroll" data-rank-scroll><svg class="ranking__svg" data-rank-svg role="img"></svg></div>
+        </aside>
+      </div>
+      <figure class="band-legend" data-legend-box hidden>
+        <figcaption class="band-legend__title" data-legend-title></figcaption>
+        <svg class="band-legend__svg" data-legend role="img"></svg>
+      </figure>
     </div>
   </section>
 </main>

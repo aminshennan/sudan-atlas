@@ -1,6 +1,8 @@
 // Map exports. The SVG is a copy of what is on screen with every style written out, plus a title,
 // an optional legend and the source credit, so it opens the same in any editor. The PNG is that
 // SVG drawn at twice its size. Everything happens in the browser; nothing is sent anywhere.
+import { drawBandLegend, drawRanking, type BandLegend, type RankItem } from "./charts";
+
 const SVG_NS = "http://www.w3.org/2000/svg";
 const FONT = "Inter, 'Helvetica Neue', Arial, sans-serif";
 const FONT_AR = "'IBM Plex Sans Arabic', 'Geeza Pro', 'Segoe UI', Tahoma, sans-serif";
@@ -9,19 +11,28 @@ export const CREDIT_AR = "مصدر الحدود: أوتشا، مجموعة COD-A
 
 export interface LegendSpec {
   title: string;
-  colours: string[];
-  /** Values at the edges between colours: one more than the colours (lowest, breaks, highest). */
-  edges: string[];
-  noData?: string;
+  bands: BandLegend;
+}
+export interface SideChart {
+  title: string;
+  subtitle?: string;
+  items: RankItem[];
+  format: (v: number) => string;
+  limit: number;
 }
 export interface ExportSpec {
   title: string;
   subtitle?: string;
   legend?: LegendSpec;
+  /** A ranked bar chart beside the map. */
+  side?: SideChart;
   rtl?: boolean;
 }
 
-const PROPS = ["fill", "stroke", "stroke-width", "stroke-linejoin", "opacity", "font-size", "font-weight", "paint-order"] as const;
+const SIDE_W = 340;
+const SIDE_GAP = 28;
+
+const PROPS = ["fill", "stroke", "stroke-width", "stroke-linejoin", "opacity", "font-size", "font-weight", "paint-order", "vector-effect"] as const;
 
 function inlineStyles(source: Element, target: Element): void {
   const cs = getComputedStyle(source);
@@ -48,9 +59,12 @@ function text(x: number, y: number, content: string, attrs: Record<string, strin
 export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string {
   const [, , w, h] = (mapSvg.getAttribute("viewBox") ?? "0 0 800 760").split(" ").map(Number);
   const top = spec.subtitle ? 84 : 64;
-  const legendH = spec.legend ? 64 : 0;
+  const legendH = spec.legend ? 120 : 0;
   const bottom = 44 + legendH;
-  const W = w;
+  const sideW = spec.side ? SIDE_W + SIDE_GAP : 0;
+  const W = w + sideW;
+  // In Arabic the chart sits on the left and the map on the right.
+  const mapX = spec.rtl ? sideW : 0;
   const H = h + top + bottom;
   const out = document.createElementNS(SVG_NS, "svg");
   out.setAttribute("xmlns", SVG_NS);
@@ -64,51 +78,56 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
   out.appendChild(bg);
 
   const font = spec.rtl ? FONT_AR : FONT;
-  const anchor = spec.rtl ? "end" : "start";
+  // SVG anchors follow the text direction: for right-to-left text, "start" is the right edge.
+  const anchor = "start";
   const x0 = spec.rtl ? W - 20 : 20;
   out.appendChild(text(x0, 40, spec.title, { "font-family": font, "font-size": 24, "font-weight": 600, fill: "#18181b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   if (spec.subtitle) out.appendChild(text(x0, 66, spec.subtitle, { "font-family": font, "font-size": 15, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
 
   const map = mapSvg.cloneNode(true) as SVGSVGElement;
   inlineStyles(mapSvg, map);
+  // Clip to the map frame: a zoomed-in view must not spill over the title or legend.
+  const clip = document.createElementNS(SVG_NS, "clipPath");
+  clip.setAttribute("id", "sa-map-frame");
+  const frame = document.createElementNS(SVG_NS, "rect");
+  frame.setAttribute("width", String(w));
+  frame.setAttribute("height", String(h));
+  clip.appendChild(frame);
+  out.appendChild(clip);
   const g = document.createElementNS(SVG_NS, "g");
-  g.setAttribute("transform", `translate(0 ${top})`);
+  g.setAttribute("transform", `translate(${mapX} ${top})`);
+  g.setAttribute("clip-path", "url(#sa-map-frame)");
   for (const child of Array.from(map.childNodes)) g.appendChild(child);
   g.querySelectorAll("text").forEach((t) => t.setAttribute("font-family", spec.rtl ? FONT_AR : FONT));
   out.appendChild(g);
 
+  if (spec.side) {
+    const S = spec.side;
+    const sx = spec.rtl ? 0 : w + SIDE_GAP;
+    const tx = spec.rtl ? sx + SIDE_W : sx;
+    const dirAttrs = { "font-family": font, "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" };
+    out.appendChild(text(tx, top + 14, S.title, { ...dirAttrs, "font-size": 14, "font-weight": 600, fill: "#18181b" }));
+    if (S.subtitle) out.appendChild(text(tx, top + 32, S.subtitle, { ...dirAttrs, "font-size": 11, fill: "#52525b" }));
+    const chart = document.createElementNS(SVG_NS, "svg");
+    chart.setAttribute("x", String(sx));
+    chart.setAttribute("y", String(top + 44));
+    chart.setAttribute("width", String(SIDE_W));
+    drawRanking(chart, S.items, { rtl: !!spec.rtl, format: S.format, width: SIDE_W, limit: S.limit, animate: false });
+    chart.querySelectorAll("rect.rank-hit, title").forEach((n) => n.remove());
+    chart.querySelectorAll("[class]").forEach((n) => n.removeAttribute("class"));
+    chart.removeAttribute("height");
+    chart.setAttribute("height", chart.getAttribute("viewBox")!.split(" ")[3]);
+    out.appendChild(chart);
+  }
+
   if (spec.legend) {
     const ly = top + h + 12;
     const L = spec.legend;
-    out.appendChild(text(x0, ly + 12, L.title, { "font-family": font, "font-size": 13, "font-weight": 600, fill: "#18181b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
-    const sw = 84;
-    // Colours run low to high from the reading start; each break value sits under its edge.
-    const edgeX = (i: number) => (spec.rtl ? W - 20 - i * sw : 20 + i * sw);
-    L.colours.forEach((c, i) => {
-      const r = document.createElementNS(SVG_NS, "rect");
-      r.setAttribute("x", String(spec.rtl ? edgeX(i + 1) : edgeX(i)));
-      r.setAttribute("y", String(ly + 22));
-      r.setAttribute("width", String(sw - 1));
-      r.setAttribute("height", "12");
-      r.setAttribute("fill", c);
-      out.appendChild(r);
-    });
-    L.edges.forEach((label, i) => {
-      const first = i === 0, last = i === L.edges.length - 1;
-      const a = first ? (spec.rtl ? "end" : "start") : last ? (spec.rtl ? "start" : "end") : "middle";
-      out.appendChild(text(edgeX(i), ly + 50, label, { "font-family": FONT, "font-size": 11, fill: "#52525b", "text-anchor": a }));
-    });
-    if (L.noData) {
-      const x = spec.rtl ? W - 20 - (L.colours.length + 1) * sw - 20 : 20 + L.colours.length * sw + 20;
-      const r = document.createElementNS(SVG_NS, "rect");
-      r.setAttribute("x", String(x));
-      r.setAttribute("y", String(ly + 22));
-      r.setAttribute("width", "20");
-      r.setAttribute("height", "12");
-      r.setAttribute("fill", "#d4d4d8");
-      out.appendChild(r);
-      out.appendChild(text(x + 26, ly + 33, L.noData, { "font-family": font, "font-size": 11, fill: "#52525b" }));
-    }
+    out.appendChild(text(spec.rtl ? mapX + w - 20 : 20, ly + 12, L.title, { "font-family": font, "font-size": 13, "font-weight": 600, fill: "#18181b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
+    const lg = document.createElementNS(SVG_NS, "g");
+    const size = drawBandLegend(lg, L.bands, { rtl: !!spec.rtl });
+    lg.setAttribute("transform", `translate(${spec.rtl ? mapX + w - 20 - size.width : 20} ${ly + 20})`);
+    out.appendChild(lg);
   }
   out.appendChild(text(x0, H - 16, spec.rtl ? CREDIT_AR : CREDIT_EN, { "font-family": font, "font-size": 11, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   return new XMLSerializer().serializeToString(out);

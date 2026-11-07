@@ -6,6 +6,7 @@ import "../styles/explorer.css";
 import "../styles/maker.css";
 import { getPlace, placeName } from "../lib/atlas";
 import { countEvent } from "../lib/analytics";
+import { drawBandLegend, drawRanking, highlightRanking, type BandLegend, type RankItem } from "../lib/charts";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
 import { lang, t, translate } from "../lib/i18n";
 import { type LabelMode, MapView } from "../lib/mapview";
@@ -335,26 +336,84 @@ function defaultTitle(): string {
   return `${col} ${lv}`;
 }
 
+const RANK_EXPORT_LIMIT = 15;
+
+/** Values for the places at the level being mapped, with their legend and chart data. */
+function chartData() {
+  const lvl = mapLevel();
+  const all = values();
+  const shown = new Map([...all].filter(([p]) => getPlace(p)?.level === lvl));
+  const spec = shown.size ? legendSpec(shown, PALETTES[palette].colours) : null;
+  const L = lang();
+  const items: RankItem[] = spec
+    ? [...shown].map(([pcode, value]) => ({ pcode, value, colour: spec.colourOf(value), name: placeName(getPlace(pcode)!, L) }))
+    : [];
+  const bands: BandLegend | null = spec ? {
+    colours: spec.used,
+    edges: spec.edges,
+    counts: spec.used.map((c) => items.filter((i) => i.colour === c).length),
+    noDataLabel: t("mk.nodata", "No data"),
+    noDataCount: (lvl === 1 ? 19 : 189) - shown.size,
+    caption: t("mk.bands", "Bars show how many places fall in each colour band"),
+  } : null;
+  return { shown, spec, items, bands, lvl };
+}
+
+function valueTitle(): string {
+  return cols.value >= 0 && sheet ? sheet.headers[cols.value] : lang() === "ar" ? "عدد الصفوف" : "Rows";
+}
+
+function rankSubtitle(n: number, limit?: number): string {
+  const ar = lang() === "ar";
+  if (limit && n > limit) return ar ? `أعلى ${limit} مكانًا من أصل ${n}` : `Top ${limit} of ${n} places`;
+  return ar ? `جميع الأماكن (${n}) · من الأعلى إلى الأدنى` : `All ${n} places, highest first`;
+}
+
 async function drawMap(): Promise<void> {
   const titleInput = $<HTMLInputElement>("[data-map-title]");
   if (!titleInput.value) titleInput.value = defaultTitle();
-  const vals = values();
-  const spec = vals.size ? legendSpec(vals, PALETTES[palette].colours) : null;
+  const rankSvg = $<SVGSVGElement>("[data-rank-svg]");
   if (!map) {
-    map = new MapView($<HTMLElement>("[data-mk-map]"), { labels, title: titleInput.value });
+    map = new MapView($<HTMLElement>("[data-mk-map]"), {
+      labels, zoom: true, title: titleInput.value,
+      onHover: (pcode) => { highlightRanking(rankSvg, pcode); revealRow(pcode); },
+    });
     await map.load();
   }
   map.setLevel(mapLevel());
-  map.setFill((p) => { const v = vals.get(p); return v === undefined || !spec ? undefined : spec.colourOf(v); });
+  const { spec, items, bands } = chartData();
+  map.setFill((p) => { const v = items.find((i) => i.pcode === p); return v?.colour; });
   map.setLabels(labels);
-  const legend = $<HTMLElement>("[data-legend]");
-  legend.replaceChildren();
-  if (spec) {
-    const ramp = Object.assign(document.createElement("span"), { className: "legend__ramp" });
-    spec.used.forEach((c, i) => ramp.append(Object.assign(document.createElement("span"), { title: spec.labels[i], style: `background:${c}` })));
-    legend.append(ramp, document.createTextNode(`${spec.labels[0]} … ${spec.labels[spec.labels.length - 1]}`),
-      Object.assign(document.createElement("span"), { className: "legend__nodata", textContent: t("mk.nodata", "No data") }));
+
+  const rtl = lang() === "ar";
+  const ranking = $<HTMLElement>("[data-ranking]");
+  ranking.hidden = !items.length;
+  if (items.length) {
+    $<HTMLElement>("[data-rank-sub]").textContent = `${valueTitle()} · ${rankSubtitle(items.length)}`;
+    drawRanking(rankSvg, items, { rtl, format: nf, width: 300, onHover: (p) => { map?.highlight(p); highlightRanking(rankSvg, p); } });
+    rankSvg.setAttribute("aria-label", `${t("mk.rank", "Ranking")}: ${rankSubtitle(items.length)}`);
   }
+
+  const legendBox = $<HTMLElement>("[data-legend-box]");
+  legendBox.hidden = !spec || !bands;
+  if (spec && bands) {
+    $<HTMLElement>("[data-legend-title]").textContent = valueTitle();
+    const legendSvg = $<SVGSVGElement>("[data-legend]");
+    const size = drawBandLegend(legendSvg, bands, { rtl });
+    legendSvg.setAttribute("width", String(size.width));
+    legendSvg.setAttribute("aria-label", spec.labels.map((l, i) => `${l}: ${bands.counts[i]}`).join(", "));
+  }
+}
+
+/** Keep the hovered place's row in view inside the ranking list, without moving the page. */
+function revealRow(pcode: string | null): void {
+  if (!pcode) return;
+  const scroller = $<HTMLElement>("[data-rank-scroll]");
+  const row = scroller.querySelector<SVGGElement>(`g.rank-row[data-pcode="${pcode}"]`);
+  if (!row) return;
+  const r = row.getBoundingClientRect(), box = scroller.getBoundingClientRect();
+  if (r.top < box.top) scroller.scrollTop -= box.top - r.top + 8;
+  else if (r.bottom > box.bottom) scroller.scrollTop += r.bottom - box.bottom + 8;
 }
 
 function renderPalettes(): void {
@@ -401,13 +460,12 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
     return;
   }
   if (!map) return;
-  const vals = values();
-  const spec = vals.size ? legendSpec(vals, PALETTES[palette].colours) : null;
-  const legendTitle = cols.value >= 0 && sheet ? sheet.headers[cols.value] : (lang() === "ar" ? "عدد الصفوف" : "Rows");
+  const { items, bands } = chartData();
   const svg = buildExportSvg(map.svg, {
     title: $<HTMLInputElement>("[data-map-title]").value || defaultTitle(),
     rtl: lang() === "ar",
-    legend: spec ? { title: legendTitle, colours: spec.used, edges: spec.edges, noData: t("mk.nodata", "No data") } : undefined,
+    legend: bands ? { title: valueTitle(), bands } : undefined,
+    side: items.length ? { title: t("mk.rank", "Ranking"), subtitle: rankSubtitle(items.length, RANK_EXPORT_LIMIT), items, format: nf, limit: RANK_EXPORT_LIMIT } : undefined,
   });
   if (kind === "svg") downloadSvg(`${fileStem()}-map.svg`, svg);
   else await downloadPng(`${fileStem()}-map.png`, svg);
@@ -417,5 +475,5 @@ document.addEventListener("sa:lang", () => {
   if (sheet) renderColumns();
   if (uniques.length) renderReview();
   renderPalettes();
-  if (map) map.render();
+  if (map) void drawMap();
 });

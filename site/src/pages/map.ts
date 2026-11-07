@@ -24,6 +24,7 @@ const state = {
 
 const map = new MapView($<HTMLElement>("[data-map]"), {
   labels: state.labels,
+  zoom: true,
   title: "Map of Sudan's states and localities",
   onSelect: (pcode) => select(pcode),
 });

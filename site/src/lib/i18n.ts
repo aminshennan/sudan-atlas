@@ -71,6 +71,9 @@ const AR: Record<string, string> = {
   "map.showLocalities": "اعرض محلياتها على الخريطة",
   "map.loading": "جارٍ تحميل الخريطة…",
   "map.reset": "السودان كاملًا",
+  "map.zoomIn": "تكبير",
+  "map.zoomOut": "تصغير",
+  "map.zoomReset": "عرض الخريطة كاملة",
   "map.crumbs": "مسار التصفح",
   "map.aria": "خريطة ولايات السودان ومحلياته",
   "map.loading.aria": "جارٍ تحميل الخريطة",
@@ -141,6 +144,8 @@ const AR: Record<string, string> = {
   "mk.colours": "الألوان (ملائمة لمن لديهم عمى الألوان)",
   "mk.export.file": "ملفك مع الرموز المكانية",
   "mk.back.review": "عُد إلى المراجعة",
+  "mk.rank": "الترتيب",
+  "mk.bands": "تُظهر الأعمدة عدد الأماكن في كل فئة لونية",
   "mk.nodata": "لا توجد بيانات",
 };
 
