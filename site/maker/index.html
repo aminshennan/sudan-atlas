@@ -2,12 +2,117 @@
 <html lang="en" dir="ltr">
 <head>
 <!-- include:head -->
-<title>Sudan Atlas</title>
+<title>Map-maker: turn a spreadsheet into a map of Sudan · Sudan Atlas</title>
+<meta name="description" content="Upload a CSV or Excel file with Sudanese place names, check the matches, and export a map plus your file with P-codes. Everything happens in your browser; nothing is uploaded.">
+<meta property="og:title" content="Map-maker · Sudan Atlas">
 </head>
-<body data-page="maker">
+<body data-page="maker" class="app-page">
 <!-- include:header -->
-<main id="main" class="container" style="padding-block: 64px"><h1>Coming soon</h1></main>
+<main id="main" class="maker">
+  <div class="maker__bar">
+    <ol class="steps" aria-label="Steps" data-i18n-attr="aria-label:mk.steps">
+      <li data-step-tab="1"><span class="steps__n">1</span><span data-i18n="mk.s1">Upload</span></li>
+      <li data-step-tab="2"><span class="steps__n">2</span><span data-i18n="mk.s2">Columns</span></li>
+      <li data-step-tab="3"><span class="steps__n">3</span><span data-i18n="mk.s3">Check matches</span></li>
+      <li data-step-tab="4"><span class="steps__n">4</span><span data-i18n="mk.s4">Map and export</span></li>
+    </ol>
+    <p class="maker__privacy"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="mk.privacy">Your file stays in your browser. Nothing is uploaded.</span></p>
+  </div>
+
+  <!-- Step 1: upload -->
+  <section class="maker__step container" data-step="1" aria-labelledby="s1-title">
+    <h1 id="s1-title" class="maker__title" data-i18n="mk.s1.title">Turn a spreadsheet of place names into a map.</h1>
+    <p class="lead" data-i18n="mk.s1.lead">Upload a CSV or Excel file with Sudanese state or locality names, in Arabic or English, spelled any way. We match each name to its official place and P-code, you check the uncertain ones, then export a map and your file with P-codes added.</p>
+    <label class="drop" data-drop>
+      <input type="file" accept=".csv,.tsv,.txt,.xlsx" data-file class="visually-hidden">
+      <span class="drop__icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 18 18"><path d="M9 12 V3 M5.5 6.5 L9 3 L12.5 6.5 M3 12 V15 H15 V12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <strong data-i18n="mk.drop">Drop a CSV or Excel file here, or click to choose one</strong>
+      <span class="muted small" data-i18n="mk.drop.hint">.csv, .tsv or .xlsx · the first row should hold the column names</span>
+    </label>
+    <p class="maker__alt"><button type="button" class="btn btn--ghost btn--small" data-sample data-i18n="mk.sample">Try a sample file with messy names</button></p>
+    <p class="maker__error" role="alert" data-error hidden></p>
+  </section>
+
+  <!-- Step 2: columns -->
+  <section class="maker__step container" data-step="2" hidden aria-labelledby="s2-title">
+    <h2 id="s2-title" data-i18n="mk.s2.title">Which columns hold what?</h2>
+    <p class="muted" data-file-summary></p>
+    <div class="maker__grid">
+      <div class="field"><label class="field__label" for="col-name" data-i18n="mk.col.name">Place names</label><select id="col-name" data-col="name"></select></div>
+      <div class="field"><label class="field__label" for="col-state" data-i18n="mk.col.state">State (optional, helps matching)</label><select id="col-state" data-col="state"></select></div>
+      <div class="field"><label class="field__label" for="col-value" data-i18n="mk.col.value">Value to map (optional)</label><select id="col-value" data-col="value"></select></div>
+      <div class="field"><span class="field__label" data-i18n="mk.col.level">The names are</span>
+        <div class="segmented" role="group" aria-label="Level">
+          <button type="button" aria-pressed="true" data-mk-level="2" data-i18n="mk.lvl.2">Localities</button>
+          <button type="button" aria-pressed="false" data-mk-level="1" data-i18n="mk.lvl.1">States</button>
+          <button type="button" aria-pressed="false" data-mk-level="0" data-i18n="mk.lvl.0">Either</button>
+        </div>
+      </div>
+    </div>
+    <div class="table-wrap"><table class="table" data-preview></table></div>
+    <div class="maker__actions">
+      <button type="button" class="btn btn--ghost" data-go="1" data-i18n="mk.back">Back</button>
+      <button type="button" class="btn btn--primary" data-match data-i18n="mk.match">Match the names</button>
+    </div>
+  </section>
+
+  <!-- Step 3: review -->
+  <section class="maker__step container" data-step="3" hidden aria-labelledby="s3-title">
+    <div class="matching" data-matching hidden>
+      <canvas data-orb="connecting" data-orb-size="64" aria-label="Matching names"></canvas>
+      <strong data-matching-text>Matching…</strong>
+      <span class="muted small" data-i18n="mk.privacy">Your file stays in your browser. Nothing is uploaded.</span>
+    </div>
+    <div data-review hidden>
+      <div class="review__head">
+        <h2 id="s3-title" data-i18n="mk.s3.title">Check the matches</h2>
+        <p class="muted" data-review-summary aria-live="polite"></p>
+      </div>
+      <div class="review__tools">
+        <div class="segmented" role="group" aria-label="Show">
+          <button type="button" aria-pressed="false" data-filter="review"><span data-i18n="mk.f.review">Needs review</span> <span data-count="review"></span></button>
+          <button type="button" aria-pressed="false" data-filter="none"><span data-i18n="mk.f.none">No match</span> <span data-count="none"></span></button>
+          <button type="button" aria-pressed="true" data-filter="all"><span data-i18n="mk.f.all">All</span> <span data-count="all"></span></button>
+        </div>
+      </div>
+      <div class="table-wrap"><table class="table review" data-review-table></table></div>
+      <div class="maker__actions">
+        <button type="button" class="btn btn--ghost" data-go="2" data-i18n="mk.back">Back</button>
+        <button type="button" class="btn btn--primary" data-go="4" data-i18n="mk.tomap">Continue to the map</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 4: map and export -->
+  <section class="maker__step maker__mapstep" data-step="4" hidden aria-labelledby="s4-title">
+    <div class="maker__side panel">
+      <h2 id="s4-title" class="field__label" data-i18n="mk.s4.title">Your map</h2>
+      <div class="field"><label class="field__label" for="map-title" data-i18n="mk.title">Title</label><input id="map-title" type="text" data-map-title></div>
+      <div class="field"><label class="field__label" for="agg" data-i18n="mk.agg">Combine rows for the same place</label>
+        <select id="agg" data-agg><option value="sum" data-i18n="mk.agg.sum">Sum of values</option><option value="mean" data-i18n="mk.agg.mean">Average of values</option><option value="count" data-i18n="mk.agg.count">Number of rows</option></select></div>
+      <div class="field"><span class="field__label" data-i18n="mk.colours">Colours (colour-blind safe)</span>
+        <div class="palettes" role="radiogroup" aria-label="Colours" data-palettes></div></div>
+      <div class="field"><span class="field__label" data-i18n="map.labels">Labels</span>
+        <div class="segmented" role="group" aria-label="Labels">
+          <button type="button" aria-pressed="true" data-mk-labels="en">English</button>
+          <button type="button" aria-pressed="false" data-mk-labels="ar" lang="ar">العربية</button>
+          <button type="button" aria-pressed="false" data-mk-labels="off" data-i18n="map.labels.off">Off</button>
+        </div></div>
+      <div class="field"><span class="field__label" data-i18n="map.export">Export</span>
+        <div class="maker__exports">
+          <button type="button" class="btn btn--primary btn--small" data-mk-export="svg">SVG</button>
+          <button type="button" class="btn btn--primary btn--small" data-mk-export="png">PNG</button>
+          <button type="button" class="btn btn--signal btn--small" data-mk-export="csv" data-i18n="mk.export.file">Your file with P-codes</button>
+        </div></div>
+      <button type="button" class="btn btn--ghost btn--small" data-go="3" data-i18n="mk.back.review">Back to the matches</button>
+    </div>
+    <div class="maker__map">
+      <div data-mk-map></div>
+      <div class="legend" data-legend></div>
+    </div>
+  </section>
+</main>
 <!-- include:footer -->
-<script type="module" src="/src/pages/stub.ts"></script>
+<script type="module" src="/src/pages/maker.ts"></script>
 </body>
 </html>

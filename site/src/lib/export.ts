@@ -10,7 +10,8 @@ export const CREDIT_AR = "الحدود: أوتشا COD-AB السودان الإ�
 export interface LegendSpec {
   title: string;
   colours: string[];
-  labels: string[];
+  /** Values at the edges between colours: one more than the colours (lowest, breaks, highest). */
+  edges: string[];
   noData?: string;
 }
 export interface ExportSpec {
@@ -80,17 +81,22 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
     const ly = top + h + 12;
     const L = spec.legend;
     out.appendChild(text(x0, ly + 12, L.title, { "font-family": font, "font-size": 13, "font-weight": 600, fill: "#18181b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
-    const sw = 56;
+    const sw = 84;
+    // Colours run low to high from the reading start; each break value sits under its edge.
+    const edgeX = (i: number) => (spec.rtl ? W - 20 - i * sw : 20 + i * sw);
     L.colours.forEach((c, i) => {
-      const x = spec.rtl ? W - 20 - (i + 1) * sw : 20 + i * sw;
       const r = document.createElementNS(SVG_NS, "rect");
-      r.setAttribute("x", String(x));
+      r.setAttribute("x", String(spec.rtl ? edgeX(i + 1) : edgeX(i)));
       r.setAttribute("y", String(ly + 22));
-      r.setAttribute("width", String(sw - 2));
+      r.setAttribute("width", String(sw - 1));
       r.setAttribute("height", "12");
       r.setAttribute("fill", c);
       out.appendChild(r);
-      out.appendChild(text(x, ly + 50, L.labels[i] ?? "", { "font-family": FONT, "font-size": 11, fill: "#52525b" }));
+    });
+    L.edges.forEach((label, i) => {
+      const first = i === 0, last = i === L.edges.length - 1;
+      const a = first ? (spec.rtl ? "end" : "start") : last ? (spec.rtl ? "start" : "end") : "middle";
+      out.appendChild(text(edgeX(i), ly + 50, label, { "font-family": FONT, "font-size": 11, fill: "#52525b", "text-anchor": a }));
     });
     if (L.noData) {
       const x = spec.rtl ? W - 20 - (L.colours.length + 1) * sw - 20 : 20 + L.colours.length * sw + 20;
