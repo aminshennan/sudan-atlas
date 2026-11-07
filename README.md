@@ -2,7 +2,7 @@
 
 An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's states and localities as maps — for websites, apps and Python.
 
-> **Status:** data release 2026.1; packages on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/). Website coming next.
+> **Status:** data release 2026.1; packages on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); website in `site/` (map explorer, map-maker and documentation).
 
 ## Quick start
 
