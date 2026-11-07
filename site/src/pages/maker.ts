@@ -5,6 +5,7 @@ import "../styles/map.css";
 import "../styles/explorer.css";
 import "../styles/maker.css";
 import { getPlace, placeName } from "../lib/atlas";
+import { countEvent } from "../lib/analytics";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
 import { lang, t, translate } from "../lib/i18n";
 import { type LabelMode, MapView } from "../lib/mapview";
@@ -49,7 +50,7 @@ function go(step: number): void {
     if (n === step) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
   });
   window.scrollTo({ top: 0 });
-  if (step === 4) drawMap();
+  if (step === 4) { drawMap(); countEvent("map_made"); }
 }
 $$<HTMLButtonElement>("[data-go]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.go))));
 go(1);
@@ -383,6 +384,7 @@ const fileStem = () => (sheet?.file ?? "sudan-atlas").replace(/\.[^.]+$/, "").re
 
 $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("click", async () => {
   const kind = b.dataset.mkExport;
+  countEvent(kind === "csv" ? "file_export" : "map_export", kind);
   if (kind === "csv") {
     if (!sheet) return;
     const byRow = new Map<number, Unique>();
