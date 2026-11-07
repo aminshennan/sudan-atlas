@@ -65,3 +65,4 @@ html[dir="rtl"] .hero__install { justify-content: flex-end; }
 .place-card li button { all: unset; cursor: pointer; }
 .place-card li button:hover { color: var(--signal); }
 .place-card li code { font-size: 12px; color: var(--muted); }
+html[dir="rtl"] .match-list .meta__score { font-family: var(--font-arabic); font-size: 12px; }

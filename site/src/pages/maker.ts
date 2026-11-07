@@ -126,7 +126,7 @@ $<HTMLButtonElement>("[data-sample]").addEventListener("click", async () => {
 function renderColumns(): void {
   if (!sheet) return;
   $<HTMLElement>("[data-file-summary]").textContent = lang() === "ar"
-    ? `${sheet.file}: ${sheet.rows.length} صفًا و${sheet.headers.length} أعمدة.`
+    ? `${sheet.file} · عدد الصفوف: ${sheet.rows.length} · عدد الأعمدة: ${sheet.headers.length}`
     : `${sheet.file}: ${sheet.rows.length} rows, ${sheet.headers.length} columns.`;
   for (const key of ["name", "state", "value"] as const) {
     const sel = $<HTMLSelectElement>(`[data-col="${key}"]`);
@@ -191,7 +191,7 @@ $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
     const u = uniques[i];
     u.result = u.name ? match(u.name, { stateHint: u.state || null, level: level || null }) : undefined;
     if (i % 40 === 0) {
-      text.textContent = lang() === "ar" ? `جارٍ مطابقة ${uniques.length} اسمًا… ${i} / ${uniques.length}` : `Matching ${uniques.length} names… ${i} / ${uniques.length}`;
+      text.textContent = lang() === "ar" ? `جارٍ مطابقة الأسماء… ${i} من ${uniques.length}` : `Matching ${uniques.length} names… ${i} / ${uniques.length}`;
       await new Promise((r) => setTimeout(r, 0));
     }
   }
@@ -215,7 +215,7 @@ function methodLabel(u: Unique): string {
   const r = u.result;
   if (!r || !u.name) return t("mk.m.empty", "Empty");
   const names: Record<string, string> = lang() === "ar"
-    ? { exact: "مطابقة تامة", variant: "تهجئة معروفة", fuzzy: "تهجئة قريبة", ambiguous: "اسم لأكثر من مكان", none: "لا تطابق" }
+    ? { exact: "الاسم الرسمي", variant: "صيغة معروفة للاسم", fuzzy: "كتابة قريبة من الاسم", ambiguous: "يحتمل أكثر من مكان", none: "بلا مطابقة" }
     : { exact: "Exact", variant: "Known spelling", fuzzy: "Close spelling", ambiguous: "Could be two places", none: "No match" };
   return `${names[r.method] ?? r.method}${r.pcode ? ` · ${r.score.toFixed(2)}` : ""}`;
 }
@@ -231,7 +231,7 @@ function renderReview(): void {
   const matchedRows = uniques.filter((u) => finalPcode(u)).reduce((n, u) => n + u.rows.length, 0);
   const totalRows = sheet?.rows.length ?? 0;
   $<HTMLElement>("[data-review-summary]").textContent = lang() === "ar"
-    ? `${matchedRows} من ${totalRows} صفًا مطابَقة · ${counts.review} اسمًا يحتاج مراجعتك`
+    ? `الصفوف المطابَقة: ${matchedRows} من ${totalRows} · أسماء بحاجة إلى مراجعتك: ${counts.review}`
     : `${matchedRows} of ${totalRows} rows matched · ${counts.review} names need your review`;
 
   const order: Record<Status, number> = { review: 0, none: 1, fixed: 2, ok: 3 };

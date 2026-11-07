@@ -40,9 +40,9 @@ function banner(): void {
   box.setAttribute("aria-label", ar ? "ملفات تعريف الارتباط" : "Cookies");
   const text = document.createElement("p");
   text.textContent = ar
-    ? "نستخدم Google Analytics لعدّ الزيارات إذا وافقت. لا يُرسل أي شيء من ملفاتك أبدًا."
+    ? "هل تسمح لنا باستخدام Google Analytics لإحصاء الزيارات؟ لن يُرسل أي شيء من ملفاتك أبدًا."
     : "May we use Google Analytics to count visits? Nothing from your files is ever sent.";
-  const yes = Object.assign(document.createElement("button"), { type: "button", className: "btn btn--primary btn--small", textContent: ar ? "موافق" : "Allow" });
+  const yes = Object.assign(document.createElement("button"), { type: "button", className: "btn btn--primary btn--small", textContent: ar ? "أسمح" : "Allow" });
   const no = Object.assign(document.createElement("button"), { type: "button", className: "btn btn--ghost btn--small", textContent: ar ? "لا، شكرًا" : "No thanks" });
   const decide = (c: Consent) => {
     try { localStorage.setItem(CONSENT_KEY, c); } catch { /* the banner returns next visit */ }

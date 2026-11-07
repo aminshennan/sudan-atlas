@@ -31,7 +31,7 @@ function renderMatches(): void {
       to.className = "to";
       to.textContent = placeName(r, lang());
       meta.append(Object.assign(document.createElement("span"), { textContent: r.pcode }),
-        Object.assign(document.createElement("span"), { textContent: `${t("home.score", "score")} ${r.score.toFixed(2)}` }));
+        Object.assign(document.createElement("span"), { className: "meta__score", textContent: `${t("home.score", "score")} ${r.score.toFixed(2)}` }));
     } else {
       to.className = "to ambiguous";
       to.textContent = t("home.card.choose", "2 places: you choose");

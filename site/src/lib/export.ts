@@ -5,7 +5,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const FONT = "Inter, 'Helvetica Neue', Arial, sans-serif";
 const FONT_AR = "'IBM Plex Sans Arabic', 'Geeza Pro', 'Segoe UI', Tahoma, sans-serif";
 export const CREDIT_EN = "Boundaries: OCHA COD-AB Sudan v03 (CC BY 3.0 IGO). Names and P-codes: Sudan Atlas (CC BY 4.0).";
-export const CREDIT_AR = "الحدود: أوتشا COD-AB السودان الإصدار 3 (CC BY 3.0 IGO). الأسماء والرموز: أطلس السودان (CC BY 4.0).";
+export const CREDIT_AR = "مصدر الحدود: أوتشا، مجموعة COD-AB للسودان، الإصدار الثالث (CC BY 3.0 IGO). الأسماء والرموز: أطلس السودان (CC BY 4.0).";
 
 export interface LegendSpec {
   title: string;
