@@ -8,7 +8,7 @@
 from .match import Matcher, match
 from .places import RESOLUTIONS, data_version, get_feature, get_localities, get_states
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 DATA_VERSION = data_version()
 
 __all__ = ["DATA_VERSION", "RESOLUTIONS", "Matcher", "get_feature", "get_localities", "get_states", "match"]
