@@ -120,6 +120,7 @@ export class MapView {
     borders.replaceChildren();
     outline.replaceChildren();
     const lang = (document.documentElement.lang === "ar" ? "ar" : "en") as Lang;
+    this.svg.setAttribute("aria-label", lang === "ar" ? "خريطة السودان" : this.opts.title ?? "Map of Sudan");
     for (const f of this.visible()) {
       const d = this.path(f);
       if (!d) continue;

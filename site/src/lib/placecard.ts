@@ -29,7 +29,7 @@ export function renderPlaceCard(container: HTMLElement, pcode: string | null, ma
   const card = node("div", { className: "place-card" });
   const parent = isState ? undefined : getPlace(place.parent_pcode);
   card.append(
-    node("span", { className: "place-card__kind", textContent: isState ? `${t("map.state", "State")} · admin 1` : `${t("map.locality", "Locality")} · admin 2` }),
+    node("span", { className: "place-card__kind", textContent: isState ? `${t("map.state", "State")} · ${t("admin1", "admin 1")}` : `${t("map.locality", "Locality")} · ${t("admin2", "admin 2")}` }),
     node("span", { className: "place-card__name", textContent: placeName(place, L) }),
     node("span", { className: "place-card__other", lang: L === "ar" ? "en" : "ar", textContent: placeName(place, L === "ar" ? "en" : "ar") }),
   );

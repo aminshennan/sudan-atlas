@@ -3,45 +3,84 @@
 <head>
 <!-- include:head -->
 <title>Data and sources · Sudan Atlas</title>
+<meta name="sa:title-ar" content="البيانات والمصادر · أطلس السودان">
 <meta name="description" content="Where Sudan Atlas's boundaries, P-codes and spellings come from, how disputed areas are shown, licences and downloads.">
 <meta property="og:title" content="Data and sources · Sudan Atlas">
 </head>
 <body data-page="sources">
 <!-- include:header -->
 <main id="main" class="container prose">
-  <p class="eyebrow">Data and sources</p>
-  <h1>Where the data comes from</h1>
-  <p class="lead">Sudan Atlas follows the UN's published boundaries exactly, adds the many ways people spell each place, and documents every source.</p>
+  <div class="stack" data-lang-only="en">
+    <p class="eyebrow">Data and sources</p>
+    <h1>Where the data comes from</h1>
+    <p class="lead">Sudan Atlas follows the UN's published boundaries exactly, adds the many ways people spell each place, and documents every source.</p>
 
-  <h2>Boundaries and P-codes</h2>
-  <p>The boundaries, P-codes and official English and Arabic names come from OCHA's <a href="https://data.humdata.org/dataset/cod-ab-sdn">Common Operational Dataset for Sudan (COD-AB), version v03</a>, published on the Humanitarian Data Exchange under CC BY 3.0 IGO. It has 19 admin-1 units (18 states and the Abyei PCA area) and 189 localities. We do not redraw, add or remove boundaries, and we never change an official name or P-code.</p>
-  <p>Three detail levels are provided: <strong>detailed</strong> (the source geometry), <strong>medium</strong> and <strong>light</strong> (simplified for the web, with borders between neighbours kept identical). Every release is checked for valid shapes, gaps and overlaps, and matching counts.</p>
+    <h2>Boundaries and P-codes</h2>
+    <p>The boundaries, P-codes and official English and Arabic names come from OCHA's <a href="https://data.humdata.org/dataset/cod-ab-sdn">Common Operational Dataset for Sudan (COD-AB), version v03</a>, published on the Humanitarian Data Exchange under CC BY 3.0 IGO. It has 19 admin-1 units (18 states and the Abyei PCA area) and 189 localities. We do not redraw, add or remove boundaries, and we never change an official name or P-code.</p>
+    <p>Three detail levels are provided: <strong>detailed</strong> (the source geometry), <strong>medium</strong> and <strong>light</strong> (simplified for the web, with borders between neighbours kept identical). Every release is checked for valid shapes, gaps and overlaps, and matching counts.</p>
 
-  <h2>Disputed areas</h2>
-  <p>Boundaries are shown for humanitarian, research and practical use. <strong>They do not imply any opinion on the legal status of any country, territory or area, or on the delimitation of any frontier.</strong> Where an area is disputed, we keep the COD-AB treatment:</p>
-  <ul>
-    <li><strong>Abyei</strong> is its own admin-1 unit, <code>SD19</code> "Abyei PCA", never merged into a state. It is different from the locality named Abyei (<code>SD18087</code>) in West Kordofan; the matcher asks which one you mean.</li>
-    <li><strong>The Halaib Triangle</strong> is in Red Sea State as the locality <code>SD10066</code> "Hala'ib", as in COD-AB, and is not styled differently.</li>
-  </ul>
+    <h2>Disputed areas</h2>
+    <p>Boundaries are shown for humanitarian, research and practical use. <strong>They do not imply any opinion on the legal status of any country, territory or area, or on the delimitation of any frontier.</strong> Where an area is disputed, we keep the COD-AB treatment:</p>
+    <ul>
+      <li><strong>Abyei</strong> is its own admin-1 unit, <code>SD19</code> "Abyei PCA", never merged into a state. It is different from the locality named Abyei (<code>SD18087</code>) in West Kordofan; the matcher asks which one you mean.</li>
+      <li><strong>The Halaib Triangle</strong> is in Red Sea State as the locality <code>SD10066</code> "Hala'ib", as in COD-AB, and is not styled differently.</li>
+    </ul>
 
-  <h2>Spellings</h2>
-  <p>To match names written any way, Sudan Atlas keeps 1,178 reviewed spellings of the 208 places, from <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0), <a href="https://www.wikidata.org/">Wikidata</a> (CC0) and <a href="https://www.openstreetmap.org/">OpenStreetMap</a> (ODbL, © OpenStreetMap contributors, kept in a separate file). Every spelling was reviewed before release; towns on a locality border point to both localities, so the matcher asks rather than guesses.</p>
+    <h2>Spellings</h2>
+    <p>To match names written any way, Sudan Atlas keeps 1,178 reviewed spellings of the 208 places, from <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0), <a href="https://www.wikidata.org/">Wikidata</a> (CC0) and <a href="https://www.openstreetmap.org/">OpenStreetMap</a> (ODbL, © OpenStreetMap contributors, kept in a separate file). Every spelling was reviewed before release; towns on a locality border point to both localities, so the matcher asks rather than guesses.</p>
 
-  <h2>Licences</h2>
-  <ul>
-    <li>Boundary files: CC BY 3.0 IGO. Credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas".</li>
-    <li>Sudan Atlas's own data (spellings, matching rules, test cases): CC BY 4.0.</li>
-    <li>OpenStreetMap spellings: ODbL 1.0, © OpenStreetMap contributors.</li>
-    <li>Software: MIT.</li>
-  </ul>
+    <h2>Licences</h2>
+    <ul>
+      <li>Boundary files: CC BY 3.0 IGO. Credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas".</li>
+      <li>Sudan Atlas's own data (spellings, matching rules, test cases): CC BY 4.0.</li>
+      <li>OpenStreetMap spellings: ODbL 1.0, © OpenStreetMap contributors.</li>
+      <li>Software: MIT.</li>
+    </ul>
 
-  <h2>Versions and downloads</h2>
-  <p>Data releases are named by year and number. The current release is <strong>2026.1</strong>, used by packages version 0.1.1. A new release is made when COD-AB changes or when we fix anything; each has a changelog.</p>
-  <ul>
-    <li><a href="https://github.com/aminshennan/sudan-atlas/releases/tag/2026.1">Release 2026.1 on GitHub</a>: all boundary files as GeoJSON and TopoJSON</li>
-    <li><a href="https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/">The data files on jsDelivr</a></li>
-    <li><a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/SOURCES.md">Full source list</a> with download dates and file hashes, and the <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/DATA_POLICY.md">data policy</a></li>
-  </ul>
+    <h2>Versions and downloads</h2>
+    <p>Data releases are named by year and number. The current release is <strong>2026.1</strong>, used by packages version 0.1.1. A new release is made when COD-AB changes or when we fix anything; each has a changelog.</p>
+    <ul>
+      <li><a href="https://github.com/aminshennan/sudan-atlas/releases/tag/2026.1">Release 2026.1 on GitHub</a>: all boundary files as GeoJSON and TopoJSON</li>
+      <li><a href="https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/">The data files on jsDelivr</a></li>
+      <li><a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/SOURCES.md">Full source list</a> with download dates and file hashes, and the <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/DATA_POLICY.md">data policy</a></li>
+    </ul>
+  </div>
+
+  <div class="stack" data-lang-only="ar" lang="ar" hidden>
+    <p class="eyebrow">البيانات والمصادر</p>
+    <h1>من أين تأتي البيانات</h1>
+    <p class="lead">يلتزم أطلس السودان بالحدود التي نشرتها الأمم المتحدة كما هي، ويضيف الطرق الكثيرة التي يُكتب بها كل مكان، ويوثّق كل مصدر.</p>
+
+    <h2>الحدود ورموز المواقع</h2>
+    <p>الحدود ورموز المواقع (P-codes) والأسماء الرسمية بالعربية والإنجليزية مأخوذة من <a href="https://data.humdata.org/dataset/cod-ab-sdn">مجموعة البيانات التشغيلية المشتركة للسودان (COD-AB)، الإصدار v03</a> الصادرة عن مكتب الأمم المتحدة لتنسيق الشؤون الإنسانية (أوتشا)، والمنشورة على منصة تبادل البيانات الإنسانية برخصة CC BY 3.0 IGO. وتضم 19 وحدة من المستوى الإداري الأول (18 ولاية ومنطقة أبيي الإدارية) و189 محلية. لا نعيد رسم الحدود ولا نضيف إليها ولا نحذف منها، ولا نغيّر أي اسم أو رمز رسمي.</p>
+    <p>تتوفر ثلاثة مستويات من التفصيل: <strong>detailed</strong> (الهندسة الأصلية)، و<strong>medium</strong> و<strong>light</strong> (مبسّطة للويب، مع إبقاء الحدود المشتركة بين الجيران متطابقة). ويُفحص كل إصدار للتأكد من صحة الأشكال، وخلوّها من الفجوات والتداخلات، وتطابق الأعداد.</p>
+
+    <h2>المناطق المتنازع عليها</h2>
+    <p>تُعرض الحدود للأغراض الإنسانية والبحثية والعملية. <strong>ولا تعني أي رأي في الوضع القانوني لأي بلد أو إقليم أو منطقة، أو في ترسيم أي حدود.</strong> وحين تكون منطقة متنازعًا عليها، نحتفظ بطريقة معالجتها في COD-AB:</p>
+    <ul>
+      <li><strong>أبيي</strong> وحدة مستقلة في المستوى الإداري الأول، <code>SD19</code> "إدارية أبيي"، ولا تُدمج أبدًا في أي ولاية. وهي تختلف عن محلية أبيي (<code>SD18087</code>) في غرب كردفان، ويسألك المطابِق أيهما تقصد.</li>
+      <li><strong>مثلث حلايب</strong> يقع في ولاية البحر الأحمر بوصفه محلية <code>SD10066</code> "حلايب"، كما في COD-AB، ولا يُعرض بشكل مختلف.</li>
+    </ul>
+
+    <h2>التهجئات</h2>
+    <p>لمطابقة الأسماء أيًّا كانت طريقة كتابتها، يحتفظ أطلس السودان بـ1,178 تهجئة مراجَعة للأماكن الـ208، مأخوذة من <a href="https://www.geonames.org/">GeoNames</a> (CC BY 4.0) و<a href="https://www.wikidata.org/">ويكي بيانات</a> (CC0) و<a href="https://www.openstreetmap.org/">OpenStreetMap</a> (ODbL، © مساهمو OpenStreetMap، في ملف منفصل). وقد رُوجعت كل تهجئة قبل النشر، والبلدات الواقعة على حدود محليتين ترتبط بالمحليتين معًا، فيسألك المطابِق بدل أن يخمّن.</p>
+
+    <h2>الرخص</h2>
+    <ul>
+      <li>ملفات الحدود: CC BY 3.0 IGO. النسبة: "OCHA (COD-AB Sudan), via HDX; Sudan Atlas".</li>
+      <li>بيانات أطلس السودان الخاصة (التهجئات وقواعد المطابقة وحالات الاختبار): CC BY 4.0.</li>
+      <li>تهجئات OpenStreetMap: ‏ODbL 1.0، © مساهمو OpenStreetMap.</li>
+      <li>البرمجيات: MIT.</li>
+    </ul>
+
+    <h2>الإصدارات والتنزيلات</h2>
+    <p>تُسمّى إصدارات البيانات بالسنة ورقم الإصدار. الإصدار الحالي هو <strong>2026.1</strong>، وتستخدمه الحزم في نسختها 0.1.1. ويصدر إصدار جديد عندما تتغير COD-AB أو عندما نصحح أي شيء، ولكل إصدار سجل تغييرات.</p>
+    <ul>
+      <li><a href="https://github.com/aminshennan/sudan-atlas/releases/tag/2026.1">الإصدار 2026.1 على GitHub</a>: جميع ملفات الحدود بصيغتي GeoJSON وTopoJSON</li>
+      <li><a href="https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/">ملفات البيانات على jsDelivr</a></li>
+      <li><a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/SOURCES.md">القائمة الكاملة للمصادر</a> مع تواريخ التنزيل وبصمات الملفات، و<a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/DATA_POLICY.md">سياسة البيانات</a> (بالإنجليزية)</li>
+    </ul>
+  </div>
 </main>
 <!-- include:footer -->
 <script type="module" src="/src/pages/stub.ts"></script>

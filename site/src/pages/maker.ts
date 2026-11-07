@@ -367,7 +367,7 @@ function renderPalettes(): void {
     b.setAttribute("aria-checked", String(key === palette));
     const ramp = Object.assign(document.createElement("span"), { className: "ramp" });
     p.colours.forEach((c) => ramp.append(Object.assign(document.createElement("span"), { style: `background:${c}` })));
-    b.append(ramp, document.createTextNode(p.label));
+    b.append(ramp, document.createTextNode(t(`pal.${key}`, p.label)));
     b.addEventListener("click", () => { palette = key; renderPalettes(); drawMap(); });
     box.append(b);
   }
@@ -416,5 +416,6 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
 document.addEventListener("sa:lang", () => {
   if (sheet) renderColumns();
   if (uniques.length) renderReview();
+  renderPalettes();
   if (map) map.render();
 });

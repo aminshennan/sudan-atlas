@@ -1,4 +1,5 @@
 import { startPage } from "../main";
+import { t } from "../lib/i18n";
 import "../styles/docs.css";
 
 startPage("docs");
@@ -18,16 +19,18 @@ document.querySelectorAll<HTMLButtonElement>("[data-code-lang]").forEach((b) => 
 
 // A copy button on every code block.
 document.querySelectorAll<HTMLElement>(".code").forEach((block) => {
-  const button = Object.assign(document.createElement("button"), { type: "button", className: "code__copy", textContent: "Copy" });
+  const button = Object.assign(document.createElement("button"), { type: "button", className: "code__copy", textContent: t("copy", "Copy") });
   button.addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(block.querySelector("code")?.textContent ?? "");
-      button.textContent = "Copied";
-      setTimeout(() => (button.textContent = "Copy"), 1500);
+      button.textContent = t("copied", "Copied");
+      setTimeout(() => (button.textContent = t("copy", "Copy")), 1500);
     } catch { /* clipboard blocked: the code can still be selected by hand */ }
   });
   block.append(button);
 });
+document.addEventListener("sa:lang", () =>
+  document.querySelectorAll<HTMLButtonElement>(".code__copy").forEach((b) => (b.textContent = t("copy", "Copy"))));
 
 // Highlight the section being read in the side menu.
 const links = new Map([...document.querySelectorAll<HTMLAnchorElement>(".docs__nav a")].map((a) => [a.hash.slice(1), a]));

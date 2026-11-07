@@ -3,6 +3,7 @@
 <head>
 <!-- include:head -->
 <title>Map-maker: turn a spreadsheet into a map of Sudan · Sudan Atlas</title>
+<meta name="sa:title-ar" content="صانع الخرائط: حوّل جدولًا إلى خريطة للسودان · أطلس السودان">
 <meta name="description" content="Upload a CSV or Excel file with Sudanese place names, check the matches, and export a map plus your file with P-codes. Everything happens in your browser; nothing is uploaded.">
 <meta property="og:title" content="Map-maker · Sudan Atlas">
 </head>
@@ -42,7 +43,7 @@
       <div class="field"><label class="field__label" for="col-state" data-i18n="mk.col.state">State (optional, helps matching)</label><select id="col-state" data-col="state"></select></div>
       <div class="field"><label class="field__label" for="col-value" data-i18n="mk.col.value">Value to map (optional)</label><select id="col-value" data-col="value"></select></div>
       <div class="field"><span class="field__label" data-i18n="mk.col.level">The names are</span>
-        <div class="segmented" role="group" aria-label="Level">
+        <div class="segmented" role="group" aria-label="Level" data-i18n-attr="aria-label:mk.col.level">
           <button type="button" aria-pressed="true" data-mk-level="2" data-i18n="mk.lvl.2">Localities</button>
           <button type="button" aria-pressed="false" data-mk-level="1" data-i18n="mk.lvl.1">States</button>
           <button type="button" aria-pressed="false" data-mk-level="0" data-i18n="mk.lvl.0">Either</button>
@@ -59,7 +60,7 @@
   <!-- Step 3: review -->
   <section class="maker__step container" data-step="3" hidden aria-labelledby="s3-title">
     <div class="matching" data-matching hidden>
-      <canvas data-orb="connecting" data-orb-size="64" aria-label="Matching names"></canvas>
+      <canvas data-orb="connecting" data-orb-size="64" aria-label="Matching names" data-i18n-attr="aria-label:orb.matching"></canvas>
       <strong data-matching-text>Matching…</strong>
       <span class="muted small" data-i18n="mk.privacy">Your file stays in your browser. Nothing is uploaded.</span>
     </div>
@@ -69,7 +70,7 @@
         <p class="muted" data-review-summary aria-live="polite"></p>
       </div>
       <div class="review__tools">
-        <div class="segmented" role="group" aria-label="Show">
+        <div class="segmented" role="group" aria-label="Show" data-i18n-attr="aria-label:mk.show">
           <button type="button" aria-pressed="false" data-filter="review"><span data-i18n="mk.f.review">Needs review</span> <span data-count="review"></span></button>
           <button type="button" aria-pressed="false" data-filter="none"><span data-i18n="mk.f.none">No match</span> <span data-count="none"></span></button>
           <button type="button" aria-pressed="true" data-filter="all"><span data-i18n="mk.f.all">All</span> <span data-count="all"></span></button>
@@ -91,9 +92,9 @@
       <div class="field"><label class="field__label" for="agg" data-i18n="mk.agg">Combine rows for the same place</label>
         <select id="agg" data-agg><option value="sum" data-i18n="mk.agg.sum">Sum of values</option><option value="mean" data-i18n="mk.agg.mean">Average of values</option><option value="count" data-i18n="mk.agg.count">Number of rows</option></select></div>
       <div class="field"><span class="field__label" data-i18n="mk.colours">Colours (colour-blind safe)</span>
-        <div class="palettes" role="radiogroup" aria-label="Colours" data-palettes></div></div>
+        <div class="palettes" role="radiogroup" aria-label="Colours" data-i18n-attr="aria-label:mk.colours" data-palettes></div></div>
       <div class="field"><span class="field__label" data-i18n="map.labels">Labels</span>
-        <div class="segmented" role="group" aria-label="Labels">
+        <div class="segmented" role="group" aria-label="Labels" data-i18n-attr="aria-label:map.labels">
           <button type="button" aria-pressed="true" data-mk-labels="en">English</button>
           <button type="button" aria-pressed="false" data-mk-labels="ar" lang="ar">العربية</button>
           <button type="button" aria-pressed="false" data-mk-labels="off" data-i18n="map.labels.off">Off</button>

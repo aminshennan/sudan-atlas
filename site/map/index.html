@@ -3,6 +3,7 @@
 <head>
 <!-- include:head -->
 <title>Map of Sudan's states and localities · Sudan Atlas</title>
+<meta name="sa:title-ar" content="خريطة ولايات السودان ومحلياته · أطلس السودان">
 <meta name="description" content="Explore Sudan's 19 states and 189 localities with their official Arabic and English names and P-codes. Export the map as SVG or PNG, or the places as CSV.">
 <meta property="og:title" content="Map of Sudan · Sudan Atlas">
 </head>
@@ -10,7 +11,7 @@
 <!-- include:header -->
 <main id="main" class="explorer">
   <div class="explorer__bar">
-    <nav class="crumbs" aria-label="Breadcrumb">
+    <nav class="crumbs" aria-label="Breadcrumb" data-i18n-attr="aria-label:map.crumbs">
       <button type="button" class="crumbs__root" data-crumb-root data-i18n="map.reset">All of Sudan</button>
       <span data-crumbs></span>
     </nav>
@@ -55,7 +56,7 @@
 
     <div class="explorer__map">
       <div class="explorer__loading" data-loading>
-        <canvas data-orb="searching" data-orb-size="64" aria-label="Loading the map"></canvas>
+        <canvas data-orb="searching" data-orb-size="64" aria-label="Loading the map" data-i18n-attr="aria-label:map.loading.aria"></canvas>
         <span data-i18n="map.loading">Loading the map…</span>
       </div>
       <div data-map></div>

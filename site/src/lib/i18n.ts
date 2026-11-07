@@ -1,5 +1,7 @@
 // English is written in the HTML; Arabic comes from this dictionary. Elements carry
-// data-i18n="key" (text) or data-i18n-attr="attr:key;attr:key" (attributes).
+// data-i18n="key" (text) or data-i18n-attr="attr:key;attr:key" (attributes). Long-form
+// pages instead pair whole elements, data-lang-only="en" and data-lang-only="ar", and the
+// one for the other language is hidden.
 // Switching language sets <html lang dir>, is remembered, and fires "sa:lang" so
 // pages can redraw what they render themselves (map labels, tables).
 
@@ -69,6 +71,20 @@ const AR: Record<string, string> = {
   "map.showLocalities": "اعرض محلياتها على الخريطة",
   "map.loading": "جارٍ تحميل الخريطة…",
   "map.reset": "كل السودان",
+  "map.crumbs": "مسار التنقل",
+  "map.aria": "خريطة ولايات السودان ومحلياته",
+  "map.loading.aria": "جارٍ تحميل الخريطة",
+  "orb.matching": "جارٍ مطابقة الأسماء",
+  "admin1": "المستوى الإداري الأول",
+  "admin2": "المستوى الإداري الثاني",
+  "copy": "نسخ",
+  "copied": "تم النسخ",
+  "mk.show": "اعرض",
+  "pal.ylgnbu": "أصفر – أخضر – أزرق",
+  "pal.ylorbr": "أصفر – بني",
+  "pal.viridis": "فيريديس",
+  "docs.nav": "التوثيق",
+  "docs.examples": "لغة الأمثلة",
 
   "mk.steps": "الخطوات",
   "mk.s1": "ارفع الملف",
@@ -153,7 +169,16 @@ function readSaved(): Lang | null {
   }
 }
 
+let originalTitle: string | null = null;
+
 function apply(root: ParentNode = document): void {
+  // Pages give their Arabic title in <meta name="sa:title-ar">.
+  const arTitle = document.querySelector<HTMLMetaElement>('meta[name="sa:title-ar"]')?.content;
+  if (arTitle) {
+    originalTitle ??= document.title;
+    document.title = current === "ar" ? arTitle : originalTitle;
+  }
+  root.querySelectorAll<HTMLElement>("[data-lang-only]").forEach((el) => (el.hidden = el.dataset.langOnly !== current));
   root.querySelectorAll<HTMLElement>("[data-i18n]").forEach((el) => {
     if (!originals.has(el)) originals.set(el, el.textContent ?? "");
     const key = el.dataset.i18n!;
