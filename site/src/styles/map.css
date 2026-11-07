@@ -1,0 +1,30 @@
+.mapview { position: relative; }
+.mapview__svg { width: 100%; height: auto; max-height: calc(100vh - 190px); touch-action: manipulation; user-select: none; }
+.mv-place { fill: var(--mv-fill, var(--surface)); stroke: var(--mv-stroke, var(--white)); stroke-width: 0.8; cursor: pointer; transition: fill 120ms ease; }
+.mv-place:not(.has-value).is-hover { fill: var(--mist); }
+.mv-place.has-value.is-hover { stroke: var(--graphite); stroke-width: 1.4; }
+.mv-place.is-selected { stroke: var(--graphite); stroke-width: 2.2; }
+.mv-place:not(.has-value).is-selected { fill: #cdeee5; }
+.mv-state-border { stroke: var(--graphite-3); stroke-width: 1.1; stroke-linejoin: round; }
+.mv-state-line { stroke: none; }
+.mv-label { font-family: var(--font-body); font-weight: 600; fill: var(--graphite); stroke: var(--white); stroke-width: 3px; stroke-linejoin: round; paint-order: stroke; }
+html[dir="rtl"] .mv-label { font-family: var(--font-arabic); }
+.mapview__tooltip { position: absolute; z-index: 5; display: flex; flex-direction: column; gap: 2px; padding: 8px 10px; background: var(--graphite); color: var(--white); border-radius: var(--radius-sm); font-size: 13px; pointer-events: none; max-width: 240px; box-shadow: var(--shadow); }
+.mapview__tooltip span { color: var(--muted-on-dark); }
+.mapview__tooltip code { font-size: 11px; color: var(--signal-bright); }
+.mapview__tooltip[hidden] { display: none; }
+html[dir="rtl"] .mapview__tooltip { transform: translateX(calc(-100% - 28px)); }
+
+.legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; font-size: 13px; color: var(--muted); }
+.legend__ramp { display: flex; }
+.legend__ramp span { width: 28px; height: 10px; }
+.legend__nodata { display: inline-flex; align-items: center; gap: 6px; }
+.legend__nodata::before { content: ""; width: 14px; height: 10px; background: var(--map-nodata); }
+
+.dot-map { width: 100%; height: auto; }
+.dot-map circle { fill: var(--graphite); }
+.dot-map .dot-map__here { fill: var(--signal); }
+@media (prefers-reduced-motion: no-preference) {
+  .dot-map circle { opacity: 0; animation: dot-in 600ms ease forwards; animation-delay: var(--d, 0ms); }
+}
+@keyframes dot-in { to { opacity: var(--o, 0.8); } }

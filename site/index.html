@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<!-- include:head -->
+<title>Sudan Atlas: every place in Sudan, on one map</title>
+<meta name="description" content="Official names in Arabic and English, P-codes and boundaries for Sudan's 19 states and 189 localities. Explore and export the map, or match your own spreadsheet in your browser.">
+<meta property="og:title" content="Sudan Atlas">
+<meta property="og:description" content="Every place in Sudan, on one map: official names, P-codes and boundaries, in Arabic and English.">
+</head>
+<body data-page="home">
+<!-- include:header -->
+<main id="main">
+  <section class="container hero">
+    <div class="hero__text">
+      <p class="eyebrow" data-i18n="home.eyebrow">Open data · P-codes · boundaries</p>
+      <h1 class="hero__title" data-i18n="home.title">Every place in Sudan, on one map.</h1>
+      <p class="lead" data-i18n="home.lead">Official names in Arabic and English, P-codes and boundaries for 19 states and 189 localities. Explore and export the map, or match your own spreadsheet, without uploading a thing.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="/map/" data-i18n="home.cta.map">Open the map</a>
+        <a class="btn btn--ghost" href="/maker/" data-i18n="home.cta.maker">Map my spreadsheet</a>
+      </div>
+      <div class="hero__install" dir="ltr">
+        <code>npm install sudan-atlas</code>
+        <code>pip install sudan-atlas</code>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__dots" data-dot-map></div>
+      <div class="float-card float-card--state panel">
+        <span class="eyebrow-mono"><span data-i18n="home.card.state">State</span> · <span dir="ltr">SD02</span></span>
+        <strong class="float-card__name">North Darfur</strong>
+        <span lang="ar" class="float-card__ar">شمال دارفور</span>
+        <span class="muted small" data-state-facts>17 localities</span>
+      </div>
+      <div class="float-card float-card--match panel">
+        <span class="eyebrow-mono match-head"><canvas data-orb="connecting" data-orb-size="20" aria-label="Matching names"></canvas><span data-i18n="home.card.matching">Matching in your browser</span></span>
+        <ul class="match-list" data-match-demo></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container explore">
+      <div class="explore__head">
+        <h2 data-i18n="home.explore.title">See every state and locality, named correctly.</h2>
+        <p class="lead" data-i18n="home.explore.lead">Click a place for its official names, P-code and localities. Switch labels between Arabic and English, then export the map as SVG or PNG.</p>
+      </div>
+      <div class="explore__frame panel">
+        <div class="explore__map" data-home-map></div>
+        <aside class="explore__info" data-home-info aria-live="polite"></aside>
+      </div>
+      <p><a class="btn btn--primary" href="/map/" data-i18n="home.cta.map">Open the map</a></p>
+    </div>
+  </section>
+
+  <section class="container features">
+    <div>
+      <p class="eyebrow" data-i18n="home.f1.k">01 · Explore</p>
+      <h3 data-i18n="home.f1.t">A map of every state and locality</h3>
+      <p class="muted" data-i18n="home.f1.d">Search in Arabic or English, click any place, and read its official names and P-code.</p>
+    </div>
+    <div>
+      <p class="eyebrow" data-i18n="home.f2.k">02 · Match</p>
+      <h3 data-i18n="home.f2.t">Messy names, matched to the right place</h3>
+      <p class="muted" data-i18n="home.f2.d">Upload a CSV or Excel file. It is matched in your browser and never uploaded. When a name could mean two places, you decide.</p>
+    </div>
+    <div>
+      <p class="eyebrow" data-i18n="home.f3.k">03 · Export</p>
+      <h3 data-i18n="home.f3.t">Maps ready for your report</h3>
+      <p class="muted" data-i18n="home.f3.d">SVG and PNG with title, legend and source credit, plus your file back with a P-code column.</p>
+    </div>
+  </section>
+
+  <section class="dark-band">
+    <div class="container dev">
+      <div class="dev__text">
+        <p class="eyebrow eyebrow--bright" data-i18n="home.dev.k">For developers</p>
+        <h2 data-i18n="home.dev.t">The same data in your code.</h2>
+        <p data-i18n="home.dev.d">Python and JavaScript packages with identical results. Tutorials, how-to guides, a full reference and an explanation of how matching works.</p>
+        <a href="/docs/" class="dev__link" data-i18n="home.dev.link">Read the documentation</a>
+      </div>
+      <pre class="code-block" dir="ltr"><code><span class="c">$</span> pip install sudan-atlas
+
+from sudan_atlas import match
+match("Elfasher", level=2)["pcode"]   <span class="c"># 'SD02114'</span>
+match("Gallabat")["method"]            <span class="c"># 'ambiguous'</span></code></pre>
+    </div>
+  </section>
+</main>
+<!-- include:footer -->
+<script type="module" src="/src/pages/home.ts"></script>
+</body>
+</html>

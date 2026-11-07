@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<!-- include:head -->
+<title>Map of Sudan's states and localities · Sudan Atlas</title>
+<meta name="description" content="Explore Sudan's 19 states and 189 localities with their official Arabic and English names and P-codes. Export the map as SVG or PNG, or the places as CSV.">
+<meta property="og:title" content="Map of Sudan · Sudan Atlas">
+</head>
+<body data-page="map" class="app-page">
+<!-- include:header -->
+<main id="main" class="explorer">
+  <div class="explorer__bar">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <button type="button" class="crumbs__root" data-crumb-root data-i18n="map.reset">All of Sudan</button>
+      <span data-crumbs></span>
+    </nav>
+    <span class="explorer__spacer"></span>
+    <div class="export">
+      <button type="button" class="btn btn--primary btn--small" data-export-toggle aria-expanded="false" aria-controls="export-menu" data-i18n="map.export">Export</button>
+      <div class="export__menu panel" id="export-menu" role="menu" hidden>
+        <button type="button" role="menuitem" data-export="svg"><span data-i18n="map.export.svg">SVG image</span><kbd>S</kbd></button>
+        <button type="button" role="menuitem" data-export="png"><span data-i18n="map.export.png">PNG image</span><kbd>P</kbd></button>
+        <button type="button" role="menuitem" data-export="csv"><span data-i18n="map.export.csv">Places as CSV</span><kbd>C</kbd></button>
+        <p class="export__note" data-i18n="map.export.note">Images include the title and source credit.</p>
+      </div>
+    </div>
+    <a class="btn btn--signal btn--small" href="/maker/" data-i18n="home.cta.maker">Map my spreadsheet</a>
+  </div>
+
+  <div class="explorer__body">
+    <section class="explorer__panel panel" aria-labelledby="layers-title">
+      <div class="field">
+        <label for="place-search" class="field__label" data-i18n="map.search">Find a place</label>
+        <input id="place-search" type="search" autocomplete="off" spellcheck="false" placeholder="208 places, Arabic or English" data-i18n-attr="placeholder:map.search.placeholder">
+        <ul id="place-results" class="search__results panel" hidden></ul>
+      </div>
+      <h2 id="layers-title" class="field__label" data-i18n="map.layers">Layers</h2>
+      <div class="field">
+        <span class="field__label" data-i18n="map.level">Level</span>
+        <div class="segmented" role="group" aria-label="Level" data-i18n-attr="aria-label:map.level">
+          <button type="button" aria-pressed="true" data-level="1"><span data-i18n="map.states">States</span> · 19</button>
+          <button type="button" aria-pressed="false" data-level="2"><span data-i18n="map.localities">Localities</span> · 189</button>
+        </div>
+      </div>
+      <div class="field">
+        <span class="field__label" data-i18n="map.labels">Labels</span>
+        <div class="segmented" role="group" aria-label="Labels" data-i18n-attr="aria-label:map.labels">
+          <button type="button" aria-pressed="true" data-labels="en">English</button>
+          <button type="button" aria-pressed="false" data-labels="ar" lang="ar">العربية</button>
+          <button type="button" aria-pressed="false" data-labels="off" data-i18n="map.labels.off">Off</button>
+        </div>
+      </div>
+      <p class="muted small" dir="ltr">COD-AB Sudan v03 · CC BY 3.0 IGO</p>
+    </section>
+
+    <div class="explorer__map">
+      <div class="explorer__loading" data-loading>
+        <canvas data-orb="searching" data-orb-size="64" aria-label="Loading the map"></canvas>
+        <span data-i18n="map.loading">Loading the map…</span>
+      </div>
+      <div data-map></div>
+    </div>
+
+    <aside class="explorer__panel explorer__details panel" aria-live="polite" data-details></aside>
+  </div>
+</main>
+<!-- include:footer -->
+<script type="module" src="/src/pages/map.ts"></script>
+</body>
+</html>
