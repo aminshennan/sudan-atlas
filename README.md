@@ -53,7 +53,7 @@ data/          boundaries, gazetteer and test fixtures (one source of truth)
 pipeline/      Python scripts that rebuild data/ from data/raw/
 packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
-site/          website + map-maker
+site/          website: map explorer, map-maker, documentation (Vite + TypeScript)
 examples/      D3 map, dropdown form, Python notebook
 docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
 ```
