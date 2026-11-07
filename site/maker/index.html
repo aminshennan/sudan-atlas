@@ -10,6 +10,7 @@
 <body data-page="maker" class="app-page">
 <!-- include:header -->
 <main id="main" class="maker">
+  <h1 class="visually-hidden" data-i18n="nav.maker">Map-maker</h1>
   <div class="maker__bar">
     <ol class="steps" aria-label="Steps" data-i18n-attr="aria-label:mk.steps">
       <li data-step-tab="1"><span class="steps__n">1</span><span data-i18n="mk.s1">Choose file</span></li>
@@ -22,7 +23,7 @@
 
   <!-- Step 1: choose a file -->
   <section class="maker__step container" data-step="1" aria-labelledby="s1-title">
-    <h1 id="s1-title" class="maker__title" data-i18n="mk.s1.title">Turn a spreadsheet of place names into a map.</h1>
+    <h2 id="s1-title" class="maker__title" data-i18n="mk.s1.title">Turn a spreadsheet of place names into a map.</h2>
     <p class="lead" data-i18n="mk.s1.lead">Open a CSV or Excel file with Sudanese state or locality names, in Arabic or English, spelled any way. We match each name to its official place and P-code, you check the uncertain ones, then export a map and your file with P-codes added.</p>
     <label class="drop" data-drop>
       <input type="file" accept=".csv,.tsv,.txt,.xlsx" data-file class="visually-hidden" aria-label="Choose a CSV or Excel file" data-i18n-attr="aria-label:mk.file">
@@ -120,11 +121,11 @@
           <svg class="band-legend__svg" data-legend role="img"></svg>
         </figure>
         </div>
-        <aside class="ranking panel" aria-labelledby="rank-title" data-ranking hidden>
+        <section class="ranking panel" aria-labelledby="rank-title" data-ranking hidden>
           <h3 id="rank-title" class="ranking__title" data-i18n="mk.rank">Ranking</h3>
           <p class="ranking__sub" data-rank-sub></p>
-          <div class="ranking__scroll" data-rank-scroll><svg class="ranking__svg" data-rank-svg role="img"></svg></div>
-        </aside>
+          <div class="ranking__scroll" data-rank-scroll tabindex="0" aria-labelledby="rank-title"><svg class="ranking__svg" data-rank-svg role="img"></svg></div>
+        </section>
       </div>
     </div>
   </section>

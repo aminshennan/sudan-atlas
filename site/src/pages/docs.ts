@@ -17,8 +17,10 @@ try { if (localStorage.getItem(KEY) === "js") saved = "js"; } catch { /* default
 show(saved);
 document.querySelectorAll<HTMLButtonElement>("[data-code-lang]").forEach((b) => b.addEventListener("click", () => show(b.dataset.codeLang as CodeLang)));
 
-// A copy button on every code block.
+// A copy button on every code block. Code that scrolls sideways must be reachable by keyboard.
 document.querySelectorAll<HTMLElement>(".code").forEach((block) => {
+  const pre = block.querySelector("pre");
+  if (pre) pre.tabIndex = 0;
   const button = Object.assign(document.createElement("button"), { type: "button", className: "code__copy", textContent: t("copy", "Copy") });
   button.addEventListener("click", async () => {
     try {
@@ -29,8 +31,9 @@ document.querySelectorAll<HTMLElement>(".code").forEach((block) => {
   });
   block.append(button);
 });
-document.addEventListener("sa:lang", () =>
-  document.querySelectorAll<HTMLButtonElement>(".code__copy").forEach((b) => (b.textContent = t("copy", "Copy"))));
+document.addEventListener("sa:lang", () => {
+  document.querySelectorAll<HTMLButtonElement>(".code__copy").forEach((b) => (b.textContent = t("copy", "Copy")));
+});
 
 // Highlight the section being read in the side menu.
 const links = new Map([...document.querySelectorAll<HTMLAnchorElement>(".docs__nav a")].map((a) => [a.hash.slice(1), a]));
