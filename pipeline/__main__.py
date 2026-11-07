@@ -2,7 +2,6 @@
 
 Boundaries:  fetch | import ARCHIVE | normalise | simplify | validate | manifest | build
 Gazetteer:   gazetteer | fetch-test-sources | test-pool | evaluate | golden
-Packages:    powerbi
 
 `build` rebuilds data/boundaries/ from data/raw/ and validates it; it exits
 non-zero if any validation check fails. `fetch` downloads data/raw/ and is
@@ -15,7 +14,7 @@ measures the matcher on data/tests/match_cases.csv.
 import sys
 from pathlib import Path
 
-from . import fetch, manifest, normalise, powerbi, simplify, validate
+from . import fetch, manifest, normalise, simplify, validate
 from .gazetteer import evaluate, golden, places, testcases, variants
 
 
@@ -52,7 +51,6 @@ def main(argv: list[str]) -> int:
         "test-pool": lambda: testcases.pool() and 0,
         "evaluate": lambda: evaluate.run() and 0,
         "golden": lambda: golden.run() or 0,
-        "powerbi": lambda: powerbi.run() or 0,
     }
     if step not in steps:
         print(__doc__)

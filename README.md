@@ -1,6 +1,6 @@
 # Sudan Atlas
 
-An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's states and localities as maps — for websites, apps, Python and Power BI.
+An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's states and localities as maps — for websites, apps and Python.
 
 > **Status:** data release 2026.1; packages on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/). Website coming next.
 
@@ -21,8 +21,6 @@ from sudan_atlas import match, get_localities
 match("الفاشر", level=2)["pcode"]  # 'SD02114'
 get_localities("SD15")              # the localities of Aj Jazirah
 ```
-
-**Power BI**: add a Shape map, load [`powerbi/sudan_states.topojson`](powerbi/) as a custom map, and put your P-code column in Location. Step-by-step guide: [`powerbi/README.md`](powerbi/README.md).
 
 **In a browser with no build step**: `import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js"`; the data files are on jsDelivr too, under `…/sudan-atlas@0.1/data/`.
 
@@ -55,7 +53,6 @@ data/          boundaries, gazetteer and test fixtures (one source of truth)
 pipeline/      Python scripts that rebuild data/ from data/raw/
 packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
-powerbi/       TopoJSON for the Shape map + build guide
 site/          website + map-maker
 examples/      D3 map, dropdown form, Python notebook
 docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
@@ -65,7 +62,7 @@ docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, 
 
 1. Data foundation — clean, validated, versioned boundaries
 2. Name matcher — Arabic and English, with confidence scores
-3. Packages — npm, PyPI and Power BI
+3. Packages — npm and PyPI
 4. Website and map-maker
 5. Hosted API (only if users ask)
 

@@ -1,6 +1,6 @@
 PYTHON ?= .venv/bin/python
 
-.PHONY: setup fetch data validate gazetteer evaluate golden powerbi packages test test-js preview clean
+.PHONY: setup fetch data validate gazetteer evaluate golden packages test test-js preview clean
 
 setup:            ## Install the pipeline's Python and Node dependencies
 	python3 -m venv .venv
@@ -25,9 +25,6 @@ evaluate:         ## Measure the matcher on data/tests/match_cases.csv; writes d
 
 golden:           ## Write data/tests/match_results.json, the results both packages must reproduce
 	$(PYTHON) -m pipeline golden
-
-powerbi:          ## Write powerbi/: Shape map TopoJSON files and the places lookup table
-	$(PYTHON) -m pipeline powerbi
 
 packages:         ## Build the npm package (packages/js/dist) and the PyPI package (packages/py/dist)
 	cd packages/js && npm run build
