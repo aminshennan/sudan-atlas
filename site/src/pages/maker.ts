@@ -89,8 +89,13 @@ function guessColumns(s: Sheet): void {
   cols.state = st;
   cols.name = loc >= 0 && loc !== st ? loc : st >= 0 ? st : 0;
   if (cols.name === st) cols.state = -1;
-  const numeric = s.headers.findIndex((_, i) => i !== cols.name && i !== cols.state &&
-    s.rows.slice(0, 50).filter((r) => r[i] !== "").every((r) => !Number.isNaN(Number(r[i].replace(/[, ]/g, "")))));
+  // A value column is mostly numbers; a stray "n/a" or "-" shouldn't hide it (those rows are reported on the map step).
+  const numeric = s.headers.findIndex((_, i) => {
+    if (i === cols.name || i === cols.state) return false;
+    const filled = s.rows.slice(0, 200).map((r) => r[i]).filter((v) => v !== "");
+    const numbers = filled.filter((v) => !Number.isNaN(Number(v.replace(/[, ]/g, ""))));
+    return numbers.length > 0 && numbers.length >= 0.8 * filled.length;
+  });
   cols.value = numeric;
   level = cols.name === st ? 1 : 2;
 }
@@ -202,6 +207,24 @@ $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
   renderReview();
 });
 
+const SKIP = "__skip";
+/** A candidate this far below the best one is not worth offering. */
+const WEAK_GAP = 0.1;
+
+/** The places worth offering for a name: the match and close runners-up, plus the reviewer's pick. */
+function candidatesFor(u: Unique): string[] {
+  const out = new Set<string>();
+  const r = u.result;
+  if (r?.pcode) out.add(r.pcode);
+  if (r) {
+    // With no confident answer at all, show every suggestion; otherwise only the close ones.
+    const floor = r.method === "none" ? -Infinity : r.score - WEAK_GAP;
+    r.alternatives.forEach((a) => { if (a.pcode && a.score >= floor) out.add(a.pcode); });
+  }
+  if (u.choice) out.add(u.choice);
+  return [...out];
+}
+
 function placeLabel(pcode: string): string {
   const p = getPlace(pcode);
   if (!p) return pcode;
@@ -213,11 +236,12 @@ function placeLabel(pcode: string): string {
 function methodLabel(u: Unique): string {
   const s = statusOf(u);
   if (s === "fixed") return t("mk.m.fixed", "Chosen by you");
+  if (u.choice === null) return t("mk.m.skipped", "Left off the map by you");
   const r = u.result;
   if (!r || !u.name) return t("mk.m.empty", "Empty");
   const names: Record<string, string> = lang() === "ar"
     ? { exact: "الاسم الرسمي", variant: "صيغة معروفة للاسم", fuzzy: "كتابة قريبة من الاسم", ambiguous: "يحتمل أكثر من مكان", none: "بلا مطابقة" }
-    : { exact: "Exact", variant: "Known spelling", fuzzy: "Close spelling", ambiguous: "Could be two places", none: "No match" };
+    : { exact: "Exact", variant: "Known spelling", fuzzy: "Close spelling", ambiguous: "More than one place", none: "No match" };
   return `${names[r.method] ?? r.method}${r.pcode ? ` · ${r.score.toFixed(2)}` : ""}`;
 }
 
@@ -261,14 +285,15 @@ function renderReview(): void {
 
     const sel = document.createElement("select");
     sel.setAttribute("aria-label", `${t("mk.th.match", "Matched place")}: ${u.name}`);
-    const options = new Set<string>();
-    if (u.result?.pcode) options.add(u.result.pcode);
-    u.result?.alternatives.forEach((a) => a.pcode && options.add(a.pcode));
-    if (u.choice) options.add(u.choice);
-    sel.append(new Option(u.result?.method === "ambiguous" && u.choice === undefined ? t("mk.choose", "Choose a place…") : t("mk.nomatch", "No match"), ""));
-    options.forEach((p) => sel.append(new Option(placeLabel(p), p)));
-    sel.value = finalPcode(u) ?? "";
-    sel.addEventListener("change", () => { u.choice = sel.value || null; renderReview(); });
+    const undecided = u.result?.method === "ambiguous" && u.choice === undefined;
+    if (undecided) sel.append(new Option(t("mk.choose", "Choose a place…"), ""));
+    candidatesFor(u).forEach((p) => sel.append(new Option(placeLabel(p), p)));
+    sel.append(new Option(t("mk.skip", "No match: leave off the map"), SKIP));
+    sel.value = undecided ? "" : finalPcode(u) ?? SKIP;
+    sel.addEventListener("change", () => {
+      u.choice = sel.value === "" ? undefined : sel.value === SKIP ? null : sel.value;
+      renderReview();
+    });
     tr.insertCell().append(sel);
     tr.insertCell().textContent = methodLabel(u);
     const status = document.createElement("span");
@@ -369,6 +394,66 @@ function rankSubtitle(n: number, limit?: number): string {
   return ar ? `جميع الأماكن (${n}) · من الأعلى إلى الأدنى` : `All ${n} places, highest first`;
 }
 
+/** Why each row is or isn't on the map. */
+type RowFate = "on_map" | "needs_review" | "no_match" | "left_unmatched" | "other_level" | "value_not_a_number";
+
+function rowFates(): RowFate[] {
+  const fates: RowFate[] = [];
+  if (!sheet) return fates;
+  const lvl = mapLevel();
+  const byRow = new Map<number, Unique>();
+  uniques.forEach((u) => u.rows.forEach((i) => byRow.set(i, u)));
+  sheet.rows.forEach((r, i) => {
+    const u = byRow.get(i);
+    const p = u ? finalPcode(u) : null;
+    if (!u || !p) {
+      fates.push(!u ? "no_match" : u.choice === null ? "left_unmatched" : u.result?.method === "ambiguous" ? "needs_review" : "no_match");
+    } else if (getPlace(p)?.level !== lvl) {
+      fates.push("other_level");
+    } else if (cols.value >= 0 && (r[cols.value].trim() === "" || Number.isNaN(Number(r[cols.value].replace(/[, ]/g, ""))))) {
+      fates.push("value_not_a_number");
+    } else {
+      fates.push("on_map");
+    }
+  });
+  return fates;
+}
+
+/** Say plainly which rows the map leaves out, so totals are never quietly wrong. */
+function renderUnmapped(): void {
+  const box = $<HTMLElement>("[data-unmapped]");
+  const counts = new Map<RowFate, number>();
+  rowFates().forEach((f) => counts.set(f, (counts.get(f) ?? 0) + 1));
+  counts.delete("on_map");
+  const total = [...counts.values()].reduce((a, b) => a + b, 0);
+  box.hidden = total === 0;
+  if (!total) return;
+  const ar = lang() === "ar";
+  const other = mapLevel() === 2 ? (ar ? "ولايات لا محليات" : ["is a state, not a locality", "are states, not localities"]) : (ar ? "محليات لا ولايات" : ["is a locality, not a state", "are localities, not states"]);
+  const en: Record<Exclude<RowFate, "on_map">, [string, string]> = {
+    needs_review: ["needs review", "need review"],
+    no_match: ["has no match", "have no match"],
+    left_unmatched: ["was left unmatched by you", "were left unmatched by you"],
+    other_level: other as [string, string],
+    value_not_a_number: ["has a value that isn't a number", "have values that aren't numbers"],
+  };
+  const arLabels: Record<Exclude<RowFate, "on_map">, string> = {
+    needs_review: "بحاجة إلى مراجعة",
+    no_match: "بلا مطابقة",
+    left_unmatched: "تركتها بلا مطابقة",
+    other_level: other as string,
+    value_not_a_number: "قيمتها ليست رقمًا",
+  };
+  const parts = [...counts].map(([f, n]) => {
+    const k = f as Exclude<RowFate, "on_map">;
+    return ar ? `${arLabels[k]}: ${n}` : `${n} ${en[k][n === 1 ? 0 : 1]}`;
+  });
+  $<HTMLElement>("[data-unmapped-text]").textContent = ar
+    ? `صفوف لا تظهر على الخريطة: ${total} (${parts.join("، ")}).`
+    : `${total} ${total === 1 ? "row is" : "rows are"} not on the map: ${parts.join(", ")}.`;
+  $<HTMLElement>("[data-unmapped-go]").hidden = !counts.has("needs_review") && !counts.has("no_match") && !counts.has("left_unmatched");
+}
+
 async function drawMap(): Promise<void> {
   const titleInput = $<HTMLInputElement>("[data-map-title]");
   if (!titleInput.value) titleInput.value = defaultTitle();
@@ -384,6 +469,7 @@ async function drawMap(): Promise<void> {
   const { spec, items, bands } = chartData();
   map.setFill((p) => { const v = items.find((i) => i.pcode === p); return v?.colour; });
   map.setLabels(labels);
+  renderUnmapped();
 
   const rtl = lang() === "ar";
   const ranking = $<HTMLElement>("[data-ranking]");
@@ -448,13 +534,19 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
     if (!sheet) return;
     const byRow = new Map<number, Unique>();
     uniques.forEach((u) => u.rows.forEach((i) => byRow.set(i, u)));
-    const rows: (string | number | null)[][] = [[...sheet.headers, "pcode", "matched_name_en", "matched_name_ar", "match_level", "match_method", "match_score"]];
+    // Every row says what happened to it: match_status for the match, on_map and not_on_map_reason
+    // for whether the map shows it, so nothing drops out unseen.
+    const fates = rowFates();
+    const rows: (string | number | null)[][] = [[...sheet.headers, "pcode", "matched_name_en", "matched_name_ar", "match_level", "match_method", "match_score", "match_status", "on_map", "not_on_map_reason"]];
     sheet.rows.forEach((r, i) => {
       const u = byRow.get(i);
       const p = u ? finalPcode(u) : null;
       const place = p ? getPlace(p) : undefined;
       const method = !u ? "" : u.choice !== undefined ? "reviewed" : u.result?.method ?? "";
-      rows.push([...r, p ?? "", place?.name_en ?? "", place?.name_ar ?? "", place?.level ?? "", method, u?.result && p && u.choice === undefined ? u.result.score : ""]);
+      const status = !u || !u.name ? "empty" : u.choice === null ? "left unmatched" : u.choice ? "chosen in review" : !p ? (u.result?.method === "ambiguous" ? "needs review" : "no match") : statusOf(u) === "review" ? "matched, worth checking" : "matched";
+      const fate = fates[i];
+      rows.push([...r, p ?? "", place?.name_en ?? "", place?.name_ar ?? "", place?.level ?? "", method, u?.result && p && u.choice === undefined ? u.result.score : "",
+        status, fate === "on_map" ? "yes" : "no", fate === "on_map" ? "" : fate.replace(/_/g, " ")]);
     });
     download(`${fileStem()}-with-pcodes.csv`, toCsv(rows));
     return;
@@ -476,4 +568,10 @@ document.addEventListener("sa:lang", () => {
   if (uniques.length) renderReview();
   renderPalettes();
   if (map) void drawMap();
+});
+
+$<HTMLButtonElement>("[data-unmapped-go]").addEventListener("click", () => {
+  filter = uniques.some((u) => statusOf(u) === "review") ? "review" : uniques.some((u) => statusOf(u) === "none") ? "none" : "all";
+  renderReview();
+  go(3);
 });

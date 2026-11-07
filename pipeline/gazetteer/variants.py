@@ -431,11 +431,13 @@ def _merge(collected, places, official, norm, review, dropped, rejected) -> list
             continue
         others = sorted(official.get(key, set()) - {pcode})
         same_level = [o for o in others if places[o]["level"] == places[pcode]["level"]]
-        if same_level or (others and kind != "town"):
+        if (same_level or (others and kind != "town")) and source != "review":
             # Equal to another place's official name: almost always a mislink (or a town whose point falls just
             # outside its namesake locality, like Kosti), and it would make that name ambiguous. A town named
             # like a place at another level is kept: "Kassala" is both the state and the town in the Madeinat
-            # Kassala locality, and a level filter tells them apart. Report, don't keep.
+            # Kassala locality, and a level filter tells them apart. Report, don't keep. A spelling added by
+            # hand in review is kept: there the ambiguity is the point ("Abyei" alone can mean the Abyei
+            # PCA area or the West Kordofan locality, so the matcher must ask).
             dropped.append({"text": text, "pcode": pcode, "ref": ref, "reason": f"official name of {others}"})
             continue
         record = merged.setdefault((text, pcode), {"text": text, "lang": _script(text, norm), "pcodes": [pcode], "sources": []})

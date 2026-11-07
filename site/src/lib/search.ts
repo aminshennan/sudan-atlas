@@ -17,25 +17,36 @@ function entries(): Entry[] {
   return index;
 }
 
+/** The matcher's own threshold: a suggestion scoring lower than this is a guess, not a result. */
+const SUGGEST_MIN = 0.82;
+
+/**
+ * Places for a query, best first: an exact name, then the matcher's confident answer (so a known
+ * spelling such as "الابيض" finds Sheikan before White Nile, which merely contains the word), then
+ * names starting with the query, names with a word starting with it, and names containing it.
+ * Close misspellings come from the matcher, but only at or above its threshold; nonsense finds nothing.
+ */
 export function searchPlaces(query: string, limit = 8): Entry[] {
   const q = fold(query);
   if (!q) return [];
-  const starts: Entry[] = [];
-  const contains: Entry[] = [];
+  const score = new Map<string, number>();
+  const offer = (pcode: string, s: number) => score.set(pcode, Math.max(score.get(pcode) ?? 0, s));
   for (const e of entries()) {
-    if (e.keys.some((k) => k.startsWith(q) || k.split(" ").some((w) => w.startsWith(q)))) starts.push(e);
-    else if (e.keys.some((k) => k.includes(q))) contains.push(e);
+    if (e.keys.some((k) => k === q)) offer(e.pcode, 100);
+    else if (e.keys.some((k) => k.startsWith(q))) offer(e.pcode, 80);
+    else if (e.keys.some((k) => k.split(" ").some((w) => w.startsWith(q)))) offer(e.pcode, 70);
+    else if (q.length >= 3 && e.keys.some((k) => k.includes(q))) offer(e.pcode, 50);
   }
-  const found = [...starts.sort((a, b) => a.level - b.level), ...contains];
-  if (found.length < limit && q.length >= 3) {
+  if (q.length >= 3) {
     const r = match(query);
-    for (const pcode of [r.pcode, ...r.alternatives.map((a) => a.pcode)]) {
-      if (!pcode || found.some((e) => e.pcode === pcode)) continue;
-      const e = entries().find((x) => x.pcode === pcode);
-      if (e) found.push(e);
-    }
+    if (r.pcode) offer(r.pcode, r.method === "fuzzy" ? 85 : 95);
+    for (const a of r.alternatives) if (a.pcode && a.score >= SUGGEST_MIN) offer(a.pcode, 60 * a.score);
   }
-  return found.slice(0, limit);
+  const byPcode = new Map(entries().map((e) => [e.pcode, e]));
+  return [...score]
+    .sort((a, b) => b[1] - a[1] || byPcode.get(a[0])!.level - byPcode.get(b[0])!.level || a[0].localeCompare(b[0]))
+    .slice(0, limit)
+    .map(([pcode]) => byPcode.get(pcode)!);
 }
 
 export function bindSearch(input: HTMLInputElement, list: HTMLUListElement, onPick: (pcode: string) => void): void {
@@ -66,7 +77,11 @@ export function bindSearch(input: HTMLInputElement, list: HTMLUListElement, onPi
       li.addEventListener("mousedown", (ev) => { ev.preventDefault(); pick(i); });
       list.append(li);
     });
-    list.hidden = results.length === 0;
+    const empty = results.length === 0 && fold(input.value).length >= 2;
+    if (empty) {
+      list.append(Object.assign(document.createElement("li"), { className: "search__empty", textContent: t("map.search.none", "No places match") }));
+    }
+    list.hidden = results.length === 0 && !empty;
     input.setAttribute("aria-expanded", String(results.length > 0));
     if (active >= 0) input.setAttribute("aria-activedescendant", `${list.id}-${active}`);
   };

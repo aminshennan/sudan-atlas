@@ -4,7 +4,7 @@
 <!-- include:head -->
 <title>Map of Sudan's states and localities · Sudan Atlas</title>
 <meta name="sa:title-ar" content="خريطة ولايات السودان ومحلياته · أطلس السودان">
-<meta name="description" content="Explore Sudan's 19 states and 189 localities with their official Arabic and English names and P-codes. Export the map as SVG or PNG, or the places as CSV.">
+<meta name="description" content="Explore Sudan's 18 states, the Abyei PCA area and 189 localities with their official Arabic and English names and P-codes. Export the map as SVG or PNG, or the places as CSV.">
 <meta property="og:title" content="Map of Sudan · Sudan Atlas">
 </head>
 <body data-page="map" class="app-page">
@@ -19,9 +19,9 @@
     <div class="export">
       <button type="button" class="btn btn--primary btn--small" data-export-toggle aria-expanded="false" aria-controls="export-menu" data-i18n="map.export">Export</button>
       <div class="export__menu panel" id="export-menu" role="menu" hidden>
-        <button type="button" role="menuitem" data-export="svg"><span data-i18n="map.export.svg">SVG image</span><kbd>S</kbd></button>
-        <button type="button" role="menuitem" data-export="png"><span data-i18n="map.export.png">PNG image</span><kbd>P</kbd></button>
-        <button type="button" role="menuitem" data-export="csv"><span data-i18n="map.export.csv">Places as CSV</span><kbd>C</kbd></button>
+        <button type="button" role="menuitem" data-export="svg" aria-keyshortcuts="S"><span data-i18n="map.export.svg">SVG image</span><kbd aria-hidden="true">S</kbd></button>
+        <button type="button" role="menuitem" data-export="png" aria-keyshortcuts="P"><span data-i18n="map.export.png">PNG image</span><kbd aria-hidden="true">P</kbd></button>
+        <button type="button" role="menuitem" data-export="csv" aria-keyshortcuts="C"><span data-i18n="map.export.csv">Places as CSV</span><kbd aria-hidden="true">C</kbd></button>
         <p class="export__note" data-i18n="map.export.note">Images include the title and source credit.</p>
       </div>
     </div>
@@ -39,8 +39,8 @@
       <div class="field">
         <span class="field__label" data-i18n="map.level">Level</span>
         <div class="segmented" role="group" aria-label="Level" data-i18n-attr="aria-label:map.level">
-          <button type="button" aria-pressed="true" data-level="1"><span data-i18n="map.states">States</span> · 19</button>
-          <button type="button" aria-pressed="false" data-level="2"><span data-i18n="map.localities">Localities</span> · 189</button>
+          <button type="button" aria-pressed="true" data-level="1"><span data-i18n="map.states">States</span></button>
+          <button type="button" aria-pressed="false" data-level="2"><span data-i18n="map.localities">Localities</span></button>
         </div>
       </div>
       <div class="field">

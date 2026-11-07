@@ -4,7 +4,7 @@
 <!-- include:head -->
 <title>Map-maker: turn a spreadsheet into a map of Sudan · Sudan Atlas</title>
 <meta name="sa:title-ar" content="صانع الخرائط: حوّل جدولك إلى خريطة للسودان · أطلس السودان">
-<meta name="description" content="Upload a CSV or Excel file with Sudanese place names, check the matches, and export a map plus your file with P-codes. Everything happens in your browser; nothing is uploaded.">
+<meta name="description" content="Open a CSV or Excel file with Sudanese place names, check the matches, and export a map plus your file with P-codes. Everything happens in your browser; nothing is uploaded.">
 <meta property="og:title" content="Map-maker · Sudan Atlas">
 </head>
 <body data-page="maker" class="app-page">
@@ -12,20 +12,20 @@
 <main id="main" class="maker">
   <div class="maker__bar">
     <ol class="steps" aria-label="Steps" data-i18n-attr="aria-label:mk.steps">
-      <li data-step-tab="1"><span class="steps__n">1</span><span data-i18n="mk.s1">Upload</span></li>
+      <li data-step-tab="1"><span class="steps__n">1</span><span data-i18n="mk.s1">Choose file</span></li>
       <li data-step-tab="2"><span class="steps__n">2</span><span data-i18n="mk.s2">Columns</span></li>
       <li data-step-tab="3"><span class="steps__n">3</span><span data-i18n="mk.s3">Check matches</span></li>
       <li data-step-tab="4"><span class="steps__n">4</span><span data-i18n="mk.s4">Map and export</span></li>
     </ol>
-    <p class="maker__privacy"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="mk.privacy">Your file stays in your browser. Nothing is uploaded.</span></p>
+    <p class="maker__privacy"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span data-i18n="mk.privacy">Your file stays on your device. Nothing is sent to a server.</span></p>
   </div>
 
-  <!-- Step 1: upload -->
+  <!-- Step 1: choose a file -->
   <section class="maker__step container" data-step="1" aria-labelledby="s1-title">
     <h1 id="s1-title" class="maker__title" data-i18n="mk.s1.title">Turn a spreadsheet of place names into a map.</h1>
-    <p class="lead" data-i18n="mk.s1.lead">Upload a CSV or Excel file with Sudanese state or locality names, in Arabic or English, spelled any way. We match each name to its official place and P-code, you check the uncertain ones, then export a map and your file with P-codes added.</p>
+    <p class="lead" data-i18n="mk.s1.lead">Open a CSV or Excel file with Sudanese state or locality names, in Arabic or English, spelled any way. We match each name to its official place and P-code, you check the uncertain ones, then export a map and your file with P-codes added.</p>
     <label class="drop" data-drop>
-      <input type="file" accept=".csv,.tsv,.txt,.xlsx" data-file class="visually-hidden">
+      <input type="file" accept=".csv,.tsv,.txt,.xlsx" data-file class="visually-hidden" aria-label="Choose a CSV or Excel file" data-i18n-attr="aria-label:mk.file">
       <span class="drop__icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 18 18"><path d="M9 12 V3 M5.5 6.5 L9 3 L12.5 6.5 M3 12 V15 H15 V12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       <strong data-i18n="mk.drop">Drop a CSV or Excel file here, or click to choose one</strong>
       <span class="muted small" data-i18n="mk.drop.hint">.csv, .tsv or .xlsx · the first row should hold the column names</span>
@@ -62,7 +62,7 @@
     <div class="matching" data-matching hidden>
       <canvas data-orb="connecting" data-orb-size="64" aria-label="Matching names" data-i18n-attr="aria-label:orb.matching"></canvas>
       <strong data-matching-text>Matching…</strong>
-      <span class="muted small" data-i18n="mk.privacy">Your file stays in your browser. Nothing is uploaded.</span>
+      <span class="muted small" data-i18n="mk.privacy">Your file stays on your device. Nothing is sent to a server.</span>
     </div>
     <div data-review hidden>
       <div class="review__head">
@@ -108,18 +108,24 @@
       <button type="button" class="btn btn--ghost btn--small" data-go="3" data-i18n="mk.back.review">Back to the matches</button>
     </div>
     <div class="maker__map">
+      <p class="map-notice" role="status" data-unmapped hidden>
+        <span data-unmapped-text></span>
+        <button type="button" class="link-button" data-unmapped-go data-i18n="mk.unmapped.check">Check the matches</button>
+      </p>
       <div class="maker__viz">
+        <div class="maker__mapcol">
         <div data-mk-map></div>
+        <figure class="band-legend" data-legend-box hidden>
+          <figcaption class="band-legend__title" data-legend-title></figcaption>
+          <svg class="band-legend__svg" data-legend role="img"></svg>
+        </figure>
+        </div>
         <aside class="ranking panel" aria-labelledby="rank-title" data-ranking hidden>
           <h3 id="rank-title" class="ranking__title" data-i18n="mk.rank">Ranking</h3>
           <p class="ranking__sub" data-rank-sub></p>
           <div class="ranking__scroll" data-rank-scroll><svg class="ranking__svg" data-rank-svg role="img"></svg></div>
         </aside>
       </div>
-      <figure class="band-legend" data-legend-box hidden>
-        <figcaption class="band-legend__title" data-legend-title></figcaption>
-        <svg class="band-legend__svg" data-legend role="img"></svg>
-      </figure>
     </div>
   </section>
 </main>

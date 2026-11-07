@@ -40,7 +40,8 @@
 .maker__side { flex: 1 1 260px; max-width: 320px; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
 .maker__map { flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 12px; align-items: center; }
 .maker__viz { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
-.maker__viz [data-mk-map] { width: 100%; max-width: 860px; justify-self: center; }
+.maker__mapcol { width: 100%; max-width: 860px; justify-self: center; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.maker__viz [data-mk-map] { width: 100%; }
 @media (min-width: 1240px) { .maker__viz { grid-template-columns: minmax(0, 1fr) 320px; } }
 .ranking { display: flex; flex-direction: column; gap: 4px; padding: 14px 10px 10px; max-height: calc(100vh - 190px); min-height: 0; }
 .ranking[hidden] { display: none; }
@@ -61,3 +62,21 @@
 .palettes .ramp span { flex: 1; height: 12px; }
 @media (max-width: 860px) { .maker__side { max-width: none; } .maker__map { order: -1; } }
 .maker__side h2 { font-size: 22px; color: var(--graphite); }
+.map-notice { align-self: stretch; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--warn-bg); color: var(--warn); font-size: 14px; }
+.map-notice[hidden] { display: none; }
+.map-notice .link-button { color: var(--warn); font-weight: 600; }
+
+/* Review table as cards when there isn't room for five columns, so How and Status stay visible. */
+@media (max-width: 860px) {
+  .review thead { display: none; }
+  .review, .review tbody { display: block; }
+  .review tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 12px; padding: 12px; border-bottom: 1px solid var(--mist); }
+  .review td { display: block; padding: 0; border: 0; background: none !important; }
+  .review tr.is-review { background: var(--warn-bg); }
+  .review td:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .review td:nth-child(2) { display: none; }
+  .review td:nth-child(5) { grid-column: 2; grid-row: 1; }
+  .review td:nth-child(3) { grid-column: 1 / -1; }
+  .review td:nth-child(3) select { width: 100%; max-width: none; }
+  .review td:nth-child(4) { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
+}

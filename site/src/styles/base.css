@@ -159,3 +159,8 @@ html[dir="rtl"] .eyebrow, html[dir="rtl"] .eyebrow-mono, html[dir="rtl"] .place-
 .consent__actions { display: flex; gap: 8px; }
 .link-button { border: 0; background: none; padding: 0; color: var(--signal); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: inherit; }
 .stack { display: flex; flex-direction: column; gap: 16px; }
+/* Narrow screens show one name in the logo: the one in the page's language. */
+@media (max-width: 680px) {
+  html[dir="rtl"] .brand__name-ar { display: inline; font-size: 18px; color: var(--graphite); }
+  html[dir="rtl"] .brand__name { display: none; }
+}

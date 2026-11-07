@@ -68,7 +68,7 @@ export function renderPlaceCard(container: HTMLElement, pcode: string | null, ma
       card.append(zoom);
     }
   } else if (parent && actions.onFocusState) {
-    const up = node("button", { type: "button", className: "btn btn--ghost btn--small", textContent: `${placeName(parent, L)} →` });
+    const up = node("button", { type: "button", className: "btn btn--ghost btn--small", textContent: `${placeName(parent, L)} ${L === "ar" ? "←" : "→"}` });
     up.addEventListener("click", () => actions.onFocusState!(parent.pcode));
     card.append(up);
   }

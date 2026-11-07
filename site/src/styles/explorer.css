@@ -38,3 +38,14 @@
 
 /* On the grey workspace, places are white with grey borders. */
 .explorer { --mv-fill: var(--white); --mv-stroke: #d4d4d8; }
+.search__empty { padding: 10px 12px; color: var(--muted); font-size: 14px; list-style: none; }
+
+/* Tablet and split-screen widths: search and layers first (compact), then the map, then details. */
+@media (max-width: 860px) {
+  .explorer__map { order: 0; flex-basis: 100%; }
+  .explorer__body > .explorer__panel:first-child { flex-basis: 100%; flex-direction: row; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; padding: 12px; }
+  .explorer__body > .explorer__panel:first-child > .field { flex: 1 1 200px; }
+  .explorer__body > .explorer__panel:first-child > .field:first-child { flex-basis: 100%; }
+  .explorer__body > .explorer__panel:first-child > h2, .explorer__body > .explorer__panel:first-child > p { display: none; }
+  .explorer__details { flex-basis: 100%; }
+}

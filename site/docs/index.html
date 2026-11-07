@@ -41,8 +41,8 @@
     <header class="docs__intro">
       <p class="eyebrow"><span data-lang-only="en">Documentation</span><span data-lang-only="ar" lang="ar" hidden>الدليل</span></p>
       <h1><span data-lang-only="en">Using Sudan Atlas in your code</span><span data-lang-only="ar" lang="ar" hidden>استخدام أطلس السودان في برامجك</span></h1>
-      <p class="lead" data-lang-only="en">One package for Python and one for JavaScript, with the same data and identical results. They match Sudanese place names written any way, in Arabic or English, to official P-codes, and give you the names and boundaries of Sudan's 19 states and 189 localities.</p>
-      <p class="lead" data-lang-only="ar" lang="ar" hidden>حزمة لبايثون وأخرى لجافاسكربت، تستخدمان البيانات نفسها وتعطيان النتائج نفسها. تتعرّف الحزمتان على أسماء الأماكن السودانية بالعربية أو الإنجليزية مهما اختلفت طريقة كتابتها، وتربطها بالرموز المكانية (P-codes) الرسمية، وتوفّران أسماء وحدود ولايات السودان الـ19 ومحلياته الـ189.</p>
+      <p class="lead" data-lang-only="en">One package for Python and one for JavaScript, with the same data and identical results. They match Sudanese place names written any way, in Arabic or English, to official P-codes, and give you the names and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities.</p>
+      <p class="lead" data-lang-only="ar" lang="ar" hidden>حزمة لبايثون وأخرى لجافاسكربت، تستخدمان البيانات نفسها وتعطيان النتائج نفسها. تتعرّف الحزمتان على أسماء الأماكن السودانية بالعربية أو الإنجليزية مهما اختلفت طريقة كتابتها، وتربطها بالرموز المكانية (P-codes) الرسمية، وتوفّران أسماء وحدود ولايات السودان الـ18 ومنطقة أبيي، ومحلياته الـ189.</p>
       <div class="lang-pick" role="group" aria-label="Code examples in" data-i18n-attr="aria-label:docs.examples">
         <span class="muted small"><span data-lang-only="en">Show examples in</span><span data-lang-only="ar" lang="ar" hidden>اعرض الأمثلة بلغة</span></span>
         <div class="segmented">
@@ -193,7 +193,7 @@ const khartoum = await getFeature("SD01", "medium");</code></pre></div>
 
     <section id="no-code">
       <h2><span data-lang-only="en">Without code: the map-maker</span><span data-lang-only="ar" lang="ar" hidden>دون برمجة: صانع الخرائط</span></h2>
-      <p data-lang-only="en">The <a href="/maker/">map-maker</a> does all of this in your browser: upload a CSV or Excel file, check the uncertain matches, then download a map and your file with P-codes added. Nothing is uploaded.</p>
+      <p data-lang-only="en">The <a href="/maker/">map-maker</a> does all of this in your browser: open a CSV or Excel file, check the uncertain matches, then download a map and your file with P-codes added. Your file never leaves your device.</p>
       <p data-lang-only="ar" lang="ar" hidden>يؤدي <a href="/maker/">صانع الخرائط</a> كل ما سبق داخل متصفحك: افتح ملف CSV أو Excel، وراجع المطابقات غير المؤكدة، ثم نزّل الخريطة وملفك وقد أُضيفت إليه الرموز المكانية. ولا يغادر ملفك جهازك.</p>
     </section>
 
@@ -255,7 +255,7 @@ strict.match("Kornoi", { stateHint: "North Darfur", level: 2 });</code></pre></d
         <thead><tr><th>Python</th><th>JavaScript</th><th><span data-lang-only="en">Returns</span><span data-lang-only="ar" lang="ar" hidden>ما تُرجعه</span></th></tr></thead>
         <tbody>
           <tr><td><code>get_feature(pcode, resolution="medium")</code></td><td><code>await getFeature(pcode, resolution = "medium")</code></td><td><span data-lang-only="en">A GeoJSON Feature with the place's properties.</span><span data-lang-only="ar" lang="ar" hidden>معلم GeoJSON (Feature) يحمل خصائص المكان.</span></td></tr>
-          <tr><td><code>geo.states(resolution="medium")</code></td><td>–</td><td><span data-lang-only="en">GeoDataFrame of the 19 states (needs <code>[geo]</code>).</span><span data-lang-only="ar" lang="ar" hidden>جدول GeoDataFrame بالولايات الـ19 (يتطلب <code>[geo]</code>).</span></td></tr>
+          <tr><td><code>geo.states(resolution="medium")</code></td><td>–</td><td><span data-lang-only="en">GeoDataFrame of the 18 states and the Abyei PCA area (needs <code>[geo]</code>).</span><span data-lang-only="ar" lang="ar" hidden>جدول GeoDataFrame بالولايات الـ18 ومنطقة أبيي (يتطلب <code>[geo]</code>).</span></td></tr>
           <tr><td><code>geo.localities(state_pcode=None, resolution="medium")</code></td><td>–</td><td><span data-lang-only="en">GeoDataFrame of localities (needs <code>[geo]</code>).</span><span data-lang-only="ar" lang="ar" hidden>جدول GeoDataFrame بالمحليات (يتطلب <code>[geo]</code>).</span></td></tr>
           <tr><td>–</td><td><code>setDataUrl(url)</code></td><td><span data-lang-only="en">Load boundary files from your own address (browser).</span><span data-lang-only="ar" lang="ar" hidden>تحميل ملفات الحدود من عنوان تحدده أنت (في المتصفح).</span></td></tr>
         </tbody>

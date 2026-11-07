@@ -569,5 +569,7 @@
   {"text": "Al Khawī", "lang": "en", "pcodes": ["SD18105"], "sources": [{"source": "geonames", "ref": "geonames:13711215", "kind": "alternate-name"}], "status": "kept"},
   {"text": "منطقة أبيي", "lang": "ar", "pcodes": ["SD19"], "sources": [{"source": "wikidata", "ref": "wikidata:Q336494", "kind": "label"}], "status": "kept"},
   {"text": "Abyei Area", "lang": "en", "pcodes": ["SD19"], "sources": [{"source": "wikidata", "ref": "wikidata:Q336494", "kind": "alias"}], "status": "kept"},
+  {"text": "أبيي", "lang": "ar", "pcodes": ["SD19001"], "sources": [{"source": "review", "ref": "review:addition/5", "kind": "review"}], "status": "kept", "conflicts_with_official": ["SD18087"]},
+  {"text": "Abyei", "lang": "en", "pcodes": ["SD19001"], "sources": [{"source": "review", "ref": "review:addition/4", "kind": "review"}], "status": "kept", "conflicts_with_official": ["SD18087"]},
   {"text": "Ab’ey", "lang": "en", "pcodes": ["SD19001"], "sources": [{"source": "geonames", "ref": "geonames:380308", "kind": "town"}], "status": "kept"}
 ]}

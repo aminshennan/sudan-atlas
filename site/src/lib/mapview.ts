@@ -261,17 +261,25 @@ export class MapView {
     const placed: [number, number, number, number][] = [];
     for (const { f, c } of items) {
       const label = this.labels === "ar" ? f.properties.name_ar : f.properties.name_en;
-      const w = label.length * size * (this.labels === "ar" ? 0.5 : 0.56) + pad;
-      const h = size * 1.3;
-      const cx = Math.min(view.x1 - pad - w / 2, Math.max(view.x0 + pad + w / 2, c[0])); // keep the label in view
-      const box: [number, number, number, number] = [cx - w / 2, c[1] - h / 2, cx + w / 2, c[1] + h / 2];
-      if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) continue;
-      placed.push(box);
-      const text = el("text", { x: cx.toFixed(2), y: c[1].toFixed(2), class: "mv-label", "text-anchor": "middle", "dominant-baseline": "middle", "font-size": size.toFixed(2) });
+      const text = el("text", { x: c[0].toFixed(2), y: c[1].toFixed(2), class: "mv-label", "text-anchor": "middle", "dominant-baseline": "middle", "font-size": size.toFixed(2) });
       text.style.strokeWidth = `${(size / 4).toFixed(2)}px`;
       text.textContent = label;
       if (this.labels === "ar") text.setAttribute("direction", "rtl");
       g.appendChild(text);
+      // Measure the drawn label (estimates run short for Arabic and wide letters); fall back to an
+      // estimate when the map is not on screen and nothing can be measured.
+      let w = 0, h = 0;
+      try { const bb = text.getBBox(); w = bb.width; h = bb.height; } catch { /* not rendered yet */ }
+      if (!w) { w = label.length * size * (this.labels === "ar" ? 0.55 : 0.6); h = size * 1.3; }
+      w += 2 * pad; h += pad;
+      // Keep the whole label in view, then skip it if it would overlap one already placed.
+      const cx = Math.min(view.x1 - w / 2, Math.max(view.x0 + w / 2, c[0]));
+      const cy = Math.min(view.y1 - h / 2, Math.max(view.y0 + h / 2, c[1]));
+      const box: [number, number, number, number] = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2];
+      if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) { text.remove(); continue; }
+      placed.push(box);
+      text.setAttribute("x", cx.toFixed(2));
+      text.setAttribute("y", cy.toFixed(2));
     }
   }
 

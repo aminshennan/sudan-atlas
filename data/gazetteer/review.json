@@ -1338,6 +1338,8 @@
  "additions": [
   {"text": "Bout", "pcodes": ["SD08108"], "by": "agent", "note": "Final recheck: Common English spelling of Bout (بوط), the town in At Tadamon, Blue Nile."},
   {"text": "ريفي وسط القضارف", "pcodes": ["SD12081"], "by": "agent", "note": "Final recheck: Correct spelling of the Wikidata label \"ريفي وسط القضارق\" (ق typed for ف)."},
-  {"text": "ارمانكول", "pcodes": ["SD04134"], "by": "agent", "note": "Third agent review, 2026-11-01: Arabic spelling of Armankul (OSM node/13357352273), in Sirba."}
+  {"text": "ارمانكول", "pcodes": ["SD04134"], "by": "agent", "note": "Third agent review, 2026-11-01: Arabic spelling of Armankul (OSM node/13357352273), in Sirba."},
+  {"text": "Abyei", "pcodes": ["SD19001"], "by": "amin", "note": "Soft-launch review, 2026-11-07: on its own, Abyei can mean the Abyei PCA area as well as the Abyei locality in West Kordofan (SD18087). Listed for both so the matcher asks instead of choosing; a West Kordofan state hint still resolves it."},
+  {"text": "أبيي", "pcodes": ["SD19001"], "by": "amin", "note": "Soft-launch review, 2026-11-07: on its own, Abyei can mean the Abyei PCA area as well as the Abyei locality in West Kordofan (SD18087). Listed for both so the matcher asks instead of choosing; a West Kordofan state hint still resolves it."}
  ]
 }
