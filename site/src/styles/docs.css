@@ -28,3 +28,4 @@ html[dir="rtl"] .docs__nav-title { letter-spacing: 0; text-transform: none; font
 html[dir="rtl"] .docs .table { direction: rtl; }
 .code { direction: ltr; }
 html[dir="rtl"] .docs code { direction: ltr; unicode-bidi: isolate; }
+.stats[hidden] { display: none !important; }
