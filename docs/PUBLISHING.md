@@ -61,7 +61,7 @@ Once, Amin:
 3. Publish a GitHub release. Zenodo archives only releases published after step 2, so the first DOI comes from the next one: either the next package release, or a citation snapshot (a release tagged, for example, `citation-2026-11` and titled "Sudan Atlas, November 2026"). The release workflow skips any release whose tag does not start with `packages-v`, so a snapshot publishes nothing to npm or PyPI.
 4. After a few minutes the release appears at https://zenodo.org/account/settings/github/ with its DOI. Copy the **concept DOI** (the one for all versions) and add it to `CITATION.cff` as `doi: 10.5281/zenodo.NNNNNNN`, and its badge to the README.
 
-Each later GitHub release gets its own DOI automatically. Update `version` and `date-released` in `CITATION.cff` with each package release.
+Done: the concept DOI is `10.5281/zenodo.24191932`. Each later GitHub release gets its own DOI automatically. Update `version` and `date-released` in `CITATION.cff` with each package release.
 
 ## Check the published packages
 

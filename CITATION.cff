@@ -13,6 +13,11 @@ authors:
   - family-names: Shennan
     given-names: Amin
     website: "https://aminshennan.com"
+doi: 10.5281/zenodo.24191932
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24191932
+    description: "Archived on Zenodo"
 repository-code: "https://github.com/aminshennan/sudan-atlas"
 url: "https://atlas-sudan.vercel.app"
 license:
