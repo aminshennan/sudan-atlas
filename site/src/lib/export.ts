@@ -7,6 +7,8 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const FONT = "Inter, 'Helvetica Neue', Arial, sans-serif";
 const FONT_AR = "'IBM Plex Sans Arabic', 'Geeza Pro', 'Segoe UI', Tahoma, sans-serif";
 export const CREDIT_EN = "Boundaries: OCHA COD-AB Sudan v03 (CC BY 3.0 IGO). Names and P-codes: Sudan Atlas (CC BY 4.0).";
+export const DISCLAIMER_EN = "Boundaries are shown for humanitarian and research use and do not imply any opinion on the legal status of any territory.";
+export const DISCLAIMER_AR = "تُعرض الحدود للأغراض الإنسانية والبحثية، ولا يعبّر رسمها عن أي موقف من الوضع القانوني لأي إقليم.";
 export const CREDIT_AR = "مصدر الحدود: أوتشا، مجموعة COD-AB للسودان، الإصدار الثالث (CC BY 3.0 IGO). الأسماء والرموز: أطلس السودان (CC BY 4.0).";
 
 export interface LegendSpec {
@@ -60,7 +62,7 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
   const [, , w, h] = (mapSvg.getAttribute("viewBox") ?? "0 0 800 760").split(" ").map(Number);
   const top = spec.subtitle ? 84 : 64;
   const legendH = spec.legend ? 120 : 0;
-  const bottom = 44 + legendH;
+  const bottom = 60 + legendH; // credit and disclaimer lines
   const sideW = spec.side ? SIDE_W + SIDE_GAP : 0;
   const W = w + sideW;
   // In Arabic the chart sits on the left and the map on the right.
@@ -129,7 +131,8 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
     lg.setAttribute("transform", `translate(${spec.rtl ? mapX + w - 20 - size.width : 20} ${ly + 20})`);
     out.appendChild(lg);
   }
-  out.appendChild(text(x0, H - 16, spec.rtl ? CREDIT_AR : CREDIT_EN, { "font-family": font, "font-size": 11, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
+  out.appendChild(text(x0, H - 32, spec.rtl ? CREDIT_AR : CREDIT_EN, { "font-family": font, "font-size": 11, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
+  out.appendChild(text(x0, H - 14, spec.rtl ? DISCLAIMER_AR : DISCLAIMER_EN, { "font-family": font, "font-size": 11, fill: "#71717a", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   return new XMLSerializer().serializeToString(out);
 }
 

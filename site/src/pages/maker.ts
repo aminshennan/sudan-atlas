@@ -553,12 +553,12 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
   }
   if (!map) return;
   const { items, bands } = chartData();
-  const svg = buildExportSvg(map.svg, {
+  const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, {
     title: $<HTMLInputElement>("[data-map-title]").value || defaultTitle(),
     rtl: lang() === "ar",
     legend: bands ? { title: valueTitle(), bands } : undefined,
     side: items.length ? { title: t("mk.rank", "Ranking"), subtitle: rankSubtitle(items.length, RANK_EXPORT_LIMIT), items, format: nf, limit: RANK_EXPORT_LIMIT } : undefined,
-  });
+  }));
   if (kind === "svg") downloadSvg(`${fileStem()}-map.svg`, svg);
   else await downloadPng(`${fileStem()}-map.png`, svg);
 }));

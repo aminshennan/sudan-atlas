@@ -146,7 +146,7 @@ menu.querySelectorAll<HTMLButtonElement>("[data-export]").forEach((b) => b.addEv
     download(`${file}.csv`, toCsv(rows));
     return;
   }
-  const svg = buildExportSvg(map.svg, { title, rtl: lang() === "ar" });
+  const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, { title, rtl: lang() === "ar" }));
   if (kind === "svg") downloadSvg(`${file}.svg`, svg);
   else await downloadPng(`${file}.png`, svg);
 }));

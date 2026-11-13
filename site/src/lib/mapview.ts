@@ -7,7 +7,7 @@ import { geoConicEqualArea, geoPath, type GeoPath, type GeoProjection } from "d3
 import { select as d3select, type Selection } from "d3-selection";
 import "d3-transition";
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
-import { type AdmFeature, loadLevel, placeName } from "./atlas";
+import { type AdmFeature, getPlace, loadLevel, placeName } from "./atlas";
 import { t, type Lang } from "./i18n";
 
 export type LabelMode = "en" | "ar" | "off";
@@ -18,6 +18,8 @@ const PAD = 16;
 const MAX_ZOOM = 64;
 /** Below this zoom, localities across the whole country are too small to label. */
 const LOCALITY_LABEL_ZOOM = 2.5;
+/** Label size, in map units, in exported images (800 units wide, so about 11 px at 1x). */
+const EXPORT_LABEL_SIZE = 11;
 
 export interface MapViewOptions {
   labels?: LabelMode;
@@ -245,42 +247,86 @@ export class MapView {
     if (this.labels === "off") return;
     const { k, x: tx, y: ty } = this.transform;
     // Whole country: label states, and localities once zoomed in far enough. Focused on a state:
-    // label its localities. Larger places are labelled first; a label that would overlap one
-    // already placed is left out. Sizes are divided by the zoom so text stays the same on screen.
+    // label its localities. Larger places are labelled first. A label's centre must fall inside its
+    // own place: it tries the place's label point (chosen to sit well inside it), small shifts
+    // around it, then a grid of spots inside the place nearest first, and the same again at a
+    // smaller size. It is left out only if every spot overlaps a label already placed. Sizes are
+    // divided by the zoom so text stays the same on screen.
     const features = this.drawnFocus ? this.visible()
       : this.level === 1 ? this.states
       : k >= LOCALITY_LABEL_ZOOM ? this.localities : [];
     // The part of the map in view, in map units.
     const view = { x0: -tx / k, y0: -ty / k, x1: (W - tx) / k, y1: (H - ty) / k };
+    const inView = (c: [number, number]) => Number.isFinite(c[0]) && c[0] > view.x0 && c[0] < view.x1 && c[1] > view.y0 && c[1] < view.y1;
+    const shapes = new Map<string, SVGPathElement>();
+    this.layers.fills.querySelectorAll<SVGPathElement>("path").forEach((el) => shapes.set(el.dataset.pcode!, el));
     const items = features
-      .map((f) => ({ f, area: this.path.area(f), c: this.path.centroid(f) }))
-      .filter((x) => Number.isFinite(x.c[0]) && x.c[0] > view.x0 && x.c[0] < view.x1 && x.c[1] > view.y0 && x.c[1] < view.y1)
+      .map((f) => {
+        const point = getPlace(f.properties.pcode)?.point;
+        const anchor = (point ? this.projection(point as [number, number]) : null) ?? this.path.centroid(f);
+        return { f, area: this.path.area(f), anchor: anchor as [number, number], bounds: this.path.bounds(f) };
+      })
+      .filter((x) => inView(x.anchor) || (x.bounds[1][0] > view.x0 && x.bounds[0][0] < view.x1 && x.bounds[1][1] > view.y0 && x.bounds[0][1] < view.y1))
       .sort((a, b) => b.area - a.area);
-    const size = this.labelSize / k;
+    const base = this.labelSize / k;
     const pad = 4 / k;
     const placed: [number, number, number, number][] = [];
-    for (const { f, c } of items) {
+    const free = (b: [number, number, number, number]) => !placed.some((o) => b[0] < o[2] && b[2] > o[0] && b[1] < o[3] && b[3] > o[1]);
+    for (const { f, anchor, bounds } of items) {
+      const shape = shapes.get(f.properties.pcode);
+      const inside = (x: number, y: number) => {
+        if (!shape?.isPointInFill) return true;
+        try { return shape.isPointInFill(new DOMPoint(x, y)); } catch { return true; }
+      };
       const label = this.labels === "ar" ? f.properties.name_ar : f.properties.name_en;
-      const text = el("text", { x: c[0].toFixed(2), y: c[1].toFixed(2), class: "mv-label", "text-anchor": "middle", "dominant-baseline": "middle", "font-size": size.toFixed(2) });
-      text.style.strokeWidth = `${(size / 4).toFixed(2)}px`;
+      const text = el("text", { x: anchor[0].toFixed(2), y: anchor[1].toFixed(2), class: "mv-label", "text-anchor": "middle", "dominant-baseline": "middle", "font-size": base.toFixed(2) });
       text.textContent = label;
       if (this.labels === "ar") text.setAttribute("direction", "rtl");
       g.appendChild(text);
       // Measure the drawn label (estimates run short for Arabic and wide letters); fall back to an
       // estimate when the map is not on screen and nothing can be measured.
-      let w = 0, h = 0;
-      try { const bb = text.getBBox(); w = bb.width; h = bb.height; } catch { /* not rendered yet */ }
-      if (!w) { w = label.length * size * (this.labels === "ar" ? 0.55 : 0.6); h = size * 1.3; }
-      w += 2 * pad; h += pad;
-      // Keep the whole label in view, then skip it if it would overlap one already placed.
-      const cx = Math.min(view.x1 - w / 2, Math.max(view.x0 + w / 2, c[0]));
-      const cy = Math.min(view.y1 - h / 2, Math.max(view.y0 + h / 2, c[1]));
-      const box: [number, number, number, number] = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2];
-      if (placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) { text.remove(); continue; }
-      placed.push(box);
-      text.setAttribute("x", cx.toFixed(2));
-      text.setAttribute("y", cy.toFixed(2));
+      let w0 = 0, h0 = 0;
+      try { const bb = text.getBBox(); w0 = bb.width; h0 = bb.height; } catch { /* not rendered yet */ }
+      if (!w0) { w0 = label.length * base * (this.labels === "ar" ? 0.55 : 0.6); h0 = base * 1.3; }
+      // Candidate centres: the label point and shifts around it, then a grid over the place,
+      // nearest to the label point first. Only centres inside the place and in view count.
+      const [[bx0, by0], [bx1, by1]] = bounds;
+      const grid: [number, number][] = [];
+      for (let i = 1; i < 8; i++) for (let j = 1; j < 8; j++) grid.push([bx0 + ((bx1 - bx0) * i) / 8, by0 + ((by1 - by0) * j) / 8]);
+      grid.sort((a, b2) => Math.hypot(a[0] - anchor[0], a[1] - anchor[1]) - Math.hypot(b2[0] - anchor[0], b2[1] - anchor[1]));
+      let spot: { x: number; y: number; size: number } | null = null;
+      for (const scale of [1, 0.85, 0.72]) {
+        const w = w0 * scale + 2 * pad, h = h0 * scale + pad;
+        const near: [number, number][] = [[0, 0], [0, -h], [0, h], [-w / 3, 0], [w / 3, 0], [-w / 3, -h], [w / 3, -h], [-w / 3, h], [w / 3, h]]
+          .map(([dx, dy]) => [anchor[0] + dx, anchor[1] + dy]);
+        for (const [cx0, cy0] of [...near, ...grid]) {
+          if (!inside(cx0, cy0)) continue;
+          // Keep the whole label in view.
+          const x = Math.min(view.x1 - w / 2, Math.max(view.x0 + w / 2, cx0));
+          const y = Math.min(view.y1 - h / 2, Math.max(view.y0 + h / 2, cy0));
+          if (!inView([x, y])) continue;
+          const box: [number, number, number, number] = [x - w / 2, y - h / 2, x + w / 2, y + h / 2];
+          if (free(box)) { spot = { x, y, size: base * scale }; placed.push(box); break; }
+        }
+        if (spot) break;
+      }
+      if (!spot) { text.remove(); continue; }
+      text.setAttribute("x", spot.x.toFixed(2));
+      text.setAttribute("y", spot.y.toFixed(2));
+      text.setAttribute("font-size", spot.size.toFixed(2));
+      text.style.strokeWidth = `${(spot.size / 4).toFixed(2)}px`;
     }
+  }
+
+  /**
+   * Run fn (an export) with labels laid out at the size used for an 800-px-wide image, whatever
+   * the screen, then put the on-screen labels back. Exports from a phone and a laptop then match.
+   */
+  withExportLabels<T>(fn: (svg: SVGSVGElement) => T): T {
+    const saved = this.labelSize;
+    this.labelSize = EXPORT_LABEL_SIZE;
+    this.renderLabels();
+    try { return fn(this.svg); } finally { this.labelSize = saved; this.renderLabels(); }
   }
 
   private applyTransform(target: ZoomTransform, animate: boolean, done?: () => void): void {
