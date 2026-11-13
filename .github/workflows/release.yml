@@ -10,6 +10,11 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      github_packages:
+        description: "Also publish the npm package to GitHub Packages (npm and PyPI are published only by a release)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -108,3 +113,42 @@ jobs:
             exit 0
           fi
           npm publish "./sudan-atlas-$VERSION.tgz" --access public --provenance="$PROVENANCE"
+
+  github-packages:
+    # A copy of the npm package on GitHub Packages, so it shows on the repository page. GitHub's
+    # registry needs a scoped name, so it is published as @aminshennan/sudan-atlas; installing from
+    # it needs a GitHub token, so npm (unscoped sudan-atlas) stays the place to install from.
+    name: Publish to GitHub Packages
+    needs: build
+    if: github.event_name == 'release' || inputs.github_packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@aminshennan"
+      - name: Publish
+        env:
+          VERSION: ${{ needs.build.outputs.version }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if npm view "@aminshennan/sudan-atlas@$VERSION" version >/dev/null 2>&1; then
+            echo "@aminshennan/sudan-atlas@$VERSION is already on GitHub Packages; nothing to do."
+            exit 0
+          fi
+          tar -xzf "sudan-atlas-$VERSION.tgz"
+          node -e '
+            const fs = require("fs");
+            const p = JSON.parse(fs.readFileSync("package/package.json", "utf8"));
+            p.name = "@aminshennan/sudan-atlas";
+            p.publishConfig = { registry: "https://npm.pkg.github.com", access: "public" };
+            fs.writeFileSync("package/package.json", JSON.stringify(p, null, 2) + "\n");
+          '
+          npm publish ./package
