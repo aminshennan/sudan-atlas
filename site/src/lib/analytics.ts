@@ -1,4 +1,6 @@
-// Analytics that count, never read. Vercel Web Analytics (no cookies) counts page views.
+// Analytics that count, never read. Vercel Web Analytics (no cookies) counts page views; the
+// site's own counter (/api/count) counts how often each feature is used, by page, event and
+// format only.
 // Google Analytics loads only after the visitor agrees, and only when a measurement ID is
 // configured (VITE_GA_ID at build time). Events carry a name and a format, never file
 // contents, place names or values.
@@ -74,9 +76,18 @@ export function initAnalytics(): void {
 }
 
 /** Count an event. Only a name and a short, non-identifying label such as an export format. */
-export function countEvent(name: "map_export" | "file_export" | "map_made", format?: string): void {
+export function countEvent(name: "match_run" | "map_export" | "file_export" | "map_made", format?: string): void {
   const props = format ? { format } : undefined;
   try { track(name, props); } catch { /* analytics must never break the page */ }
+  // The site's own counter: page, event and format, nothing else. Not sent from local development.
+  if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+    try {
+      const body = JSON.stringify({ page: document.body.dataset.page ?? "", event: name, format: format ?? "" });
+      if (!navigator.sendBeacon?.("/api/count", new Blob([body], { type: "application/json" }))) {
+        void fetch("/api/count", { method: "POST", body, headers: { "Content-Type": "application/json" }, keepalive: true }).catch(() => {});
+      }
+    } catch { /* counting must never break the page */ }
+  }
   const gtag = (window as unknown as { gtag?: Gtag }).gtag;
   if (gtag) gtag("event", name, props ?? {});
 }

@@ -87,7 +87,7 @@ npm run dev       # http://localhost:5173, with the package source and boundary 
 npm run build     # type-check and build into site/dist/
 ```
 
-The site uses the `sudan-atlas` package straight from `packages/js/src`, so it always matches the published packages. Vercel builds and deploys it from `site/` on every push to `main`; other branches get preview deployments. Visits are counted with Vercel Analytics, which uses no cookies; nothing in a visitor's files is ever counted or sent.
+The site uses the `sudan-atlas` package straight from `packages/js/src`, so it always matches the published packages. Vercel builds and deploys it from `site/` on every push to `main`; other branches get preview deployments. Visits are counted with Vercel Analytics, which uses no cookies. Feature use is counted by the site's own function, [`site/api/count.ts`](site/api/count.ts): one number per page, event and file type (for example "maker, map export, PNG"), kept in an Upstash Redis database connected through Vercel's Marketplace. It stores no IP address, cookie, file name or value, and does nothing until the database is connected. `GET /api/count` returns the counts.
 
 ## Rebuilding the data and packages
 
@@ -104,6 +104,10 @@ make preview    # then open http://localhost:8000/pipeline/preview/
 ```
 
 Publishing steps: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
+
+## Citing Sudan Atlas
+
+If you use Sudan Atlas in a report, paper or product, please cite it. Each GitHub release is archived on [Zenodo](https://zenodo.org) with a DOI; the "Cite this repository" button on GitHub gives the citation in APA and BibTeX, from [`CITATION.cff`](CITATION.cff). Please also credit the boundary source: "OCHA (COD-AB Sudan), via HDX".
 
 ## Help improve it
 

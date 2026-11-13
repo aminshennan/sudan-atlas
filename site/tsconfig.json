@@ -14,5 +14,5 @@
     "baseUrl": ".",
     "paths": { "sudan-atlas": ["../packages/js/src/index.ts"] }
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "api", "vite.config.ts"]
 }

@@ -51,7 +51,7 @@ function go(step: number): void {
     if (n === step) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
   });
   window.scrollTo({ top: 0 });
-  if (step === 4) { drawMap(); countEvent("map_made"); }
+  if (step === 4) { drawMap(); countEvent("map_made", "map"); }
 }
 $$<HTMLButtonElement>("[data-go]").forEach((b) => b.addEventListener("click", () => go(Number(b.dataset.go))));
 go(1);
@@ -180,6 +180,9 @@ const finalPcode = (u: Unique): string | null => (u.choice !== undefined ? u.cho
 
 $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
   if (!sheet) return;
+  // Count the run by file type only (never the file's name or contents).
+  const ext = sheet.file.toLowerCase().split(".").pop() ?? "";
+  countEvent("match_run", sheet.file === "sudan-atlas-sample.csv" ? "sample" : ext === "xlsx" || ext === "tsv" ? ext : "csv");
   go(3);
   $<HTMLElement>("[data-review]").hidden = true;
   $<HTMLElement>("[data-matching]").hidden = false;

@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use Sudan Atlas in a report, paper or product, please cite it as below."
+type: software
+title: "Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities"
+abstract: >-
+  An open toolkit that matches Sudanese place names written in Arabic or English, in any
+  spelling, to official P-codes, and gives the names and boundaries of Sudan's 18 states,
+  the Abyei PCA area and 189 localities. It includes Python and JavaScript packages with
+  identical results, a website with a map and a map-maker, and a hand-checked evaluation
+  of the matcher. Boundaries follow OCHA's Common Operational Dataset for Sudan (COD-AB v03) and keep its
+  CC BY 3.0 IGO licence; code is MIT and Sudan Atlas's own data is CC BY 4.0.
+authors:
+  - family-names: Shennan
+    given-names: Amin
+    website: "https://aminshennan.com"
+repository-code: "https://github.com/aminshennan/sudan-atlas"
+url: "https://atlas-sudan.vercel.app"
+license:
+  - MIT
+  - CC-BY-4.0
+version: 0.1.2
+date-released: 2026-11-07
+keywords:
+  - Sudan
+  - P-codes
+  - gazetteer
+  - administrative boundaries
+  - place name matching
+  - Arabic
+  - humanitarian data
+  - COD-AB

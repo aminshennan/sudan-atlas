@@ -3,7 +3,8 @@ name: Release packages
 # Publishing a GitHub release tagged packages-v<version> (for example packages-v0.1.0) tests, builds
 # and publishes both packages. npm and PyPI trust this workflow directly ("trusted publishing"), so no
 # token is stored in the repository. Running it by hand (Actions -> Release packages -> Run workflow)
-# only tests and builds: a rehearsal that publishes nothing. See docs/PUBLISHING.md.
+# only tests and builds: a rehearsal that publishes nothing. Other releases (data releases such as
+# 2026.1, or a citation snapshot archived by Zenodo) are skipped. See docs/PUBLISHING.md.
 
 on:
   release:
@@ -16,6 +17,7 @@ permissions:
 jobs:
   build:
     name: Test and build
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'packages-v')
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}

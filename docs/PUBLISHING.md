@@ -50,6 +50,19 @@ The workflow stops if the three versions differ or the tag does not match them. 
 
 While the repository is private, npm cannot record provenance (the signed link from the package to the commit that built it); the workflow turns it on once the repository is public.
 
+## Archive releases on Zenodo (DOI)
+
+Zenodo gives every GitHub release a DOI, plus one "concept" DOI that always resolves to the latest version. Its record takes its title, author, licence and keywords from `.zenodo.json`; GitHub's "Cite this repository" button reads `CITATION.cff`.
+
+Once, Amin:
+
+1. Sign in at https://zenodo.org with **Log in → GitHub**, and allow access.
+2. Open https://zenodo.org/account/settings/github/, press **Sync now**, and switch `aminshennan/sudan-atlas` **On**.
+3. Publish a GitHub release. Zenodo archives only releases published after step 2, so the first DOI comes from the next one: either the next package release, or a citation snapshot (a release tagged, for example, `citation-2026-11` and titled "Sudan Atlas, November 2026"). The release workflow skips any release whose tag does not start with `packages-v`, so a snapshot publishes nothing to npm or PyPI.
+4. After a few minutes the release appears at https://zenodo.org/account/settings/github/ with its DOI. Copy the **concept DOI** (the one for all versions) and add it to `CITATION.cff` as `doi: 10.5281/zenodo.NNNNNNN`, and its badge to the README.
+
+Each later GitHub release gets its own DOI automatically. Update `version` and `date-released` in `CITATION.cff` with each package release.
+
 ## Check the published packages
 
 - npm: https://www.npmjs.com/package/sudan-atlas, and on jsDelivr within a few minutes. The browser build fetches boundary files from jsDelivr, so check one loads: `https://cdn.jsdelivr.net/npm/sudan-atlas@0.1.0/data/boundaries/light/adm1.geojson`.
