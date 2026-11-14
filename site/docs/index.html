@@ -225,6 +225,8 @@ claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/m
       </table>
       <p data-lang-only="en">Like the packages, the server never guesses silently: when a name could be two places it returns the candidates, and the assistant is told to ask you.</p>
       <p data-lang-only="ar" lang="ar" hidden>ومثل الحزم، لا يخمّن الخادم أبدًا دون أن يخبرك: إذا احتمل الاسم مكانين أعاد المرشحين، ويُطلب من المساعد أن يسألك.</p>
+      <p data-lang-only="en"><strong>Privacy.</strong> Unlike the map-maker, which works entirely in your browser, the MCP server runs on our server: the names your assistant sends are processed there to answer the request, and are not stored or logged. Your assistant's own provider sees them too, under its own terms. Each address may make 60 requests a minute.</p>
+      <p data-lang-only="ar" lang="ar" hidden><strong>الخصوصية.</strong> صانع الخرائط يعمل كله داخل متصفحك، أما خادم MCP فيعمل على خادمنا: تُعالَج الأسماء التي يرسلها مساعدك هناك للإجابة عن الطلب، ولا تُحفظ ولا تُسجَّل. ويطّلع عليها كذلك مزوّد المساعد نفسه، وفق شروطه. ويُسمح لكل عنوان بـ60 طلبًا في الدقيقة.</p>
     </section>
 
     <section id="ref-match">
@@ -351,20 +353,22 @@ strict.match("Kornoi", { stateHint: "North Darfur", level: 2 });</code></pre></d
 
     <section id="accuracy">
       <h2><span data-lang-only="en">How accurate it is</span><span data-lang-only="ar" lang="ar" hidden>ما مدى دقته؟</span></h2>
-      <p data-lang-only="en">On 299 real names taken from humanitarian datasets (IOM, UNHCR, OCHA, IPC and the US Census Bureau), each checked by hand:</p>
-      <p data-lang-only="ar" lang="ar" hidden>اختبرنا أداة المطابقة على 299 اسمًا حقيقيًا من مجموعات بيانات إنسانية (المنظمة الدولية للهجرة، ومفوضية الأمم المتحدة لشؤون اللاجئين، وأوتشا، والتصنيف المرحلي المتكامل للأمن الغذائي، ومكتب الإحصاء الأمريكي)، وتحققنا من كل اسم يدويًا:</p>
+      <p data-lang-only="en">We tested the matcher on 299 place names copied as written from eight public datasets on HDX: refugee sites (UNHCR), people reached and who does what where (OCHA), displacement (IOM DTM), food insecurity (IPC), schools, floods and population tables. 253 of them should match a state or locality. The other 46 should match nothing: camps and villages, names shared by several places, and stray header and total rows. The expected answer for each name was proposed by an AI agent, checked by a second, independent AI agent and confirmed by <span lang="en">Amin Shennan</span>. With the state given as a hint, as most humanitarian spreadsheets allow:</p>
+      <p data-lang-only="ar" lang="ar" hidden>اختبرنا أداة المطابقة على 299 اسم مكان، نُقلت كما كُتبت من ثماني مجموعات بيانات عامة على منصة HDX: مواقع اللاجئين (المفوضية)، والمستفيدون ومن يعمل أين (أوتشا)، والنزوح (مصفوفة تتبّع النزوح التابعة للمنظمة الدولية للهجرة)، وانعدام الأمن الغذائي (التصنيف المرحلي المتكامل)، والمدارس، والفيضانات، وجداول السكان. من هذه الأسماء 253 يجب أن تُربط بولاية أو محلية، و46 يجب ألا تُربط بشيء: مخيمات وقرى، وأسماء تشترك فيها عدة أماكن، وصفوف عناوين ومجاميع وردت في الجداول. اقترح وكيل ذكاء اصطناعي الإجابة الصحيحة لكل اسم، وراجعها وكيل ثانٍ مستقل، ثم أكّدها <span lang="en">Amin Shennan</span>. وحين تُذكر الولاية تلميحًا، كما تسمح أغلب الجداول الإنسانية، كانت النتائج:</p>
       <ul class="stats" data-lang-only="en">
-        <li><strong>94.9%</strong> matched to the right place first time</li>
-        <li><strong>99.6%</strong> had the right place among the top three</li>
-        <li><strong>0</strong> matched to a wrong place: when it isn't sure, it asks</li>
+        <li><strong>94.9%</strong> of the 253 matched to the right place first time</li>
+        <li><strong>99.6%</strong> (252 of 253) had the right place among the top three</li>
+        <li><strong>0 of 299</strong> matched to a wrong place on this set: when it wasn't sure, it asked (13 names)</li>
       </ul>
       <ul class="stats" data-lang-only="ar" lang="ar" hidden>
-        <li><strong>94.9%</strong> من الأسماء رُبطت بمكانها الصحيح مباشرة</li>
-        <li><strong>99.6%</strong> من الأسماء كان مكانها الصحيح بين أول ثلاثة مرشحين</li>
-        <li><strong>0</strong> أسماء رُبطت بمكان خاطئ: حين لا تكون الأداة متأكدة، تسألك</li>
+        <li><strong>94.9%</strong> من الأسماء الـ253 رُبطت بمكانها الصحيح مباشرة</li>
+        <li><strong>99.6%</strong> (252 من 253) كان مكانها الصحيح بين أول ثلاثة مرشحين</li>
+        <li><strong>لا اسم</strong> من الـ299 رُبط بمكان خاطئ في هذا الاختبار: حين لم تكن الأداة متأكدة سألت (13 اسمًا)</li>
       </ul>
-      <p data-lang-only="en">The full evaluation is in <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/MATCHER_EVALUATION.md">MATCHER_EVALUATION.md</a>.</p>
-      <p data-lang-only="ar" lang="ar" hidden>تفاصيل التقييم كاملة في <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/MATCHER_EVALUATION.md">MATCHER_EVALUATION.md</a> (بالإنجليزية).</p>
+      <p data-lang-only="en"><strong>What these figures don't show.</strong> The threshold (0.82) was chosen on this same set of names, so the results describe this set and are not an independent test: on new data the matcher will make mistakes, wrong matches included. Without a state hint it is right first time for 85.0% and names a wrong place for 2.3% of the names (7 of 299), so give the state whenever you have it. None of the test names was added to the matcher's spellings by hand; 47 are spellings it already knew from GeoNames, Wikidata, COD-AB or OpenStreetMap. If you find a wrong match, please <a href="https://github.com/aminshennan/sudan-atlas/issues">report it on GitHub</a>.</p>
+      <p data-lang-only="ar" lang="ar" hidden><strong>ما لا تقوله هذه الأرقام.</strong> اختيرت عتبة القبول (0.82) على هذه الأسماء نفسها، فالنتائج تصف هذا الاختبار وليست تقييمًا مستقلًا، وستخطئ الأداة في بيانات جديدة، ومن ذلك أن تربط اسمًا بمكان خاطئ. ومن دون ذكر الولاية تصيب الأداة من أول مرة في 85.0% من الأسماء، وتربط 2.3% منها بمكان خاطئ (7 من 299)، فاذكر الولاية كلما عرفتها. لم يُضَف أيٌّ من أسماء الاختبار يدويًا إلى صيغ الأداة، و47 منها صيغ كانت تعرفها مسبقًا من GeoNames وويكي بيانات وCOD-AB وOpenStreetMap. وإن وجدت مطابقة خاطئة فنرجو أن <a href="https://github.com/aminshennan/sudan-atlas/issues">تبلغنا بها على GitHub</a>.</p>
+      <p data-lang-only="en">The full evaluation, with every failure, is in <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/MATCHER_EVALUATION.md">MATCHER_EVALUATION.md</a>, and the names themselves are in <a href="https://github.com/aminshennan/sudan-atlas/blob/main/data/tests/match_cases.csv">match_cases.csv</a>.</p>
+      <p data-lang-only="ar" lang="ar" hidden>تفاصيل التقييم كاملة، مع كل حالة أخطأت فيها الأداة، في <a href="https://github.com/aminshennan/sudan-atlas/blob/main/docs/MATCHER_EVALUATION.md">MATCHER_EVALUATION.md</a>، والأسماء نفسها في <a href="https://github.com/aminshennan/sudan-atlas/blob/main/data/tests/match_cases.csv">match_cases.csv</a> (بالإنجليزية).</p>
     </section>
 
     <section id="sources">

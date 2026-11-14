@@ -14,6 +14,8 @@ export const CREDIT_AR = "مصدر الحدود: أوتشا، مجموعة COD-A
 export interface LegendSpec {
   title: string;
   bands: BandLegend;
+  /** One line under the legend, such as a caveat about the rates. */
+  note?: string;
 }
 export interface SideChart {
   title: string;
@@ -84,7 +86,7 @@ export { FONT, FONT_AR, text as svgText };
 export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string {
   const [, , w, h] = (mapSvg.getAttribute("viewBox") ?? "0 0 800 760").split(" ").map(Number);
   const top = spec.subtitle ? 84 : 64;
-  const legendH = spec.legend ? 120 : 0;
+  const legendH = spec.legend ? 120 + (spec.legend.note ? 20 : 0) : 0;
   const bottom = 60 + legendH; // credit and disclaimer lines
   const sideW = spec.side ? SIDE_W + SIDE_GAP : 0;
   const W = w + sideW;
@@ -141,6 +143,7 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
     const size = drawBandLegend(lg, L.bands, { rtl: !!spec.rtl });
     lg.setAttribute("transform", `translate(${spec.rtl ? mapX + w - 20 - size.width : 20} ${ly + 20})`);
     out.appendChild(lg);
+    if (L.note) out.appendChild(text(spec.rtl ? mapX + w - 20 : 20, ly + 20 + size.height + 14, L.note, { "font-family": font, "font-size": 11, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   }
   out.appendChild(text(x0, H - 32, spec.rtl ? CREDIT_AR : CREDIT_EN, { "font-family": font, "font-size": 11, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   out.appendChild(text(x0, H - 14, spec.rtl ? DISCLAIMER_AR : DISCLAIMER_EN, { "font-family": font, "font-size": 11, fill: "#71717a", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));

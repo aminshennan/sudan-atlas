@@ -9,6 +9,9 @@ import { lang } from "./i18n";
 
 const GA_ID = (import.meta.env.VITE_GA_ID as string | undefined)?.trim();
 const CONSENT_KEY = "sa-consent";
+// Visiting any page with ?nocount=1 stops this browser being counted, by the site's counter and by
+// Vercel Web Analytics (which is then not loaded at all); ?nocount=0 starts counting it again.
+const NO_COUNT_KEY = "sa-no-count";
 type Consent = "granted" | "denied";
 type Gtag = (...args: unknown[]) => void;
 
@@ -60,8 +63,39 @@ function banner(): void {
   document.body.append(box);
 }
 
+function store(key: string, value: string | null): void {
+  try { value === null ? localStorage.removeItem(key) : localStorage.setItem(key, value); } catch { /* storage blocked */ }
+}
+
+/** Whether this browser has asked not to be counted. */
+function notCounted(): boolean {
+  try { return localStorage.getItem(NO_COUNT_KEY) === "1"; } catch { return false; }
+}
+
+function noCountFlag(): void {
+  const flag = new URLSearchParams(location.search).get("nocount");
+  if (flag !== "1" && flag !== "0") return;
+  const off = flag === "1";
+  store(NO_COUNT_KEY, off ? "1" : null);
+  const note = Object.assign(document.createElement("p"), {
+    className: "toast",
+    textContent: lang() === "ar"
+      ? (off ? "لن يُحتسب هذا المتصفح بعد الآن. للتراجع افتح الموقع مع ‎?nocount=0‎." : "سيُحتسب هذا المتصفح من جديد.")
+      : (off ? "This browser is no longer counted. Visit with ?nocount=0 to undo." : "This browser is counted again."),
+  });
+  note.setAttribute("role", "status");
+  document.body.append(note);
+  setTimeout(() => note.remove(), 5000);
+  // Take the flag out of the address so it is not shared by accident.
+  const url = new URL(location.href);
+  url.searchParams.delete("nocount");
+  history.replaceState(history.state, "", url);
+}
+
 export function initAnalytics(): void {
-  inject({ mode: import.meta.env.PROD ? "production" : "development" });
+  noCountFlag();
+  if (notCounted()) return;
+  inject({ mode: import.meta.env.PROD ? "production" : "development", beforeSend: (event) => (notCounted() ? null : event) });
   if (!GA_ID) return;
   const consent = readConsent();
   if (consent === "granted") loadGoogle();
@@ -77,6 +111,7 @@ export function initAnalytics(): void {
 
 /** Count an event. Only a name and a short, non-identifying label such as an export format. */
 export function countEvent(name: "match_run" | "map_export" | "file_export" | "map_made", format?: string): void {
+  if (notCounted()) return;
   const props = format ? { format } : undefined;
   try { track(name, props); } catch { /* analytics must never break the page */ }
   // The site's own counter: page, event and format, nothing else. Not sent from local development.

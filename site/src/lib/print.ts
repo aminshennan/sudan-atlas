@@ -55,7 +55,7 @@ export function buildPrintSvg(map: MapView, spec: PrintSpec): string {
   const bar = map.scaleBar(160);
   if (bar) {
     const len = bar.units * k;
-    const sx = rtl ? M + mapW - 14 - len : M + 14;
+    const sx = rtl ? M + mapW - 28 - len : M + 14; // room for the km label, centred on the bar's end
     const sy = top + mapH - 18;
     const sb = el("g");
     sb.appendChild(el("rect", { x: sx - 6, y: sy - 18, width: len + 12, height: 30, fill: "#fff", opacity: 0.85 }));
@@ -95,6 +95,7 @@ export function buildPrintSvg(map: MapView, spec: PrintSpec): string {
     const size = drawBandLegend(lg, spec.legend.bands, { rtl, swatch: 62 });
     lg.setAttribute("transform", `translate(${rtl ? PAGE_W - M - size.width : M} ${y + 20})`);
     out.appendChild(lg);
+    if (spec.legend.note) out.appendChild(svgText(lx, y + 20 + size.height + 14, spec.legend.note, { ...dir, "font-size": 9.5, fill: MUTED }));
   }
 
   // Footer: source, disclaimer, made with, date

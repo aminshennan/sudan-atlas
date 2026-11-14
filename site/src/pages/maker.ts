@@ -510,6 +510,8 @@ function values(): Map<string, number> {
 function rateOn(): boolean {
   return $<HTMLSelectElement>("[data-rate]").value === "per1000" && $<HTMLSelectElement>("[data-agg]").value !== "mean";
 }
+/** The caveat shown under the legend, and in exports, whenever values are per 1,000 people. */
+const rateCaveat = () => (rateOn() ? t("mk.rate.caveat", "Rates use mid-2025 population estimates. Where many people have fled or arrived, rates can mislead.") : undefined);
 const PER_1000 = () => (lang() === "ar" ? "لكل 1,000 نسمة" : "per 1,000 people");
 
 function classes(vals: number[], n: number): number[] {
@@ -689,6 +691,7 @@ async function drawMap(): Promise<void> {
     legendSvg.setAttribute("width", String(size.width));
     legendSvg.setAttribute("aria-label", spec.labels.map((l, i) => `${l}: ${bands.counts[i]}`).join(", "));
   }
+  $<HTMLElement>("[data-legend-note]").hidden = !rateOn();
 }
 
 /** Keep the hovered place's row in view inside the ranking list, without moving the page. */
@@ -780,14 +783,14 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
   const subtitle = rateOn() ? `${lang() === "ar" ? "لكل 1,000 نسمة، حسب" : "Per 1,000 people, using population estimates from"} ${lang() === "ar" ? POPULATION_SOURCE_AR : POPULATION_SOURCE}` : undefined;
   if (kind === "print") {
     const m = map;
-    printSvg(m.withExportLabels(() => buildPrintSvg(m, { title: mapTitle, subtitle, rtl: lang() === "ar", legend: bands ? { title: valueTitle(), bands } : undefined })), mapTitle);
+    printSvg(m.withExportLabels(() => buildPrintSvg(m, { title: mapTitle, subtitle, rtl: lang() === "ar", legend: bands ? { title: valueTitle(), bands, note: rateCaveat() } : undefined })), mapTitle);
     return;
   }
   const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, {
     title: mapTitle,
     subtitle,
     rtl: lang() === "ar",
-    legend: bands ? { title: valueTitle(), bands } : undefined,
+    legend: bands ? { title: valueTitle(), bands, note: rateCaveat() } : undefined,
     side: items.length ? { title: t("mk.rank", "Ranking"), subtitle: rankSubtitle(items.length, RANK_EXPORT_LIMIT), items, format: nf, limit: RANK_EXPORT_LIMIT } : undefined,
   }));
   if (kind === "svg") downloadSvg(`${fileStem()}-map.svg`, svg);

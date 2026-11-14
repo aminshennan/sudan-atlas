@@ -29,9 +29,26 @@ Data licences
    Humanitarian OpenStreetMap Team's export on HDX) are kept in a separate file,
    data/gazetteer/variants_osm.json, under the Open Database License (ODbL 1.0),
    with attribution "© OpenStreetMap contributors". The packages ship this file
-   alongside the others; it is never merged into variants.json.
+   alongside the others; it is never merged into variants.json. The JavaScript
+   build (dist/) and the website embed an unchanged copy of it; every record
+   there keeps its "osm:" source reference and stays under the ODbL.
 
      https://opendatacommons.org/licenses/odbl/
+
+   What the ODbL does and does not cover:
+   - It covers variants_osm.json (and any copy or changed version of it). If you
+     redistribute that file, or a database made from it, keep it under the ODbL,
+     keep the attribution, and offer the changed database if you publish one.
+   - It does not cover the other files. The boundaries, places.json,
+     variants.json, the normalisation rules and the test cases are independent
+     databases kept beside the OSM file, so the packages are a "Collective
+     Database" (ODbL section 4.5) and those files keep their own licences
+     (CC BY 3.0 IGO and CC BY 4.0).
+   - Matching results (the P-codes and names returned for your data) are, at
+     most, a "Produced Work" (ODbL section 4.3): they are not under the ODbL and
+     need no share-alike. When a published result relies substantially on the
+     OpenStreetMap spellings, add "Contains information from OpenStreetMap,
+     available under the ODbL".
 
 The boundaries do not imply any opinion on the legal status of any country,
 territory or area, or on the delimitation of any frontier. See

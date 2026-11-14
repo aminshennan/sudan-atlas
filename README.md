@@ -54,14 +54,14 @@ Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a
 
 When the best candidate scores below 0.82, or another place scores almost as high, `pcode` is `null` (`None` in Python) and `alternatives` lists the candidates: the matcher never guesses silently. "Gallabat" lies on a locality border and "Abyei" can mean the Abyei PCA area or the West Kordofan locality, so both come back as `ambiguous` for a person to decide. A state hint (a P-code or a state name in any spelling) and a level (1 = state, 2 = locality) settle most ambiguity.
 
-On 299 real names from public humanitarian datasets, each checked by hand, the matcher finds the right place first time for 94.9 %, puts it among the top three for 99.6 %, and names no wrong place; see [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md). The Python and JavaScript packages share the same rules and return identical results.
+We tested the matcher on 299 place names copied from eight public HDX datasets (UNHCR refugee sites, OCHA people reached and 3W, IOM DTM, IPC, schools, floods and population tables): 253 that should match a state or locality and 46 that should match nothing (camps, villages, names shared by several places, header and total rows). Each expected answer was proposed by an AI agent, checked by a second, independent agent and confirmed by Amin Shennan. With a state hint, it finds the right place first time for 94.9 % of the 253, puts it among the top three for 99.6 %, and named no wrong place for any of the 299. Without a state hint: 85.0 % first time and 2.3 % wrong matches. The threshold was chosen on this same set, so these figures describe it rather than an independent test, and new data will produce some wrong matches; please [report them](https://github.com/aminshennan/sudan-atlas/issues). Details and every failure: [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md). The Python and JavaScript packages share the same rules and return identical results.
 
 ## What it does
 
 - **Name matching**: `El Fasher`, `Al Fashir` and `الفاشر` all resolve to the same official P-code, with a confidence score and alternatives.
 - **Boundaries**: states (admin 1) and localities (admin 2) as GeoJSON and TopoJSON at three resolutions, following OCHA's COD-AB exactly.
 - **Bilingual**: every feature carries `pcode`, `name_en` and `name_ar`; every page of the website supports right-to-left layout.
-- **Private and static**: everything ships as files and runs on the client. Files opened in the map-maker are never uploaded.
+- **Private and static**: everything ships as files and runs on the client. Files opened in the map-maker are never uploaded. (The optional MCP server for AI assistants is the exception: names sent to it are processed on the server, not stored.)
 
 ## Repository layout
 

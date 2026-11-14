@@ -42,4 +42,13 @@ Website, map and map-maker: https://atlas-sudan.vercel.app
 
 ## Licences and sources
 
-Code: MIT. Boundaries: CC BY 3.0 IGO, from OCHA's COD-AB for Sudan (version v03); credit "OCHA (COD-AB Sudan), via HDX; Sudan Atlas". Spellings and rules: CC BY 4.0, with sources including GeoNames (CC BY 4.0) and Wikidata (CC0); town spellings from OpenStreetMap are kept in a separate file under the ODbL (© OpenStreetMap contributors). Boundaries do not imply any opinion on the legal status of any territory. Details: https://github.com/aminshennan/sudan-atlas
+Each licence covers its own files:
+
+| Files | Licence | Credit |
+| --- | --- | --- |
+| Code | MIT | |
+| Boundaries | CC BY 3.0 IGO | "OCHA (COD-AB Sudan), via HDX; Sudan Atlas" (COD-AB version v03) |
+| Places, spellings (`variants.json`), rules | CC BY 4.0 | "Sudan Atlas"; sources include GeoNames (CC BY 4.0) and Wikidata (CC0) |
+| OpenStreetMap town spellings (`variants_osm.json` only) | ODbL 1.0 | "© OpenStreetMap contributors" |
+
+The OpenStreetMap spellings are kept in their own file, so the ODbL's share-alike applies to that file alone, not to the boundaries or the other data. Matching results are not under the ODbL. Boundaries do not imply any opinion on the legal status of any territory. Details: https://github.com/aminshennan/sudan-atlas/blob/main/LICENSE-DATA

@@ -157,6 +157,7 @@ html[dir="rtl"] .eyebrow, html[dir="rtl"] .eyebrow-mono, html[dir="rtl"] .place-
 .consent { position: fixed; inset-inline: 16px; bottom: 16px; z-index: 60; max-width: 520px; margin-inline-start: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 16px; background: var(--white); border: 1px solid var(--mist); border-radius: var(--radius); box-shadow: 0 16px 40px rgb(24 24 27 / 0.16); font-size: 14px; }
 .consent p { flex: 1 1 260px; }
 .consent__actions { display: flex; gap: 8px; }
+.toast { position: fixed; inset-inline: 16px; bottom: 16px; z-index: 60; max-width: 420px; margin: 0; margin-inline-start: auto; padding: 12px 16px; background: var(--graphite); color: var(--white); border-radius: var(--radius); font-size: 14px; }
 .link-button { border: 0; background: none; padding: 0; color: var(--signal); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; font-size: inherit; }
 .stack { display: flex; flex-direction: column; gap: 16px; }
 /* Narrow screens show one name in the logo: the one in the page's language. */

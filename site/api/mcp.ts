@@ -1,12 +1,19 @@
 // Sudan Atlas as an MCP server (Model Context Protocol), so AI assistants can match Sudanese place
 // names to official P-codes and look up places, populations and boundaries. Streamable HTTP,
 // stateless and read-only: POST /api/mcp. It runs the published sudan-atlas package, so its answers
-// are the packages' answers. Nothing sent to it is stored.
+// are the packages' answers. Names sent to it are processed to answer the request and not stored
+// or logged. Each address may make 60 requests a minute (see _limit.ts); more get 429.
 import { readFileSync } from "node:fs";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { DATA_VERSION, getFeature, getLocalities, getPlace, getStates, match, VERSION } from "sudan-atlas";
 import { z } from "zod";
+import { storeFrom } from "./_counter.js";
+import { rateLimit, tooMany } from "./_limit.js";
+
+const MCP_LIMIT = 60;
+const env = (globalThis as { process?: { env: Record<string, string | undefined> } }).process?.env ?? {};
+const PRIVACY = "Names you send are processed on the Sudan Atlas server to answer the request and are not stored or logged by Sudan Atlas. Only the website's map-maker works entirely in your browser.";
 
 const readJson = (path: string) => JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"));
 const AREAS: Record<string, number> = readJson("../src/data/areas.json");
@@ -16,6 +23,7 @@ const DOI = "10.5281/zenodo.24191932";
 const INSTRUCTIONS = `Sudan Atlas: official names (Arabic and English), P-codes and boundaries for Sudan's 18 states, the Abyei PCA area and 189 localities (OCHA COD-AB v03, data release ${DATA_VERSION}, package ${VERSION}).
 Use match_place_name or match_place_names to turn place names written any way (Arabic or English, any spelling) into P-codes. Pass a state hint and a level (1 = state, 2 = locality) when known. When the matcher is not confident, pcode is null and the alternatives are the candidates: ask the user or say so, never pick one silently. "Abyei" alone can mean the Abyei PCA area or the West Kordofan locality.
 Boundaries follow COD-AB and do not imply any opinion on the legal status of any territory. Populations are UNFPA/CBS Sudan COD-PS 2025 estimates (mid-2025 projections), not counts.
+Privacy: ${PRIVACY}
 Cite: Sudan Atlas, https://doi.org/${DOI}. Website: https://atlas-sudan.vercel.app`;
 
 const json = (data: unknown) => ({ content: [{ type: "text" as const, text: JSON.stringify(data, null, 1) }] });
@@ -116,9 +124,14 @@ export default {
     if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: CORS });
     if (request.method === "GET" && !(request.headers.get("accept") ?? "").includes("text/event-stream")) {
       // A person opening the address in a browser gets a short explanation instead of an error.
-      return new Response(JSON.stringify({ name: "sudan-atlas", version: VERSION, data_version: DATA_VERSION, protocol: "MCP (Streamable HTTP), POST to this address", docs: "https://atlas-sudan.vercel.app/docs/#mcp", doi: DOI }, null, 1), {
+      return new Response(JSON.stringify({ name: "sudan-atlas", version: VERSION, data_version: DATA_VERSION, protocol: "MCP (Streamable HTTP), POST to this address", docs: "https://atlas-sudan.vercel.app/docs/#mcp", doi: DOI, privacy: PRIVACY, rate_limit: `${MCP_LIMIT} requests a minute per address` }, null, 1), {
         headers: { "Content-Type": "application/json", ...CORS },
       });
+    }
+    const limited = await rateLimit(request, "mcp", MCP_LIMIT, storeFrom(env));
+    if (!limited.ok) {
+      const body = JSON.stringify({ jsonrpc: "2.0", id: null, error: { code: -32000, message: `Too many requests: at most ${MCP_LIMIT} a minute. Try again in ${limited.retryAfter} seconds.` } });
+      return tooMany(limited.retryAfter, { "Content-Type": "application/json", ...CORS }, body);
     }
     // Stateless: a new server and transport for each request, answering in plain JSON.
     const server = buildServer();
