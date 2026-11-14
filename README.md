@@ -12,7 +12,7 @@ An open toolkit that turns messy Sudanese place names into official codes and dr
 
 ## On the website
 
-Everything works in Arabic (right to left) and English, on phones and desktops, and runs in your browser.
+Everything works in Arabic (right to left) and English, on phones and desktops. The map and map-maker run in your browser.
 
 - **[Map](https://atlas-sudan.vercel.app/map/)**: every state and locality with its official Arabic and English names, P-code and area. Search in either language and spelling, zoom and pan, open a state to see its localities, and export the view as SVG or PNG, or the places as CSV. Links keep their place (`/map/?focus=SD02&place=SD02114`).
 - **[Map-maker](https://atlas-sudan.vercel.app/maker/)**: open a CSV or Excel file of place names, check the names the matcher is unsure about, and get a choropleth map with a ranked bar chart and a legend showing how many places fall in each colour band. Download the map (SVG or PNG) and your file with P-codes added. Rows that are not on the map are listed, never dropped silently, and your file never leaves your device.
@@ -61,7 +61,7 @@ We tested the matcher on 299 place names copied from eight public HDX datasets (
 - **Name matching**: `El Fasher`, `Al Fashir` and `الفاشر` all resolve to the same official P-code, with a confidence score and alternatives.
 - **Boundaries**: states (admin 1) and localities (admin 2) as GeoJSON and TopoJSON at three resolutions, following OCHA's COD-AB exactly.
 - **Bilingual**: every feature carries `pcode`, `name_en` and `name_ar`; every page of the website supports right-to-left layout.
-- **Private and static**: everything ships as files and runs on the client. Files opened in the map-maker are never uploaded. (The optional MCP server for AI assistants is the exception: names sent to it are processed on the server, not stored.)
+- **Private by design**: the data ships as files and matching runs on your machine. Files opened in the map-maker never leave your device. The site has two small server functions: an anonymous usage counter (which feature was used and in what format, never by whom or with what data), and the MCP server for AI assistants, which processes the names sent to it and does not store them. Both are rate limited.
 
 ## Repository layout
 
@@ -81,7 +81,8 @@ docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, 
 2. ~~Name matcher: Arabic and English, with confidence scores~~ (done)
 3. ~~Packages: npm and PyPI~~ (done, 0.1.3)
 4. ~~Website and map-maker~~ (done, [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app))
-5. Hosted API (only if users ask)
+5. ~~Hosted access for AI assistants~~ (done, [MCP server](https://atlas-sudan.vercel.app/docs/#mcp))
+6. A general hosted REST API (only if users ask)
 
 ## Running the website
 
@@ -127,6 +128,8 @@ Found a spelling the matcher misses, or a name that should match differently? [O
 - Code: [MIT](LICENSE)
 - Boundaries: CC BY 3.0 IGO, derived from OCHA's COD-AB ([details](LICENSE-DATA))
 - Gazetteer additions (variant spellings, normalisation rules, test cases): CC BY 4.0
+- OpenStreetMap town spellings: ODbL 1.0, © OpenStreetMap contributors. They are kept in their own file (`variants_osm.json`), so the ODbL covers that file only, not the other data or your matching results ([details](LICENSE-DATA))
+- Population estimates (website and MCP server only, not the packages): UNFPA and CBS Sudan, COD-PS 2025, via OCHA HDX, CC BY
 - Sources are listed in [`docs/SOURCES.md`](docs/SOURCES.md). Boundary choices are documented in [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
 
 Boundaries are shown for humanitarian, research and practical use and do not imply any opinion on the legal status of any territory.
