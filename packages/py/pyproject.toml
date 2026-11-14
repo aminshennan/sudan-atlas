@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sudan-atlas"
-version = "0.1.2"
+version = "0.1.3"
 description = "Official codes, names and boundaries for Sudan's states and localities, with a matcher for messy Arabic and English place names."
 readme = "README.md"
 requires-python = ">=3.11"

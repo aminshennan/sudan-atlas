@@ -8,7 +8,7 @@ An open toolkit that turns messy Sudanese place names into official codes and dr
 
 **Website: [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app)** · [Map](https://atlas-sudan.vercel.app/map/) · [Map-maker](https://atlas-sudan.vercel.app/maker/) · [Documentation](https://atlas-sudan.vercel.app/docs/)
 
-> **Status:** live website; packages 0.1.2 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
+> **Status:** live website; packages 0.1.3 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
 
 ## On the website
 
@@ -79,7 +79,7 @@ docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, 
 
 1. ~~Data foundation: clean, validated, versioned boundaries~~ (done, release 2026.1)
 2. ~~Name matcher: Arabic and English, with confidence scores~~ (done)
-3. ~~Packages: npm and PyPI~~ (done, 0.1.2)
+3. ~~Packages: npm and PyPI~~ (done, 0.1.3)
 4. ~~Website and map-maker~~ (done, [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app))
 5. Hosted API (only if users ask)
 
