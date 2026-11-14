@@ -16,6 +16,7 @@ Everything works in Arabic (right to left) and English, on phones and desktops, 
 
 - **[Map](https://atlas-sudan.vercel.app/map/)**: every state and locality with its official Arabic and English names, P-code and area. Search in either language and spelling, zoom and pan, open a state to see its localities, and export the view as SVG or PNG, or the places as CSV. Links keep their place (`/map/?focus=SD02&place=SD02114`).
 - **[Map-maker](https://atlas-sudan.vercel.app/maker/)**: open a CSV or Excel file of place names, check the names the matcher is unsure about, and get a choropleth map with a ranked bar chart and a legend showing how many places fall in each colour band. Download the map (SVG or PNG) and your file with P-codes added. Rows that are not on the map are listed, never dropped silently, and your file never leaves your device.
+- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`.
 - **[Documentation](https://atlas-sudan.vercel.app/docs/)**: how to use the packages after installing them, with Python and JavaScript examples, a full reference and how matching works.
 
 ## Quick start

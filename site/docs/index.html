@@ -23,6 +23,7 @@
     <a href="#browser"><span data-lang-only="en">Use it in a web page</span><span data-lang-only="ar" lang="ar" hidden>الاستخدام في صفحة ويب</span></a>
     <a href="#self-host"><span data-lang-only="en">Serve the boundary files yourself</span><span data-lang-only="ar" lang="ar" hidden>استضافة ملفات الحدود على خادمك</span></a>
     <a href="#no-code"><span data-lang-only="en">Without code: the map-maker</span><span data-lang-only="ar" lang="ar" hidden>دون برمجة: صانع الخرائط</span></a>
+    <a href="#mcp"><span data-lang-only="en">Connect an AI assistant (MCP)</span><span data-lang-only="ar" lang="ar" hidden>ربط مساعد ذكاء اصطناعي (MCP)</span></a>
     <p class="docs__nav-title"><span data-lang-only="en">Reference</span><span data-lang-only="ar" lang="ar" hidden>المرجع</span></p>
     <a href="#ref-match"><span dir="ltr">match()</span></a>
     <a href="#ref-matcher">Matcher</a>
@@ -195,6 +196,35 @@ const khartoum = await getFeature("SD01", "medium");</code></pre></div>
       <h2><span data-lang-only="en">Without code: the map-maker</span><span data-lang-only="ar" lang="ar" hidden>دون برمجة: صانع الخرائط</span></h2>
       <p data-lang-only="en">The <a href="/maker/">map-maker</a> does all of this in your browser: open a CSV or Excel file, check the uncertain matches, then download a map and your file with P-codes added. Your file never leaves your device. It reads <a href="https://hxlstandard.org">HXL</a> hashtags (such as <code>#adm2+name</code>, <code>#adm2+code</code> and <code>#affected</code>) to pick the columns, uses P-code columns as they are, and keeps the hashtags in the file you download. A file with latitude and longitude columns can be placed by coordinates instead: each point is counted in the locality that contains it, using the detailed boundaries, and drawn on the map; points outside Sudan or without coordinates are listed, not dropped.</p>
       <p data-lang-only="ar" lang="ar" hidden>يؤدي <a href="/maker/">صانع الخرائط</a> كل ما سبق داخل متصفحك: افتح ملف CSV أو Excel، وراجع المطابقات غير المؤكدة، ثم نزّل الخريطة وملفك وقد أُضيفت إليه الرموز المكانية. ولا يغادر ملفك جهازك. ويقرأ صانع الخرائط وسوم <a href="https://hxlstandard.org">HXL</a> (مثل <code>#adm2+name</code> و<code>#adm2+code</code> و<code>#affected</code>) لاختيار الأعمدة، ويستخدم أعمدة الرموز المكانية كما هي، ويُبقي الوسوم في الملف الذي تنزّله. ويمكن تحديد مكان صفوف الملف الذي يحتوي على عمودين لخطَّي العرض والطول حسب الإحداثيات بدل الأسماء: فتُحسب كل نقطة في المحلية التي تقع فيها، اعتمادًا على الحدود المفصّلة، وتُرسم على الخريطة؛ أما النقاط الواقعة خارج السودان أو التي لا إحداثيات لها فتُذكر ولا تُسقط.</p>
+    </section>
+
+    <section id="mcp">
+      <h2><span data-lang-only="en">Connect an AI assistant (MCP)</span><span data-lang-only="ar" lang="ar" hidden>ربط مساعد ذكاء اصطناعي (MCP)</span></h2>
+      <p data-lang-only="en">Sudan Atlas runs as a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server, so assistants such as Claude can match place names and look up places for you. The address is <code>https://atlas-sudan.vercel.app/api/mcp</code> (Streamable HTTP). It is free, needs no key, only reads, and stores nothing you send.</p>
+      <p data-lang-only="ar" lang="ar" hidden>يعمل أطلس السودان خادمًا لبروتوكول <a href="https://modelcontextprotocol.io">Model Context Protocol</a>، فيستطيع مساعد مثل Claude أن يطابق أسماء الأماكن ويبحث عنها نيابة عنك. العنوان هو <code>https://atlas-sudan.vercel.app/api/mcp</code> (Streamable HTTP). الخدمة مجانية، ولا تحتاج إلى مفتاح، وتقرأ فقط، ولا تحفظ شيئًا مما ترسله.</p>
+      <div class="code" data-lang="py"><pre><code># Claude Code
+claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp
+
+# Other clients (mcp.json / claude_desktop_config.json, clients that support remote servers)
+{ "mcpServers": { "sudan-atlas": { "type": "http", "url": "https://atlas-sudan.vercel.app/api/mcp" } } }</code></pre></div>
+      <div class="code" data-lang="js"><pre><code>// Claude Code
+claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp
+
+// Other clients (mcp.json / claude_desktop_config.json, clients that support remote servers)
+{ "mcpServers": { "sudan-atlas": { "type": "http", "url": "https://atlas-sudan.vercel.app/api/mcp" } } }</code></pre></div>
+      <table class="table">
+        <thead><tr><th><span data-lang-only="en">Tool</span><span data-lang-only="ar" lang="ar" hidden>الأداة</span></th><th><span data-lang-only="en">What it does</span><span data-lang-only="ar" lang="ar" hidden>ما تفعله</span></th></tr></thead>
+        <tbody>
+          <tr><td><code>match_place_name</code></td><td><span data-lang-only="en">One name to its P-code, with score, method and alternatives (optional state hint and level).</span><span data-lang-only="ar" lang="ar" hidden>اسم واحد إلى رمزه المكاني، مع الدرجة والطريقة والبدائل (مع تلميح اختياري بالولاية والمستوى).</span></td></tr>
+          <tr><td><code>match_place_names</code></td><td><span data-lang-only="en">Up to 1,000 names at once, in order.</span><span data-lang-only="ar" lang="ar" hidden>حتى 1,000 اسم دفعة واحدة، بالترتيب.</span></td></tr>
+          <tr><td><code>search_places</code></td><td><span data-lang-only="en">Find states and localities by part of a name.</span><span data-lang-only="ar" lang="ar" hidden>البحث عن الولايات والمحليات بجزء من الاسم.</span></td></tr>
+          <tr><td><code>get_place</code></td><td><span data-lang-only="en">Names, parent state, localities, area and estimated population for a P-code.</span><span data-lang-only="ar" lang="ar" hidden>الأسماء والولاية والمحليات والمساحة وعدد السكان المقدَّر لرمز مكاني.</span></td></tr>
+          <tr><td><code>list_places</code></td><td><span data-lang-only="en">All states, or the localities of the country or of one state.</span><span data-lang-only="ar" lang="ar" hidden>كل الولايات، أو محليات السودان كله أو محليات ولاية واحدة.</span></td></tr>
+          <tr><td><code>get_boundary</code></td><td><span data-lang-only="en">A boundary as GeoJSON (light or medium detail).</span><span data-lang-only="ar" lang="ar" hidden>حدود مكان بصيغة GeoJSON (تفصيل خفيف أو متوسط).</span></td></tr>
+        </tbody>
+      </table>
+      <p data-lang-only="en">Like the packages, the server never guesses silently: when a name could be two places it returns the candidates, and the assistant is told to ask you.</p>
+      <p data-lang-only="ar" lang="ar" hidden>ومثل الحزم، لا يخمّن الخادم أبدًا دون أن يخبرك: إذا احتمل الاسم مكانين أعاد المرشحين، ويُطلب من المساعد أن يسألك.</p>
     </section>
 
     <section id="ref-match">

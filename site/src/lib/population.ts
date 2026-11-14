@@ -1,6 +1,6 @@
 // Estimated population per state and locality, mid-2025 (UNFPA and CBS Sudan, COD-PS 2025, via
 // OCHA HDX). Projections, not counts; see data/population/ and the data page for the caveats.
-import DATA from "../../../data/population/sdn_population_2025.json";
+import DATA from "../data/population.json"; // written by `make population` from data/population/
 
 const POPULATION = DATA.population as Record<string, number>;
 

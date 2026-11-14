@@ -19,6 +19,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "data" / "population" / "sdn_population_2025.json"
+# A compact copy for the website and its API (they are deployed from site/ alone).
+SITE_COPY = ROOT / "site" / "src" / "data" / "population.json"
 PLACES = ROOT / "data" / "gazetteer" / "places.json"
 
 DATASET = "https://data.humdata.org/dataset/cod-ps-sdn"
@@ -64,5 +66,8 @@ def run() -> int:
         "population": dict(sorted(totals.items())),
     }
     OUT.write_text(json.dumps(document, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    compact = {k: document[k] for k in ("source", "dataset", "licence", "reference_date", "notes", "missing")}
+    compact["population"] = document["population"]
+    SITE_COPY.write_text(json.dumps(compact, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(f"population: {len(totals)} places, total {states:,}; no figure for {', '.join(missing) or 'none'} -> {OUT.relative_to(ROOT)}")
     return 0

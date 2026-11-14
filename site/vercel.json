@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/mcp.ts": {
+      "includeFiles": "{src/data/areas.json,src/data/population.json,node_modules/sudan-atlas/data/boundaries/light/*.geojson,node_modules/sudan-atlas/data/boundaries/medium/*.geojson}",
+      "maxDuration": 15
+    }
+  }
+}
