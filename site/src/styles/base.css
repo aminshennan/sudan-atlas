@@ -91,7 +91,7 @@ p { margin: 0; }
 .site-header__row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-block: 14px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--graphite); text-decoration: none; }
 .brand:hover { color: var(--graphite); }
-.brand__mark { width: 30px; height: 30px; color: var(--graphite); }
+.brand__mark { width: 38px; height: 38px; color: var(--graphite); }
 .brand__name { font-family: "Inter Tight Variable", "Inter Variable", sans-serif; font-weight: 600; font-size: 20px; letter-spacing: -0.03em; }
 .brand__name-ar { font-family: var(--font-arabic); font-weight: 600; font-size: 16px; color: var(--muted); }
 .site-nav { display: flex; flex-wrap: wrap; gap: 4px 20px; flex: 1 1 auto; justify-content: flex-end; }
@@ -116,8 +116,8 @@ p { margin: 0; }
 .segmented button { min-height: 36px; padding: 0 12px; white-space: nowrap; border: 0; border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; font-size: 14px; }
 .segmented button[aria-pressed="true"] { background: var(--white); color: var(--graphite); font-weight: 600; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
 
-/* Thinking orb */
-.orb { flex: none; }
+/* Loading animation (the dotted Sudan) */
+.loader { flex: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }

@@ -1,3 +1,5 @@
+<img src="docs/logo.svg" width="96" alt="Sudan Atlas logo: Sudan drawn in dots, with Khartoum in green" align="right">
+
 # Sudan Atlas
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191932.svg)](https://doi.org/10.5281/zenodo.24191932) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/)
