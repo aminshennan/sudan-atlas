@@ -31,7 +31,7 @@ function rewind(f: AdmFeature): AdmFeature {
   return { ...f, geometry } as AdmFeature;
 }
 
-export function loadLevel(level: 1 | 2, resolution: "medium" | "light" = "medium"): Promise<AdmFeature[]> {
+export function loadLevel(level: 1 | 2, resolution: "detailed" | "medium" | "light" = "medium"): Promise<AdmFeature[]> {
   const key = `${resolution}/${level}`;
   if (!cache.has(key)) {
     cache.set(key, fetch(`${DATA_BASE}/${resolution}/adm${level}.topojson`)

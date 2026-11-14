@@ -44,6 +44,14 @@
       <div class="field"><label class="field__label" for="col-name" data-i18n="mk.col.name">Place names</label><select id="col-name" data-col="name"></select></div>
       <div class="field"><label class="field__label" for="col-state" data-i18n="mk.col.state">State (optional, helps matching)</label><select id="col-state" data-col="state"></select></div>
       <div class="field"><label class="field__label" for="col-value" data-i18n="mk.col.value">Value to map (optional)</label><select id="col-value" data-col="value"></select></div>
+      <div class="field"><label class="field__label" for="col-lat" data-i18n="mk.col.lat">Latitude (optional)</label><select id="col-lat" data-col="lat"></select></div>
+      <div class="field"><label class="field__label" for="col-lon" data-i18n="mk.col.lon">Longitude (optional)</label><select id="col-lon" data-col="lon"></select></div>
+      <div class="field" data-locate-field hidden><span class="field__label" data-i18n="mk.locate">Find each row's place by</span>
+        <div class="segmented" role="group" aria-label="Find each row's place by" data-i18n-attr="aria-label:mk.locate">
+          <button type="button" aria-pressed="true" data-locate="points" data-i18n="mk.locate.points">Coordinates</button>
+          <button type="button" aria-pressed="false" data-locate="names" data-i18n="mk.locate.names">Place names</button>
+        </div>
+      </div>
       <div class="field"><span class="field__label" data-i18n="mk.col.level">The names are</span>
         <div class="segmented" role="group" aria-label="Level" data-i18n-attr="aria-label:mk.col.level">
           <button type="button" aria-pressed="true" data-mk-level="2" data-i18n="mk.lvl.2">Localities</button>
@@ -96,6 +104,7 @@
       <div class="field"><label class="field__label" for="rate" data-i18n="mk.rate">Show values as</label>
         <select id="rate" data-rate><option value="total" data-i18n="mk.rate.total">Totals</option><option value="per1000" data-i18n="mk.rate.per1000">Per 1,000 people</option></select>
         <p class="field__hint" data-rate-note hidden data-i18n="mk.rate.note">Uses UNFPA and CBS Sudan population estimates for mid-2025 (COD-PS). They are projections, least certain for Khartoum and West Darfur.</p></div>
+      <label class="check" data-points-field hidden><input type="checkbox" data-show-points checked> <span data-i18n="mk.points.show">Show the points on the map</span></label>
       <div class="field"><span class="field__label" data-i18n="mk.colours">Colours (colour-blind safe)</span>
         <div class="palettes" role="radiogroup" aria-label="Colours" data-i18n-attr="aria-label:mk.colours" data-palettes></div></div>
       <div class="field"><span class="field__label" data-i18n="map.labels">Labels</span>

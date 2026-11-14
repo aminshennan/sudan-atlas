@@ -4,7 +4,8 @@ import { startPage } from "../main";
 import "../styles/map.css";
 import "../styles/explorer.css";
 import "../styles/maker.css";
-import { getPlace, placeName } from "../lib/atlas";
+import { geoBounds, geoContains } from "d3-geo";
+import { getPlace, loadLevel, placeName } from "../lib/atlas";
 import { countEvent } from "../lib/analytics";
 import { drawBandLegend, drawRanking, highlightRanking, type BandLegend, type RankItem } from "../lib/charts";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
@@ -28,6 +29,8 @@ interface Unique {
   rows: number[];
   result?: MatchResult;
   choice?: string | null; // a reviewer's pick; undefined = not reviewed
+  /** Rows placed by coordinates that could not be placed. */
+  issue?: "no_coordinates" | "outside_sudan";
 }
 
 const PALETTES: Record<string, { label: string; colours: string[] }> = {
@@ -37,7 +40,11 @@ const PALETTES: Record<string, { label: string; colours: string[] }> = {
 };
 
 let sheet: Sheet | null = null;
-const cols = { name: -1, state: -1, value: -1 };
+const cols = { name: -1, state: -1, value: -1, lat: -1, lon: -1 };
+/** How rows find their place: by the place-name column, or by latitude and longitude. */
+let locateBy: "names" | "points" = "names";
+/** Rows placed by coordinates, for drawing on the map. */
+let points: { lonlat: [number, number]; row: number; pcode: string }[] = [];
 let level: 0 | 1 | 2 = 2;
 let uniques: Unique[] = [];
 let filter: "all" | "review" | "none" = "all";
@@ -112,7 +119,32 @@ function placeFromCode(text: string): string | null {
   return /^SD\d{2}(\d{3})?$/.test(code) && getPlace(code) ? code : null;
 }
 
+/** A number from a cell, accepting a decimal comma ("15,6") as well as a point. */
+function parseNumber(text: string): number {
+  const v = text.trim().replace(/\s+/g, "");
+  if (v === "") return NaN; // Number("") is 0, which is a place (0°N 0°E), not "no value"
+  return Number(/^-?\d+,\d+$/.test(v) ? v.replace(",", ".") : v);
+}
+
+/** Latitude and longitude columns: by HXL tag or header, and only if the values fit Sudan's area. */
+function guessCoordinates(s: Sheet): void {
+  const fits = (i: number, lo: number, hi: number) => {
+    if (i < 0) return false;
+    const vals = s.rows.slice(0, 200).map((r) => r[i]).filter((v) => v.trim() !== "");
+    const ok = vals.filter((v) => { const n = parseNumber(v); return Number.isFinite(n) && n >= lo && n <= hi; });
+    return ok.length > 0 && ok.length >= 0.8 * vals.length;
+  };
+  const byTag = (tag: string) => (s.hxl ? hxlColumn(s.hxl, tag) : -1);
+  const byHeader = (re: RegExp) => s.headers.findIndex((h) => re.test(h.trim()));
+  const lat = [byTag("#geo+lat"), byHeader(/^(lat|latitude|y|gps[_ ]?lat(itude)?)$|latitude|خط العرض/i), byHeader(/\blat\b/i)].find((i) => fits(i, 0, 25)) ?? -1;
+  const lon = [byTag("#geo+lon"), byHeader(/^(lon|lng|long|longitude|x|gps[_ ]?(lon|lng|long)(gitude)?)$|longitude|خط الطول/i), byHeader(/\b(lon|lng)\b/i)].find((i) => fits(i, 20, 40)) ?? -1;
+  cols.lat = lat;
+  cols.lon = lon;
+  locateBy = lat >= 0 && lon >= 0 ? "points" : "names";
+}
+
 function guessColumns(s: Sheet): void {
+  guessCoordinates(s);
   if (s.hxl && guessFromHxl(s, s.hxl)) return;
   const find = (re: RegExp) => s.headers.findIndex((h) => re.test(h));
   const loc = find(/local|mahal|محلي|admin ?2|adm2|district|county|site|town|village|place|name|اسم/i);
@@ -122,7 +154,7 @@ function guessColumns(s: Sheet): void {
   if (cols.name === st) cols.state = -1;
   // A value column is mostly numbers; a stray "n/a" or "-" shouldn't hide it (those rows are reported on the map step).
   const numeric = s.headers.findIndex((_, i) => {
-    if (i === cols.name || i === cols.state) return false;
+    if (i === cols.name || i === cols.state || i === cols.lat || i === cols.lon) return false;
     const filled = s.rows.slice(0, 200).map((r) => r[i]).filter((v) => v !== "");
     const numbers = filled.filter((v) => !Number.isNaN(Number(v.replace(/[, ]/g, ""))));
     return numbers.length > 0 && numbers.length >= 0.8 * filled.length;
@@ -183,14 +215,27 @@ function renderColumns(): void {
   const hxlNote = $<HTMLElement>("[data-hxl-note]");
   hxlNote.hidden = !sheet.hxl;
   if (sheet.hxl) hxlNote.textContent = t("mk.hxl", "HXL hashtags found: the columns were chosen from them, and your file keeps them when you download it.");
-  for (const key of ["name", "state", "value"] as const) {
+  for (const key of ["name", "state", "value", "lat", "lon"] as const) {
     const sel = $<HTMLSelectElement>(`[data-col="${key}"]`);
     sel.replaceChildren();
-    if (key !== "name") sel.append(new Option(key === "state" ? t("mk.col.nostate", "No state column") : t("mk.col.novalue", "No value: count rows"), "-1"));
+    if (key !== "name") {
+      const none = key === "state" ? t("mk.col.nostate", "No state column") : key === "value" ? t("mk.col.novalue", "No value: count rows") : t("mk.col.nocoord", "None");
+      sel.append(new Option(none, "-1"));
+    }
     sheet.headers.forEach((h, i) => sel.append(new Option(h, String(i))));
     sel.value = String(cols[key]);
-    sel.onchange = () => { cols[key] = Number(sel.value); renderPreview(); };
+    sel.onchange = () => {
+      cols[key] = Number(sel.value);
+      if (key === "lat" || key === "lon") locateBy = cols.lat >= 0 && cols.lon >= 0 ? "points" : "names";
+      renderColumns();
+    };
   }
+  const hasCoords = cols.lat >= 0 && cols.lon >= 0;
+  $<HTMLElement>("[data-locate-field]").hidden = !hasCoords;
+  $$<HTMLButtonElement>("[data-locate]").forEach((b) => {
+    b.setAttribute("aria-pressed", String(b.dataset.locate === locateBy));
+    b.onclick = () => { locateBy = b.dataset.locate as typeof locateBy; renderColumns(); };
+  });
   $$<HTMLButtonElement>("[data-mk-level]").forEach((b) => {
     b.setAttribute("aria-pressed", String(Number(b.dataset.mkLevel) === level));
     b.onclick = () => { level = Number(b.dataset.mkLevel) as 0 | 1 | 2; renderColumns(); };
@@ -205,7 +250,8 @@ function renderPreview(): void {
   const head = table.createTHead().insertRow();
   sheet.headers.forEach((h, i) => {
     const th = document.createElement("th");
-    const role = i === cols.name ? t("mk.col.name", "Place names") : i === cols.state ? t("mk.role.state", "State") : i === cols.value ? t("mk.role.value", "Value") : "";
+    const role = i === cols.name ? t("mk.col.name", "Place names") : i === cols.state ? t("mk.role.state", "State") : i === cols.value ? t("mk.role.value", "Value")
+      : i === cols.lat ? t("mk.col.lat", "Latitude").replace(/ \(.*\)$/, "") : i === cols.lon ? t("mk.col.lon", "Longitude").replace(/ \(.*\)$/, "") : "";
     th.textContent = role ? `${h} · ${role}` : h;
     head.append(th);
   });
@@ -245,6 +291,15 @@ $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
   go(3);
   $<HTMLElement>("[data-review]").hidden = true;
   $<HTMLElement>("[data-matching]").hidden = false;
+  points = [];
+  if (locateBy === "points" && cols.lat >= 0 && cols.lon >= 0) {
+    await locatePoints();
+    $<HTMLElement>("[data-matching]").hidden = true;
+    $<HTMLElement>("[data-review]").hidden = false;
+    filter = "all";
+    renderReview();
+    return;
+  }
   const groups = new Map<string, Unique>();
   sheet.rows.forEach((r, i) => {
     const name = r[cols.name] ?? "";
@@ -295,6 +350,56 @@ function placeLabel(pcode: string): string {
   return `${placeName(p, L)}${parent ? ` (${placeName(parent, L)})` : ""} · ${pcode}`;
 }
 
+/**
+ * Place each row by its coordinates: the locality whose (detailed) boundary contains the point,
+ * or its state when the map is of states. Rows are grouped by place for review; rows with no
+ * usable coordinates, or outside Sudan, are kept in their own groups and reported.
+ */
+async function locatePoints(): Promise<void> {
+  if (!sheet) return;
+  const text = $<HTMLElement>("[data-matching-text]");
+  const features = await loadLevel(2, "detailed");
+  const boxes = features.map((f) => geoBounds(f));
+  const inBox = (b: [[number, number], [number, number]], [x, y]: [number, number]) => x >= b[0][0] && x <= b[1][0] && y >= b[0][1] && y <= b[1][1];
+  const groups = new Map<string, Unique>();
+  const issue = (kind: "no_coordinates" | "outside_sudan") => {
+    const key = `pt:${kind}`;
+    if (!groups.has(key)) {
+      groups.set(key, {
+        key, name: kind === "no_coordinates" ? t("mk.pt.missing", "Missing or invalid coordinates") : t("mk.pt.outside", "Points outside Sudan"),
+        state: "", rows: [], issue: kind,
+        result: { pcode: null, name_en: null, name_ar: null, level: null, score: 0, method: "none", alternatives: [] } as unknown as MatchResult,
+      });
+    }
+    return groups.get(key)!;
+  };
+  const rows = sheet.rows;
+  for (let i = 0; i < rows.length; i++) {
+    const lat = parseNumber(rows[i][cols.lat] ?? ""), lon = parseNumber(rows[i][cols.lon] ?? "");
+    if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) { issue("no_coordinates").rows.push(i); continue; }
+    const at: [number, number] = [lon, lat];
+    const f = features.find((x, j) => inBox(boxes[j], at) && geoContains(x, at));
+    if (!f) { issue("outside_sudan").rows.push(i); continue; }
+    const locality = getPlace(f.properties.pcode)!;
+    const place = level === 1 ? getPlace(locality.parent_pcode)! : locality;
+    points.push({ lonlat: at, row: i, pcode: place.pcode });
+    const key = `pt:${place.pcode}`;
+    if (!groups.has(key)) {
+      const parent = place.level === 2 ? getPlace(place.parent_pcode) : undefined;
+      groups.set(key, {
+        key, name: placeName(place, lang()), state: parent ? placeName(parent, lang()) : "", rows: [],
+        result: { pcode: place.pcode, name_en: place.name_en, name_ar: place.name_ar, level: place.level, score: 1, method: "point", alternatives: [] } as unknown as MatchResult,
+      });
+    }
+    groups.get(key)!.rows.push(i);
+    if (i % 500 === 0) {
+      text.textContent = lang() === "ar" ? `جارٍ تحديد مواقع النقاط… ${i} من ${rows.length}` : `Placing ${rows.length} points… ${i} / ${rows.length}`;
+      await new Promise((r) => setTimeout(r, 0));
+    }
+  }
+  uniques = [...groups.values()];
+}
+
 function methodLabel(u: Unique): string {
   const s = statusOf(u);
   if (s === "fixed") return t("mk.m.fixed", "Chosen by you");
@@ -302,8 +407,9 @@ function methodLabel(u: Unique): string {
   const r = u.result;
   if (!r || !u.name) return t("mk.m.empty", "Empty");
   const names: Record<string, string> = lang() === "ar"
-    ? { exact: "الاسم الرسمي", variant: "صيغة معروفة للاسم", fuzzy: "كتابة قريبة من الاسم", ambiguous: "يحتمل أكثر من مكان", none: "بلا مطابقة" }
-    : { exact: "Exact", variant: "Known spelling", fuzzy: "Close spelling", ambiguous: "More than one place", none: "No match" };
+    ? { exact: "الاسم الرسمي", variant: "صيغة معروفة للاسم", fuzzy: "كتابة قريبة من الاسم", ambiguous: "يحتمل أكثر من مكان", none: "بلا مطابقة", point: t("mk.pt.method", "By coordinates") }
+    : { exact: "Exact", variant: "Known spelling", fuzzy: "Close spelling", ambiguous: "More than one place", none: "No match", point: "By coordinates" };
+  if (u.result?.method === ("point" as string)) return names.point;
   return `${names[r.method] ?? r.method}${r.pcode ? ` · ${r.score.toFixed(2)}` : ""}`;
 }
 
@@ -470,7 +576,7 @@ function rankSubtitle(n: number, limit?: number): string {
 }
 
 /** Why each row is or isn't on the map. */
-type RowFate = "on_map" | "needs_review" | "no_match" | "left_unmatched" | "other_level" | "value_not_a_number" | "no_population";
+type RowFate = "on_map" | "needs_review" | "no_match" | "left_unmatched" | "other_level" | "value_not_a_number" | "no_population" | "no_coordinates" | "outside_sudan";
 
 function rowFates(): RowFate[] {
   const fates: RowFate[] = [];
@@ -481,7 +587,9 @@ function rowFates(): RowFate[] {
   sheet.rows.forEach((r, i) => {
     const u = byRow.get(i);
     const p = u ? finalPcode(u) : null;
-    if (!u || !p) {
+    if (u?.issue && u.choice === undefined) {
+      fates.push(u.issue);
+    } else if (!u || !p) {
       fates.push(!u ? "no_match" : u.choice === null ? "left_unmatched" : u.result?.method === "ambiguous" ? "needs_review" : "no_match");
     } else if (getPlace(p)?.level !== lvl) {
       fates.push("other_level");
@@ -514,6 +622,8 @@ function renderUnmapped(): void {
     other_level: other as [string, string],
     value_not_a_number: ["has a value that isn't a number", "have values that aren't numbers"],
     no_population: ["is in a place with no population estimate (the Abyei PCA area)", "are in places with no population estimate (the Abyei PCA area)"],
+    no_coordinates: ["has no usable coordinates", "have no usable coordinates"],
+    outside_sudan: ["is outside Sudan", "are outside Sudan"],
   };
   const arLabels: Record<Exclude<RowFate, "on_map">, string> = {
     needs_review: "بحاجة إلى مراجعة",
@@ -522,6 +632,8 @@ function renderUnmapped(): void {
     other_level: other as string,
     value_not_a_number: "قيمتها ليست رقمًا",
     no_population: "في مكان بلا تقدير سكاني (منطقة أبيي)",
+    no_coordinates: "إحداثياتها ناقصة أو غير صالحة",
+    outside_sudan: "خارج السودان",
   };
   const parts = [...counts].map(([f, n]) => {
     const k = f as Exclude<RowFate, "on_map">;
@@ -548,6 +660,15 @@ async function drawMap(): Promise<void> {
   const { spec, items, bands } = chartData();
   map.setFill((p) => { const v = items.find((i) => i.pcode === p); return v?.colour; });
   map.setLabels(labels);
+  // Points placed by coordinates, drawn over the places (only those on the map's level and kept).
+  const showPoints = locateBy === "points" && points.length > 0;
+  $<HTMLElement>("[data-points-field]").hidden = !showPoints;
+  const keep = new Set(items.map((i) => i.pcode));
+  const byRow = new Map<number, Unique>();
+  uniques.forEach((u) => u.rows.forEach((r) => byRow.set(r, u)));
+  map.setPoints(showPoints && $<HTMLInputElement>("[data-show-points]").checked
+    ? points.filter((pt) => { const u = byRow.get(pt.row); const p = u ? finalPcode(u) : null; return !!p && (keep.has(p) || !items.length); }).map((pt) => pt.lonlat)
+    : []);
   renderUnmapped();
 
   const rtl = lang() === "ar";
@@ -614,6 +735,7 @@ function retitle(): void {
   if (!input.value || input.value === lastDefaultTitle) input.value = defaultTitle();
   lastDefaultTitle = defaultTitle();
 }
+$<HTMLInputElement>("[data-show-points]").addEventListener("change", () => drawMap());
 $$<HTMLButtonElement>("[data-mk-labels]").forEach((b) => b.addEventListener("click", () => {
   labels = b.dataset.mkLabels as LabelMode;
   $$<HTMLButtonElement>("[data-mk-labels]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
@@ -643,7 +765,8 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
       const p = u ? finalPcode(u) : null;
       const place = p ? getPlace(p) : undefined;
       const method = !u ? "" : u.choice !== undefined ? "reviewed" : u.result?.method ?? "";
-      const status = !u || !u.name ? "empty" : u.choice === null ? "left unmatched" : u.choice ? "chosen in review" : !p ? (u.result?.method === "ambiguous" ? "needs review" : "no match") : statusOf(u) === "review" ? "matched, worth checking" : "matched";
+      const status = u?.issue && u.choice === undefined ? (u.issue === "outside_sudan" ? "outside Sudan" : "no coordinates")
+        : !u || !u.name ? "empty" : u.choice === null ? "left unmatched" : u.choice ? "chosen in review" : !p ? (u.result?.method === "ambiguous" ? "needs review" : "no match") : statusOf(u) === "review" ? "matched, worth checking" : "matched";
       const fate = fates[i];
       rows.push([...r, p ?? "", place?.name_en ?? "", place?.name_ar ?? "", place?.level ?? "", method, u?.result && p && u.choice === undefined ? u.result.score : "",
         status, fate === "on_map" ? "yes" : "no", fate === "on_map" ? "" : fate.replace(/_/g, " ")]);

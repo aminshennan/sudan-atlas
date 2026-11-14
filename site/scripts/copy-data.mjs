@@ -15,4 +15,7 @@ for (const resolution of ["medium", "light"]) {
     cpSync(join(root, "data", "boundaries", resolution, file), join(target, "boundaries", resolution, file));
   }
 }
+// Detailed localities, loaded only to place points (latitude/longitude) in the right locality.
+mkdirSync(join(target, "boundaries", "detailed"), { recursive: true });
+cpSync(join(root, "data", "boundaries", "detailed", "adm2.topojson"), join(target, "boundaries", "detailed", "adm2.topojson"));
 console.log("site data copied to public/atlas-data");

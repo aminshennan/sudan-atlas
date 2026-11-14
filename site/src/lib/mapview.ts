@@ -64,7 +64,8 @@ export class MapView {
   private labels: LabelMode;
   private tooltip: HTMLDivElement;
   private zoomGroup: SVGGElement;
-  private layers: Record<"fills" | "borders" | "outline" | "labels", SVGGElement>;
+  private layers: Record<"fills" | "borders" | "outline" | "points" | "labels", SVGGElement>;
+  private points: [number, number][] = [];
   /** Label size in map units at zoom 1, so labels stay about 11 px on screen at any width. */
   private labelSize = 12;
   private transform: ZoomTransform = zoomIdentity;
@@ -85,6 +86,7 @@ export class MapView {
       fills: this.zoomGroup.appendChild(el("g", { class: "mv-fills" })),
       borders: this.zoomGroup.appendChild(el("g", { class: "mv-borders", fill: "none", "pointer-events": "none" })),
       outline: this.zoomGroup.appendChild(el("g", { class: "mv-outline", fill: "none", "pointer-events": "none" })),
+      points: this.zoomGroup.appendChild(el("g", { class: "mv-points", fill: "#18181b", "fill-opacity": 0.75, stroke: "#ffffff", "pointer-events": "none" })),
       labels: this.zoomGroup.appendChild(el("g", { class: "mv-labels", "pointer-events": "none" })),
     };
     this.tooltip = document.createElement("div");
@@ -153,6 +155,24 @@ export class MapView {
       this.render();
       this.applyTransform(zoomIdentity, false);
     });
+  }
+
+  /** Draw points ([longitude, latitude]) over the places, for example a file's sites; [] removes them. */
+  setPoints(points: [number, number][]): void {
+    this.points = points;
+    this.renderPoints();
+  }
+
+  private renderPoints(): void {
+    const g = this.layers.points;
+    g.replaceChildren();
+    const k = this.transform.k;
+    const r = 2.6 / Math.sqrt(k); // grow a little when zoomed in, but not with the map
+    g.setAttribute("stroke-width", (0.8 / k).toFixed(3));
+    for (const p of this.points) {
+      const xy = this.projection(p);
+      if (xy) g.appendChild(el("circle", { cx: xy[0].toFixed(2), cy: xy[1].toFixed(2), r: r.toFixed(2) }));
+    }
   }
 
   /** Zoom in or out around the centre of the map. */
@@ -238,6 +258,7 @@ export class MapView {
     }
     this.select(this.selected);
     this.highlight(this.hovered);
+    this.renderPoints();
     this.renderLabels();
   }
 
@@ -352,7 +373,7 @@ export class MapView {
     if (hudZoom && this.loaded) hudZoom.textContent = this.zoomLevel().toFixed(1);
     this.container.classList.toggle("is-zoomed", transform.k > 1.01);
     cancelAnimationFrame(this.labelFrame);
-    this.labelFrame = requestAnimationFrame(() => this.renderLabels());
+    this.labelFrame = requestAnimationFrame(() => { this.renderLabels(); if (this.points.length) this.renderPoints(); });
   }
 
   private bindZoom(): void {

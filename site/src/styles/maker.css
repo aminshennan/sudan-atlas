@@ -84,3 +84,6 @@
 .hxl-note[hidden] { display: none; }
 .field__hint { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
 .field__hint[hidden] { display: none; }
+.check { display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; }
+.check[hidden] { display: none; }
+.check input { width: 18px; height: 18px; accent-color: var(--signal); }
