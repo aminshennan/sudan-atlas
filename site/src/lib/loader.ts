@@ -3,7 +3,7 @@
 //   "searching" (loading a map): light sweeps round Khartoum like an orbit, with a fading trail.
 //   "connecting" (matching names): rings of light pulse outward from Khartoum across the country.
 // With reduced motion it shows the still map. <canvas data-loader="searching|connecting"
-// data-loader-size="64|20"> elements are mounted by mountLoaders().
+// data-loader-size="64|20" [data-loader-rest="seconds"]> elements are mounted by mountLoaders().
 import DOTS from "../data/sudan-dots.json";
 
 export type LoaderState = "searching" | "connecting";
@@ -12,7 +12,13 @@ interface DotSet { step: number; dots: [number, number, number][]; here: [number
 const reduced = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
 const SIGNAL = "14, 124, 102";
 
-export function mountLoader(canvas: HTMLCanvasElement, state: LoaderState, size: number, dark = false): () => void {
+const FRAME_MS = 1000 / 30;
+
+/**
+ * restSeconds: for a decorative loader (not one shown while something loads), stop after this long
+ * and keep the still picture until it scrolls out of view and back in.
+ */
+export function mountLoader(canvas: HTMLCanvasElement, state: LoaderState, size: number, dark = false, restSeconds = 0): () => void {
   const set = (size <= 32 ? DOTS.small : DOTS.large) as unknown as DotSet;
   const dpr = Math.min(2, window.devicePixelRatio || 1);
   canvas.width = Math.round(size * dpr);
@@ -72,12 +78,20 @@ export function mountLoader(canvas: HTMLCanvasElement, state: LoaderState, size:
   }
   let raf = 0;
   let visible = true;
-  const loop = () => {
-    frame(performance.now() / 1000);
+  let last = 0;
+  let began = 0;
+  const loop = (now: number) => {
     raf = requestAnimationFrame(loop);
+    if (now - last < FRAME_MS - 1) return;
+    last = now;
+    frame(now / 1000);
+    if (restSeconds && now - began > restSeconds * 1000) stop();
   };
   const start = () => {
-    if (!raf && visible && document.visibilityState !== "hidden") raf = requestAnimationFrame(loop);
+    if (!raf && visible && document.visibilityState !== "hidden") {
+      began = performance.now();
+      raf = requestAnimationFrame(loop);
+    }
   };
   const stop = () => {
     cancelAnimationFrame(raf);
@@ -106,6 +120,6 @@ export function mountLoaders(root: ParentNode = document): void {
     if (canvas.dataset.loaderMounted) return;
     canvas.dataset.loaderMounted = "1";
     const size = Number(canvas.dataset.loaderSize) || 64;
-    mountLoader(canvas, canvas.dataset.loader === "connecting" ? "connecting" : "searching", size, canvas.dataset.loaderDark !== undefined);
+    mountLoader(canvas, canvas.dataset.loader === "connecting" ? "connecting" : "searching", size, canvas.dataset.loaderDark !== undefined, Number(canvas.dataset.loaderRest) || 0);
   });
 }

@@ -21,13 +21,7 @@ html[dir="rtl"] .mapview__tooltip { transform: translateX(calc(-100% - 28px)); }
 .legend__nodata { display: inline-flex; align-items: center; gap: 6px; }
 .legend__nodata::before { content: ""; width: 14px; height: 10px; background: var(--map-nodata); }
 
-.dot-map { width: 100%; height: auto; }
-.dot-map circle { fill: var(--graphite); }
-.dot-map .dot-map__here { fill: var(--signal); }
-@media (prefers-reduced-motion: no-preference) {
-  .dot-map circle { opacity: 0; animation: dot-in 600ms ease forwards; animation-delay: var(--d, 0ms); }
-}
-@keyframes dot-in { to { opacity: var(--o, 0.8); } }
+.dot-map { display: block; width: 100%; height: auto; }
 
 /* Zoom: borders keep their width on screen at any zoom. */
 .mv-place, .mv-state-border { vector-effect: non-scaling-stroke; }

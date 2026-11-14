@@ -42,12 +42,45 @@ function renderMatches(): void {
     list.append(li);
   }
 }
-renderMatches();
+// The first match builds the matcher's index, so wait until the page has painted and is idle.
+const whenIdle = (fn: () => void) => ("requestIdleCallback" in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 200));
+whenIdle(renderMatches);
+document.addEventListener("sa:lang", () => renderMatches());
 
-// A live preview of the map explorer.
+// The hero card's facts about North Darfur, in the page's language.
+function stateFacts(): void {
+  const facts = document.querySelector("[data-state-facts]");
+  if (!facts) return;
+  const n = getLocalities("SD02").length;
+  const area = (areaKm2("SD02") ?? 0).toLocaleString("en-GB");
+  const ar = lang() === "ar";
+  const name = document.querySelector(".float-card__name");
+  const other = document.querySelector<HTMLElement>(".float-card__ar");
+  if (name) name.textContent = ar ? "شمال دارفور" : "North Darfur";
+  if (other) { other.textContent = ar ? "North Darfur" : "شمال دارفور"; other.lang = ar ? "en" : "ar"; }
+  facts.textContent = lang() === "ar" ? `${n} محلية · نحو ${area} كم²` : `${n} localities · about ${area} km²`;
+}
+stateFacts();
+document.addEventListener("sa:lang", stateFacts);
+
+// A live preview of the map explorer. It is below the first screen, so it is built once the page is
+// idle (while the hero is being read), or as soon as it nears the screen if that comes first.
 const mapBox = document.querySelector<HTMLElement>("[data-home-map]");
 const info = document.querySelector<HTMLElement>("[data-home-info]");
 if (mapBox && info) {
+  let started = false;
+  const start = () => {
+    if (started) return;
+    started = true;
+    near.disconnect();
+    startMapPreview(mapBox, info);
+  };
+  const near = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && start(), { rootMargin: "400px 0px" });
+  near.observe(mapBox);
+  addEventListener("load", () => setTimeout(() => whenIdle(start), 300), { once: true });
+}
+
+function startMapPreview(mapBox: HTMLElement, info: HTMLElement): void {
   let current: string | null = "SD02";
   const labelMode = () => (lang() === "ar" ? "ar" : "en");
   const map = new MapView(mapBox, { labels: labelMode(), onSelect: (pcode) => select(pcode) });
@@ -56,27 +89,12 @@ if (mapBox && info) {
     map.select(pcode);
     renderPlaceCard(info!, pcode, map, { onLocality: select });
   }
-  function stateFacts(): void {
-    const facts = document.querySelector("[data-state-facts]");
-    if (!facts) return;
-    const n = getLocalities("SD02").length;
-    const area = (areaKm2("SD02") ?? 0).toLocaleString("en-GB");
-    const ar = lang() === "ar";
-    const name = document.querySelector(".float-card__name");
-    const other = document.querySelector<HTMLElement>(".float-card__ar");
-    if (name) name.textContent = ar ? "شمال دارفور" : "North Darfur";
-    if (other) { other.textContent = ar ? "North Darfur" : "شمال دارفور"; other.lang = ar ? "en" : "ar"; }
-    facts.textContent = lang() === "ar" ? `${n} محلية · نحو ${area} كم²` : `${n} localities · about ${area} km²`;
-  }
   map.load().then(() => {
     select(current);
-    stateFacts();
   });
   document.addEventListener("sa:lang", () => {
     map.setLabels(labelMode());
     map.render();
     select(current);
-    stateFacts();
-    renderMatches();
   });
 }

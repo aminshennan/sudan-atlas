@@ -60,7 +60,7 @@ writeFileSync(join(site, "public", "logo.svg"), svg(logo, { size: 512, dotScale:
 writeFileSync(join(site, "..", "docs", "logo.svg"), svg(logo, { size: 512, dotScale: 0.62, minOpacity: 0.45, hereScale: 2.4, title: "Sudan Atlas" }));
 writeFileSync(join(site, "public", "favicon.svg"), svg(favicon, { size: 64, dotScale: 0.72, minOpacity: 1, hereScale: 2.2, title: "Sudan Atlas" }));
 // Loader dot sets: 64-px loaders and the 20-px inline loader, plus the header mark.
-writeFileSync(join(site, "src", "data", "sudan-dots.json"), JSON.stringify({ large: dots(24), small: dots(9), mark: logo }) + "\n");
+writeFileSync(join(site, "src", "data", "sudan-dots.json"), JSON.stringify({ large: dots(24), small: dots(9) }) + "\n");
 // The header mark: a coarser map drawn in the text colour (currentColor), written into the header.
 const mark = dots(10);
 {
@@ -74,4 +74,21 @@ const mark = dots(10);
   if (next === header && !header.includes(svgMark)) throw new Error("brand mark not found in partials/header.html");
   writeFileSync(headerPath, next);
 }
+// The home page hero: the same grid the page used to compute in the browser (640 x 600, a dot every
+// 11 px), now worked out once here so phones do no geometry on load. Flat [x, y, opacity, ...].
+const HERO = { width: 640, height: 600, step: 11 };
+const heroProjection = geoConicEqualArea().parallels([9, 21]).rotate([-30, 0])
+  .fitExtent([[8, 8], [HERO.width - 8, HERO.height - 8]], states);
+const heroDots = [];
+for (let y = HERO.step / 2; y < HERO.height; y += HERO.step) {
+  for (let x = HERO.step / 2; x < HERO.width; x += HERO.step) {
+    const ll = heroProjection.invert([x, y]);
+    if (!ll || !states.features.some((f) => geoContains(f, ll))) continue;
+    const tone = 0.32 + 0.5 * (0.5 + 0.5 * Math.sin(x / 90 + y / 140));
+    heroDots.push(+x.toFixed(1), +y.toFixed(1), +tone.toFixed(2));
+  }
+}
+const heroHere = heroProjection(KHARTOUM).map((v) => +v.toFixed(1));
+writeFileSync(join(site, "src", "data", "sudan-dots-hero.json"), JSON.stringify({ ...HERO, r: 2.1, dots: heroDots, here: heroHere }) + "\n");
+console.log(`dots: hero ${heroDots.length / 3}`);
 console.log(`dots: logo ${logo.dots.length}, favicon ${favicon.dots.length}, mark ${mark.dots.length}`);

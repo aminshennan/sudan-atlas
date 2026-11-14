@@ -1,50 +1,78 @@
-// The brand's "dotted" Sudan: a regular grid of dots kept wherever it falls inside a state,
-// computed from the real boundaries, with one Signal dot at Khartoum.
-import { geoConicEqualArea, geoPath } from "d3-geo";
-import { loadLevel } from "./atlas";
+// The brand's "dotted" Sudan on the home page: a regular grid of dots wherever it falls inside a
+// state, with one Signal dot at Khartoum. The dots are worked out once by scripts/dots.mjs, and
+// drawn here on a single canvas: about 1,900 dots as one element, so phones scroll smoothly.
+// They fade in once, from the top down, then the canvas stays still.
+import HERO from "../data/sudan-dots-hero.json";
 
-const SVG_NS = "http://www.w3.org/2000/svg";
-const KHARTOUM: [number, number] = [32.5599, 15.5007];
+const FADE_MS = 600;
+const reduced = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+// ease-out, like the CSS "ease" the SVG version used
+const ease = (t: number) => 1 - (1 - t) ** 3;
 
-export async function drawDotMap(container: HTMLElement, { width = 640, height = 600, step = 11 } = {}): Promise<void> {
-  const states = await loadLevel(1, "light");
-  const projection = geoConicEqualArea().parallels([9, 21]).rotate([-30, 0])
-    .fitExtent([[8, 8], [width - 8, height - 8]], { type: "FeatureCollection", features: states });
-  const path = geoPath(projection);
-  const shapes = states.map((f) => new Path2D(path(f) ?? ""));
-  const ctx = document.createElement("canvas").getContext("2d");
+export function drawDotMap(container: HTMLElement): void {
+  const { width, height, r, dots } = HERO;
+  const here = HERO.here as [number, number];
+  const canvas = document.createElement("canvas");
+  canvas.className = "dot-map";
+  canvas.setAttribute("aria-hidden", "true");
+  container.replaceChildren(canvas);
+  const ctx = canvas.getContext("2d");
   if (!ctx) return;
+  const css = getComputedStyle(document.documentElement);
+  const ink = css.getPropertyValue("--graphite").trim() || "#18181b";
+  const signal = css.getPropertyValue("--signal").trim() || "#0e7c66";
 
-  const svg = document.createElementNS(SVG_NS, "svg");
-  svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-  svg.setAttribute("class", "dot-map");
-  svg.setAttribute("aria-hidden", "true");
-  const frag = document.createDocumentFragment();
-  for (let y = step / 2; y < height; y += step) {
-    for (let x = step / 2; x < width; x += step) {
-      if (!shapes.some((s) => ctx.isPointInPath(s, x, y))) continue;
-      const c = document.createElementNS(SVG_NS, "circle");
-      c.setAttribute("cx", x.toFixed(1));
-      c.setAttribute("cy", y.toFixed(1));
-      c.setAttribute("r", "2.1");
-      // a slow wash of tone across the country, like the depth shading of the brand mark
-      const tone = 0.32 + 0.5 * (0.5 + 0.5 * Math.sin(x / 90 + y / 140));
-      c.style.setProperty("--o", tone.toFixed(2));
-      c.style.setProperty("--d", `${Math.round(y * 1.4 + x * 0.3)}ms`);
-      frag.appendChild(c);
+  let scale = 1;
+  const size = () => {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const w = container.clientWidth || width;
+    scale = (w / width) * dpr;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round((w * height / width) * dpr);
+  };
+
+  /** Draw every dot at `elapsed` ms into the fade-in (Infinity = finished). */
+  const draw = (elapsed: number) => {
+    ctx.setTransform(scale, 0, 0, scale, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = ink;
+    for (let i = 0; i < dots.length; i += 3) {
+      const x = dots[i], y = dots[i + 1];
+      const t = Math.min(1, Math.max(0, (elapsed - (y * 1.4 + x * 0.3)) / FADE_MS));
+      if (t <= 0) continue;
+      ctx.globalAlpha = dots[i + 2] * ease(t);
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, 2 * Math.PI);
+      ctx.fill();
     }
+    const t = Math.min(1, Math.max(0, (elapsed - 900) / FADE_MS));
+    ctx.globalAlpha = ease(t);
+    ctx.fillStyle = signal;
+    ctx.beginPath();
+    ctx.arc(here[0], here[1], 7, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  };
+
+  size();
+  // The last dot starts fading in at about 1.4 * height + 0.3 * width ms.
+  const total = 1.4 * height + 0.3 * width + FADE_MS;
+  let done = reduced();
+  if (done) draw(Infinity);
+  else {
+    const start = performance.now();
+    const step = (now: number) => {
+      const elapsed = now - start;
+      draw(elapsed);
+      if (elapsed < total) requestAnimationFrame(step);
+      else done = true;
+    };
+    requestAnimationFrame(step);
   }
-  const here = projection(KHARTOUM);
-  if (here) {
-    const c = document.createElementNS(SVG_NS, "circle");
-    c.setAttribute("cx", here[0].toFixed(1));
-    c.setAttribute("cy", here[1].toFixed(1));
-    c.setAttribute("r", "7");
-    c.setAttribute("class", "dot-map__here");
-    c.style.setProperty("--o", "1");
-    c.style.setProperty("--d", "900ms");
-    frag.appendChild(c);
-  }
-  svg.appendChild(frag);
-  container.replaceChildren(svg);
+  // Redraw sharp at the new size when the layout changes (after the fade-in, one frame only).
+  new ResizeObserver(() => {
+    const before = canvas.width;
+    size();
+    if (canvas.width !== before && done) draw(Infinity);
+  }).observe(container);
 }

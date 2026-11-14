@@ -24,7 +24,7 @@ html[dir="rtl"] .hero__install { justify-content: flex-end; }
 .match-list .meta { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 11px; color: var(--muted); display: flex; justify-content: space-between; }
 .match-list .ambiguous { color: var(--warn); }
 @media (max-width: 720px) {
-  .float-card { position: static; width: auto; margin-top: 12px; }
+  .float-card { position: static; width: auto; margin-top: 12px; backdrop-filter: none; }
 }
 
 .band { background: var(--surface); border-block: 1px solid var(--mist); }
