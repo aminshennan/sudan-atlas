@@ -8,6 +8,7 @@ import { getPlace, placeName } from "../lib/atlas";
 import { countEvent } from "../lib/analytics";
 import { drawBandLegend, drawRanking, highlightRanking, type BandLegend, type RankItem } from "../lib/charts";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
+import { buildPrintSvg, printSvg } from "../lib/print";
 import { lang, t, translate } from "../lib/i18n";
 import { populationOf, POPULATION_SOURCE, POPULATION_SOURCE_AR } from "../lib/population";
 import { type LabelMode, MapView } from "../lib/mapview";
@@ -652,9 +653,16 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
   }
   if (!map) return;
   const { items, bands } = chartData();
+  const mapTitle = $<HTMLInputElement>("[data-map-title]").value || defaultTitle();
+  const subtitle = rateOn() ? `${lang() === "ar" ? "لكل 1,000 نسمة، حسب" : "Per 1,000 people, using population estimates from"} ${lang() === "ar" ? POPULATION_SOURCE_AR : POPULATION_SOURCE}` : undefined;
+  if (kind === "print") {
+    const m = map;
+    printSvg(m.withExportLabels(() => buildPrintSvg(m, { title: mapTitle, subtitle, rtl: lang() === "ar", legend: bands ? { title: valueTitle(), bands } : undefined })), mapTitle);
+    return;
+  }
   const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, {
-    title: $<HTMLInputElement>("[data-map-title]").value || defaultTitle(),
-    subtitle: rateOn() ? `${lang() === "ar" ? "لكل 1,000 نسمة، حسب" : "Per 1,000 people, using population estimates from"} ${lang() === "ar" ? POPULATION_SOURCE_AR : POPULATION_SOURCE}` : undefined,
+    title: mapTitle,
+    subtitle,
     rtl: lang() === "ar",
     legend: bands ? { title: valueTitle(), bands } : undefined,
     side: items.length ? { title: t("mk.rank", "Ranking"), subtitle: rankSubtitle(items.length, RANK_EXPORT_LIMIT), items, format: nf, limit: RANK_EXPORT_LIMIT } : undefined,

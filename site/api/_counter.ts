@@ -7,7 +7,7 @@ export const PAGES = ["map", "maker", "home", "docs"] as const;
 export const EVENTS = {
   match_run: ["csv", "tsv", "xlsx", "sample"],
   map_made: ["map"],
-  map_export: ["svg", "png", "csv"],
+  map_export: ["svg", "png", "csv", "print"],
   file_export: ["csv"],
 } as const satisfies Record<string, readonly string[]>;
 export type EventName = keyof typeof EVENTS;

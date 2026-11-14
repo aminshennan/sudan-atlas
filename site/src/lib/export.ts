@@ -57,6 +57,29 @@ function text(x: number, y: number, content: string, attrs: Record<string, strin
   return t;
 }
 
+/**
+ * The map's drawing with every style written out, in a group clipped to the map frame (a
+ * zoomed-in view must not spill over the title or legend). Place it with a transform.
+ */
+export function cloneMap(mapSvg: SVGSVGElement, rtl: boolean, clipId: string): { clip: SVGClipPathElement; g: SVGGElement; w: number; h: number } {
+  const [, , w, h] = (mapSvg.getAttribute("viewBox") ?? "0 0 800 760").split(" ").map(Number);
+  const map = mapSvg.cloneNode(true) as SVGSVGElement;
+  inlineStyles(mapSvg, map);
+  const clip = document.createElementNS(SVG_NS, "clipPath");
+  clip.setAttribute("id", clipId);
+  const frame = document.createElementNS(SVG_NS, "rect");
+  frame.setAttribute("width", String(w));
+  frame.setAttribute("height", String(h));
+  clip.appendChild(frame);
+  const g = document.createElementNS(SVG_NS, "g");
+  g.setAttribute("clip-path", `url(#${clipId})`);
+  for (const child of Array.from(map.childNodes)) g.appendChild(child);
+  g.querySelectorAll("text").forEach((t) => t.setAttribute("font-family", rtl ? FONT_AR : FONT));
+  return { clip, g, w, h };
+}
+
+export { FONT, FONT_AR, text as svgText };
+
 /** A standalone SVG of the map, ready to save. */
 export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string {
   const [, , w, h] = (mapSvg.getAttribute("viewBox") ?? "0 0 800 760").split(" ").map(Number);
@@ -86,21 +109,9 @@ export function buildExportSvg(mapSvg: SVGSVGElement, spec: ExportSpec): string 
   out.appendChild(text(x0, 40, spec.title, { "font-family": font, "font-size": 24, "font-weight": 600, fill: "#18181b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
   if (spec.subtitle) out.appendChild(text(x0, 66, spec.subtitle, { "font-family": font, "font-size": 15, fill: "#52525b", "text-anchor": anchor, direction: spec.rtl ? "rtl" : "ltr" }));
 
-  const map = mapSvg.cloneNode(true) as SVGSVGElement;
-  inlineStyles(mapSvg, map);
-  // Clip to the map frame: a zoomed-in view must not spill over the title or legend.
-  const clip = document.createElementNS(SVG_NS, "clipPath");
-  clip.setAttribute("id", "sa-map-frame");
-  const frame = document.createElementNS(SVG_NS, "rect");
-  frame.setAttribute("width", String(w));
-  frame.setAttribute("height", String(h));
-  clip.appendChild(frame);
+  const { clip, g } = cloneMap(mapSvg, !!spec.rtl, "sa-map-frame");
   out.appendChild(clip);
-  const g = document.createElementNS(SVG_NS, "g");
   g.setAttribute("transform", `translate(${mapX} ${top})`);
-  g.setAttribute("clip-path", "url(#sa-map-frame)");
-  for (const child of Array.from(map.childNodes)) g.appendChild(child);
-  g.querySelectorAll("text").forEach((t) => t.setAttribute("font-family", spec.rtl ? FONT_AR : FONT));
   out.appendChild(g);
 
   if (spec.side) {

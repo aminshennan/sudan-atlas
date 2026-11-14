@@ -62,6 +62,8 @@ const AR: Record<string, string> = {
   "map.export.svg": "صورة SVG",
   "map.export.png": "صورة PNG",
   "map.export.csv": "جدول الأماكن (CSV)",
+  "map.export.print": "طباعة أو PDF (A4)",
+  "mk.print": "طباعة / PDF (A4)",
   "map.export.note": "تتضمن الصور العنوان والمصدر.",
   "map.details.empty": "اختر مكانًا من الخريطة، أو ابحث عنه بالاسم.",
   "map.state": "ولاية",

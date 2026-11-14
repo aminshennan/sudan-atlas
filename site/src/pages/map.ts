@@ -7,6 +7,7 @@ import AREAS from "../data/areas.json";
 import { populationOf } from "../lib/population";
 import { countEvent } from "../lib/analytics";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
+import { buildPrintSvg, printSvg } from "../lib/print";
 import { lang, t } from "../lib/i18n";
 import { type LabelMode, MapView } from "../lib/mapview";
 import { renderPlaceCard } from "../lib/placecard";
@@ -122,7 +123,7 @@ document.addEventListener("click", (e) => { if (!menu.hidden && !(e.target as El
 menu.addEventListener("keydown", (e) => {
   const key = e.key.toLowerCase();
   if (key === "escape") { openMenu(false); toggle.focus(); }
-  const target = menu.querySelector<HTMLButtonElement>(`[data-export="${({ s: "svg", p: "png", c: "csv" } as Record<string, string>)[key]}"]`);
+  const target = menu.querySelector<HTMLButtonElement>(`[data-export="${({ s: "svg", p: "png", c: "csv", r: "print" } as Record<string, string>)[key]}"]`);
   if (target) { e.preventDefault(); target.click(); }
 });
 
@@ -145,6 +146,10 @@ menu.querySelectorAll<HTMLButtonElement>("[data-export]").forEach((b) => b.addEv
     const rows: (string | number | undefined)[][] = [["pcode", "level", "name_en", "name_ar", "parent_pcode", "area_km2", "population_est_2025"]];
     for (const p of places) rows.push([p.pcode, p.level, p.name_en, p.name_ar, p.parent_pcode, (AREAS as Record<string, number>)[p.pcode], populationOf(p.pcode)]);
     download(`${file}.csv`, toCsv(rows));
+    return;
+  }
+  if (kind === "print") {
+    printSvg(map.withExportLabels(() => buildPrintSvg(map, { title, rtl: lang() === "ar" })), title);
     return;
   }
   const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, { title, rtl: lang() === "ar" }));

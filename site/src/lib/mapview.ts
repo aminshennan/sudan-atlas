@@ -3,7 +3,7 @@
 // to show its localities. With zoom on, d3-zoom adds wheel, pinch and drag, zoom buttons, and an
 // animated flight into and out of a focused state. The same SVG is what the export menu saves,
 // so an export shows exactly the view on screen.
-import { geoConicEqualArea, geoPath, type GeoPath, type GeoProjection } from "d3-geo";
+import { geoConicEqualArea, geoDistance, geoPath, type GeoPath, type GeoProjection } from "d3-geo";
 import { select as d3select, type Selection } from "d3-selection";
 import "d3-transition";
 import { zoom as d3zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
@@ -453,6 +453,57 @@ export class MapView {
       this.select(pcode);
       this.opts.onSelect?.(pcode);
     });
+  }
+
+  /** A point of the visible view (viewBox units) as [longitude, latitude]. */
+  private toLonLat(x: number, y: number): [number, number] | null {
+    return this.projection.invert?.(this.transform.invert([x, y])) ?? null;
+  }
+
+  /**
+   * A scale bar for the view: a round distance in km and its length in viewBox units, no longer
+   * than maxUnits, measured across the centre of the view (the projection is equal-area, so the
+   * scale varies a little across the map; the bar is true at the centre).
+   */
+  scaleBar(maxUnits: number): { km: number; units: number } | null {
+    const a = this.toLonLat(W / 2 - 50, H / 2), b = this.toLonLat(W / 2 + 50, H / 2);
+    if (!a || !b) return null;
+    const kmPerUnit = (geoDistance(a, b) * 6371) / 100;
+    const target = maxUnits * kmPerUnit;
+    const steps = [1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000];
+    const km = [...steps].reverse().find((s) => s <= target) ?? steps[0];
+    return { km, units: km / kmPerUnit };
+  }
+
+  /** Which way north points at the centre of the view, in degrees clockwise from straight up. */
+  northAngle(): number {
+    const c = this.toLonLat(W / 2, H / 2);
+    if (!c) return 0;
+    const p0 = this.transform.apply(this.projection(c)!), p1 = this.transform.apply(this.projection([c[0], c[1] + 0.5])!);
+    return (Math.atan2(p1[0] - p0[0], -(p1[1] - p0[1])) * 180) / Math.PI;
+  }
+
+  /**
+   * A small map of Sudan (state outlines) with the area in view outlined, for a print inset;
+   * null when the whole country is in view anyway.
+   */
+  insetPaths(size: number): { states: string[]; view: string } | null {
+    const whole = !this.drawnFocus && this.transform.k <= 1.01;
+    if (whole) return null;
+    const inset = geoConicEqualArea().parallels([9, 21]).rotate([-30, 0])
+      .fitExtent([[4, 4], [size - 4, size - 4]], { type: "FeatureCollection", features: this.states });
+    const path = geoPath(inset);
+    const states = this.states.map((f) => path(f) ?? "");
+    // Trace the edges of the view, a few points per side, into the inset.
+    const ring: [number, number][] = [];
+    const n = 8;
+    for (let i = 0; i <= n; i++) ring.push([(W * i) / n, 0]);
+    for (let i = 1; i <= n; i++) ring.push([W, (H * i) / n]);
+    for (let i = n - 1; i >= 0; i--) ring.push([(W * i) / n, H]);
+    for (let i = n - 1; i > 0; i--) ring.push([0, (H * i) / n]);
+    const pts = ring.map(([x, y]) => this.toLonLat(x, y)).filter((p): p is [number, number] => !!p).map((p) => inset(p)).filter((p): p is [number, number] => !!p);
+    const view = pts.length ? `M${pts.map((p) => p.map((v) => v.toFixed(1)).join(",")).join("L")}Z` : "";
+    return { states, view };
   }
 
   feature(pcode: string): AdmFeature | undefined {
