@@ -82,3 +82,5 @@
 }
 .hxl-note { margin: 0; padding: 8px 12px; border-radius: var(--radius-sm); background: #e3f4ef; color: #0a5f4e; font-size: 14px; }
 .hxl-note[hidden] { display: none; }
+.field__hint { margin: 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+.field__hint[hidden] { display: none; }

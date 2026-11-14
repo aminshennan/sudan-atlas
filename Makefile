@@ -26,6 +26,9 @@ evaluate:         ## Measure the matcher on data/tests/match_cases.csv; writes d
 golden:           ## Write data/tests/match_results.json, the results both packages must reproduce
 	$(PYTHON) -m pipeline golden
 
+population:       ## Download OCHA population estimates (COD-PS) into data/population/
+	$(PYTHON) -m pipeline population
+
 packages:         ## Build the npm package (packages/js/dist) and the PyPI package (packages/py/dist)
 	cd packages/js && npm run build
 	$(PYTHON) packages/sync_data.py

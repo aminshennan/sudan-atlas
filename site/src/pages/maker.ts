@@ -9,6 +9,7 @@ import { countEvent } from "../lib/analytics";
 import { drawBandLegend, drawRanking, highlightRanking, type BandLegend, type RankItem } from "../lib/charts";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
 import { lang, t, translate } from "../lib/i18n";
+import { populationOf, POPULATION_SOURCE, POPULATION_SOURCE_AR } from "../lib/population";
 import { type LabelMode, MapView } from "../lib/mapview";
 
 startPage("maker");
@@ -388,9 +389,21 @@ function values(): Map<string, number> {
     }
   }
   const out = new Map<string, number>();
-  sums.forEach((e, p) => out.set(p, agg === "mean" ? e.sum / e.n : agg === "count" ? e.n : e.sum));
+  const rate = rateOn();
+  sums.forEach((e, p) => {
+    const v = agg === "mean" ? e.sum / e.n : agg === "count" ? e.n : e.sum;
+    if (!rate) { out.set(p, v); return; }
+    const pop = populationOf(p);
+    if (pop) out.set(p, (v / pop) * 1000); // places with no population figure are reported, not mapped
+  });
   return out;
 }
+
+/** Per 1,000 people: chosen, and meaningful (a rate of an average is not). */
+function rateOn(): boolean {
+  return $<HTMLSelectElement>("[data-rate]").value === "per1000" && $<HTMLSelectElement>("[data-agg]").value !== "mean";
+}
+const PER_1000 = () => (lang() === "ar" ? "لكل 1,000 نسمة" : "per 1,000 people");
 
 function classes(vals: number[], n: number): number[] {
   const sorted = [...vals].sort((a, b) => a - b);
@@ -416,7 +429,7 @@ function legendSpec(vals: Map<string, number>, colours: string[]) {
 }
 
 function defaultTitle(): string {
-  const col = cols.value >= 0 && sheet ? sheet.headers[cols.value] : lang() === "ar" ? "عدد الصفوف" : "Rows";
+  const col = valueTitle();
   const lv = mapLevel() === 1 ? (lang() === "ar" ? "حسب الولاية" : "by state") : (lang() === "ar" ? "حسب المحلية" : "by locality");
   return `${col} ${lv}`;
 }
@@ -445,7 +458,8 @@ function chartData() {
 }
 
 function valueTitle(): string {
-  return cols.value >= 0 && sheet ? sheet.headers[cols.value] : lang() === "ar" ? "عدد الصفوف" : "Rows";
+  const base = cols.value >= 0 && sheet ? sheet.headers[cols.value] : lang() === "ar" ? "عدد الصفوف" : "Rows";
+  return rateOn() ? `${base} ${PER_1000()}` : base;
 }
 
 function rankSubtitle(n: number, limit?: number): string {
@@ -455,7 +469,7 @@ function rankSubtitle(n: number, limit?: number): string {
 }
 
 /** Why each row is or isn't on the map. */
-type RowFate = "on_map" | "needs_review" | "no_match" | "left_unmatched" | "other_level" | "value_not_a_number";
+type RowFate = "on_map" | "needs_review" | "no_match" | "left_unmatched" | "other_level" | "value_not_a_number" | "no_population";
 
 function rowFates(): RowFate[] {
   const fates: RowFate[] = [];
@@ -472,6 +486,8 @@ function rowFates(): RowFate[] {
       fates.push("other_level");
     } else if (cols.value >= 0 && (r[cols.value].trim() === "" || Number.isNaN(Number(r[cols.value].replace(/[, ]/g, ""))))) {
       fates.push("value_not_a_number");
+    } else if (rateOn() && populationOf(p) === undefined) {
+      fates.push("no_population");
     } else {
       fates.push("on_map");
     }
@@ -496,6 +512,7 @@ function renderUnmapped(): void {
     left_unmatched: ["was left unmatched by you", "were left unmatched by you"],
     other_level: other as [string, string],
     value_not_a_number: ["has a value that isn't a number", "have values that aren't numbers"],
+    no_population: ["is in a place with no population estimate (the Abyei PCA area)", "are in places with no population estimate (the Abyei PCA area)"],
   };
   const arLabels: Record<Exclude<RowFate, "on_map">, string> = {
     needs_review: "بحاجة إلى مراجعة",
@@ -503,6 +520,7 @@ function renderUnmapped(): void {
     left_unmatched: "تركتها بلا مطابقة",
     other_level: other as string,
     value_not_a_number: "قيمتها ليست رقمًا",
+    no_population: "في مكان بلا تقدير سكاني (منطقة أبيي)",
   };
   const parts = [...counts].map(([f, n]) => {
     const k = f as Exclude<RowFate, "on_map">;
@@ -516,7 +534,7 @@ function renderUnmapped(): void {
 
 async function drawMap(): Promise<void> {
   const titleInput = $<HTMLInputElement>("[data-map-title]");
-  if (!titleInput.value) titleInput.value = defaultTitle();
+  retitle();
   const rankSvg = $<SVGSVGElement>("[data-rank-svg]");
   if (!map) {
     map = new MapView($<HTMLElement>("[data-mk-map]"), {
@@ -578,7 +596,23 @@ function renderPalettes(): void {
   }
 }
 renderPalettes();
-$<HTMLSelectElement>("[data-agg]").addEventListener("change", () => drawMap());
+// Rates only make sense for totals and counts, so averages switch the rate option off.
+const syncRate = () => {
+  const mean = $<HTMLSelectElement>("[data-agg]").value === "mean";
+  const rate = $<HTMLSelectElement>("[data-rate]");
+  rate.disabled = mean;
+  if (mean) rate.value = "total";
+  $<HTMLElement>("[data-rate-note]").hidden = !rateOn();
+};
+$<HTMLSelectElement>("[data-agg]").addEventListener("change", () => { syncRate(); retitle(); drawMap(); });
+$<HTMLSelectElement>("[data-rate]").addEventListener("change", () => { syncRate(); retitle(); drawMap(); });
+/** Follow the title along with the choices, unless the user has typed their own. */
+let lastDefaultTitle = "";
+function retitle(): void {
+  const input = $<HTMLInputElement>("[data-map-title]");
+  if (!input.value || input.value === lastDefaultTitle) input.value = defaultTitle();
+  lastDefaultTitle = defaultTitle();
+}
 $$<HTMLButtonElement>("[data-mk-labels]").forEach((b) => b.addEventListener("click", () => {
   labels = b.dataset.mkLabels as LabelMode;
   $$<HTMLButtonElement>("[data-mk-labels]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
@@ -620,6 +654,7 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
   const { items, bands } = chartData();
   const svg = map.withExportLabels((mapSvg) => buildExportSvg(mapSvg, {
     title: $<HTMLInputElement>("[data-map-title]").value || defaultTitle(),
+    subtitle: rateOn() ? `${lang() === "ar" ? "لكل 1,000 نسمة، حسب" : "Per 1,000 people, using population estimates from"} ${lang() === "ar" ? POPULATION_SOURCE_AR : POPULATION_SOURCE}` : undefined,
     rtl: lang() === "ar",
     legend: bands ? { title: valueTitle(), bands } : undefined,
     side: items.length ? { title: t("mk.rank", "Ranking"), subtitle: rankSubtitle(items.length, RANK_EXPORT_LIMIT), items, format: nf, limit: RANK_EXPORT_LIMIT } : undefined,

@@ -4,6 +4,7 @@ import "../styles/home.css";
 import "../styles/explorer.css";
 import { getLocalities, getPlace, getStates, placeName } from "../lib/atlas";
 import AREAS from "../data/areas.json";
+import { populationOf } from "../lib/population";
 import { countEvent } from "../lib/analytics";
 import { buildExportSvg, download, downloadPng, downloadSvg, toCsv } from "../lib/export";
 import { lang, t } from "../lib/i18n";
@@ -141,8 +142,8 @@ menu.querySelectorAll<HTMLButtonElement>("[data-export]").forEach((b) => b.addEv
   countEvent("map_export", kind);
   if (kind === "csv") {
     const places = state.focus ? getLocalities(state.focus) : state.level === 1 ? getStates() : getLocalities();
-    const rows: (string | number | undefined)[][] = [["pcode", "level", "name_en", "name_ar", "parent_pcode", "area_km2"]];
-    for (const p of places) rows.push([p.pcode, p.level, p.name_en, p.name_ar, p.parent_pcode, (AREAS as Record<string, number>)[p.pcode]]);
+    const rows: (string | number | undefined)[][] = [["pcode", "level", "name_en", "name_ar", "parent_pcode", "area_km2", "population_est_2025"]];
+    for (const p of places) rows.push([p.pcode, p.level, p.name_en, p.name_ar, p.parent_pcode, (AREAS as Record<string, number>)[p.pcode], populationOf(p.pcode)]);
     download(`${file}.csv`, toCsv(rows));
     return;
   }

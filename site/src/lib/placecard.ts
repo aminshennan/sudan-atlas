@@ -2,6 +2,7 @@
 // copy button, facts computed from the data, and the state's localities.
 import { areaKm2, getLocalities, getPlace, placeName } from "./atlas";
 import { lang, t } from "./i18n";
+import { populationOf, POPULATION_SOURCE, POPULATION_SOURCE_AR } from "./population";
 import type { MapView } from "./mapview";
 
 export interface PlaceCardActions {
@@ -52,7 +53,10 @@ export function renderPlaceCard(container: HTMLElement, pcode: string | null, ma
   if (isState) fact(t("map.localityCount", "Localities"), fmt(getLocalities(place.pcode).length));
   else if (parent) fact(t("map.inState", "In state"), placeName(parent, L));
   if (area) fact(L === "ar" ? "المساحة" : "Area", `≈ ${fmt(area)} ${L === "ar" ? "كم²" : "km²"}`);
+  const pop = populationOf(place.pcode);
+  fact(t("map.population", "Population (est. 2025)"), pop === undefined ? t("map.population.none", "No estimate") : `≈ ${fmt(Math.round(pop / 1000) * 1000)}`);
   card.append(facts);
+  card.append(node("p", { className: "place-card__note", textContent: `${t("map.population.source", "Population")}: ${L === "ar" ? POPULATION_SOURCE_AR : POPULATION_SOURCE}` }));
 
   if (isState) {
     const list = node("ul");

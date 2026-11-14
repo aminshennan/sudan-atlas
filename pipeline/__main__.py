@@ -2,6 +2,7 @@
 
 Boundaries:  fetch | import ARCHIVE | normalise | simplify | validate | manifest | build
 Gazetteer:   gazetteer | fetch-test-sources | test-pool | evaluate | golden
+Population:  population (downloads OCHA COD-PS and writes data/population/)
 
 `build` rebuilds data/boundaries/ from data/raw/ and validates it; it exits
 non-zero if any validation check fails. `fetch` downloads data/raw/ and is
@@ -14,7 +15,7 @@ measures the matcher on data/tests/match_cases.csv.
 import sys
 from pathlib import Path
 
-from . import fetch, manifest, normalise, simplify, validate
+from . import fetch, manifest, normalise, population, simplify, validate
 from .gazetteer import evaluate, golden, places, testcases, variants
 
 
@@ -51,6 +52,7 @@ def main(argv: list[str]) -> int:
         "test-pool": lambda: testcases.pool() and 0,
         "evaluate": lambda: evaluate.run() and 0,
         "golden": lambda: golden.run() or 0,
+        "population": population.run,
     }
     if step not in steps:
         print(__doc__)
