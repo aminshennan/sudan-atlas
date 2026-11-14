@@ -1,5 +1,7 @@
 # sudan-atlas
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191932.svg)](https://doi.org/10.5281/zenodo.24191932)
+
 Official codes, names and boundaries for Sudan's 18 states, the Abyei PCA area and 189 localities, with a matcher that turns messy Arabic and English place names into official P-codes.
 
 ```sh
@@ -37,6 +39,14 @@ The Python package (`pip install sudan-atlas`) returns identical results.
 ## Boundaries
 
 `getFeature` loads boundary files only when first asked. In Node it reads them from this package; in a browser it fetches them from jsDelivr. To serve them yourself, copy the package's `data/` folder and call `setDataUrl("/static/sudan-atlas/")`. The raw files are also at `https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/data/boundaries/{detailed|medium|light}/adm{1|2}.{geojson|topojson}`.
+
+## Citing
+
+If you use sudan-atlas in a report, paper or product, please cite it:
+
+> Shennan, A. (2026). *Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities*. Zenodo. https://doi.org/10.5281/zenodo.24191932
+
+Website, map and map-maker: https://atlas-sudan.vercel.app
 
 ## Licences and sources
 

@@ -19,7 +19,7 @@
     "url": "git+https://github.com/aminshennan/sudan-atlas.git",
     "directory": "packages/js"
   },
-  "homepage": "https://github.com/aminshennan/sudan-atlas#readme",
+  "homepage": "https://atlas-sudan.vercel.app",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

@@ -29,6 +29,8 @@ test = ["pytest>=8"]
 Homepage = "https://github.com/aminshennan/sudan-atlas"
 Source = "https://github.com/aminshennan/sudan-atlas/tree/main/packages/py"
 Issues = "https://github.com/aminshennan/sudan-atlas/issues"
+Documentation = "https://atlas-sudan.vercel.app/docs/"
+DOI = "https://doi.org/10.5281/zenodo.24191932"
 
 [tool.setuptools.packages.find]
 where = ["src"]
