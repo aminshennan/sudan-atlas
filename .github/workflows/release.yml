@@ -148,7 +148,8 @@ jobs:
             const fs = require("fs");
             const p = JSON.parse(fs.readFileSync("package/package.json", "utf8"));
             p.name = "@aminshennan/sudan-atlas";
+            delete p.scripts; // built and tested in the build job; the unpacked tarball has no build scripts
             p.publishConfig = { registry: "https://npm.pkg.github.com", access: "public" };
             fs.writeFileSync("package/package.json", JSON.stringify(p, null, 2) + "\n");
           '
-          npm publish ./package
+          npm publish ./package --ignore-scripts

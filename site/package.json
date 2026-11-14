@@ -13,7 +13,7 @@
     "typecheck": "npm run data && tsc --noEmit"
   },
   "engines": {
-    "node": ">=20"
+    "node": "24.x"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.6",
@@ -45,5 +45,8 @@
     "playwright-core": "^1.52.0",
     "typescript": "^5.8.3",
     "vite": "^7.3.7"
+  },
+  "allowScripts": {
+    "esbuild": true
   }
 }
