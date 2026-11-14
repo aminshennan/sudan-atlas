@@ -16,7 +16,8 @@ startPage("maker");
 const $ = <T extends Element>(s: string) => document.querySelector<T>(s)!;
 const $$ = <T extends Element>(s: string) => Array.from(document.querySelectorAll<T>(s));
 
-interface Sheet { file: string; headers: string[]; rows: string[][] }
+/** hxl: the file's HXL hashtag row (#adm2+name, #affected, ...), when it has one. */
+interface Sheet { file: string; headers: string[]; rows: string[][]; hxl?: string[] }
 type Status = "ok" | "review" | "none" | "fixed";
 interface Unique {
   key: string;
@@ -79,10 +80,38 @@ async function readFile(file: File): Promise<Sheet> {
   if (rows.length < 2) throw new Error(t("mk.err.empty", "The file needs a header row and at least one row of data."));
   const headers = rows[0].map((h, i) => h.replace(/^﻿/, "") || `Column ${i + 1}`);
   const width = headers.length;
-  return { file: file.name, headers, rows: rows.slice(1).map((r) => Array.from({ length: width }, (_, i) => r[i] ?? "")) };
+  const body = rows.slice(1).map((r) => Array.from({ length: width }, (_, i) => r[i] ?? ""));
+  // HXL: a row of hashtags straight under the header (humanitarian data's convention). Keep it
+  // apart from the data, and use it to pick the columns.
+  const hxl = isHxlRow(body[0]) ? body.shift()!.map((c) => c.trim().toLowerCase()) : undefined;
+  if (!body.length) throw new Error(t("mk.err.empty", "The file needs a header row and at least one row of data."));
+  return { file: file.name, headers, rows: body, hxl };
+}
+
+/** True when most filled cells of a row are HXL hashtags, such as #adm2+name or #affected+idps. */
+function isHxlRow(row: string[] | undefined): boolean {
+  if (!row) return false;
+  const filled = row.map((c) => c.trim()).filter(Boolean);
+  return filled.length > 0 && filled.filter((c) => /^#[a-z][a-z0-9_]*(\s*\+[a-z][a-z0-9_]*)*$/i.test(c)).length >= Math.max(1, filled.length * 0.6);
+}
+
+/** The column whose HXL tag starts with one of these, in order of preference, or -1. */
+function hxlColumn(hxl: string[], ...prefixes: string[]): number {
+  for (const prefix of prefixes) {
+    const i = hxl.findIndex((tag) => tag.replace(/\s+/g, "") === prefix || tag.replace(/\s+/g, "").startsWith(`${prefix}+`));
+    if (i >= 0) return i;
+  }
+  return -1;
+}
+
+/** The official place for a P-code written in a cell (SD15 or SD15034), or null. */
+function placeFromCode(text: string): string | null {
+  const code = text.trim().toUpperCase();
+  return /^SD\d{2}(\d{3})?$/.test(code) && getPlace(code) ? code : null;
 }
 
 function guessColumns(s: Sheet): void {
+  if (s.hxl && guessFromHxl(s, s.hxl)) return;
   const find = (re: RegExp) => s.headers.findIndex((h) => re.test(h));
   const loc = find(/local|mahal|محلي|admin ?2|adm2|district|county|site|town|village|place|name|اسم/i);
   const st = find(/state|wilay|ولاي|admin ?1|adm1|region/i);
@@ -128,12 +157,30 @@ $<HTMLButtonElement>("[data-sample]").addEventListener("click", async () => {
   load(new File([await res.blob()], "sudan-atlas-sample.csv", { type: "text/csv" }));
 });
 
+/** Pick columns from HXL tags; false when the tags name no place column. */
+function guessFromHxl(s: Sheet, hxl: string[]): boolean {
+  // Prefer locality columns, and a P-code column over a name column (codes match exactly).
+  const adm2 = hxlColumn(hxl, "#adm2+code", "#adm2+name", "#adm2");
+  const adm1 = hxlColumn(hxl, "#adm1+code", "#adm1+name", "#adm1");
+  const place = adm2 >= 0 ? adm2 : adm1 >= 0 ? adm1 : hxlColumn(hxl, "#loc+name", "#loc");
+  if (place < 0) return false;
+  cols.name = place;
+  cols.state = adm2 >= 0 ? hxlColumn(hxl, "#adm1+name", "#adm1+code", "#adm1") : -1;
+  level = adm2 >= 0 ? 2 : adm1 >= 0 ? 1 : 0;
+  // The figure to map: the usual humanitarian counts, then any numeric indicator.
+  cols.value = hxlColumn(hxl, "#affected", "#inneed", "#targeted", "#reached", "#population", "#value", "#indicator");
+  return true;
+}
+
 // ---------- step 2: columns ----------
 function renderColumns(): void {
   if (!sheet) return;
   $<HTMLElement>("[data-file-summary]").textContent = lang() === "ar"
     ? `${sheet.file} · عدد الصفوف: ${sheet.rows.length} · عدد الأعمدة: ${sheet.headers.length}`
     : `${sheet.file}: ${sheet.rows.length} rows, ${sheet.headers.length} columns.`;
+  const hxlNote = $<HTMLElement>("[data-hxl-note]");
+  hxlNote.hidden = !sheet.hxl;
+  if (sheet.hxl) hxlNote.textContent = t("mk.hxl", "HXL hashtags found: the columns were chosen from them, and your file keeps them when you download it.");
   for (const key of ["name", "state", "value"] as const) {
     const sel = $<HTMLSelectElement>(`[data-col="${key}"]`);
     sel.replaceChildren();
@@ -176,6 +223,16 @@ function statusOf(u: Unique): Status {
   if (!r.pcode) return "none";
   return r.method === "fuzzy" && r.score < 0.9 ? "review" : "ok";
 }
+/** A P-code in the cell is taken as it is; anything else goes to the matcher. */
+function matchCell(name: string, state: string): MatchResult {
+  const code = placeFromCode(name);
+  if (code && (!level || getPlace(code)!.level === level)) {
+    const p = getPlace(code)!;
+    return { pcode: p.pcode, name_en: p.name_en, name_ar: p.name_ar, level: p.level, score: 1, method: "exact", alternatives: [] } as MatchResult;
+  }
+  return match(name, { stateHint: placeFromCode(state) ?? (state || null), level: level || null });
+}
+
 const finalPcode = (u: Unique): string | null => (u.choice !== undefined ? u.choice : u.result?.pcode ?? null);
 
 $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
@@ -198,7 +255,7 @@ $<HTMLButtonElement>("[data-match]").addEventListener("click", async () => {
   const text = $<HTMLElement>("[data-matching-text]");
   for (let i = 0; i < uniques.length; i++) {
     const u = uniques[i];
-    u.result = u.name ? match(u.name, { stateHint: u.state || null, level: level || null }) : undefined;
+    u.result = u.name ? matchCell(u.name, u.state) : undefined;
     if (i % 40 === 0) {
       text.textContent = lang() === "ar" ? `جارٍ مطابقة الأسماء… ${i} من ${uniques.length}` : `Matching ${uniques.length} names… ${i} / ${uniques.length}`;
       await new Promise((r) => setTimeout(r, 0));
@@ -541,6 +598,11 @@ $$<HTMLButtonElement>("[data-mk-export]").forEach((b) => b.addEventListener("cli
     // for whether the map shows it, so nothing drops out unseen.
     const fates = rowFates();
     const rows: (string | number | null)[][] = [[...sheet.headers, "pcode", "matched_name_en", "matched_name_ar", "match_level", "match_method", "match_score", "match_status", "on_map", "not_on_map_reason"]];
+    if (sheet.hxl) {
+      // Keep the HXL row, and tag the columns we add so HXL tools understand them too.
+      const adm = mapLevel() === 1 ? "#adm1" : "#adm2";
+      rows.push([...sheet.hxl, `${adm}+code`, `${adm}+name+i_en`, `${adm}+name+i_ar`, "#meta+level", "#meta+match_method", "#meta+match_score", "#meta+match_status", "#meta+on_map", "#meta+reason"]);
+    }
     sheet.rows.forEach((r, i) => {
       const u = byRow.get(i);
       const p = u ? finalPcode(u) : null;
