@@ -14,9 +14,12 @@ An open toolkit that turns messy Sudanese place names into official codes and dr
 
 Everything works in Arabic (right to left) and English, on phones and desktops. The map and map-maker run in your browser.
 
-- **[Map](https://atlas-sudan.vercel.app/map/)**: every state and locality with its official Arabic and English names, P-code and area. Search in either language and spelling, zoom and pan, open a state to see its localities, and export the view as SVG or PNG, or the places as CSV. Links keep their place (`/map/?focus=SD02&place=SD02114`).
-- **[Map-maker](https://atlas-sudan.vercel.app/maker/)**: open a CSV or Excel file of place names, check the names the matcher is unsure about, and get a choropleth map with a ranked bar chart and a legend showing how many places fall in each colour band. Download the map (SVG or PNG) and your file with P-codes added. Rows that are not on the map are listed, never dropped silently, and your file never leaves your device.
-- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`.
+- **[Map](https://atlas-sudan.vercel.app/map/)**: every state and locality with its official Arabic and English names, P-code, area and estimated population. Search in either language and spelling, zoom and pan, open a state to see its localities, and export the view as SVG, PNG or an A4 page to print or save as PDF, or the places as CSV. Links keep their place (`/map/?focus=SD02&place=SD02114`).
+- **[Map-maker](https://atlas-sudan.vercel.app/maker/)**: open a CSV or Excel file of place names, P-codes or latitude and longitude, check the names the matcher is unsure about, and get a choropleth map with a ranked bar chart and a legend showing how many places fall in each colour band. Files tagged with [HXL](https://hxlstandard.org) hashtags are read automatically.
+  - Show values as totals or per 1,000 people, using UNFPA and CBS Sudan population estimates for mid-2025.
+  - Download the map as SVG, PNG or an A4 print layout (PDF), and your file with P-codes and a status for every row.
+  - Rows that are not on the map are listed with the reason, never dropped silently, and your file never leaves your device.
+- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`. Names sent to it are processed on the server and not stored; each address may make 60 requests a minute.
 - **[Documentation](https://atlas-sudan.vercel.app/docs/)**: how to use the packages after installing them, with Python and JavaScript examples, a full reference and how matching works.
 
 ## Quick start
@@ -54,7 +57,7 @@ Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a
 
 When the best candidate scores below 0.82, or another place scores almost as high, `pcode` is `null` (`None` in Python) and `alternatives` lists the candidates: the matcher never guesses silently. "Gallabat" lies on a locality border and "Abyei" can mean the Abyei PCA area or the West Kordofan locality, so both come back as `ambiguous` for a person to decide. A state hint (a P-code or a state name in any spelling) and a level (1 = state, 2 = locality) settle most ambiguity.
 
-We tested the matcher on 299 place names copied from eight public HDX datasets (UNHCR refugee sites, OCHA people reached and 3W, IOM DTM, IPC, schools, floods and population tables): 253 that should match a state or locality and 46 that should match nothing (camps, villages, names shared by several places, header and total rows). Each expected answer was proposed by an AI agent, checked by a second, independent agent and confirmed by Amin Shennan. With a state hint, it finds the right place first time for 94.9 % of the 253, puts it among the top three for 99.6 %, and named no wrong place for any of the 299. Without a state hint: 85.0 % first time and 2.3 % wrong matches. The threshold was chosen on this same set, so these figures describe it rather than an independent test, and new data will produce some wrong matches; please [report them](https://github.com/aminshennan/sudan-atlas/issues). Details and every failure: [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md). The Python and JavaScript packages share the same rules and return identical results.
+We tested the matcher on 299 place names copied from eight public HDX datasets (UNHCR refugee sites, OCHA people reached and 3W, IOM DTM, IPC, schools, floods and population tables): 253 that should match a state or locality and 46 that should match nothing (camps, villages, names shared by several places, header and total rows). With a state hint, it finds the right place first time for 94.9 % of the 253, puts it among the top three for 99.6 %, and named no wrong place for any of the 299. Without a state hint: 85.0 % first time and 2.3 % wrong matches. The threshold was chosen on this same set, so these figures describe it rather than an independent test, and new data will produce some wrong matches; please [report them](https://github.com/aminshennan/sudan-atlas/issues). Details and every failure: [`docs/MATCHER_EVALUATION.md`](docs/MATCHER_EVALUATION.md). The Python and JavaScript packages share the same rules and return identical results.
 
 ## What it does
 
@@ -75,15 +78,6 @@ examples/      D3 map, dropdown form, Python notebook
 docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
 ```
 
-## Roadmap
-
-1. ~~Data foundation: clean, validated, versioned boundaries~~ (done, release 2026.1)
-2. ~~Name matcher: Arabic and English, with confidence scores~~ (done)
-3. ~~Packages: npm and PyPI~~ (done, 0.1.3)
-4. ~~Website and map-maker~~ (done, [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app))
-5. ~~Hosted access for AI assistants~~ (done, [MCP server](https://atlas-sudan.vercel.app/docs/#mcp))
-6. A general hosted REST API (only if users ask)
-
 ## Running the website
 
 ```sh
@@ -93,7 +87,7 @@ npm run dev       # http://localhost:5173, with the package source and boundary 
 npm run build     # type-check and build into site/dist/
 ```
 
-The site uses the `sudan-atlas` package straight from `packages/js/src`, so it always matches the published packages. Vercel builds and deploys it from `site/` on every push to `main`; other branches get preview deployments. Visits are counted with Vercel Analytics, which uses no cookies. Feature use is counted by the site's own function, [`site/api/count.ts`](site/api/count.ts): one number per page, event and file type (for example "maker, map export, PNG"), kept in an Upstash Redis database connected through Vercel's Marketplace. It stores no IP address, cookie, file name or value, and does nothing until the database is connected. `GET /api/count` returns the counts.
+The site uses the `sudan-atlas` package straight from `packages/js/src`, so it always matches the published packages. Vercel builds and deploys it from `site/` on every push to `main`; other branches get preview deployments. Visits are counted with Vercel Analytics, which uses no cookies. Feature use is counted by the site's own function, [`site/api/count.ts`](site/api/count.ts): one number per page, event and file type (for example "maker, map export, PNG"), kept in an Upstash Redis database connected through Vercel's Marketplace. It stores no IP address, cookie, file name or value, allows 30 requests a minute per address, and does nothing until the database is connected. `GET /api/count` returns the counts. To leave your own browser out of all counts, open the site once with `?nocount=1` (`?nocount=0` undoes it).
 
 ## Rebuilding the data and packages
 
