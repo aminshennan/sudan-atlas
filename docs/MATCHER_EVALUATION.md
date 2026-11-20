@@ -6,7 +6,7 @@ Test cases used: **299** (cases marked UNSURE are left out until checked). Cases
 
 ## Default setting
 
-Scorer **combined**, threshold **0.82** (agreed with Amin on 2026-11-01), margin 0.05, with state hints.
+Scorer **combined**, threshold **0.82** (chosen on 2026-11-01), margin 0.05, with state hints.
 
 | Measure | Result | Agreed target |
 | --- | --- | --- |

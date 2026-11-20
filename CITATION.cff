@@ -6,7 +6,7 @@ abstract: >-
   An open toolkit that matches Sudanese place names written in Arabic or English, in any
   spelling, to official P-codes, and gives the names and boundaries of Sudan's 18 states,
   the Abyei PCA area and 189 localities. It includes Python and JavaScript packages with
-  identical results, a website with a map and a map-maker, and a hand-checked evaluation
+  identical results, a skill and plugin for AI assistants, and a published evaluation
   of the matcher. Boundaries follow OCHA's Common Operational Dataset for Sudan (COD-AB v03) and keep its
   CC BY 3.0 IGO licence; code is MIT and Sudan Atlas's own data is CC BY 4.0.
 authors:

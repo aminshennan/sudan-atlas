@@ -4,7 +4,7 @@ name: Release packages
 # and publishes both packages. npm and PyPI trust this workflow directly ("trusted publishing"), so no
 # token is stored in the repository. Running it by hand (Actions -> Release packages -> Run workflow)
 # only tests and builds: a rehearsal that publishes nothing. Other releases (data releases such as
-# 2026.1, or a citation snapshot archived by Zenodo) are skipped. See docs/PUBLISHING.md.
+# 2026.1, or a citation snapshot archived by Zenodo) are skipped.
 
 on:
   release:

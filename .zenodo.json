@@ -1,7 +1,7 @@
 {
   "title": "Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities",
   "upload_type": "software",
-  "description": "<p>An open toolkit that matches Sudanese place names written in Arabic or English, in any spelling, to official P-codes, and gives the names and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities.</p><p>It includes Python and JavaScript packages with identical results (PyPI and npm: <code>sudan-atlas</code>), a website with a map and a map-maker (https://atlas-sudan.vercel.app), and a hand-checked evaluation of the matcher. Boundaries follow OCHA's Common Operational Dataset for Sudan (COD-AB v03) and do not imply any opinion on the legal status of any territory.</p>",
+  "description": "<p>An open toolkit that matches Sudanese place names written in Arabic or English, in any spelling, to official P-codes, and gives the names and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities.</p><p>It includes Python and JavaScript packages with identical results (PyPI and npm: <code>sudan-atlas</code>), a skill and plugin for AI assistants, and a published evaluation of the matcher. A website with a map and a map-maker is built on it: https://atlas-sudan.vercel.app. Boundaries follow OCHA's Common Operational Dataset for Sudan (COD-AB v03) and do not imply any opinion on the legal status of any territory.</p>",
   "creators": [
     { "name": "Shennan, Amin" }
   ],

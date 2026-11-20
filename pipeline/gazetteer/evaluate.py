@@ -15,7 +15,7 @@ from sudan_atlas.gazetteer import Gazetteer
 from sudan_atlas.match import DEFAULT_MARGIN, DEFAULT_THRESHOLD, SCORERS, Matcher
 
 from .. import config
-from .testcases import CASES_PATH, load_cases
+from .testcases import load_cases
 
 MAX_FALSE_MATCH_RATE = 0.01
 THRESHOLDS = [0.70, 0.75, 0.78, 0.80, 0.82, 0.85, 0.88, 0.90, 0.92, 0.95]
@@ -123,7 +123,7 @@ def _write_report(cases, grid, scorer, best, ranked) -> None:
         "",
         "## Default setting",
         "",
-        f"Scorer **{scorer}**, threshold **{best['threshold']:.2f}** (agreed with Amin on 2026-11-01), margin {DEFAULT_MARGIN:.2f}, with state hints.",
+        f"Scorer **{scorer}**, threshold **{best['threshold']:.2f}** (chosen on 2026-11-01), margin {DEFAULT_MARGIN:.2f}, with state hints.",
         "",
         "| Measure | Result | Agreed target |",
         "| --- | --- | --- |",

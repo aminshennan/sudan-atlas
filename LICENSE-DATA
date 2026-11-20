@@ -30,8 +30,9 @@ Data licences
    data/gazetteer/variants_osm.json, under the Open Database License (ODbL 1.0),
    with attribution "© OpenStreetMap contributors". The packages ship this file
    alongside the others; it is never merged into variants.json. The JavaScript
-   build (dist/) and the website embed an unchanged copy of it; every record
-   there keeps its "osm:" source reference and stays under the ODbL.
+   build (dist/) embeds an unchanged copy of it, and so does anything built on
+   that package; every record there keeps its "osm:" source reference and stays
+   under the ODbL.
 
      https://opendatacommons.org/licenses/odbl/
 

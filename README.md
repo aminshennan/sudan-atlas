@@ -1,26 +1,19 @@
 <img src="docs/logo.svg" width="96" alt="Sudan Atlas logo: Sudan drawn in dots, with Khartoum in green" align="right">
 
-# Sudan Atlas
+# Sudan Atlas toolkit
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191932.svg)](https://doi.org/10.5281/zenodo.24191932) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/)
 
-An open toolkit that turns messy Sudanese place names into official codes and draws Sudan's 18 states, the Abyei PCA area and 189 localities as maps, in Arabic and English. Use it on the website, or in your own code with the npm and PyPI packages.
+An open toolkit that turns messy Sudanese place names into official codes, and gives the names (Arabic and English) and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities. It contains:
 
-**Website: [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app)** · [Map](https://atlas-sudan.vercel.app/map/) · [Map-maker](https://atlas-sudan.vercel.app/maker/) · [Documentation](https://atlas-sudan.vercel.app/docs/)
+- **Python and JavaScript packages** (`sudan-atlas` on PyPI and npm) with the same matcher, data and results;
+- **the data**: boundaries following OCHA's COD-AB for Sudan (v03), a gazetteer of reviewed spellings, and the pipeline that builds them;
+- **a skill for AI assistants**, and a Claude Code plugin that adds it together with the Sudan Atlas MCP server;
+- **an evaluation** of the matcher on real humanitarian data.
 
-> **Status:** live website; packages 0.1.3 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
+> **Status:** packages 0.1.3 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
 
-## On the website
-
-Everything works in Arabic (right to left) and English, on phones and desktops. The map and map-maker run in your browser.
-
-- **[Map](https://atlas-sudan.vercel.app/map/)**: every state and locality with its official Arabic and English names, P-code, area and estimated population. Search in either language and spelling, zoom and pan, open a state to see its localities, and export the view as SVG, PNG or an A4 page to print or save as PDF, or the places as CSV. Links keep their place (`/map/?focus=SD02&place=SD02114`).
-- **[Map-maker](https://atlas-sudan.vercel.app/maker/)**: open a CSV or Excel file of place names, P-codes or latitude and longitude, check the names the matcher is unsure about, and get a choropleth map with a ranked bar chart and a legend showing how many places fall in each colour band. Files tagged with [HXL](https://hxlstandard.org) hashtags are read automatically.
-  - Show values as totals or per 1,000 people, using UNFPA and CBS Sudan population estimates for mid-2025.
-  - Download the map as SVG, PNG or an A4 print layout (PDF), and your file with P-codes and a status for every row.
-  - Rows that are not on the map are listed with the reason, never dropped silently, and your file never leaves your device.
-- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code, `/plugin marketplace add aminshennan/sudan-atlas` then `/plugin install sudan-atlas@sudan-atlas` adds the server and a skill that tells the assistant how to use it well (or add the server alone: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`). The skill also works in other agents: [`plugins/sudan-atlas/skills/sudan-atlas`](plugins/sudan-atlas/skills/sudan-atlas/SKILL.md); see [`docs/LISTINGS.md`](docs/LISTINGS.md). Names sent to it are processed on the server and not stored; each address may make 60 requests a minute.
-- **[Documentation](https://atlas-sudan.vercel.app/docs/)**: how to use the packages after installing them, with Python and JavaScript examples, a full reference and how matching works.
+**Use it online:** the website [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app) is built on this toolkit: a [map](https://atlas-sudan.vercel.app/map/) of every state and locality, a [map-maker](https://atlas-sudan.vercel.app/maker/) that turns a spreadsheet of place names into a map (in the browser; files never leave your device), and the [documentation](https://atlas-sudan.vercel.app/docs/).
 
 ## Quick start
 
@@ -41,6 +34,15 @@ get_localities("SD15")              # the localities of Aj Jazirah
 ```
 
 **In a browser with no build step**: `import { match } from "https://cdn.jsdelivr.net/npm/sudan-atlas@0.1/dist/index.js"`; the data files are on jsDelivr too, under `…/sudan-atlas@0.1/data/`.
+
+**AI assistants**: in Claude Code, add the plugin, which brings the skill and the [MCP server](https://atlas-sudan.vercel.app/docs/#mcp):
+
+```text
+/plugin marketplace add aminshennan/sudan-atlas
+/plugin install sudan-atlas@sudan-atlas
+```
+
+Or add the server alone, in any client that supports remote MCP servers: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`. The skill works in other agents too: copy [`plugins/sudan-atlas/skills/sudan-atlas/`](plugins/sudan-atlas/skills/sudan-atlas/SKILL.md) into the agent's skills folder. Names sent to the MCP server are processed on the server and not stored; each address may make 60 requests a minute.
 
 Examples: a [D3 choropleth from a messy spreadsheet](examples/d3-choropleth/), a [state-and-locality picker](examples/dropdown/), and a [Python notebook](examples/python/sudan_atlas_quickstart.ipynb).
 
@@ -63,32 +65,20 @@ We tested the matcher on 299 place names copied from eight public HDX datasets (
 
 - **Name matching**: `El Fasher`, `Al Fashir` and `الفاشر` all resolve to the same official P-code, with a confidence score and alternatives.
 - **Boundaries**: states (admin 1) and localities (admin 2) as GeoJSON and TopoJSON at three resolutions, following OCHA's COD-AB exactly.
-- **Bilingual**: every feature carries `pcode`, `name_en` and `name_ar`; every page of the website supports right-to-left layout.
-- **Private by design**: the data ships as files and matching runs on your machine. Files opened in the map-maker never leave your device. The site has two small server functions: an anonymous usage counter (which feature was used and in what format, never by whom or with what data), and the MCP server for AI assistants, which processes the names sent to it and does not store them. Both are rate limited.
+- **Bilingual**: every feature carries `pcode`, `name_en` and `name_ar`.
+- **Runs on your machine**: the packages ship the data as files and match locally, with no network calls (boundaries can also be loaded from a CDN in the browser).
 
 ## Repository layout
 
 ```text
-data/          boundaries, gazetteer and test fixtures (one source of truth)
+data/          boundaries, gazetteer, population estimates and test cases (one source of truth)
 pipeline/      Python scripts that rebuild data/ from data/raw/
 packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
-site/          website: map, map-maker, documentation (Vite + TypeScript + D3)
+plugins/       Claude Code plugin: the skill plus the MCP server
 examples/      D3 map, dropdown form, Python notebook
-docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md, LISTINGS.md
-plugins/       Claude Code plugin: the MCP server plus a skill (also usable alone)
+docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md
 ```
-
-## Running the website
-
-```sh
-cd site
-npm install
-npm run dev       # http://localhost:5173, with the package source and boundary files from this repository
-npm run build     # type-check and build into site/dist/
-```
-
-The site uses the `sudan-atlas` package straight from `packages/js/src`, so it always matches the published packages. Vercel builds and deploys it from `site/` on every push to `main`; other branches get preview deployments. Visits are counted with Vercel Analytics, which uses no cookies. Feature use is counted by the site's own function, [`site/api/count.ts`](site/api/count.ts): one number per page, event and file type (for example "maker, map export, PNG"), kept in an Upstash Redis database connected through Vercel's Marketplace. It stores no IP address, cookie, file name or value, allows 30 requests a minute per address, and does nothing until the database is connected. `GET /api/count` returns the counts. To leave your own browser out of all counts, open the site once with `?nocount=1` (`?nocount=0` undoes it).
 
 ## Rebuilding the data and packages
 
@@ -100,11 +90,12 @@ make gazetteer  # rebuild data/gazetteer/ (places and spellings)
 make evaluate   # measure the matcher; writes docs/MATCHER_EVALUATION.md
 make golden     # write the results both packages must reproduce
 make packages   # build the npm and PyPI packages
+make population # download the COD-PS population estimates into data/population/
 make test       # Python tests;  make test-js for the TypeScript package
 make preview    # then open http://localhost:8000/pipeline/preview/
 ```
 
-Publishing steps: [`docs/PUBLISHING.md`](docs/PUBLISHING.md).
+Packages are published by [`.github/workflows/release.yml`](.github/workflows/release.yml) when a release tagged `packages-v<version>` is published.
 
 ## Citing Sudan Atlas
 
@@ -124,7 +115,7 @@ Found a spelling the matcher misses, or a name that should match differently? [O
 - Boundaries: CC BY 3.0 IGO, derived from OCHA's COD-AB ([details](LICENSE-DATA))
 - Gazetteer additions (variant spellings, normalisation rules, test cases): CC BY 4.0
 - OpenStreetMap town spellings: ODbL 1.0, © OpenStreetMap contributors. They are kept in their own file (`variants_osm.json`), so the ODbL covers that file only, not the other data or your matching results ([details](LICENSE-DATA))
-- Population estimates (website and MCP server only, not the packages): UNFPA and CBS Sudan, COD-PS 2025, via OCHA HDX, CC BY
+- Population estimates (`data/population/`, not in the packages): UNFPA and CBS Sudan, COD-PS 2025, via OCHA HDX, CC BY
 - Sources are listed in [`docs/SOURCES.md`](docs/SOURCES.md). Boundary choices are documented in [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
 
 Boundaries are shown for humanitarian, research and practical use and do not imply any opinion on the legal status of any territory.

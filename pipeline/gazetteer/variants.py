@@ -17,8 +17,6 @@ or to places near the record's location; records that do not link clearly are re
 never guessed. The test-set datasets (data/tests/) are deliberately not used here.
 """
 
-import csv
-import io
 import json
 import re
 import zipfile
