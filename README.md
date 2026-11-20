@@ -11,7 +11,7 @@ An open toolkit that turns messy Sudanese place names into official codes, and g
 - **a skill for AI assistants**, and a Claude Code plugin that adds it together with the Sudan Atlas MCP server;
 - **an evaluation** of the matcher on real humanitarian data.
 
-> **Status:** packages 0.1.3 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
+> **Status:** packages 0.1.4 on [npm](https://www.npmjs.com/package/sudan-atlas) and [PyPI](https://pypi.org/project/sudan-atlas/); data release 2026.1 (COD-AB Sudan v03).
 
 **Use it online:** the website [atlas-sudan.vercel.app](https://atlas-sudan.vercel.app) is built on this toolkit: a [map](https://atlas-sudan.vercel.app/map/) of every state and locality, a [map-maker](https://atlas-sudan.vercel.app/maker/) that turns a spreadsheet of place names into a map (in the browser; files never leave your device), and the [documentation](https://atlas-sudan.vercel.app/docs/).
 
