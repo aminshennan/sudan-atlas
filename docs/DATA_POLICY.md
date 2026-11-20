@@ -21,7 +21,7 @@ Sudan Atlas keeps it exactly so:
 - It counts toward the 19 admin-1 features (18 states plus Abyei).
 - It is never merged into a neighbouring state, at any resolution.
 
-COD-AB also has a separate locality named **"Abyei" (`SD18087`) in West Kordofan**. This is a different feature from the Abyei PCA area. The matcher (Phase 2) must not resolve "Abyei" silently to either one; it returns both as alternatives unless a state hint decides it.
+COD-AB also has a separate locality named **"Abyei" (`SD18087`) in West Kordofan**. This is a different feature from the Abyei PCA area. The matcher must not resolve "Abyei" silently to either one; it returns both as alternatives unless a state hint decides it.
 
 ### Halaib Triangle
 
@@ -34,7 +34,7 @@ Sudan Atlas keeps the COD-AB geometry unchanged. Halaib is not marked or styled 
 ## Naming conventions
 
 - Every feature has `pcode`, `name_en`, `name_ar`, `level` (1 = state, 2 = locality) and `parent_pcode`.
-- P-codes and names are taken from COD-AB exactly. The pipeline only trims and collapses whitespace; it never changes a spelling. Other spellings belong in the gazetteer's variants table (Phase 2), not in the boundary files.
+- P-codes and names are taken from COD-AB exactly. The pipeline only trims and collapses whitespace; it never changes a spelling. Other spellings belong in the gazetteer's variants table (`data/gazetteer/variants.json`), not in the boundary files.
 - `parent_pcode` is the country P-code for a state and the state P-code for a locality.
 - Every feature missing an Arabic name is listed in the build report and in the release notes.
 

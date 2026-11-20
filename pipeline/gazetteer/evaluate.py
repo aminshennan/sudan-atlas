@@ -19,7 +19,7 @@ from .testcases import load_cases
 
 MAX_FALSE_MATCH_RATE = 0.01
 THRESHOLDS = [0.70, 0.75, 0.78, 0.80, 0.82, 0.85, 0.88, 0.90, 0.92, 0.95]
-# Agreed accuracy targets (Phase 2 checkpoint, 2026-11-01), at the default setting with state hints.
+# Accuracy targets (set 2026-11-01), at the default setting with state hints.
 TARGETS = {"top1_accuracy": 0.91, "top3_recall": 0.98, "false_match_rate": 0.01}
 REPORT_PATH = config.ROOT / "docs" / "MATCHER_EVALUATION.md"
 RESULTS_PATH = config.REPORTS_DIR / "match_evaluation.json"

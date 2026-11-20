@@ -70,8 +70,6 @@ We tested the matcher on 299 place names copied from eight public HDX datasets (
 
 ## Repository layout
 
-How the data and packages are rebuilt and tested: [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
-
 ```text
 data/          boundaries, gazetteer and test cases (one source of truth)
 pipeline/      Python scripts that rebuild data/ from data/raw/
@@ -79,7 +77,7 @@ packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
 plugins/       Claude Code plugin: the skill plus the MCP server
 examples/      D3 map, dropdown form, Python notebook
-docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, DEVELOPMENT.md
+docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md
 ```
 
 ## Citing Sudan Atlas

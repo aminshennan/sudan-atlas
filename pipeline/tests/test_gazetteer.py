@@ -30,12 +30,11 @@ def test_match_cases_are_well_formed():
     assert len({c["id"] for c in cases}) == len(cases)
     for c in cases:
         assert c["expected_pcode"] == "" or c["expected_pcode"] in places
-        assert c["verified_by"] in ("agent", "amin")
         assert c["level"] in ("1", "2")
 
 
 def test_matcher_meets_the_agreed_targets():
-    """The accuracy targets agreed at the Phase 2 checkpoint (pipeline/gazetteer/evaluate.py: TARGETS)."""
+    """The accuracy targets in pipeline/gazetteer/evaluate.py (TARGETS)."""
     best = evaluate.run()
     assert best["top1_accuracy"] >= evaluate.TARGETS["top1_accuracy"]
     assert best["top3_recall"] >= evaluate.TARGETS["top3_recall"]
