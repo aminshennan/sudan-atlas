@@ -70,32 +70,17 @@ We tested the matcher on 299 place names copied from eight public HDX datasets (
 
 ## Repository layout
 
+How the data and packages are rebuilt and tested: [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
+
 ```text
-data/          boundaries, gazetteer, population estimates and test cases (one source of truth)
+data/          boundaries, gazetteer and test cases (one source of truth)
 pipeline/      Python scripts that rebuild data/ from data/raw/
 packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
 plugins/       Claude Code plugin: the skill plus the MCP server
 examples/      D3 map, dropdown form, Python notebook
-docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md
+docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, DEVELOPMENT.md
 ```
-
-## Rebuilding the data and packages
-
-```sh
-make setup      # Python venv, mapshaper and the JS package's tools
-make fetch      # download COD-AB, GeoNames and Wikidata into data/raw/
-make data       # rebuild and validate data/boundaries/
-make gazetteer  # rebuild data/gazetteer/ (places and spellings)
-make evaluate   # measure the matcher; writes docs/MATCHER_EVALUATION.md
-make golden     # write the results both packages must reproduce
-make packages   # build the npm and PyPI packages
-make population # download the COD-PS population estimates into data/population/
-make test       # Python tests;  make test-js for the TypeScript package
-make preview    # then open http://localhost:8000/pipeline/preview/
-```
-
-Packages are published by [`.github/workflows/release.yml`](.github/workflows/release.yml) when a release tagged `packages-v<version>` is published.
 
 ## Citing Sudan Atlas
 
@@ -115,7 +100,6 @@ Found a spelling the matcher misses, or a name that should match differently? [O
 - Boundaries: CC BY 3.0 IGO, derived from OCHA's COD-AB ([details](LICENSE-DATA))
 - Gazetteer additions (variant spellings, normalisation rules, test cases): CC BY 4.0
 - OpenStreetMap town spellings: ODbL 1.0, © OpenStreetMap contributors. They are kept in their own file (`variants_osm.json`), so the ODbL covers that file only, not the other data or your matching results ([details](LICENSE-DATA))
-- Population estimates (`data/population/`, not in the packages): UNFPA and CBS Sudan, COD-PS 2025, via OCHA HDX, CC BY
 - Sources are listed in [`docs/SOURCES.md`](docs/SOURCES.md). Boundary choices are documented in [`docs/DATA_POLICY.md`](docs/DATA_POLICY.md).
 
 Boundaries are shown for humanitarian, research and practical use and do not imply any opinion on the legal status of any territory.
