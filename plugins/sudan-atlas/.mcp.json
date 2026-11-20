@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "sudan-atlas": {
+      "type": "http",
+      "url": "https://atlas-sudan.vercel.app/api/mcp"
+    }
+  }
+}

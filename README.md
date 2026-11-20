@@ -19,7 +19,7 @@ Everything works in Arabic (right to left) and English, on phones and desktops. 
   - Show values as totals or per 1,000 people, using UNFPA and CBS Sudan population estimates for mid-2025.
   - Download the map as SVG, PNG or an A4 print layout (PDF), and your file with P-codes and a status for every row.
   - Rows that are not on the map are listed with the reason, never dropped silently, and your file never leaves your device.
-- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`. Names sent to it are processed on the server and not stored; each address may make 60 requests a minute.
+- **AI assistants (MCP)**: `https://atlas-sudan.vercel.app/api/mcp` is a free, read-only [Model Context Protocol](https://modelcontextprotocol.io) server with tools to match names, search, look up places and populations, and get boundaries. In Claude Code, `/plugin marketplace add aminshennan/sudan-atlas` then `/plugin install sudan-atlas@sudan-atlas` adds the server and a skill that tells the assistant how to use it well (or add the server alone: `claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp`). The skill also works in other agents: [`plugins/sudan-atlas/skills/sudan-atlas`](plugins/sudan-atlas/skills/sudan-atlas/SKILL.md); see [`docs/LISTINGS.md`](docs/LISTINGS.md). Names sent to it are processed on the server and not stored; each address may make 60 requests a minute.
 - **[Documentation](https://atlas-sudan.vercel.app/docs/)**: how to use the packages after installing them, with Python and JavaScript examples, a full reference and how matching works.
 
 ## Quick start
@@ -75,7 +75,8 @@ packages/js/   npm package: data + matcher (TypeScript)
 packages/py/   PyPI package: same API (Python)
 site/          website: map, map-maker, documentation (Vite + TypeScript + D3)
 examples/      D3 map, dropdown form, Python notebook
-docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md
+docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md, PUBLISHING.md, LISTINGS.md
+plugins/       Claude Code plugin: the MCP server plus a skill (also usable alone)
 ```
 
 ## Running the website

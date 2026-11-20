@@ -1,0 +1,10 @@
+{
+  "name": "sudan-atlas",
+  "version": "0.1.0",
+  "description": "Match Sudanese place names (Arabic or English, any spelling) to official P-codes, and look up Sudan's states, localities, populations and boundaries. Adds the Sudan Atlas MCP server and a skill that tells the assistant how to use it well.",
+  "author": { "name": "Amin Shennan", "url": "https://aminshennan.com" },
+  "homepage": "https://atlas-sudan.vercel.app",
+  "repository": "https://github.com/aminshennan/sudan-atlas",
+  "license": "MIT",
+  "keywords": ["sudan", "p-codes", "place-names", "gazetteer", "humanitarian", "arabic", "geocoding", "ocha", "cod-ab"]
+}

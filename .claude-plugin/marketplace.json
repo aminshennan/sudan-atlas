@@ -1,0 +1,13 @@
+{
+  "name": "sudan-atlas",
+  "owner": { "name": "Amin Shennan", "url": "https://aminshennan.com" },
+  "metadata": { "description": "Sudan Atlas for AI assistants: official names, P-codes and boundaries for Sudan's states and localities." },
+  "plugins": [
+    {
+      "name": "sudan-atlas",
+      "source": "./plugins/sudan-atlas",
+      "description": "Match Sudanese place names to official P-codes and look up states, localities, populations and boundaries.",
+      "category": "data"
+    }
+  ]
+}

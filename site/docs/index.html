@@ -202,12 +202,20 @@ const khartoum = await getFeature("SD01", "medium");</code></pre></div>
       <h2><span data-lang-only="en">Connect an AI assistant (MCP)</span><span data-lang-only="ar" lang="ar" hidden>ربط مساعد ذكاء اصطناعي (MCP)</span></h2>
       <p data-lang-only="en">Sudan Atlas runs as a <a href="https://modelcontextprotocol.io">Model Context Protocol</a> server, so assistants such as Claude can match place names and look up places for you. The address is <code>https://atlas-sudan.vercel.app/api/mcp</code> (Streamable HTTP). It is free, needs no key, only reads, and stores nothing you send.</p>
       <p data-lang-only="ar" lang="ar" hidden>يعمل أطلس السودان خادمًا لبروتوكول <a href="https://modelcontextprotocol.io">Model Context Protocol</a>، فيستطيع مساعد مثل Claude أن يطابق أسماء الأماكن ويبحث عنها نيابة عنك. العنوان هو <code>https://atlas-sudan.vercel.app/api/mcp</code> (Streamable HTTP). الخدمة مجانية، ولا تحتاج إلى مفتاح، وتقرأ فقط، ولا تحفظ شيئًا مما ترسله.</p>
-      <div class="code" data-lang="py"><pre><code># Claude Code
+      <div class="code" data-lang="py"><pre><code># Claude Code: the server plus a skill that tells Claude how to use it well
+/plugin marketplace add aminshennan/sudan-atlas
+/plugin install sudan-atlas@sudan-atlas
+
+# Claude Code: the server only
 claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp
 
 # Other clients (mcp.json / claude_desktop_config.json, clients that support remote servers)
 { "mcpServers": { "sudan-atlas": { "type": "http", "url": "https://atlas-sudan.vercel.app/api/mcp" } } }</code></pre></div>
-      <div class="code" data-lang="js"><pre><code>// Claude Code
+      <div class="code" data-lang="js"><pre><code>// Claude Code: the server plus a skill that tells Claude how to use it well
+/plugin marketplace add aminshennan/sudan-atlas
+/plugin install sudan-atlas@sudan-atlas
+
+// Claude Code: the server only
 claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/mcp
 
 // Other clients (mcp.json / claude_desktop_config.json, clients that support remote servers)
@@ -223,6 +231,8 @@ claude mcp add --transport http sudan-atlas https://atlas-sudan.vercel.app/api/m
           <tr><td><code>get_boundary</code></td><td><span data-lang-only="en">A boundary as GeoJSON (light or medium detail).</span><span data-lang-only="ar" lang="ar" hidden>حدود مكان بصيغة GeoJSON (تفصيل خفيف أو متوسط).</span></td></tr>
         </tbody>
       </table>
+      <p data-lang-only="en">The skill also works in other agents that read Agent Skills: copy the <a href="https://github.com/aminshennan/sudan-atlas/tree/main/plugins/sudan-atlas/skills/sudan-atlas">sudan-atlas skill folder</a> into the agent's skills folder.</p>
+      <p data-lang-only="ar" lang="ar" hidden>وتعمل المهارة أيضًا مع الوكلاء الآخرين الذين يقرؤون مهارات الوكلاء (Agent Skills): انسخ <a href="https://github.com/aminshennan/sudan-atlas/tree/main/plugins/sudan-atlas/skills/sudan-atlas">مجلد مهارة sudan-atlas</a> إلى مجلد المهارات لدى الوكيل.</p>
       <p data-lang-only="en">Like the packages, the server never guesses silently: when a name could be two places it returns the candidates, and the assistant is told to ask you.</p>
       <p data-lang-only="ar" lang="ar" hidden>ومثل الحزم، لا يخمّن الخادم أبدًا دون أن يخبرك: إذا احتمل الاسم مكانين أعاد المرشحين، ويُطلب من المساعد أن يسألك.</p>
       <p data-lang-only="en"><strong>Privacy.</strong> Unlike the map-maker, which works entirely in your browser, the MCP server runs on our server: the names your assistant sends are processed there to answer the request, and are not stored or logged. Your assistant's own provider sees them too, under its own terms. Each address may make 60 requests a minute.</p>
