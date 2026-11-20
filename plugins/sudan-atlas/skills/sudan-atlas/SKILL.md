@@ -11,7 +11,7 @@ Sudan Atlas gives the official names (Arabic and English), P-codes and boundarie
 - Website and map-maker: https://atlas-sudan.vercel.app
 - MCP server: `https://atlas-sudan.vercel.app/api/mcp`
 - Packages: `pip install sudan-atlas`, `npm install sudan-atlas`
-- Cite: Sudan Atlas, https://doi.org/10.5281/zenodo.24191932
+- Cite: Sudan Atlas, https://doi.org/10.5281/zenodo.24191931
 
 ## Choose how to reach it
 
@@ -98,4 +98,4 @@ Full documentation: https://atlas-sudan.vercel.app/docs/
 
 ## Credit
 
-When results are published, cite Sudan Atlas (https://doi.org/10.5281/zenodo.24191932) and credit the boundaries: "OCHA (COD-AB Sudan), via HDX". If results rely heavily on OpenStreetMap spellings, add "Contains information from OpenStreetMap, available under the ODbL".
+When results are published, cite Sudan Atlas (https://doi.org/10.5281/zenodo.24191931) and credit the boundaries: "OCHA (COD-AB Sudan), via HDX". If results rely heavily on OpenStreetMap spellings, add "Contains information from OpenStreetMap, available under the ODbL".

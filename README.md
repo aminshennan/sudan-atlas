@@ -2,7 +2,7 @@
 
 # Sudan Atlas toolkit
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191932.svg)](https://doi.org/10.5281/zenodo.24191932) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191931.svg)](https://doi.org/10.5281/zenodo.24191931) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/)
 
 An open toolkit that turns messy Sudanese place names into official codes, and gives the names (Arabic and English) and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities. It contains:
 
@@ -84,9 +84,9 @@ docs/          DATA_POLICY.md, SOURCES.md, GAZETTEER.md, MATCHER_EVALUATION.md
 
 If you use Sudan Atlas in a report, paper or product, please cite it:
 
-> Shennan, A. (2026). *Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities*. Zenodo. https://doi.org/10.5281/zenodo.24191932
+> Shennan, A. (2026). *Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities*. Zenodo. https://doi.org/10.5281/zenodo.24191931
 
-Each GitHub release is archived on [Zenodo](https://doi.org/10.5281/zenodo.24191932); the "Cite this repository" button on GitHub gives the citation in APA and BibTeX, from [`CITATION.cff`](CITATION.cff). Please also credit the boundary source: "OCHA (COD-AB Sudan), via HDX".
+Each GitHub release is archived on [Zenodo](https://doi.org/10.5281/zenodo.24191931); the "Cite this repository" button on GitHub gives the citation in APA and BibTeX, from [`CITATION.cff`](CITATION.cff). Please also credit the boundary source: "OCHA (COD-AB Sudan), via HDX".
 
 ## Help improve it
 

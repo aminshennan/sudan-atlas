@@ -1,6 +1,6 @@
 # sudan-atlas
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191932.svg)](https://doi.org/10.5281/zenodo.24191932)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191931.svg)](https://doi.org/10.5281/zenodo.24191931)
 
 Official codes, names and boundaries for Sudan's 18 states, the Abyei PCA area and 189 localities, with a matcher that turns messy Arabic and English place names into official P-codes.
 
@@ -36,7 +36,7 @@ The npm package (`npm install sudan-atlas`) returns identical results.
 
 If you use sudan-atlas in a report, paper or product, please cite it:
 
-> Shennan, A. (2026). *Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities*. Zenodo. https://doi.org/10.5281/zenodo.24191932
+> Shennan, A. (2026). *Sudan Atlas: official names, P-codes and boundaries for Sudan's states and localities*. Zenodo. https://doi.org/10.5281/zenodo.24191931
 
 Website, map and map-maker: https://atlas-sudan.vercel.app
 
