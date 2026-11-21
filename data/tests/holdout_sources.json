@@ -1,0 +1,228 @@
+{
+ "measured_on": "2026-11-21",
+ "sources": [
+  {
+   "dataset": "food-for-education-ffe-supported-schools-sudan",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan - Food for Education (FFE) Supported Schools",
+   "file_name": "ffe-consolidated-sudan-schools.xls",
+   "file_url": "https://data.humdata.org/dataset/fc2c09e8-6fed-450d-898c-76562ce1fb89/resource/dd271393-dba3-4131-8979-7a3c2b029cca/download/ffe-consolidated-sudan-schools.xls",
+   "sha256": "703238a418ede511687f5f7042f52e7894596d5e73cf7cc33b78faae5ee14271",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Locality",
+    "State"
+   ]
+  },
+  {
+   "dataset": "sudan-2020-hrp-response-monitoring-4ws-quarter-1",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan: 2020 HRP-Response Monitoring (4Ws)",
+   "file_name": "2020-HRP-Sectors-Response-Jan-Dec-HXLV2.xlsx",
+   "file_url": "https://data.humdata.org/dataset/97001334-7818-4d8d-b3c2-3ecdf99dda77/resource/3ea2cad4-13db-4099-8998-76a5a56f0640/download/2020-hrp-sectors-response-jan-dec-hxlv2.xlsx",
+   "sha256": "ab0a7c5154ac2c93a28cb139a556b73666116abee07008a8aa3e32e8148946b7",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "LOCALITY"
+   ]
+  },
+  {
+   "dataset": "sudan-violence-against-civilians-and-vital-civilian-facilities",
+   "publisher": "Insecurity Insight",
+   "title": "Sudan (SDN): Attacks on Aid Operations, Education, Food and Water Systems, Health Care and IDP/Refugee Camps, and Conflict-Related or Political-Related Sexual Violence and Explosive Weapons Incident Data",
+   "file_name": "2016-2026-sdn-attacks-on-health-care-incident-data.xlsx",
+   "file_url": "https://data.humdata.org/dataset/681c1690-6c99-4c66-842c-0ab99a731af4/resource/cd122a85-70ed-471a-a631-193f92c72b26/download/2016-2026-sdn-attacks-on-health-care-incident-data.xlsx",
+   "sha256": "d6aceab4757123f928e2bca48d23b2f0d3b7e43cca4c526356b93d7addfc9767",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Admin 1"
+   ]
+  },
+  {
+   "dataset": "sudan-humanitarianneeds-overview",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan: 2019 Humanitarian Needs Overview",
+   "file_name": "hno-2019-baseline-data-hxl.xlsx",
+   "file_url": "https://data.humdata.org/dataset/01b94c26-4c5a-4aa9-8397-1348c82068d3/resource/226f8c83-1897-4273-b9bf-0dd614b6d130/download/hno-2019-baseline-data-hxl.xlsx",
+   "sha256": "cac13cf37819485a554eb8a037e8398d9b647d70947de6294d7b325e3132d472",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "LOCALITY"
+   ]
+  },
+  {
+   "dataset": "sudan-2022-humanitarian-needs-overview-hno",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan 2022 Humanitarian Needs Overview (HNO)",
+   "file_name": "SDN HNO 2022 V1.0.xlsx",
+   "file_url": "https://data.humdata.org/dataset/38696db4-dace-400f-b048-9431c849de1d/resource/23951ad5-25cd-4259-855e-d7b49ed861b0/download/sdn-hno-2022-v1.0.xlsx",
+   "sha256": "31b8519000a36f33d5f0f7f9907df8ace4e5ea6b8534407c199a170a1c14d53f",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Locality"
+   ]
+  },
+  {
+   "dataset": "sudan-idp-camps",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan IDP camps",
+   "file_name": "sudan_idp_camps.xlsx",
+   "file_url": "https://data.humdata.org/dataset/245f99d2-061d-4e3a-a4c9-81458b0bb054/resource/d8d8551d-57ce-4c80-8ff4-2d17ad31f5f6/download/sudan_idp_camps.xlsx",
+   "sha256": "9df75872abbaf8d6379098a6ab92228b425a9c1ac4726ddfb3d10e8da104911c",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Locality",
+    "Locality1",
+    "Locality2",
+    "Locality3",
+    "Location",
+    "Location Arabic"
+   ]
+  },
+  {
+   "dataset": "sudan-acled-conflict-data",
+   "publisher": "Armed Conflict Location & Event Data Project (ACLED)",
+   "title": "Sudan - Conflict Events",
+   "file_name": "sudan_hrp_political_violence_events_and_fatalities_by_month-year_as-of-18nov2026.xlsx",
+   "file_url": "https://data.humdata.org/dataset/5efad450-8b15-4867-b7b3-8a25b455eed8/resource/cebc4989-f114-4b7e-9f7b-ce1c6476bb00/download/sudan_hrp_political_violence_events_and_fatalities_by_month-year_as-of-18nov2026.xlsx",
+   "sha256": "bbdd09e8e2983c95bba0e2699accbcf4d5d0e642c0c486fe8cee1379b3f53789",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Admin1",
+    "Admin2"
+   ]
+  },
+  {
+   "dataset": "sudan-subnational-displacement-forecasts",
+   "publisher": "Danish Refugee Council",
+   "title": "Sudan - Subnational Displacement Forecasts",
+   "file_name": "sudan-displacement-forecasts-nov26-jan27.xlsx",
+   "file_url": "https://data.humdata.org/dataset/f061d32e-b980-413d-9951-989863eb614b/resource/db48eb2a-6999-491f-a6fb-aa539355fd26/download/sudan-displacement-forecasts-nov26-jan27.xlsx",
+   "sha256": "b0076b62fe9dca7196695580f00cf49a74e85b0fd072c48c616758ba839a0849",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "state"
+   ]
+  },
+  {
+   "dataset": "wfp-food-prices-for-sudan",
+   "publisher": "WFP - World Food Programme",
+   "title": "Sudan - Food Prices",
+   "file_name": "wfp_food_prices_sdn.csv",
+   "file_url": "https://data.humdata.org/dataset/369e003b-f0af-4e48-99d7-34fc85b44635/resource/8fea18b2-615f-4af5-9bd5-85cc31a25ffd/download/wfp_food_prices_sdn.csv",
+   "sha256": "2cd174ed90449a2c8d262fcf64493581cb6657191413f5aa853eac00adcf6dd0",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "admin1",
+    "admin2",
+    "market"
+   ]
+  },
+  {
+   "dataset": "sudan-who-is-doing-what-and-where-3ws",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan: Who is doing What and Where (3Ws)",
+   "file_name": "SDN 2022 3Ws-Jul-2022.xlsx",
+   "file_url": "https://data.humdata.org/dataset/9b333991-01db-4781-906b-bcb510150442/resource/e9d0ad0d-ecce-462e-8415-55abcedc3c42/download/sdn-2022-3ws-jul-2022.xlsx",
+   "sha256": "3793376db9aef529a8905215d973d242943f6fe74b9547e539e35621ade71847",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Locality"
+   ]
+  },
+  {
+   "dataset": "sudan-disease-outbreaks-2019",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan Disease Outbreaks",
+   "file_name": "Sudan Disease Outbreaks 2019.xlsx",
+   "file_url": "https://data.humdata.org/dataset/33ea8b09-7501-46d2-89b1-8376a1d8834f/resource/b9465fc1-15d4-462e-91df-2f2c39ee5cc3/download/sudan-disease-outbreaks-2019.xlsx",
+   "sha256": "624f3db297767bd1e198666fde026f979b151c5a63e4fed8aafa23ef1677e05d",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "localities",
+    "locality"
+   ]
+  },
+  {
+   "dataset": "sdn-jiaf-humanitarian-needs-pin-and-severity",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan: JIAF Humanitarian Needs and Response Plan",
+   "file_name": "sdn-caseload-dissaggregation-by-cluster.xlsx",
+   "file_url": "https://data.humdata.org/dataset/cfd63a4b-b95d-4c2d-bb53-cd2cc55f17fb/resource/8118eb45-af87-4d2d-bc5d-ddc2f36371f1/download/sdn-caseload-dissaggregation-by-cluster.xlsx",
+   "sha256": "95b7ecc88c57d0faf1a6c8b624494fdca056b17d7efae213d89d9879bad1f278",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Admin 2"
+   ]
+  },
+  {
+   "dataset": "sudan-2021-hrp-response-monitoring-4ws",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan: 2021 HRP-Response Monitoring (4Ws)",
+   "file_name": "2021-hrp-sectors-response-jan-dec.xlsx",
+   "file_url": "https://data.humdata.org/dataset/b612dcbc-c496-405a-a48c-ce3ff4218dfd/resource/fc41924b-9ace-4a71-9a6a-031e24bf841c/download/2021-hrp-sectors-response-jan-dec.xlsx",
+   "sha256": "de57b1e3fc5ee1ed249920ff30831ea2a3bed7f8f69dfc274d167f3b5df61558",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "LOCALITY",
+    "STATE"
+   ]
+  },
+  {
+   "dataset": "sudan-2018-hrp-response-monitoring-4ws",
+   "publisher": "OCHA Sudan",
+   "title": "Sudan : 2018 HRP-Response Monitoring (4Ws)",
+   "file_name": "sudan-people-reached-by-state-jan-dec-2018_hrp.xlsx",
+   "file_url": "https://data.humdata.org/dataset/43ae8d7f-78c7-42a8-bc8d-be7087824725/resource/9e945b6f-c825-41a6-b1ab-eed971fd792d/download/sudan-people-reached-by-state-jan-dec-2018_hrp.xlsx",
+   "sha256": "333a0a001e506225a43dafd2cf364ab46ddc1027ea295e937a168eff66fa52fb",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "State"
+   ]
+  },
+  {
+   "dataset": "sudan-market-prices-river-nile-state",
+   "publisher": "Food and Agriculture Organization (FAO) of the United Nations",
+   "title": "Sudan: Market Prices in River Nile State",
+   "file_name": "ad-damar01.csv",
+   "file_url": "https://data.humdata.org/dataset/cd838375-87f4-4c55-b669-60d4581aa32f/resource/635334ff-817a-48bc-9b06-b079c90621f7/download/ad-damar01.csv",
+   "sha256": "807834853a5822c512fdb6aef96583effa17c4b5244f57d7cbbbe373c5b5908e",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "market"
+   ]
+  },
+  {
+   "dataset": "sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024",
+   "publisher": "Sudanese American Physicians Association",
+   "title": "Sudan: Health and Nutrition Assessment",
+   "file_name": "sapa-assessment_wadihalfa_health-and-nutrition_feb2024.xlsx",
+   "file_url": "https://data.humdata.org/dataset/89c100f6-1a8d-4a1c-aa44-15e40b9fee21/resource/d745edf6-d890-4f92-a474-541f5d4037b2/download/sapa-assessment_wadihalfa_health-and-nutrition_feb2024.xlsx",
+   "sha256": "bfefc0519cf4629d654a22eb228ce3855aa827fb7c3783591cb965fc1a1b39f4",
+   "downloaded": "2026-11-21",
+   "columns": [
+    "Administrative Unit",
+    "Administrative Unit (AU)",
+    "Facility"
+   ]
+  }
+ ],
+ "pool": {
+  "distinct_names": 276,
+  "official_share": 0.7101449275362319
+ },
+ "answers": {
+  "answered": 150,
+  "agreed": 150,
+  "with_dataset_pcode": 15,
+  "agreed_with_dataset": 14,
+  "dataset_pcode_overruled": 1
+ },
+ "not_reachable": [
+  {
+   "dataset": "sdn-acute-food-insecurity-classification-historical",
+   "publisher": "FEWS NET",
+   "reason": "its files are hosted on fdw.fews.net, which could not be reached from the test environment"
+  }
+ ]
+}

@@ -1,0 +1,151 @@
+id,input_name,state_hint,level,expected_pcode,source_dataset,source_detail,source_pcode,answer_from,kind,notes
+h001,Um Rowaba,North Kordofan,2,SD13023,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Um Rawaba locality in North Kordofan; spelling variant.
+h002,El Salam/ Al FULLA,West Kordofan,2,SD18086,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,"As Salam locality of West Kordofan, whose seat is Al Fula."
+h003,Khasm Algirba,Kassala,2,SD11060,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Reifi Khashm Elgirba locality in Kassala.
+h004,Shikan,North Kordofan,2,SD13024,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Sheikan locality in North Kordofan; spelling variant.
+h005,West Kordufan,,1,SD18,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,other,West Kordofan state; spelling variant.
+h006,El Selam,South Kordofan,2,SD18086,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,"low confidence: No As Salam locality in South Kordofan; most likely As Salam (Al Fula) of West Kordofan, which used to be under South Kordofan, though other As Salam localities exist."
+h007,Al Gash,Kassala,2,,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,"UNSURE: Al Gash is not a current Kassala locality name; the Gash delta area spans Shamal Ad Delta, Reifi Aroma and Reifi Kassala, so I cannot tell which one is meant."
+h008,Kalma camp,South Darfur,2,,sudan-humanitarianneeds-overview,Localitywise HNO 2019!B [LOCALITY],,review,none,"Kalma is an IDP camp, not a locality."
+h009,Atbara River,Kassala,2,SD11062,sudan-2022-humanitarian-needs-overview-hno,Conflict Hazard!B [Locality],,review,other,Reifi Nahr Atbara (Atbara River) locality in Kassala.
+h010,Abu Gibaiha,South Kordofan,2,SD07088,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Abu Jubayhah locality in South Kordofan; spelling variant.
+h011,Zamzam camp,North Darfur,2,,sudan-humanitarianneeds-overview,Localitywise HNO 2019!B [LOCALITY],,review,none,"Zamzam is an IDP camp, not a locality."
+h012,Rehaid Albredi,South Darfur,2,SD03158,sudan-idp-camps,Locality2,,review,other,Rehaid Albirdi locality in South Darfur; spelling variant.
+h013,Golo,Central Darfur,2,SD06139,sudan-2022-humanitarian-needs-overview-hno,Conflict Hazard!B [Locality],,review,other,Golo is the seat of Wasat (Central) Jabal Marrah locality.
+h014,Lakes,Bahr el Ghazal,2,,sudan-acled-conflict-data,Admin2,,review,none,Lakes is a South Sudan state.
+h015,Central Equatoria,Equatoria,2,,sudan-acled-conflict-data,Admin2,,review,none,Central Equatoria is a South Sudan state.
+h016,Halfa El Jadeeda (New Halfa),Kassala,2,SD11052,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,New Halfa = Halfa Aj Jadeedah locality in Kassala.
+h017,Suakin,Red Sea,2,SD10068,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Suakin = Sawakin locality in Red Sea.
+h018,Rokoro,Central Darfur,2,SD06132,sudan-2022-humanitarian-needs-overview-hno,Conflict Hazard!B [Locality],,review,other,Rokero is the seat of Shamal (North) Jabal Marrah locality in Central Darfur.
+h019,Bahr el Ghazal,,1,,sudan-acled-conflict-data,Admin1,,review,none,Bahr el Ghazal is a South Sudan region.
+h020,Gebret El Sheikh,North Kordofan,2,SD13027,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Gebrat Al Sheikh locality in North Kordofan.
+h021,Rahad El Berdi,South Darfur,2,SD03158,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Rehaid Albirdi locality in South Darfur.
+h022,Halayeb,Red Sea,2,SD10066,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Hala'ib locality in Red Sea.
+h023,Gadaref,Gadaref,2,SD12080,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Gedaref town is the namesake of Madeinat Al Gedaref locality (the other is Wasat Al Gedaref).
+h024,Jebrat El Sheikh,North Kordofan,2,SD13027,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Gebrat Al Sheikh locality in North Kordofan.
+h025,Eastern Equatoria,Equatoria,2,,sudan-acled-conflict-data,Admin2,,review,none,Eastern Equatoria is a South Sudan state.
+h026,Western Bahr El Ghazal,Bahr el Ghazal,2,,sudan-acled-conflict-data,Admin2,,review,none,Western Bahr el Ghazal is a South Sudan state.
+h027,Marshang,South Darfur,2,SD03145,sudan-idp-camps,Locality,,review,other,Mershing locality in South Darfur; spelling variant.
+h028,Um Ruwaba,North Kordofan,2,SD13023,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Um Rawaba locality in North Kordofan.
+h029,North Delta,Kassala,2,SD11057,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Reifi Shamal Ad Delta (North Delta) locality in Kassala.
+h030,Siteet,Kassala,2,SD11061,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,"low confidence: Setit river area in Kassala; most likely Reifi Wad Elhilaiw locality which lies on the Setit, but no locality is named Setit."
+h031,Merowe,Northern,2,SD17020,sudan-acled-conflict-data,Admin2,SD17020,dataset,other,Merowe = Merwoe locality in Northern.
+h032,Ethiopia,,1,,sudan-subnational-displacement-forecasts,state,,review,none,Ethiopia is another country.
+h033,Eastern Darfur,,1,SD05,wfp-food-prices-for-sudan,admin1,,review,other,East Darfur state.
+h034,CAR,,1,,sudan-subnational-displacement-forecasts,state,,review,none,Central African Republic is another country.
+h035,Kreinik,West Darfur,2,SD04125,sudan-idp-camps,Locality,,review,other,Kereneik locality in West Darfur.
+h036,Other,West Darfur,2,,sudan-idp-camps,Locality3,,review,none,Not a place.
+h037,Alborgag,Northern,2,SD17016,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Al Burgaig locality in Northern.
+h038,Reifi Khashm Elgriba,Kassala,2,SD11060,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,other,Reifi Khashm Elgirba locality in Kassala.
+h039,Abyei Administrative Area,,1,SD19,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,other,Abyei PCA area admin-1 unit.
+h040,El Qaneb,Red Sea,2,SD10069,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Al Ganab (Qanab) locality in Red Sea.
+h041,Gezeira,Gezeira,2,,food-for-education-ffe-supported-schools-sudan,Locality,,review,none,"Gezira is a state name, not a locality; no locality called just Al Jazirah."
+h042,Sharq Jabal Marra,South Darfur,2,SD03147,sudan-idp-camps,Locality,,review,other,Sharg Aj Jabal (East Jebel Marra) locality in South Darfur.
+h043,Alwehda,South Darfur,2,SD03150,sudan-idp-camps,Locality2,,review,other,Al Wihda locality in South Darfur.
+h044,Warap,Bahr el Ghazal,2,,sudan-acled-conflict-data,Admin2,,review,none,Warrap is a South Sudan state.
+h045,Reifi Reifi Hamashkureib,Kassala,2,SD11058,sudan-disease-outbreaks-2019,Chikugunya!B [locality],,review,other,Reifi Hamashkureib locality in Kassala; duplicated word.
+h046,Al Gedaref Rural,Gedaref,2,SD12081,wfp-food-prices-for-sudan,admin2,,review,other,"low confidence: Rural Gedaref most likely means the rural area round the town, today Wasat Al Gedaref locality, but the old-to-new mapping is uncertain."
+h047,Equatoria,,1,,sudan-acled-conflict-data,Admin1,,review,none,Equatoria is a South Sudan region.
+h048,Jebal Aulya,Khartoum,2,SD01001,wfp-food-prices-for-sudan,admin2,,review,other,Jebel Awlia locality in Khartoum.
+h049,Edd-elfursan,South Darfur,2,SD03143,sudan-idp-camps,Locality3,,review,other,Ed Al Fursan locality in South Darfur.
+h050,No Information,,1,,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,none,Not a place.
+h051,Kereinik,West Darfur,2,SD04125,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Kereneik locality in West Darfur.
+h052,Mornie camp,West Darfur,2,,sudan-humanitarianneeds-overview,Localitywise HNO 2019!B [LOCALITY],,review,none,Mornei is an IDP camp.
+h053,Al Qadarif State,,1,SD12,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,other,Gedaref state.
+h054,Sharg Jabel Marra(E JM),South Darfur,2,SD03147,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Sharg Aj Jabal (East Jebel Marra) locality in South Darfur.
+h055,Foro Burunga,West Darfur,2,SD04121,sudan-idp-camps,Locality1,,review,other,Foro Baranga locality in West Darfur.
+h056,Gezeira,,1,SD15,food-for-education-ffe-supported-schools-sudan,State,,review,other,Aj Jazirah state.
+h057,Central Jabal Mara/Golo/Rokoro,Central Darfur,2,,sudan-idp-camps,Locality1,,review,none,"low confidence: Old combined unit covering Golo (Wasat Jabal Marrah) and Rokero (Shamal Jabal Marrah), now two localities."
+h058,Other,South Darfur,2,,sudan-idp-camps,Locality1,,review,none,Not a place.
+h059,Chad,,1,,sudan-subnational-displacement-forecasts,state,,review,none,Chad is another country.
+h060,Aroma,Kassala,2,SD11055,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Reifi Aroma locality in Kassala.
+h061,Nertiti(West Jebel Marra),Central Darfur,2,SD06131,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Nertiti / West Jebel Marra = Gharb Jabal Marrah locality.
+h062,Other,East Darfur,2,,sudan-idp-camps,Locality3,,review,none,Not a place.
+h063,Shirea,East Darfur,2,SD05148,sudan-idp-camps,Locality1,,review,other,Shia'ria locality in East Darfur.
+h064,North Kordufan,,1,SD13,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,other,North Kordofan state.
+h065,Talkouk,Kassala,2,SD11059,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,Reifi Telkok locality in Kassala.
+h066,Omdurman,Khartoum,2,SD01006,sudan-acled-conflict-data,Admin2,SD01006,dataset,other,Omdurman = Um Durman locality.
+h067,Rural Port Sudan,Red Sea,2,,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,"UNSURE: No current Rural Port Sudan locality; the rural area may have become Al Ganab or other Red Sea localities, cannot decide."
+h068,Other,North Darfur,2,,sudan-idp-camps,Locality1,,review,none,Not a place.
+h069,Wad Madani El Kobra,Al Gezira,2,SD15030,wfp-food-prices-for-sudan,admin2,,review,other,Medani Al Kubra locality in Aj Jazirah.
+h070,Golo(Central Jebel Marra),Central Darfur,2,SD06139,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Golo / Central Jebel Marra = Wasat Jabal Marrah locality.
+h071,Refy Kassala,Kassala,2,SD11056,sudan-disease-outbreaks-2019,Dengue!B [localities],,review,other,Reifi Kassala locality.
+h072,Ghibaish,North Kordofan,2,SD18021,food-for-education-ffe-supported-schools-sudan,Locality,,review,other,"Ghubaish locality exists only in West Kordofan (formerly part of North Kordofan), so the hint is outdated."
+h073,Geredia,South Darfur,2,SD03153,sudan-idp-camps,Locality,,review,other,Gereida locality in South Darfur.
+h074,Western Equatoria,Equatoria,2,,sudan-acled-conflict-data,Admin2,,review,none,Western Equatoria is a South Sudan state.
+h075,Northern Bahr el Ghazal,Bahr el Ghazal,2,,sudan-acled-conflict-data,Admin2,,review,none,Northern Bahr el Ghazal is a South Sudan state.
+h076,Al Qoz,South Kordofan,2,SD07094,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Al Quoz locality in South Kordofan.
+h077,South Kordufan,,1,SD07,sudan-violence-against-civilians-and-vital-civilian-facilities,Admin 1,,review,other,South Kordofan state.
+h078,Gadaref,,1,SD12,food-for-education-ffe-supported-schools-sudan,State,,review,other,Gedaref state.
+h079,South Sudan,,1,,sudan-subnational-displacement-forecasts,state,,review,none,South Sudan is another country.
+h080,Gedir,South Kordofan,2,SD07108,sudan-2020-hrp-response-monitoring-4ws-quarter-1,Jan-Dec 2020 Response-Locality!E [LOCALITY],,review,other,Ghadeer locality in South Kordofan.
+h081,Ar Rusayris,Blue Nile,2,SD08107,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD08107,dataset,official,Ar Rusayris locality in Blue Nile.
+h082,Abyei PCA area,Abyei PCA,2,SD19001,sudan-2021-hrp-response-monitoring-4ws,LOCALITY,SD19101,review,official,"Abyei PCA area locality. (the dataset gives SD19101, which is not a P-code)"
+h083,At Tadamon - SK,South Kordofan,2,SD07106,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD07106,dataset,official,At Tadamon - SK locality.
+h084,Habila - SK,South Kordofan,2,SD07103,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD07103,dataset,official,Habila - SK locality.
+h085,Abyei PCA,,1,SD19,sudan-2021-hrp-response-monitoring-4ws,STATE,SD19,dataset,official,Abyei PCA admin-1 unit.
+h086,At Tawisha,North Darfur,2,SD02119,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD02119,dataset,official,At Tawisha locality in North Darfur.
+h087,Um Durman,Khartoum,2,SD01006,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD01006,dataset,official,Um Durman locality in Khartoum.
+h088,Ag Geneina,West Darfur,2,SD04115,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD04115,dataset,official,Ag Geneina locality in West Darfur.
+h089,At Tadamon - BN,Blue Nile,2,SD08108,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD08108,dataset,official,At Tadamon - BN locality.
+h090,As Salam - SD,South Darfur,2,SD03166,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD03166,dataset,official,As Salam - SD locality.
+h091,As Salam - WK,West Kordofan,2,SD18086,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD18086,dataset,official,As Salam - WK locality.
+h092,Merwoe,Northern,2,SD17020,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD17020,dataset,official,Merwoe locality in Northern.
+h093,Abyei PCA Area,,1,SD19,sudan-2018-hrp-response-monitoring-4ws,HXL sheet!A [State],,review,official,Abyei PCA admin-1 unit.
+h094,Habila - WD,West Darfur,2,SD04122,sdn-jiaf-humanitarian-needs-pin-and-severity,Admin 2,SD04122,dataset,official,Habila - WD locality.
+h095,Sharg Aj Jabal,Central Darfur,2,SD03147,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Sharg Aj Jabal locality exists only in South Darfur; Central Darfur hint is wrong.
+h096,As Suki,Sinnar,2,SD14041,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,As Suki locality in Sennar.
+h097,Sinja,Sinnar,2,SD14043,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Sinja locality in Sennar.
+h098,Ad Dinder,Sinnar,2,SD14040,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Ad Dinder locality in Sennar.
+h099,Sennar,Sinnar,2,SD14038,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Sennar locality.
+h100,Abu Hujar,Sinnar,2,SD14037,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Abu Hujar locality in Sennar.
+h101,Sharg Sennar,Sinnar,2,SD14042,sudan-who-is-doing-what-and-where-3ws,3Ws_by_Locality!B [Locality],,review,official,Sharg Sennar locality.
+h102,Bahr El Arab,North Darfur,2,SD05160,sudan-2022-humanitarian-needs-overview-hno,Conflict Hazard!B [Locality],,review,official,Bahr Al Arab locality exists only in East Darfur; North Darfur hint is wrong.
+h103,South Kordofan,,1,SD07,wfp-food-prices-for-sudan,admin1,,review,official,South Kordofan state.
+h104,West Darfur,,1,SD04,wfp-food-prices-for-sudan,admin1,,review,official,West Darfur state.
+h105,El Fasher,North Darfur,2,SD02114,wfp-food-prices-for-sudan,admin2,,review,official,Al Fasher locality in North Darfur.
+h106,Bakery,River- Nile  State,2,,sudan-market-prices-river-nile-state,market,,review,none,"Bakery is a price outlet, not a place."
+h107,Albuhayra,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,"Administrative unit (Lake Nubia area) inside Wadi Halfa locality, not River Nile's Al Buhaira locality."
+h108,Saysab (Say Island),,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality administrative unit/island in Northern state.
+h109,Dar alsalam,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,"Sub-locality administrative unit in Wadi Halfa area, not North Darfur's Dar As Salam."
+h110,Aboud,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality administrative unit.
+h111,Ginis,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality administrative unit (Ginis village).
+h112,Block 6 (Alashgal),,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality block/neighbourhood.
+h113,Qubbat Selim,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality village/administrative unit.
+h114,Abraga Hospital,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Facility,,review,none,Health facility.
+h115,Ashimtou,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality administrative unit.
+h116,Block 2,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality block.
+h117,Alsika’hadid,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Railway neighbourhood (sub-locality unit).
+h118,Other West Bank facilities,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit,,review,none,"Group of facilities, not a place."
+h119,Attab,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality village/administrative unit.
+h120,Aldawajin,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality village/administrative unit.
+h121,Amara,,2,,sudan_wadi-halfa-and-abri-localities_-northern-state_sudan-health-nutrition-assessment_feb2024,Administrative Unit (AU),,review,none,Sub-locality village (Amara) administrative unit.
+h122,Ad-Damar Market,River- Nile  State,2,,sudan-market-prices-river-nile-state,market,,review,none,"A market in Ad Damar town (market facility), not the locality itself."
+h123,Tea-Maker,River- Nile  State,2,,sudan-market-prices-river-nile-state,market,,review,none,"Price outlet type, not a place."
+h124,Ad-Damar General,River- Nile  State,2,,sudan-market-prices-river-nile-state,market,,review,none,"Market/outlet category in Ad Damar, not the locality itself."
+h125,Al Fashir,North Darfur,2,SD02114,wfp-food-prices-for-sudan,market,,review,other,Al Fasher town = Al Fasher locality.
+h126,El Gedarif,Gedaref,2,SD12080,wfp-food-prices-for-sudan,market,,review,other,Gedaref town is namesake of Madeinat Al Gedaref locality.
+h127,Khartoum,Khartoum,2,SD01007,wfp-food-prices-for-sudan,market,,review,other,Khartoum town = Khartoum locality.
+h128,Eddein,Eastern Darfur,2,SD05142,wfp-food-prices-for-sudan,market,,review,other,Ed Daein = Ad Du'ayn locality.
+h129,El Fula,West Kordofan,2,SD18086,wfp-food-prices-for-sudan,market,,review,other,Al Fula is the seat of As Salam - WK locality.
+h130,Port Sudan,Red Sea,2,SD10064,wfp-food-prices-for-sudan,market,,review,other,Port Sudan locality.
+h131,Dongola,Northern,2,SD17017,wfp-food-prices-for-sudan,market,,review,other,Dongola locality.
+h132,Zalingi,Central Darfur,2,SD06138,wfp-food-prices-for-sudan,market,,review,other,Zalingi locality.
+h133,Kosti,White Nile,2,SD09047,wfp-food-prices-for-sudan,market,,review,other,Kosti locality.
+h134,Wad Medani,Al Gezira,2,SD15030,wfp-food-prices-for-sudan,market,,review,other,Wad Medani = Medani Al Kubra locality.
+h135,Nyala El Kabeer,South Darfur,2,,wfp-food-prices-for-sudan,market,,review,none,Greater Nyala town spans Nyala Shimal and Nyala Janoub; ambiguous.
+h136,Hameedia,Central Darfur,2,,sudan-idp-camps,Location,,review,none,Hamidiya IDP camp.
+h137,معسكر كساب,North Darfur,2,,sudan-idp-camps,Location Arabic,,review,none,Kassab IDP camp.
+h138,Al fenya Camp,South Darfur,2,,sudan-idp-camps,Location,,review,none,IDP camp.
+h139,العباسي,North Darfur,2,,sudan-idp-camps,Location Arabic,,review,none,"Abbasi site/camp in North Darfur, not a locality."
+h140,كرانيك,Central Darfur,2,,sudan-idp-camps,Location Arabic,,review,none,"low confidence: Site named Kranik under Central Darfur; Kereneik locality is in West Darfur, so this is likely a camp/site."
+h141,Amar Jadid,Central Darfur,2,,sudan-idp-camps,Location,,review,none,IDP site.
+h142,Abuja Shareg,North Darfur,2,,sudan-idp-camps,Location,,review,none,IDP site.
+h143,Other 8,North Darfur,2,,sudan-idp-camps,Location,,review,none,Not a place.
+h144,Mershing,South Darfur,2,SD03145,sudan-idp-camps,Location,,review,other,Mershing town is namesake of Mershing locality.
+h145,Jartubuk,South Darfur,2,,sudan-idp-camps,Location,,review,none,IDP site.
+h146,سلطان هاوس,West Darfur,2,,sudan-idp-camps,Location Arabic,,review,none,Sultan House IDP site.
+h147,Shabab,Central Darfur,2,,sudan-idp-camps,Location,,review,none,IDP site.
+h148,Dorti,West Darfur,2,,sudan-idp-camps,Location,,review,none,Dorti IDP camp in Geneina.
+h149,Nertati North Camp,Central Darfur,2,,sudan-idp-camps,Location,,review,none,IDP camp.
+h150,مرشنج,South Darfur,2,SD03145,sudan-idp-camps,Location Arabic,,review,other,Mershing town (Arabic) is namesake of Mershing locality.

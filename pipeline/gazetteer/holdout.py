@@ -169,6 +169,12 @@ def run() -> dict:
         r = _subset(cases, ranked, matcher, lambda c, k=kind: c["kind"] == k)
         if r:
             lines.append(_row(KIND_LABEL[kind], r))
+    sure = _subset(cases, ranked, matcher, lambda c: not c["notes"].startswith("low confidence"))
+    low = sum(c["notes"].startswith("low confidence") for c in cases)
+    if sure and low:
+        lines += ["", f"Leaving out the {low} names whose answer was given with low confidence: right place first time "
+                  f"{_pct(sure['top1_accuracy'])}, top three {_pct(sure['top3_recall'])}, wrong matches "
+                  f"{sure['false_matches']} of {sure['cases']}."]
     negatives = [i for i, c in enumerate(cases) if not c["expected_pcode"]]
     wrong_neg = sum(1 for i in negatives if with_hints["results"][i]["pcode"])
     lines += ["", f"Of the {len(negatives)} names that should match nothing, {wrong_neg} were matched to a place.", ""]
@@ -200,6 +206,10 @@ def run() -> dict:
                   f"P-code, the review agreed with it on {agree['agreed_with_dataset']} of {agree['with_dataset_pcode']}"
                   + (f"; {agree['dataset_pcode_overruled']} dataset P-codes were plainly wrong and were not used" if agree.get("dataset_pcode_overruled") else "")
                   + "."]
+        if agree["agreed"] == agree["answered"]:
+            lines += ["", "Full agreement shows the answers are consistent, not that they are certainly right: both reviews "
+                      "drew on the same kind of knowledge and could share a mistake. The answers, each with its reason, are in "
+                      "`data/tests/holdout_cases.csv`, so any of them can be checked and challenged."]
     lines.append("")
 
     lines += ["### Sources", "", "| Dataset | Publisher | File | Columns | Names in the test |", "| --- | --- | --- | --- | --- |"]
@@ -207,6 +217,8 @@ def run() -> dict:
     for s in meta["sources"]:
         lines.append(f"| [{s['title']}](https://data.humdata.org/dataset/{s['dataset']}) | {s['publisher']} | `{s['file_name']}` | "
                      f"{', '.join(s['columns'])} | {per.get(s['dataset'], 0)} |")
+    for s in meta.get("not_reachable", []):
+        lines.append(f"Not used: {s['publisher']} (`{s['dataset']}`), because {s['reason']}.")
     lines.append("")
 
     failures = [i for i, r in enumerate(with_hints["results"]) if r["pcode"] != cases[i]["expected_pcode"]]
