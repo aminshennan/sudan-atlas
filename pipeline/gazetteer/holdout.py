@@ -27,6 +27,7 @@ KIND_LABEL = {"official": "official spelling", "other": "other spelling", "none"
 # Sampling (see the protocol): mostly names that are not an official spelling, as in the first test.
 SEED = 20261121
 PER_DATASET = 60
+SITES_PER_DATASET = 15
 TARGET = {"other": 230, "official": 25, "site": 45}
 CASE_COLUMNS = ["id", "input_name", "state_hint", "level", "expected_pcode", "source_dataset", "source_detail",
                 "source_pcode", "answer_from", "kind", "notes"]
@@ -69,6 +70,8 @@ def select(pool_paths: list, out_path) -> tuple[list[dict], dict]:
             if got == want:
                 break
             if per[r["dataset"]] >= PER_DATASET or r in taken:
+                continue
+            if stratum == "site" and sum(t["dataset"] == r["dataset"] and t["stratum"] == "site" for t in taken) >= SITES_PER_DATASET:
                 continue
             taken.append(r)
             per[r["dataset"]] += 1

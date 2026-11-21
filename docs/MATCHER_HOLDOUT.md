@@ -31,6 +31,8 @@ No spelling, rule or setting is changed because of this test. Anything it reveal
 
 **Measures**, at the frozen setting, with and without the dataset's state as a hint, for every case and for each dataset: right place first time (of the names that should match), right place among the top three, wrong matches (of all names), and names left for the user to decide. Every failure is listed. Results are reported whatever they are.
 
+**Amendment, 2026-11-21, before any name was answered or matched.** The first eleven datasets held only 239 distinct state and locality names not already in the first test, and 76.2 % of them were official spellings, leaving 57 other spellings: too few to measure the harder part. So eight more datasets were added (older OCHA response, needs and outbreak tables, and FEWS NET), and site names were capped at 15 per dataset, so that one assessment's village list could not dominate them. Nothing about the answers or the matcher's output was known when this was decided.
+
 ## Results
 
 Pending.
