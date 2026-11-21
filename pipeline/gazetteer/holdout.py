@@ -101,9 +101,25 @@ def _measure(cases: list[dict], matcher: Matcher, hints: bool) -> tuple[dict, li
     return score(cases, ranked, matcher, DEFAULT_THRESHOLD), ranked
 
 
+def _wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
+    """95 % Wilson interval for k successes out of n."""
+    if n == 0:
+        return 0.0, 0.0
+    p = k / n
+    centre = (p + z * z / (2 * n)) / (1 + z * z / n)
+    half = z * ((p * (1 - p) / n + z * z / (4 * n * n)) ** 0.5) / (1 + z * z / n)
+    return max(0.0, centre - half), min(1.0, centre + half)
+
+
+def _ci(share: float, n: int) -> str:
+    lo, hi = _wilson(round(share * n), n)
+    return f"{_pct(share)} ({lo * 100:.0f}–{hi * 100:.0f} %)"
+
+
 def _row(label: str, r: dict) -> str:
-    return (f"| {label} | {r['cases']} | {_pct(r['top1_accuracy'])} | {_pct(r['top3_recall'])} | "
-            f"{_pct(r['false_match_rate'])} ({r['false_matches']} of {r['cases']}) | {r['no_answer_on_matchable']} |")
+    m = r["should_match"]
+    return (f"| {label} | {r['cases']} | {_ci(r['top1_accuracy'], m)} | {_ci(r['top3_recall'], m)} | "
+            f"{_ci(r['false_match_rate'], r['cases'])}, {r['false_matches']} of {r['cases']} | {r['no_answer_on_matchable']} |")
 
 
 def _subset(cases, ranked, matcher, keep) -> dict | None:
@@ -136,7 +152,9 @@ def run() -> dict:
               _row("With the dataset's state as a hint", with_hints),
               _row("Without a state hint", without_hints), ""]
     lines += ["Right place first time and in the top three are shares of the names that should match; wrong matches "
-              "are a share of all names (a wrong place, or any place for a name that should match nothing).", ""]
+              "are a share of all names (a wrong place, or any place for a name that should match nothing). The range "
+              "after each figure is its 95 % confidence interval (Wilson): with this many names, the true rate on similar "
+              "data is likely to lie within it.", ""]
     lines += ["**Compared with the first test** (with state hints): right first time "
               f"{_pct(with_hints['top1_accuracy'])} here against {_pct(FIRST_TEST['top1_accuracy'])}; top three "
               f"{_pct(with_hints['top3_recall'])} against {_pct(FIRST_TEST['top3_recall'])}; wrong matches "
