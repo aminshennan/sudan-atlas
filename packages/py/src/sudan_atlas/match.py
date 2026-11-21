@@ -99,6 +99,7 @@ class Matcher:
                 if pcode in self.gazetteer.places:
                     self._add(variant["text"], pcode, "variant")
         self._fuzzy_choices = lru_cache(maxsize=256)(self._choices)
+        self._settlements: dict[str, list[dict]] | None = None  # key -> settlements, loaded on first use
 
     def _add(self, name: str, pcode: str, method: str) -> None:
         for key in self.normaliser.keys(name):
@@ -173,12 +174,14 @@ class Matcher:
         found = self.candidates(str(name or ""), level, state)
         return [(p, s, m) for p, (s, m) in sorted(found.items(), key=lambda kv: (-kv[1][0], kv[0]))]
 
+    def _record(self, pcode: str, score: float) -> dict:
+        place = self.gazetteer.places[pcode]
+        return {"pcode": pcode, "name_en": place["name_en"], "name_ar": place["name_ar"],
+                "level": place["level"], "score": score}
+
     def decide(self, ranked: list[tuple[str, float, str]]) -> dict:
         """Turn ranked candidates into a result: a match only above the threshold and clear of the runner-up."""
-        def record(pcode: str, score: float) -> dict:
-            place = self.gazetteer.places[pcode]
-            return {"pcode": pcode, "name_en": place["name_en"], "name_ar": place["name_ar"],
-                    "level": place["level"], "score": score}
+        record = self._record
 
         if ranked:
             top, score, method = ranked[0]
@@ -193,21 +196,77 @@ class Matcher:
                 "score": ranked[0][1] if ranked else 0.0, "method": outcome,
                 "alternatives": [record(p, s) for p, s, _ in ranked[:3]]}
 
-    def match(self, name: str, state_hint: str | None = None, level: int | None = None) -> dict:
+    def _settlement_index(self) -> dict[str, list[dict]]:
+        """Villages, towns and camps by matching key, loaded the first time they are asked for."""
+        if self._settlements is None:
+            index: dict[str, list[dict]] = {}
+            for s in self.gazetteer.settlements():
+                for key in {k for n in s["names"] for k in self.normaliser.keys(n) if k}:
+                    index.setdefault(key, []).append(s)
+            self._settlements = index
+        return self._settlements
+
+    def find_settlements(self, name: str, state: str | None = None) -> list[dict]:
+        """Every village, town or camp whose name matches name exactly (after normalising), best first.
+
+        Only exact names count: with tens of thousands of villages, a merely similar name is too
+        often a different place. state, a state P-code, keeps only settlements in that state."""
+        index = self._settlement_index()
+        found: dict[str, dict] = {}
+        for key in self.normaliser.keys(str(name or "")):
+            for s in index.get(key, []) if key else []:
+                if state is None or s["state"] == state:
+                    found[s["id"]] = s
+        return sorted(found.values(), key=lambda s: (s["pcode"], s["id"]))
+
+    @staticmethod
+    def _settlement_record(s: dict) -> dict:
+        return {"id": s["id"], "name": s["name"], "kind": s["kind"], "lat": s["lat"], "lon": s["lon"]}
+
+    def match(self, name: str, state_hint: str | None = None, level: int | None = None,
+              settlements: bool = False) -> dict:
         """The official record for name, or no match plus up to three alternatives.
 
         Result: {pcode, name_en, name_ar, level, score, method, alternatives}. method is
         exact, variant or fuzzy for a match, and ambiguous or none otherwise.
+
+        With settlements=True a name that is not a state or locality is also looked up among
+        villages, towns and camps. A settlement found in one locality gives that locality, with
+        method "settlement" and a "settlement" field (id, name, kind, lat, lon); found in several
+        localities, or clashing with a close locality name, the result is "ambiguous" and the
+        alternatives say where each one is. State and locality names always win over villages.
         """
-        return self.decide(self.rank(name, state_hint, level))
+        result = self.decide(self.rank(name, state_hint, level))
+        if not settlements or level == 1:
+            return result
+        result["settlement"] = None
+        if result["method"] in ("exact", "variant"):
+            return result
+        state = self.resolve_state(state_hint) if state_hint else None
+        found = self.find_settlements(name, state)
+        if not found:
+            return result
+        by_locality: dict[str, list[dict]] = {}
+        for s in found:
+            by_locality.setdefault(s["pcode"], []).append(s)
+        options = [{**self._record(pcode, EXACT_SCORE), "settlement": self._settlement_record(group[0])}
+                   for pcode, group in by_locality.items()]
+        if len(options) == 1 and not (result["pcode"] and result["pcode"] != options[0]["pcode"]):
+            return {**{k: v for k, v in options[0].items() if k != "settlement"}, "method": "settlement",
+                    "settlement": options[0]["settlement"], "alternatives": []}
+        if result["pcode"] and result["pcode"] not in by_locality:
+            # A close locality name and a village somewhere else: ask.
+            options.append({**self._record(result["pcode"], result["score"]), "settlement": None})
+        return {"pcode": None, "name_en": None, "name_ar": None, "level": None, "score": EXACT_SCORE,
+                "method": "ambiguous", "settlement": None, "alternatives": options[:3]}
 
 
 _default: Matcher | None = None
 
 
-def match(name: str, state_hint: str | None = None, level: int | None = None) -> dict:
-    """Match name with the bundled gazetteer and default settings."""
+def match(name: str, state_hint: str | None = None, level: int | None = None, settlements: bool = False) -> dict:
+    """Match name with the bundled gazetteer and default settings (see Matcher.match)."""
     global _default
     if _default is None:
         _default = Matcher()
-    return _default.match(name, state_hint=state_hint, level=level)
+    return _default.match(name, state_hint=state_hint, level=level, settlements=settlements)

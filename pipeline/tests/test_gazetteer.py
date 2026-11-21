@@ -45,3 +45,9 @@ def test_golden_results_are_current():
     """data/tests/match_results.json must match what the Python matcher returns now (regenerate: make golden)."""
     from pipeline.gazetteer import golden
     assert golden.GOLDEN_PATH.read_text(encoding="utf-8") == golden.render(golden.results())
+
+
+def test_settlement_golden_results_are_current():
+    """data/tests/settlement_results.json must match the Python matcher with settlements=True (make golden)."""
+    from pipeline.gazetteer import golden
+    assert golden.SETTLEMENT_GOLDEN_PATH.read_text(encoding="utf-8") == golden.render(golden.settlement_results())

@@ -11,7 +11,7 @@ const target = join(pkg, "data");
 
 rmSync(target, { recursive: true, force: true });
 mkdirSync(join(target, "boundaries"), { recursive: true });
-for (const name of ["places.json", "variants.json", "variants_osm.json", "normalisation.json"]) {
+for (const name of ["places.json", "variants.json", "variants_osm.json", "normalisation.json", "settlements.json", "settlements_osm.json"]) {
   const source = join(root, "data", "gazetteer", name);
   if (existsSync(source)) cpSync(source, join(target, name));
 }

@@ -6,6 +6,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 VARIANT_FILES = ("variants.json", "variants_osm.json")
+# Villages, towns and camps; OpenStreetMap's in their own file under the ODbL. Loaded only when asked for.
+SETTLEMENT_FILES = ("settlements.json", "settlements_osm.json")
 
 
 def _repository_data() -> Path | None:
@@ -48,6 +50,19 @@ class Gazetteer:
     rules: dict
     version: str = ""
     sources: list[str] = field(default_factory=list)
+    folder: Path | None = None
+
+    def settlements(self) -> list[dict]:
+        """Every village, town and camp, read from the gazetteer folder when first needed."""
+        folder = self.folder or data_dir()
+        out: list[dict] = []
+        for name in SETTLEMENT_FILES:
+            path = folder / name
+            if path.exists():
+                out += json.loads(path.read_text(encoding="utf-8"))["settlements"]
+        if not out:
+            raise FileNotFoundError(f"No village data (settlements.json) in {folder}.")
+        return out
 
     @classmethod
     def load(cls, folder: Path | None = None) -> "Gazetteer":
@@ -61,4 +76,4 @@ class Gazetteer:
                 variants += json.loads(path.read_text(encoding="utf-8"))["variants"]
                 sources.append(name)
         rules = json.loads((folder / "normalisation.json").read_text(encoding="utf-8"))
-        return cls(places, variants, rules, document.get("version", ""), sources)
+        return cls(places, variants, rules, document.get("version", ""), sources, folder)
