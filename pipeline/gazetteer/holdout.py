@@ -221,7 +221,7 @@ def run() -> dict:
         lines.append(f"Not used: {s['publisher']} (`{s['dataset']}`), because {s['reason']}.")
     lines.append("")
 
-    failures = [i for i, r in enumerate(with_hints["results"]) if r["pcode"] != cases[i]["expected_pcode"]]
+    failures = [i for i, r in enumerate(with_hints["results"]) if (r["pcode"] or "") != cases[i]["expected_pcode"]]
     kinds = Counter(_failure_kind(cases[i], with_hints["results"][i]) for i in failures)
     lines += ["### Every failure, with state hints", "",
               ", ".join(f"{k}: {v}" for k, v in kinds.most_common()) or "None.", ""]
