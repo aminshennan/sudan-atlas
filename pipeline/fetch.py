@@ -170,6 +170,27 @@ def fetch_osm() -> dict:
     return manifest
 
 
+CAMPS_DATASET = "sudan-idp-camps"
+
+
+def fetch_camps() -> dict:
+    """OCHA Sudan's list of IDP camps and sites, with coordinates and English and Arabic names (CC0)."""
+    meta = json.loads(_get(f"{config.HDX_API}?id={CAMPS_DATASET}"))["result"]
+    resource = next(r for r in meta["resources"] if (r.get("format") or "").upper() in ("XLSX", "XLS"))
+    name = resource["url"].rsplit("/", 1)[-1].split("?", 1)[0]
+    files = [_save(resource["url"], config.RAW_DIR / "ocha-camps" / name)]
+    manifest = {
+        "source": "Sudan IDP camps (OCHA Sudan, via HDX)",
+        "dataset_url": f"https://data.humdata.org/dataset/{CAMPS_DATASET}",
+        "dataset_last_modified": meta.get("last_modified"),
+        "licence": meta.get("license_title"),
+        "downloaded_at": _now(),
+        "files": files,
+    }
+    (config.RAW_DIR / "ocha-camps" / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
 def register_local(archive: Path, note: str) -> dict:
     """Copy a COD-AB archive downloaded by hand into data/raw/cod-ab/ and record it."""
     body = archive.read_bytes()
@@ -205,3 +226,5 @@ def run() -> None:
     print(f"Wikidata: {wd['files'][0]['bytes']:,} bytes, licence {wd['licence']!r}")
     osm = fetch_osm()
     print(f"OpenStreetMap: {osm['files'][0]['bytes']:,} bytes, licence {osm['licence']!r}")
+    camps = fetch_camps()
+    print(f"OCHA IDP camps: {camps['files'][0]['bytes']:,} bytes, licence {camps['licence']!r}")

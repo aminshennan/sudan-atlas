@@ -1,7 +1,7 @@
 """Command line: python -m pipeline STEP
 
 Boundaries:  fetch | import ARCHIVE | normalise | simplify | validate | manifest | build
-Gazetteer:   gazetteer | fetch-test-sources | test-pool | evaluate | golden | holdout
+Gazetteer:   gazetteer | settlements | fetch-test-sources | test-pool | evaluate | golden | holdout
 
 `build` rebuilds data/boundaries/ from data/raw/ and validates it; it exits
 non-zero if any validation check fails. `fetch` downloads data/raw/ and is
@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 from . import fetch, manifest, normalise, simplify, validate
-from .gazetteer import evaluate, golden, holdout, places, testcases, variants
+from .gazetteer import evaluate, golden, holdout, places, settlements, testcases, variants
 
 
 def build() -> int:
@@ -52,6 +52,7 @@ def main(argv: list[str]) -> int:
         "evaluate": lambda: evaluate.run() and 0,
         "golden": lambda: golden.run() or 0,
         "holdout": lambda: holdout.run() and 0,
+        "settlements": lambda: settlements.run() and 0,
     }
     if step not in steps:
         print(__doc__)

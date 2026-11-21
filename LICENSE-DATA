@@ -25,30 +25,39 @@ Data licences
    The test cases contain place names from the HDX datasets listed in
    docs/SOURCES.md, each under its own licence (CC BY, CC BY-IGO or CC0).
 
-3. Spellings taken from OpenStreetMap (places tagged city or town, from the
-   Humanitarian OpenStreetMap Team's export on HDX) are kept in a separate file,
-   data/gazetteer/variants_osm.json, under the Open Database License (ODbL 1.0),
-   with attribution "© OpenStreetMap contributors". The packages ship this file
-   alongside the others; it is never merged into variants.json. The JavaScript
-   build (dist/) embeds an unchanged copy of it, and so does anything built on
-   that package; every record there keeps its "osm:" source reference and stays
-   under the ODbL.
+   The villages, towns and camps in data/gazetteer/settlements.json come from
+   GeoNames populated places (CC BY 4.0, www.geonames.org) and OCHA Sudan's
+   list of IDP camps (CC0), and are shared under CC BY 4.0 with the same
+   attribution. Their state and locality are worked out from the COD-AB
+   boundaries.
+
+3. Data taken from OpenStreetMap (from the Humanitarian OpenStreetMap Team's
+   export of populated places on HDX) is kept in separate files: town
+   spellings in data/gazetteer/variants_osm.json, and villages, hamlets, towns
+   and neighbourhoods in data/gazetteer/settlements_osm.json. Both are under
+   the Open Database License (ODbL 1.0), with attribution "© OpenStreetMap
+   contributors". The packages ship these files alongside the others; they are
+   never merged into variants.json or settlements.json. The JavaScript build
+   (dist/) embeds an unchanged copy of variants_osm.json, and so does anything
+   built on that package; every record keeps its "osm:" source reference and
+   stays under the ODbL.
 
      https://opendatacommons.org/licenses/odbl/
 
    What the ODbL does and does not cover:
-   - It covers variants_osm.json (and any copy or changed version of it). If you
-     redistribute that file, or a database made from it, keep it under the ODbL,
+   - It covers variants_osm.json and settlements_osm.json (and any copy or
+     changed version of them). If you redistribute either file, or a database
+     made from it, keep it under the ODbL,
      keep the attribution, and offer the changed database if you publish one.
    - It does not cover the other files. The boundaries, places.json,
-     variants.json, the normalisation rules and the test cases are independent
-     databases kept beside the OSM file, so the packages are a "Collective
+     variants.json, settlements.json, the normalisation rules and the test
+     cases are independent databases kept beside the OSM files, so the packages are a "Collective
      Database" (ODbL section 4.5) and those files keep their own licences
      (CC BY 3.0 IGO and CC BY 4.0).
    - Matching results (the P-codes and names returned for your data) are, at
      most, a "Produced Work" (ODbL section 4.3): they are not under the ODbL and
      need no share-alike. When a published result relies substantially on the
-     OpenStreetMap spellings, add "Contains information from OpenStreetMap,
+     OpenStreetMap spellings or villages, add "Contains information from OpenStreetMap,
      available under the ODbL".
 
 The boundaries do not imply any opinion on the legal status of any country,
