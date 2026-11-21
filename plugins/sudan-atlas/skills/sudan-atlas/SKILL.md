@@ -27,6 +27,7 @@ Names sent to the MCP server are processed on the Sudan Atlas server and not sto
 - **Pass a state hint whenever there is one.** A state column, a state named in the file or the conversation, or a state P-code. It settles most ambiguity: many locality names repeat across states (three localities are called As Salam). The state can be any spelling or a P-code (`SD02`).
 - **Pass the level when you know it**: 1 for states, 2 for localities.
 - **Only states and localities can match.** Villages, towns, camps and sites have no P-code here and should come back unmatched. Say that this is expected. Never assign a camp or village to a locality unless the user asks you to and the file records that it was done.
+- **Check matches for village, camp, market and site names.** A site whose name resembles a locality can still be matched to it, especially without a state hint: in an independent test, 9 of 56 such names were. When a name comes from a village, camp, market or site column, show the user any match and ask before using it.
 - **"Abyei" is ambiguous**: it can mean the Abyei PCA area (SD19, administered jointly, not part of a state) or Abyei locality in West Kordofan. Ask which one.
 - **Keep the user's original values.** Add columns next to them (P-code, official English name, official Arabic name, method, score); never overwrite the original names.
 - **Report what happened**: how many names matched, how many need a decision, how many matched nothing, and why.
