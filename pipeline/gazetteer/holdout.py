@@ -24,6 +24,71 @@ FIRST_TEST = {"top1_accuracy": 0.949, "top3_recall": 0.996, "false_match_rate": 
 KIND_LABEL = {"official": "official spelling", "other": "other spelling", "none": "should match nothing"}
 
 
+# Sampling (see the protocol): mostly names that are not an official spelling, as in the first test.
+SEED = 20261121
+PER_DATASET = 60
+TARGET = {"other": 230, "official": 25, "site": 45}
+CASE_COLUMNS = ["id", "input_name", "state_hint", "level", "expected_pcode", "source_dataset", "source_detail",
+                "source_pcode", "answer_from", "kind", "notes"]
+
+
+def select(pool_paths: list, out_path) -> tuple[list[dict], dict]:
+    """Draw the test names from the collected pools (one row per distinct dataset, column, name and state).
+
+    Names already in the first test set are left out. Official spellings are told apart with the matcher's
+    normalising rules only; no matching is done here. Writes the drawn names without answers."""
+    import csv
+    import random
+
+    from sudan_atlas.normalise import Normaliser
+
+    norm = Normaliser(json.loads((config.ROOT / "data" / "gazetteer" / "normalisation.json").read_text()))
+    places = json.loads((config.ROOT / "data" / "gazetteer" / "places.json").read_text())["places"]
+    official = {norm.key(n) for p in places for n in (p["name_en"], p["name_ar"])}
+    first_test = {norm.key(c["input_name"]) for c in load_cases()}
+    pool, seen = [], set()
+    for path in pool_paths:
+        with open(path, newline="", encoding="utf-8") as handle:
+            for r in csv.DictReader(handle):
+                key = norm.key(r["input_name"])
+                identity = (key, norm.key(r["state_hint"]), r["column_kind"])
+                if not key or key in first_test or identity in seen:
+                    continue
+                seen.add(identity)
+                stratum = "site" if r["column_kind"] == "site" else ("official" if key in official else "other")
+                pool.append({**r, "stratum": stratum})
+    admin = [r for r in pool if r["stratum"] != "site"]
+    stats = {"distinct_names": len(admin), "official_share": sum(r["stratum"] == "official" for r in admin) / max(1, len(admin))}
+
+    rng = random.Random(SEED)
+    rng.shuffle(pool)
+    taken, per = [], Counter()
+    for stratum, want in TARGET.items():
+        got = 0
+        for r in sorted((r for r in pool if r["stratum"] == stratum), key=lambda r: per[r["dataset"]]):
+            if got == want:
+                break
+            if per[r["dataset"]] >= PER_DATASET or r in taken:
+                continue
+            taken.append(r)
+            per[r["dataset"]] += 1
+            got += 1
+    rows = []
+    for i, r in enumerate(taken, 1):
+        rows.append({"id": f"h{i:03d}", "input_name": r["input_name"], "state_hint": r["state_hint"],
+                     "level": "1" if r["column_kind"] == "state" else "2", "expected_pcode": "",
+                     "source_dataset": r["dataset"], "source_detail": r["column"], "source_pcode": r["source_pcode"],
+                     "answer_from": "", "kind": r["stratum"], "notes": ""})
+    with open(out_path, "w", newline="", encoding="utf-8") as handle:
+        w = csv.DictWriter(handle, fieldnames=CASE_COLUMNS, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    print(f"holdout: pool {len(pool)} names ({stats['distinct_names']} state or locality names, "
+          f"{stats['official_share']:.1%} official spellings); drew {len(rows)}: {dict(Counter(r['kind'] for r in rows))}, "
+          f"per dataset {dict(per)}")
+    return rows, stats
+
+
 def _usable(case: dict) -> bool:
     return not case["notes"].startswith("UNSURE")
 
