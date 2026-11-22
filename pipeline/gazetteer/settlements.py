@@ -31,6 +31,7 @@ NORMALISATION_PATH = GAZETTEER_DIR / "normalisation.json"
 SETTLEMENTS_PATH = GAZETTEER_DIR / "settlements.json"
 OSM_SETTLEMENTS_PATH = GAZETTEER_DIR / "settlements_osm.json"
 CAMPS_DIR = config.RAW_DIR / "ocha-camps"
+OCHA_SETTLEMENTS_DIR = config.RAW_DIR / "ocha-settlements"
 OVERTURE_FILE = config.RAW_DIR / "overture" / "sd_divisions.parquet"
 WIKIDATA_FILE = config.RAW_DIR / "wikidata" / "settlements.json"
 OVERTURE_KINDS = {"city": "town", "town": "town", "village": "village", "hamlet": "hamlet"}
@@ -96,6 +97,25 @@ def camps() -> list[dict]:
                     "names": _names(row.get("Location"), row.get("Location Arabic")),
                     "kind": {"neighborhood": "neighbourhood"}.get(kind, kind),
                     "lon": float(lon), "lat": float(lat)})
+    return [s for s in out if s["names"]]
+
+
+def ocha_settlements() -> list[dict]:
+    """OCHA Sudan's settlement list (2020). Its locality P-codes are not used: like every other source,
+    each place is put in the locality its coordinates fall in, on the current boundaries."""
+    path = next(OCHA_SETTLEMENTS_DIR.glob("*.xls*"), None)
+    if path is None:
+        return []
+    frame = pd.read_excel(path)
+    out = []
+    for r in frame.itertuples(index=False):
+        row = dict(zip(frame.columns, r))
+        if pd.isna(row.get("X")) or pd.isna(row.get("Y")):
+            continue
+        out.append({"id": f"ocha-settlements:{str(row['feature_pc']).strip()}",
+                    "names": _names(row.get("featureNam"), row.get("featureRef")),
+                    "kind": "village" if str(row.get("Type_Text")).strip() == "Village" else "town",
+                    "lon": float(row["X"]), "lat": float(row["Y"])})
     return [s for s in out if s["names"]]
 
 
@@ -196,7 +216,7 @@ def _dedupe(records: list[dict], norm: Normaliser) -> list[dict]:
     """The same name within DEDUPE_METRES in the same locality is one place: keep the first, merge names."""
     kept, index = [], defaultdict(list)
     for r in records:
-        keys = {norm.key(n) for n in r["names"]} - {""}
+        keys = sorted({norm.key(n) for n in r["names"]} - {""})  # sorted: set order changes between runs
         twin = None
         for k in keys:
             for other in index[(k, r["pcode"])]:
@@ -233,12 +253,12 @@ def run() -> dict:
 
     norm = Normaliser(json.loads(NORMALISATION_PATH.read_text(encoding="utf-8")))
     overture_osm, overture_esri = overture()
-    open_records = _finish(_dedupe(_place(geonames() + camps() + wikidata() + overture_esri), norm))
+    open_records = _finish(_dedupe(_place(geonames() + ocha_settlements() + camps() + wikidata() + overture_esri), norm))
     osm_records = _finish(_dedupe(_place(_merge_ids(osm() + overture_osm)), norm))
     SETTLEMENTS_PATH.write_text(dump_records(
         {"version": config.DATA_VERSION,
          "description": "Villages, towns and camps with the state and locality each falls in, from its coordinates and the detailed COD-AB boundaries.",
-         "licence": "GeoNames records: CC BY 4.0 (www.geonames.org). OCHA Sudan IDP camps: CC0. Wikidata: CC0. Overture Maps records from Esri Community Maps: CC BY 4.0."},
+         "licence": "GeoNames records: CC BY 4.0 (www.geonames.org). OCHA Sudan settlements: CC BY 4.0. OCHA Sudan IDP camps: CC0. Wikidata: CC0. Overture Maps records from Esri Community Maps: CC BY 4.0."},
         "settlements", open_records), encoding="utf-8")
     OSM_SETTLEMENTS_PATH.write_text(dump_records(
         {"version": config.DATA_VERSION,
@@ -247,5 +267,5 @@ def run() -> dict:
         "settlements", osm_records), encoding="utf-8")
     summary = {"settlements.json": dict(Counter(r["kind"] for r in open_records)),
                "settlements_osm.json": dict(Counter(r["kind"] for r in osm_records))}
-    print(f"settlements: {len(open_records)} (GeoNames and camps), {len(osm_records)} (OpenStreetMap); {summary}")
+    print(f"settlements: {len(open_records)} (GeoNames, OCHA, Wikidata, Overture), {len(osm_records)} (OpenStreetMap); {summary}")
     return summary

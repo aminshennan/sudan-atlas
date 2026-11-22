@@ -191,6 +191,27 @@ def fetch_camps() -> dict:
     return manifest
 
 
+OCHA_SETTLEMENTS_DATASET = "sudan-settlement-26-july-2020"
+
+
+def fetch_ocha_settlements() -> dict:
+    """OCHA Sudan's settlement list: villages and towns with coordinates and locality P-codes (CC BY)."""
+    meta = json.loads(_get(f"{config.HDX_API}?id={OCHA_SETTLEMENTS_DATASET}"))["result"]
+    resource = next(r for r in meta["resources"] if (r.get("format") or "").upper() in ("XLSX", "XLS"))
+    name = resource["url"].rsplit("/", 1)[-1].split("?", 1)[0]
+    files = [_save(resource["url"], config.RAW_DIR / "ocha-settlements" / name)]
+    manifest = {
+        "source": "Sudan: Settlements (OCHA Sudan and humanitarian partners, via HDX)",
+        "dataset_url": f"https://data.humdata.org/dataset/{OCHA_SETTLEMENTS_DATASET}",
+        "dataset_last_modified": meta.get("last_modified"),
+        "licence": meta.get("license_title"),
+        "downloaded_at": _now(),
+        "files": files,
+    }
+    (config.RAW_DIR / "ocha-settlements" / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
 OVERTURE_BUCKET = "https://overturemaps-us-west-2.s3.amazonaws.com"
 OVERTURE_SUBTYPES = ("locality", "neighborhood", "microhood", "macrohood")
 
@@ -302,6 +323,8 @@ def run() -> None:
     print(f"OpenStreetMap: {osm['files'][0]['bytes']:,} bytes, licence {osm['licence']!r}")
     camps = fetch_camps()
     print(f"OCHA IDP camps: {camps['files'][0]['bytes']:,} bytes, licence {camps['licence']!r}")
+    ocha = fetch_ocha_settlements()
+    print(f"OCHA settlements: {ocha['files'][0]['bytes']:,} bytes, licence {ocha['licence']!r}")
     overture = fetch_overture()
     print(f"Overture Maps {overture['release']}: {overture['files'][0]['rows']:,} Sudan places")
     wikidata = fetch_wikidata_settlements()
