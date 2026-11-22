@@ -3,6 +3,7 @@
 Boundaries:  fetch | import ARCHIVE | normalise | simplify | validate | manifest | build
 Gazetteer:   gazetteer | settlements | fetch-test-sources | test-pool | evaluate | golden | holdout
 Villages:    fetch-settlement-test | settlement-cases | settlement-holdout
+             fetch-settlement-test-2 | settlement-cases-2 | settlement-holdout-2
 
 `build` rebuilds data/boundaries/ from data/raw/ and validates it; it exits
 non-zero if any validation check fails. `fetch` downloads data/raw/ and is
@@ -16,7 +17,8 @@ import sys
 from pathlib import Path
 
 from . import fetch, manifest, normalise, simplify, validate
-from .gazetteer import evaluate, golden, holdout, places, settlement_holdout, settlements, testcases, variants
+from .gazetteer import (evaluate, golden, holdout, places, settlement_holdout, settlement_holdout2, settlements,
+                        testcases, variants)
 
 
 def build() -> int:
@@ -57,6 +59,9 @@ def main(argv: list[str]) -> int:
         "fetch-settlement-test": lambda: settlement_holdout.fetch() and 0,
         "settlement-cases": lambda: settlement_holdout.cases() and 0,
         "settlement-holdout": lambda: settlement_holdout.run() and 0,
+        "fetch-settlement-test-2": lambda: settlement_holdout2.fetch() and 0,
+        "settlement-cases-2": lambda: settlement_holdout2.cases() and 0,
+        "settlement-holdout-2": lambda: settlement_holdout2.run() and 0,
     }
     if step not in steps:
         print(__doc__)
