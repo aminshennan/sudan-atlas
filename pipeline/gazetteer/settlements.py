@@ -1,10 +1,12 @@
 """Villages, towns and camps, each placed in its locality by its coordinates.
 
 Writes two files, kept apart because of their licences:
-- data/gazetteer/settlements.json: GeoNames populated places (CC BY 4.0) and OCHA Sudan's list of
-  IDP camps and sites (CC0);
-- data/gazetteer/settlements_osm.json: OpenStreetMap villages, hamlets, towns and neighbourhoods
-  (ODbL, © OpenStreetMap contributors).
+- data/gazetteer/settlements.json: GeoNames populated places (CC BY 4.0), OCHA Sudan's list of IDP
+  camps and sites (CC0), Wikidata settlements (CC0), and Overture Maps places from Esri Community
+  Maps (CC BY 4.0);
+- data/gazetteer/settlements_osm.json: OpenStreetMap villages, hamlets, towns and neighbourhoods,
+  from the Humanitarian OpenStreetMap Team's export and from Overture Maps, which adds the
+  alternative and other-language names OpenStreetMap records (ODbL, © OpenStreetMap contributors).
 
 Each settlement keeps its names as written by its source (English, Arabic and alternates), its
 point, its kind, and the state and locality it falls in, worked out from the detailed COD-AB
@@ -29,6 +31,9 @@ NORMALISATION_PATH = GAZETTEER_DIR / "normalisation.json"
 SETTLEMENTS_PATH = GAZETTEER_DIR / "settlements.json"
 OSM_SETTLEMENTS_PATH = GAZETTEER_DIR / "settlements_osm.json"
 CAMPS_DIR = config.RAW_DIR / "ocha-camps"
+OVERTURE_FILE = config.RAW_DIR / "overture" / "sd_divisions.parquet"
+WIKIDATA_FILE = config.RAW_DIR / "wikidata" / "settlements.json"
+OVERTURE_KINDS = {"city": "town", "town": "town", "village": "village", "hamlet": "hamlet"}
 
 # OpenStreetMap place values kept, and what they are called here. Single farms (isolated_dwelling),
 # city blocks and islands are left out. A named residential area with no place tag is a settlement.
@@ -115,6 +120,65 @@ def osm() -> list[dict]:
     return out
 
 
+def overture() -> tuple[list[dict], list[dict]]:
+    """Overture Maps places, split by licence: (OpenStreetMap records, Esri Community Maps records).
+
+    An OpenStreetMap record keeps its OpenStreetMap id ("osm:node/123"), so its names merge with the
+    same place from the Humanitarian OpenStreetMap Team export."""
+    if not OVERTURE_FILE.exists():
+        return [], []
+    import pyarrow.parquet as pq
+    from shapely import wkb
+
+    osm_records, esri_records = [], []
+    for r in pq.read_table(OVERTURE_FILE).to_pylist():
+        n = r["names"] or {}
+        common = n.get("common") or []
+        common = [v for _, v in common] if common and isinstance(common[0], (list, tuple)) else []
+        names = _names(n.get("primary"), *common, *[x.get("value") for x in (n.get("rules") or [])])
+        if not names or not r["geometry"]:
+            continue
+        point = wkb.loads(r["geometry"]).representative_point()
+        kind = OVERTURE_KINDS.get(r["class"] or "", "neighbourhood" if r["subtype"] != "locality" else "settlement")
+        osm_ids = [s["record_id"].split("@")[0] for s in (r["sources"] or []) if s.get("dataset") == "OpenStreetMap"]
+        record = {"names": names, "kind": kind, "lon": point.x, "lat": point.y}
+        if osm_ids:
+            rid = osm_ids[0]
+            typ = {"n": "node", "w": "way", "r": "relation"}.get(rid[:1])
+            osm_records.append({"id": f"osm:{typ}/{rid[1:]}" if typ else f"overture:{r['id']}", **record})
+        else:
+            esri_records.append({"id": f"overture:{r['id']}", **record})
+    return osm_records, esri_records
+
+
+def wikidata() -> list[dict]:
+    if not WIKIDATA_FILE.exists():
+        return []
+    import json
+
+    out = []
+    for b in json.loads(WIKIDATA_FILE.read_text(encoding="utf-8"))["results"]["bindings"]:
+        m = re.match(r"Point\(([-\d.]+) ([-\d.]+)\)", b["coord"]["value"])
+        if not m:
+            continue
+        names = _names(*b["names"]["value"].split("|"))
+        if names:
+            out.append({"id": "wikidata:" + b["item"]["value"].rsplit("/", 1)[-1], "names": names, "kind": "village",
+                        "lon": float(m.group(1)), "lat": float(m.group(2))})
+    return out
+
+
+def _merge_ids(records: list[dict]) -> list[dict]:
+    """Records with the same id (one OpenStreetMap place from two exports) become one, names merged."""
+    by_id: dict[str, dict] = {}
+    for r in records:
+        if r["id"] in by_id:
+            by_id[r["id"]]["names"] += [n for n in r["names"] if n not in by_id[r["id"]]["names"]]
+        else:
+            by_id[r["id"]] = {**r, "names": list(r["names"])}
+    return list(by_id.values())
+
+
 def _place(records: list[dict]) -> list[dict]:
     """Add the state and locality each point falls in; drop points outside Sudan."""
     localities = gpd.read_file(config.BOUNDARIES_DIR / "detailed" / "adm2.geojson")[["pcode", "parent_pcode", "geometry"]]
@@ -168,16 +232,17 @@ def run() -> dict:
     import json
 
     norm = Normaliser(json.loads(NORMALISATION_PATH.read_text(encoding="utf-8")))
-    open_records = _finish(_dedupe(_place(geonames() + camps()), norm))
-    osm_records = _finish(_dedupe(_place(osm()), norm))
+    overture_osm, overture_esri = overture()
+    open_records = _finish(_dedupe(_place(geonames() + camps() + wikidata() + overture_esri), norm))
+    osm_records = _finish(_dedupe(_place(_merge_ids(osm() + overture_osm)), norm))
     SETTLEMENTS_PATH.write_text(dump_records(
         {"version": config.DATA_VERSION,
          "description": "Villages, towns and camps with the state and locality each falls in, from its coordinates and the detailed COD-AB boundaries.",
-         "licence": "GeoNames records: CC BY 4.0 (www.geonames.org). OCHA Sudan IDP camps: CC0."},
+         "licence": "GeoNames records: CC BY 4.0 (www.geonames.org). OCHA Sudan IDP camps: CC0. Wikidata: CC0. Overture Maps records from Esri Community Maps: CC BY 4.0."},
         "settlements", open_records), encoding="utf-8")
     OSM_SETTLEMENTS_PATH.write_text(dump_records(
         {"version": config.DATA_VERSION,
-         "description": "OpenStreetMap villages, hamlets, towns and neighbourhoods with the state and locality each falls in.",
+         "description": "OpenStreetMap villages, hamlets, towns and neighbourhoods (from the Humanitarian OpenStreetMap Team's export and Overture Maps) with the state and locality each falls in.",
          "licence": "ODbL 1.0 (Open Database License); © OpenStreetMap contributors"},
         "settlements", osm_records), encoding="utf-8")
     summary = {"settlements.json": dict(Counter(r["kind"] for r in open_records)),

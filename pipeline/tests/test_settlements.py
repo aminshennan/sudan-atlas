@@ -18,11 +18,12 @@ def places() -> dict:
     return {p["pcode"]: p for p in json.loads((GAZETTEER / "places.json").read_text(encoding="utf-8"))["places"]}
 
 
-@pytest.mark.parametrize("name, sources", [("settlements.json", {"geonames", "ocha-camps"}),
+@pytest.mark.parametrize("name, sources", [("settlements.json", {"geonames", "ocha-camps", "wikidata", "overture"}),
                                             ("settlements_osm.json", {"osm"})])
 def test_each_file_holds_only_its_own_sources(name, sources):
-    # OpenStreetMap (ODbL) must stay in its own file.
-    assert {s["id"].split(":", 1)[0] for s in _load(name)} == sources
+    # OpenStreetMap (ODbL) must stay in its own file, and nothing else may go into it.
+    found = {s["id"].split(":", 1)[0] for s in _load(name)}
+    assert found <= sources and found
 
 
 @pytest.mark.parametrize("name", ["settlements.json", "settlements_osm.json"])

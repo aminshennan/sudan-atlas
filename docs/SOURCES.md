@@ -9,6 +9,8 @@ Every dataset used to build Sudan Atlas, with its URL, download date and licence
 | Wikidata: states (Q746290) and localities (Q505830) of Sudan | https://www.wikidata.org/ (query: `pipeline/gazetteer/wikidata.rq`) | 2026-10-31 | CC0 1.0 | Variant spellings, locality capitals as town names |
 | OpenStreetMap populated places of Sudan (Humanitarian OpenStreetMap Team export) | https://data.humdata.org/dataset/hotosm_sdn_populated_places | 2026-11-01 | ODbL 1.0, © OpenStreetMap contributors | Town names (places tagged city or town), kept separately in `data/gazetteer/variants_osm.json` |
 | Sudan IDP camps (OCHA Sudan) | https://data.humdata.org/dataset/sudan-idp-camps (`sudan_idp_camps.xlsx`) | 2026-11-21 | CC0 1.0 | Camps and sites in `data/gazetteer/settlements.json` |
+| Overture Maps, divisions theme (release 2026-11-18.0) | https://docs.overturemaps.org/guides/divisions/ (Sudan's localities and neighbourhoods, `data/raw/overture/sd_divisions.parquet`) | 2026-11-22 | ODbL 1.0 (OpenStreetMap records); CC BY 4.0 (Esri Community Maps records) | Alternative and other-language names of villages in `data/gazetteer/settlements_osm.json` |
+| Wikidata: human settlements in Sudan (Q486972) with coordinates | https://query.wikidata.org/ (query in `pipeline/fetch.py`) | 2026-11-22 | CC0 1.0 | Villages and towns in `data/gazetteer/settlements.json` |
 | geoBoundaries gbOpen SDN (ADM0–ADM2) | https://github.com/wmgeolab/geoBoundaries (`releaseData/gbOpen/SDN`) | 2026-10-28 | CC BY 3.0 IGO | Cross-check of the boundaries; its spellings (such as "Gezira") are variants |
 
 ## Notes

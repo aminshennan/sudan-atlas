@@ -26,13 +26,15 @@ Data licences
    docs/SOURCES.md, each under its own licence (CC BY, CC BY-IGO or CC0).
 
    The villages, towns and camps in data/gazetteer/settlements.json come from
-   GeoNames populated places (CC BY 4.0, www.geonames.org) and OCHA Sudan's
-   list of IDP camps (CC0), and are shared under CC BY 4.0 with the same
-   attribution. Their state and locality are worked out from the COD-AB
+   GeoNames populated places (CC BY 4.0, www.geonames.org), OCHA Sudan's list
+   of IDP camps (CC0), Wikidata (CC0) and, where a place comes only from Esri
+   Community Maps, Overture Maps (CC BY 4.0), and are shared under CC BY 4.0
+   with the same attribution. Their state and locality are worked out from the COD-AB
    boundaries.
 
 3. Data taken from OpenStreetMap (from the Humanitarian OpenStreetMap Team's
-   export of populated places on HDX) is kept in separate files: town
+   export of populated places on HDX, and from Overture Maps, which republishes
+   OpenStreetMap places with their alternative names) is kept in separate files: town
    spellings in data/gazetteer/variants_osm.json, and villages, hamlets, towns
    and neighbourhoods in data/gazetteer/settlements_osm.json. Both are under
    the Open Database License (ODbL 1.0), with attribution "© OpenStreetMap
