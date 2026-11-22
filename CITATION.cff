@@ -23,8 +23,8 @@ url: "https://atlas-sudan.vercel.app"
 license:
   - MIT
   - CC-BY-4.0
-version: 0.1.4
-date-released: 2026-11-20
+version: 0.1.5
+date-released: 2026-11-22
 keywords:
   - Sudan
   - P-codes
