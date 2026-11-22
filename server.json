@@ -3,8 +3,12 @@
   "name": "io.github.aminshennan/sudan-atlas",
   "title": "Sudan Atlas",
   "description": "Match Sudanese place names (Arabic or English) to official P-codes; get places and boundaries.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "websiteUrl": "https://atlas-sudan.vercel.app/docs/#mcp",
+  "icons": [
+    { "src": "https://atlas-sudan.vercel.app/icon-512.png", "mimeType": "image/png", "sizes": ["512x512"] },
+    { "src": "https://atlas-sudan.vercel.app/logo.svg", "mimeType": "image/svg+xml", "sizes": ["any"] }
+  ],
   "repository": {
     "url": "https://github.com/aminshennan/sudan-atlas",
     "source": "github"

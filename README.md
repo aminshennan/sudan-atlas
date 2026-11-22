@@ -2,7 +2,7 @@
 
 # Sudan Atlas toolkit
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191931.svg)](https://doi.org/10.5281/zenodo.24191931) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24191931.svg)](https://doi.org/10.5281/zenodo.24191931) [![npm](https://img.shields.io/npm/v/sudan-atlas)](https://www.npmjs.com/package/sudan-atlas) [![PyPI](https://img.shields.io/pypi/v/sudan-atlas)](https://pypi.org/project/sudan-atlas/) [![mcptry](https://mcptry.com/badge/io.github.aminshennan/sudan-atlas)](https://mcptry.com/servers/io.github.aminshennan/sudan-atlas)
 
 An open toolkit that turns messy Sudanese place names into official codes, and gives the names (Arabic and English) and boundaries of Sudan's 18 states, the Abyei PCA area and 189 localities. It contains:
 
