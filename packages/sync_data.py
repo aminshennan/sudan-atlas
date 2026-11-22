@@ -11,8 +11,7 @@ import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-GAZETTEER_FILES = ["places.json", "variants.json", "variants_osm.json", "normalisation.json",
-                   "settlements.json", "settlements_osm.json"]
+GAZETTEER_FILES = ["places.json", "variants.json", "variants_osm.json", "normalisation.json"]
 PACKAGE = ROOT / "packages" / "py"
 TARGETS = [PACKAGE / "src" / "sudan_atlas" / "data"]
 

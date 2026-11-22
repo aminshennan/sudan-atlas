@@ -37,7 +37,7 @@ function packageDataUrl(): string {
   return new URL("../data/", import.meta.url).href;
 }
 
-async function readJson<T = FeatureCollection>(url: string): Promise<T> {
+async function readJson(url: string): Promise<FeatureCollection> {
   if (url.startsWith("file:")) {
     const { readFile } = await import("node:fs/promises");
     const { fileURLToPath } = await import("node:url");
@@ -48,19 +48,16 @@ async function readJson<T = FeatureCollection>(url: string): Promise<T> {
   return response.json();
 }
 
-/** Read a file from this package's data/ folder (Node), the CDN (browser) or the address given to setDataUrl. */
-export async function loadData<T = FeatureCollection>(path: string): Promise<T> {
-  if (dataUrl) return readJson<T>(new URL(path, dataUrl).href);
-  if (!isNode) return readJson<T>(new URL(path, CDN_DATA_URL).href);
+async function load(path: string): Promise<FeatureCollection> {
+  if (dataUrl) return readJson(new URL(path, dataUrl).href);
+  if (!isNode) return readJson(new URL(path, CDN_DATA_URL).href);
   try {
-    return await readJson<T>(new URL(path, packageDataUrl()).href);
+    return await readJson(new URL(path, packageDataUrl()).href);
   } catch {
     // Bundled into another build (a server framework, say), the files may not sit beside the code.
-    return readJson<T>(new URL(path, CDN_DATA_URL).href);
+    return readJson(new URL(path, CDN_DATA_URL).href);
   }
 }
-
-const load = (path: string) => loadData<FeatureCollection>(path);
 
 function features(resolution: Resolution, level: number): Promise<Map<string, Feature>> {
   const key = `${resolution}/adm${level}`;
