@@ -19,7 +19,8 @@ SETTLEMENT_SAMPLE_EVERY = 100  # one settlement in every hundred, in file order,
 
 def settlement_cases() -> list[dict]:
     """Names to match with settlements=True: a fixed sample of village, town and camp names (with their
-    state as a hint and without), their Arabic names, and the site names of the independent test."""
+    state as a hint and without, and misspelled with their state), their Arabic names, and the site and
+    village names of the two independent tests."""
     from sudan_atlas.gazetteer import Gazetteer
 
     settlements = Gazetteer.load().settlements()
@@ -27,6 +28,9 @@ def settlement_cases() -> list[dict]:
     for s in settlements[::SETTLEMENT_SAMPLE_EVERY]:
         cases.append({"input_name": s["name"], "state_hint": s["state"]})
         cases.append({"input_name": s["name"], "state_hint": ""})
+        if len(s["name"]) > 4:  # a letter dropped from the middle, for close spellings
+            middle = len(s["name"]) // 2
+            cases.append({"input_name": s["name"][:middle] + s["name"][middle + 1:], "state_hint": s["state"]})
     arabic = [s for s in settlements if any("\u0600" <= c <= "\u06ff" for n in s["names"] for c in n)]
     for s in arabic[::SETTLEMENT_SAMPLE_EVERY // 10]:
         name = next(n for n in s["names"] if any("\u0600" <= c <= "\u06ff" for c in n))
@@ -34,6 +38,8 @@ def settlement_cases() -> list[dict]:
     for c in load_cases(config.ROOT / "data" / "tests" / "holdout_cases.csv"):
         if c["kind"] in ("none", "other") and c["level"] == "2":
             cases.append({"input_name": c["input_name"], "state_hint": c["state_hint"]})
+    for c in load_cases(config.ROOT / "data" / "tests" / "settlement_holdout_cases.csv"):
+        cases.append({"input_name": c["input_name"], "state_hint": c["state_hint"]})
     return [{"id": f"s{i:03d}", **c} for i, c in enumerate(cases, 1)]
 
 
