@@ -18,12 +18,6 @@ const SUBSET_WEIGHT = 0.9;
 const SUBSET_MIN_LETTERS = 4;
 const SUBSET_MIN_LETTERS_ONE_WORD = 5;
 
-// Close spellings of villages, towns and camps: tried only inside the hinted state, when no state or
-// locality matched (see VILLAGE_THRESHOLD in the Python package for how they were chosen).
-export const VILLAGE_THRESHOLD = 0.8;
-/** Every village scoring within this of the best must lie in the same locality. */
-export const VILLAGE_MARGIN = 0.1;
-
 export type Method = "exact" | "variant" | "fuzzy" | "settlement" | "ambiguous" | "none";
 
 export interface Candidate {
@@ -54,8 +48,7 @@ export interface MatchOptions {
   /** 1 for states, 2 for localities; omit to search both. */
   level?: 1 | 2 | null;
   /**
-   * Also look the name up among villages, towns and camps when it is not a state or locality name:
-   * exact names anywhere (or in the hinted state), and close spellings within the hinted state.
+   * Also look the name up among villages, towns and camps when it is not a state or locality name.
    * Call `await loadSettlements()` once first.
    */
   settlements?: boolean;
@@ -137,7 +130,6 @@ export class Matcher {
   private readonly choicesCache = new Map<string, string[]>();
   private readonly scorer: (a: string, b: string) => number;
   private settlementIndex: Map<string, Settlement[]> | null = null;
-  private readonly settlementKeys = new Map<string, [string, Settlement[]][]>();
 
   constructor(data: Gazetteer = gazetteer, options: MatcherOptions = {}) {
     this.normaliser = new Normaliser(data.rules);
@@ -292,7 +284,9 @@ export class Matcher {
 
   /**
    * Every village, town or camp whose name matches name exactly (after normalising), best first.
-   * state, a state P-code, keeps only settlements in that state. For close spellings, see closeSettlements.
+   * Only exact names count: with tens of thousands of villages, a merely similar name is too often a
+   * different place (close spellings were tried and dropped: see docs/SETTLEMENT_HOLDOUT_2.md).
+   * state, a state P-code, keeps only settlements in that state.
    */
   findSettlements(name: string, state: string | null = null): Settlement[] {
     const index = this.settlementsByKey();
@@ -303,63 +297,6 @@ export class Matcher {
     }
     const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
     return [...found.values()].sort((a, b) => cmp(a.pcode, b.pcode) || cmp(a.id, b.id));
-  }
-
-  /** [key, settlements] for every settlement key in one state and script, in index order. */
-  private stateSettlementKeys(state: string, script: string): [string, Settlement[]][] {
-    const cacheKey = `${state}|${script}`;
-    let keys = this.settlementKeys.get(cacheKey);
-    if (!keys) {
-      keys = [];
-      for (const [key, ss] of this.settlementsByKey()) {
-        if (this.normaliser.script(key) !== script) continue;
-        const group = ss.filter((s) => s.state === state);
-        if (group.length) keys.push([key, group]);
-      }
-      this.settlementKeys.set(cacheKey, keys);
-    }
-    return keys;
-  }
-
-  /**
-   * [score, settlement] for the villages, towns and camps of one state, best first, scored like
-   * locality names (0 to 1), each settlement once.
-   */
-  closeSettlements(name: string, state: string): [number, Settlement][] {
-    const best = new Map<string, [number, Settlement]>();
-    for (const key of this.normaliser.keys(String(name ?? ""))) {
-      if (!key) continue;
-      for (const [choice, group] of this.stateSettlementKeys(state, this.normaliser.script(key))) {
-        const score = round4(this.scorer(key, choice) / 100);
-        for (const s of group) {
-          const current = best.get(s.id);
-          if (!current || score > current[0]) best.set(s.id, [score, s]);
-        }
-      }
-    }
-    const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
-    return [...best.values()].sort((a, b) => b[0] - a[0] || cmp(a[1].pcode, b[1].pcode) || cmp(a[1].id, b[1].id));
-  }
-
-  /** A village of the hinted state spelled a little differently, if one stands clear of the rest. */
-  private closeSettlement(name: string, state: string, result: MatchResult): MatchResult {
-    const close = this.closeSettlements(name, state);
-    if (!close.length || close[0][0] < VILLAGE_THRESHOLD) return result;
-    const top = close[0][0];
-    const byLocality = new Map<string, [number, Settlement]>();
-    for (const [score, s] of close) {
-      if (score < top - VILLAGE_MARGIN) break;
-      if (!byLocality.has(s.pcode)) byLocality.set(s.pcode, [score, s]);
-    }
-    const options_: Candidate[] = [...byLocality].map(([pcode, [score, s]]) => ({ ...this.record(pcode, score), settlement: asRecord(s) }));
-    if (options_.length === 1) {
-      const { settlement, ...place } = options_[0];
-      return { ...place, method: "settlement", settlement, alternatives: [] };
-    }
-    return {
-      pcode: null, name_en: null, name_ar: null, level: null, score: top,
-      method: "ambiguous", settlement: null, alternatives: options_.slice(0, 3),
-    };
   }
 
   /**
@@ -373,13 +310,14 @@ export class Matcher {
     if (result.method === "exact" || result.method === "variant") return result;
     const state = options.stateHint ? this.resolveState(options.stateHint) : null;
     const found = this.findSettlements(name, state);
-    if (!found.length) return state && result.method === "none" ? this.closeSettlement(name, state, result) : result;
+    if (!found.length) return result;
     const byLocality = new Map<string, Settlement[]>();
     for (const s of found) {
       const group = byLocality.get(s.pcode);
       if (group) group.push(s);
       else byLocality.set(s.pcode, [s]);
     }
+    const asRecord = (s: Settlement): SettlementRecord => ({ id: s.id, name: s.name, kind: s.kind, lat: s.lat, lon: s.lon });
     const options_: Candidate[] = [...byLocality].map(([pcode, group]) => ({ ...this.record(pcode, EXACT_SCORE), settlement: asRecord(group[0]) }));
     if (options_.length === 1 && !(result.pcode && result.pcode !== options_[0].pcode)) {
       const { settlement, ...place } = options_[0];
@@ -395,8 +333,6 @@ export class Matcher {
     };
   }
 }
-
-const asRecord = (s: Settlement): SettlementRecord => ({ id: s.id, name: s.name, kind: s.kind, lat: s.lat, lon: s.lon });
 
 let defaultMatcher: Matcher | undefined;
 

@@ -2,6 +2,8 @@
 
 The matcher can also look names up among villages, towns and camps (`settlements=True`). This test measures that once, on village names it was not built from, with nothing changed afterwards.
 
+A [second test](SETTLEMENT_HOLDOUT_2.md) followed, after the village data was enlarged and close spellings were tried.
+
 ## Protocol
 
 Written before any test name was collected (2026-11-21).

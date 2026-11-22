@@ -33,13 +33,6 @@ SUBSET_WEIGHT = 0.9  # every word of the shorter name appears in the longer ("Um
 SUBSET_MIN_LETTERS = 4  # ...but only when the shorter name is long enough to mean something:
 SUBSET_MIN_LETTERS_ONE_WORD = 5  # a single short word ("area", "abu", "wad") is in too many names to count
 
-# Close spellings of villages, towns and camps, tried only inside the state the hint names and only when
-# no state or locality matched. Chosen on 2026-11-22 on the flood-report rows of
-# data/tests/settlement_holdout_cases.csv, after that test had been reported (docs/SETTLEMENT_HOLDOUT.md),
-# so they are not an independent test of these settings.
-VILLAGE_THRESHOLD = 0.80
-VILLAGE_MARGIN = 0.10  # every village scoring within this of the best must lie in the same locality
-
 
 def round4(x: float) -> float:
     """Round half up to four decimals, the same way in both languages (Python's round() rounds half to even)."""
@@ -107,7 +100,6 @@ class Matcher:
                     self._add(variant["text"], pcode, "variant")
         self._fuzzy_choices = lru_cache(maxsize=256)(self._choices)
         self._settlements: dict[str, list[dict]] | None = None  # key -> settlements, loaded on first use
-        self._settlement_keys: dict[tuple[str, str], tuple[tuple[str, tuple[dict, ...]], ...]] = {}
 
     def _add(self, name: str, pcode: str, method: str) -> None:
         for key in self.normaliser.keys(name):
@@ -217,8 +209,10 @@ class Matcher:
     def find_settlements(self, name: str, state: str | None = None) -> list[dict]:
         """Every village, town or camp whose name matches name exactly (after normalising), best first.
 
-        state, a state P-code, keeps only settlements in that state. For close spellings, see
-        close_settlements."""
+        Only exact names count: with tens of thousands of villages, a merely similar name is too
+        often a different place. Close spellings within the hinted state were tried and dropped: in an
+        independent test they gave 48 wrong localities for 60 right ones (docs/SETTLEMENT_HOLDOUT_2.md).
+        state, a state P-code, keeps only settlements in that state."""
         index = self._settlement_index()
         found: dict[str, dict] = {}
         for key in self.normaliser.keys(str(name or "")):
@@ -226,30 +220,6 @@ class Matcher:
                 if state is None or s["state"] == state:
                     found[s["id"]] = s
         return sorted(found.values(), key=lambda s: (s["pcode"], s["id"]))
-
-    def _state_settlement_keys(self, state: str, script: str) -> tuple[tuple[str, tuple[dict, ...]], ...]:
-        """(key, settlements) for every settlement key in one state and script, in index order."""
-        if (state, script) not in self._settlement_keys:
-            self._settlement_keys[(state, script)] = tuple(
-                (key, group) for key, ss in self._settlement_index().items()
-                if self.normaliser.script(key) == script
-                for group in [tuple(s for s in ss if s["state"] == state)] if group
-            )
-        return self._settlement_keys[(state, script)]
-
-    def close_settlements(self, name: str, state: str) -> list[tuple[float, dict]]:
-        """(score, settlement) for the villages, towns and camps of one state, best first, scored
-        like locality names (0 to 1), each settlement once."""
-        best: dict[str, tuple[float, dict]] = {}
-        for key in self.normaliser.keys(str(name or "")):
-            if not key:
-                continue
-            for choice, group in self._state_settlement_keys(state, self.normaliser.script(key)):
-                score = round4(self.scorer(key, choice) / 100)
-                for s in group:
-                    if s["id"] not in best or score > best[s["id"]][0]:
-                        best[s["id"]] = (score, s)
-        return sorted(best.values(), key=lambda x: (-x[0], x[1]["pcode"], x[1]["id"]))
 
     @staticmethod
     def _settlement_record(s: dict) -> dict:
@@ -267,12 +237,6 @@ class Matcher:
         method "settlement" and a "settlement" field (id, name, kind, lat, lon); found in several
         localities, or clashing with a close locality name, the result is "ambiguous" and the
         alternatives say where each one is. State and locality names always win over villages.
-
-        When no name matches exactly and the state hint names a state, close spellings of that
-        state's villages are tried too: the best must score at least VILLAGE_THRESHOLD, and every
-        village within VILLAGE_MARGIN of it must lie in the same locality, or the result is
-        "ambiguous". Without a state hint only exact village names count: across the whole country a
-        merely similar name is too often a different place.
         """
         result = self.decide(self.rank(name, state_hint, level))
         if not settlements or level == 1:
@@ -283,7 +247,7 @@ class Matcher:
         state = self.resolve_state(state_hint) if state_hint else None
         found = self.find_settlements(name, state)
         if not found:
-            return self._close_settlement(name, state, result) if state and result["method"] == "none" else result
+            return result
         by_locality: dict[str, list[dict]] = {}
         for s in found:
             by_locality.setdefault(s["pcode"], []).append(s)
@@ -296,25 +260,6 @@ class Matcher:
             # A close locality name and a village somewhere else: ask.
             options.append({**self._record(result["pcode"], result["score"]), "settlement": None})
         return {"pcode": None, "name_en": None, "name_ar": None, "level": None, "score": EXACT_SCORE,
-                "method": "ambiguous", "settlement": None, "alternatives": options[:3]}
-
-    def _close_settlement(self, name: str, state: str, result: dict) -> dict:
-        """A village of the hinted state spelled a little differently, if one stands clear of the rest."""
-        close = self.close_settlements(name, state)
-        if not close or close[0][0] < VILLAGE_THRESHOLD:
-            return result
-        top = close[0][0]
-        by_locality: dict[str, tuple[float, dict]] = {}
-        for score, s in close:
-            if score < top - VILLAGE_MARGIN:
-                break
-            by_locality.setdefault(s["pcode"], (score, s))
-        options = [{**self._record(pcode, score), "settlement": self._settlement_record(s)}
-                   for pcode, (score, s) in by_locality.items()]
-        if len(options) == 1:
-            return {**{k: v for k, v in options[0].items() if k != "settlement"}, "method": "settlement",
-                    "settlement": options[0]["settlement"], "alternatives": []}
-        return {"pcode": None, "name_en": None, "name_ar": None, "level": None, "score": top,
                 "method": "ambiguous", "settlement": None, "alternatives": options[:3]}
 
 
