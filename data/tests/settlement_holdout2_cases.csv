@@ -1,0 +1,801 @@
+id,input_name,state_hint,expected_pcode,source_dataset,source_detail
+w001,DIHEISH,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w002,HAFARA,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w003,HASHAB,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w004,HASHABA,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w005,HELA BAKH,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w006,HELA HEMI,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w007,HELA NOOR,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w008,KARGO,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w009,SANKER FO,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w010,TANGRARA,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w011,TIBIRGHI,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w012,UM DEREISA,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w013,UMM TUGURAG,North Darfur,SD02113,darfur-damaged-and-destroyed-villages,NAME
+w014,ABU DOC,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w015,AMARGADIED,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w016,BILALA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w017,FAGURI,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w018,FETERA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w019,HILLAT JEBEL,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w020,JAKHO I,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w021,JUGHMAR,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w022,JUMA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w023,KERKERE,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w024,MAHADI,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w025,SAWIYA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w026,SCHALOCHO,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w027,TANGORA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w028,TANGORO,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w029,TARAFONA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w030,UM DIBEBA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w031,UM HAJALIK,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w032,UM KOSCHERO,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w033,UMM GAMEYNA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w034,UMM KHABILA,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w035,UMM SHAM,North Darfur,SD02114,darfur-damaged-and-destroyed-villages,NAME
+w036,ARGI,North Darfur,SD02117,darfur-damaged-and-destroyed-villages,NAME
+w037,MALHA,North Darfur,SD02117,darfur-damaged-and-destroyed-villages,NAME
+w038,MUGRAN,North Darfur,SD02117,darfur-damaged-and-destroyed-villages,NAME
+w039,AFFIA,North Darfur,SD02118,darfur-damaged-and-destroyed-villages,NAME
+w040,KARKUR,North Darfur,SD02119,darfur-damaged-and-destroyed-villages,NAME
+w041,MATBETTI,North Darfur,SD02120,darfur-damaged-and-destroyed-villages,NAME
+w042,QUSAIYIR,North Darfur,SD02120,darfur-damaged-and-destroyed-villages,NAME
+w043,SIR,North Darfur,SD02120,darfur-damaged-and-destroyed-villages,NAME
+w044,UM HARAZ,North Darfur,SD02120,darfur-damaged-and-destroyed-villages,NAME
+w045,ARAMBA,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w046,ARRU,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w047,BARBIS,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w048,GURAB,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w049,SUDAK,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w050,TABELDIA,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w051,TORONGA,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w052,UMLA ODHA,North Darfur,SD02124,darfur-damaged-and-destroyed-villages,NAME
+w053,ABU DELEIQ,North Darfur,SD02126,darfur-damaged-and-destroyed-villages,NAME
+w054,ED AL BEADA,North Darfur,SD02126,darfur-damaged-and-destroyed-villages,NAME
+w055,WAD KOTA,North Darfur,SD02126,darfur-damaged-and-destroyed-villages,NAME
+w056,WADA'A,North Darfur,SD02126,darfur-damaged-and-destroyed-villages,NAME
+w057,AMUSHADIGA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w058,BIRMAZA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w059,DISA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w060,HILI HAKHUN,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w061,KANKULE,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w062,KARKOWIE,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w063,KUNGA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w064,KURI,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w065,MASRI,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w066,OSTANI,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w067,SHAKA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w068,TOKOUR,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w069,TUNDARO,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w070,ZONARA,North Darfur,SD02128,darfur-damaged-and-destroyed-villages,NAME
+w071,ABU GIRA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w072,BARNOOS,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w073,BOMAR,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w074,DISHUMA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w075,GOZ LYTA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w076,HARMAL,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w077,HELAT IBRAHIM,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w078,HILLET MAHMUD,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w079,HILLET ZAKERIA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w080,IDDA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w081,KADANIA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w082,KARKALA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w083,KREKERA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w084,KUR,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w085,LABDA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w086,SAIYAH,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w087,SELIBO,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w088,SINDY,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w089,UM HEGLIG,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w090,UM KITERA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w091,WIZA,North Darfur,SD02129,darfur-damaged-and-destroyed-villages,NAME
+w092,HAMBOUL G,North Darfur,SD02133,darfur-damaged-and-destroyed-villages,NAME
+w093,MELESAH,North Darfur,SD02133,darfur-damaged-and-destroyed-villages,NAME
+w094,UM EREIDA,North Darfur,SD02136,darfur-damaged-and-destroyed-villages,NAME
+w095,UM KUDA,North Darfur,SD02136,darfur-damaged-and-destroyed-villages,NAME
+w096,BOBA,North Darfur,SD02168,darfur-damaged-and-destroyed-villages,NAME
+w097,DALIL BABIKIR,North Darfur,SD02169,darfur-damaged-and-destroyed-villages,NAME
+w098,SHAQ EL ASAAD,North Darfur,SD02169,darfur-damaged-and-destroyed-villages,NAME
+w099,DABANEIRA,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w100,DUGO TINA,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w101,GARRAD RIGLEL,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w102,KASARLOI,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w103,KULLU,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w104,SANDINGU,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w105,UM KAYGO,North Darfur,SD02170,darfur-damaged-and-destroyed-villages,NAME
+w106,ABAG,South Darfur,SD03141,darfur-damaged-and-destroyed-villages,NAME
+w107,EL UMDASAI,South Darfur,SD03143,darfur-damaged-and-destroyed-villages,NAME
+w108,GUWEI,South Darfur,SD03143,darfur-damaged-and-destroyed-villages,NAME
+w109,MANDANG,South Darfur,SD03143,darfur-damaged-and-destroyed-villages,NAME
+w110,NABAKA,South Darfur,SD03143,darfur-damaged-and-destroyed-villages,NAME
+w111,UM ZEIFA,South Darfur,SD03143,darfur-damaged-and-destroyed-villages,NAME
+w112,ABDABHYA MANGA,South Darfur,SD03144,darfur-damaged-and-destroyed-villages,NAME
+w113,EL DANGA,South Darfur,SD03144,darfur-damaged-and-destroyed-villages,NAME
+w114,KIDADA,South Darfur,SD03144,darfur-damaged-and-destroyed-villages,NAME
+w115,ZALEDA,South Darfur,SD03144,darfur-damaged-and-destroyed-villages,NAME
+w116,JUROF,South Darfur,SD03145,darfur-damaged-and-destroyed-villages,NAME
+w117,MARSHING (MERSHING),South Darfur,SD03145,darfur-damaged-and-destroyed-villages,NAME
+w118,MENAWASHEI,South Darfur,SD03145,darfur-damaged-and-destroyed-villages,NAME
+w119,DJAFENA,South Darfur,SD03147,darfur-damaged-and-destroyed-villages,NAME
+w120,MADU,South Darfur,SD03147,darfur-damaged-and-destroyed-villages,NAME
+w121,SANDAWA GENOUB,South Darfur,SD03147,darfur-damaged-and-destroyed-villages,NAME
+w122,DITO,South Darfur,SD03149,darfur-damaged-and-destroyed-villages,NAME
+w123,SHARAYA,South Darfur,SD03149,darfur-damaged-and-destroyed-villages,NAME
+w124,BARKAZ,South Darfur,SD03151,darfur-damaged-and-destroyed-villages,NAME
+w125,JUKKA,South Darfur,SD03151,darfur-damaged-and-destroyed-villages,NAME
+w126,KARANU,South Darfur,SD03151,darfur-damaged-and-destroyed-villages,NAME
+w127,KHOR ABECHE,South Darfur,SD03151,darfur-damaged-and-destroyed-villages,NAME
+w128,NEGEHA,South Darfur,SD03151,darfur-damaged-and-destroyed-villages,NAME
+w129,BANAYA,South Darfur,SD03153,darfur-damaged-and-destroyed-villages,NAME
+w130,SHANGA 1,South Darfur,SD03153,darfur-damaged-and-destroyed-villages,NAME
+w131,GOLDOBER,South Darfur,SD03154,darfur-damaged-and-destroyed-villages,NAME
+w132,RUMALIA,South Darfur,SD03154,darfur-damaged-and-destroyed-villages,NAME
+w133,AL BAYDA,South Darfur,SD03156,darfur-damaged-and-destroyed-villages,NAME
+w134,KANSKUMA,South Darfur,SD03157,darfur-damaged-and-destroyed-villages,NAME
+w135,KUBUM,South Darfur,SD03157,darfur-damaged-and-destroyed-villages,NAME
+w136,ABU GARADIL,South Darfur,SD03158,darfur-damaged-and-destroyed-villages,NAME
+w137,BANGADEED,South Darfur,SD03158,darfur-damaged-and-destroyed-villages,NAME
+w138,DONGA,South Darfur,SD03158,darfur-damaged-and-destroyed-villages,NAME
+w139,KIRRIANG,South Darfur,SD03158,darfur-damaged-and-destroyed-villages,NAME
+w140,EIDEKHA,South Darfur,SD03159,darfur-damaged-and-destroyed-villages,NAME
+w141,KHORSHAMAN,South Darfur,SD03159,darfur-damaged-and-destroyed-villages,NAME
+w142,MOROFAYA,South Darfur,SD03159,darfur-damaged-and-destroyed-villages,NAME
+w143,SAWWAM,South Darfur,SD03159,darfur-damaged-and-destroyed-villages,NAME
+w144,UM SIGUM,South Darfur,SD03159,darfur-damaged-and-destroyed-villages,NAME
+w145,FARFUR,South Darfur,SD03161,darfur-damaged-and-destroyed-villages,NAME
+w146,HINEIGA,South Darfur,SD03161,darfur-damaged-and-destroyed-villages,NAME
+w147,UMM BALULA,South Darfur,SD03161,darfur-damaged-and-destroyed-villages,NAME
+w148,ABU RAMEINAK,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w149,AL NESIM,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w150,AMBURU,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w151,GALDI,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w152,KAMBALA,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w153,KUMBILAH (NORTH),South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w154,KUMLEA,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w155,MARLA,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w156,MARMITON,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w157,RIMELLA,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w158,TURUG,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w159,UMM GHUBEISHA,South Darfur,SD03162,darfur-damaged-and-destroyed-villages,NAME
+w160,BOBAJA,South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w161,BULBUL,South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w162,DOMIA,South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w163,ENDUR (SIGARA),South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w164,SURRMANJAGO,South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w165,TIBREI,South Darfur,SD03164,darfur-damaged-and-destroyed-villages,NAME
+w166,EL BANGADEED,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w167,FAIYU,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w168,HILA BEIDA,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w169,TALILA,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w170,TOGA,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w171,TOMAT,South Darfur,SD03166,darfur-damaged-and-destroyed-villages,NAME
+w172,TURMANA,South Darfur,SD03172,darfur-damaged-and-destroyed-villages,NAME
+w173,ANGONAY,West Darfur,SD04111,darfur-damaged-and-destroyed-villages,NAME
+w174,DIREITA,West Darfur,SD04111,darfur-damaged-and-destroyed-villages,NAME
+w175,TERBIDA,West Darfur,SD04111,darfur-damaged-and-destroyed-villages,NAME
+w176,ABU SOGA,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w177,ARMANKUL,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w178,BERTAGNOU,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w179,DURINHUR,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w180,HUJAILEYA,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w181,JEBEL NAGA,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w182,SIRAF JIDAD,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w183,TANEKA,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w184,TENDELTI,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w185,UM TISSA,West Darfur,SD04115,darfur-damaged-and-destroyed-villages,NAME
+w186,DABA NAIRA,West Darfur,SD04121,darfur-damaged-and-destroyed-villages,NAME
+w187,JURUKO,West Darfur,SD04121,darfur-damaged-and-destroyed-villages,NAME
+w188,KAJA BAGOL,West Darfur,SD04121,darfur-damaged-and-destroyed-villages,NAME
+w189,AMBLENG,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w190,ASMAL MOLOK,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w191,BENDATA,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w192,DOLONGA,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w193,DORTY,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w194,MESSEMENGE,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w195,SALCA,West Darfur,SD04122,darfur-damaged-and-destroyed-villages,NAME
+w196,ASKANETI,West Darfur,SD04123,darfur-damaged-and-destroyed-villages,NAME
+w197,KUSHKUSH,West Darfur,SD04123,darfur-damaged-and-destroyed-villages,NAME
+w198,A'ATTASH,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w199,AGOURA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w200,BARDAI,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w201,BIR QIRHAB,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w202,FAJARA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w203,GHARRA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w204,GUNDO,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w205,KANGOK,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w206,KONGI,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w207,KUDAMI,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w208,NGARINJO,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w209,NYARA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w210,TAJUNA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w211,UMM SHEREINA,West Darfur,SD04125,darfur-damaged-and-destroyed-villages,NAME
+w212,BATRO,West Darfur,SD04127,darfur-damaged-and-destroyed-villages,NAME
+w213,DUMTA ASHGAR,West Darfur,SD04134,darfur-damaged-and-destroyed-villages,NAME
+w214,GORONEI,West Darfur,SD04134,darfur-damaged-and-destroyed-villages,NAME
+w215,RIJIL MUR,West Darfur,SD04134,darfur-damaged-and-destroyed-villages,NAME
+w216,SHEEYO ED ATEEN,West Darfur,SD04134,darfur-damaged-and-destroyed-villages,NAME
+w217,ADILLA,East Darfur,SD05139,darfur-damaged-and-destroyed-villages,NAME
+w218,SHARIF,East Darfur,SD05139,darfur-damaged-and-destroyed-villages,NAME
+w219,TA'ALBA,East Darfur,SD05139,darfur-damaged-and-destroyed-villages,NAME
+w220,GIDEL AS SANT,East Darfur,SD05140,darfur-damaged-and-destroyed-villages,NAME
+w221,TUMBRUKU,East Darfur,SD05140,darfur-damaged-and-destroyed-villages,NAME
+w222,ARTO,East Darfur,SD05148,darfur-damaged-and-destroyed-villages,NAME
+w223,HASSAN MON,East Darfur,SD05148,darfur-damaged-and-destroyed-villages,NAME
+w224,HILET FAD,East Darfur,SD05148,darfur-damaged-and-destroyed-villages,NAME
+w225,SHATANEAL,East Darfur,SD05148,darfur-damaged-and-destroyed-villages,NAME
+w226,YUSUF,East Darfur,SD05148,darfur-damaged-and-destroyed-villages,NAME
+w227,EL KHITMA,East Darfur,SD05155,darfur-damaged-and-destroyed-villages,NAME
+w228,KARIO,East Darfur,SD05160,darfur-damaged-and-destroyed-villages,NAME
+w229,SADR AL HISAN,East Darfur,SD05160,darfur-damaged-and-destroyed-villages,NAME
+w230,SIBDU,East Darfur,SD05160,darfur-damaged-and-destroyed-villages,NAME
+w231,UM BOIM,East Darfur,SD05163,darfur-damaged-and-destroyed-villages,NAME
+w232,VILMU,East Darfur,SD05163,darfur-damaged-and-destroyed-villages,NAME
+w233,WARGAT,East Darfur,SD05163,darfur-damaged-and-destroyed-villages,NAME
+w234,ABOUDIGES,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w235,ABU BOUCHA,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w236,ABU SHIBEID,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w237,HIGELIG,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w238,HILLET BUCH,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w239,KOLIKELI,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w240,LADOBE,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w241,NERTIC,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w242,QARDUD,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w243,SIRA,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w244,UM HAWAIM,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w245,UMM DERATA,East Darfur,SD05165,darfur-damaged-and-destroyed-villages,NAME
+w246,BIRGANGA,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w247,DURAYSAH,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w248,KURBI,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w249,NUR ELSALAM,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w250,SILI,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w251,WADI AZOU,Central Darfur,SD06110,darfur-damaged-and-destroyed-villages,NAME
+w252,ANGITEA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w253,BOROK,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w254,FOSA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w255,GUMENA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w256,KEYLIS,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w257,RAMAKAYA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w258,SALALA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w259,SUNI EAST,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w260,TENGERENA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w261,TUNDUR,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w262,URDEIA,Central Darfur,SD06112,darfur-damaged-and-destroyed-villages,NAME
+w263,BALDA,Central Darfur,SD06130,darfur-damaged-and-destroyed-villages,NAME
+w264,DAMBRANG,Central Darfur,SD06130,darfur-damaged-and-destroyed-villages,NAME
+w265,DENOW,Central Darfur,SD06130,darfur-damaged-and-destroyed-villages,NAME
+w266,BARINGO,Central Darfur,SD06131,darfur-damaged-and-destroyed-villages,NAME
+w267,GULDO,Central Darfur,SD06131,darfur-damaged-and-destroyed-villages,NAME
+w268,KULUFUGU,Central Darfur,SD06131,darfur-damaged-and-destroyed-villages,NAME
+w269,SAGADIR,Central Darfur,SD06131,darfur-damaged-and-destroyed-villages,NAME
+w270,TORA,Central Darfur,SD06131,darfur-damaged-and-destroyed-villages,NAME
+w271,DAYA,Central Darfur,SD06132,darfur-damaged-and-destroyed-villages,NAME
+w272,FANGA SUK,Central Darfur,SD06132,darfur-damaged-and-destroyed-villages,NAME
+w273,AGIANA,Central Darfur,SD06135,darfur-damaged-and-destroyed-villages,NAME
+w274,ALBAN JEDIT,Central Darfur,SD06135,darfur-damaged-and-destroyed-villages,NAME
+w275,MAGULA,Central Darfur,SD06135,darfur-damaged-and-destroyed-villages,NAME
+w276,SUFALAWIN,Central Darfur,SD06135,darfur-damaged-and-destroyed-villages,NAME
+w277,UM DUKHUN,Central Darfur,SD06135,darfur-damaged-and-destroyed-villages,NAME
+w278,BEIGA (BEJA),Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w279,DAMRA KOLMA,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w280,FAYA,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w281,FIRI,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w282,GABA,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w283,GURLA,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w284,HI NASIM,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w285,KORUN,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w286,RASONGHA,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w287,SAGAI,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w288,TABLA BIG,Central Darfur,SD06137,darfur-damaged-and-destroyed-villages,NAME
+w289,BUGULAY,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w290,GALE,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w291,KADALINGA SAGEER,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w292,KAGA,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w293,KARTI,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w294,KORARE,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w295,KOULME,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w296,NATTAI,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w297,SELENYI,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w298,TARMO,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w299,WARANGA,Central Darfur,SD06138,darfur-damaged-and-destroyed-villages,NAME
+w300,ABU JABIRAH,West Kordofan,SD18106,darfur-damaged-and-destroyed-villages,NAME
+w301,Jawery,North Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w302,Khoromer,East Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w303,Lemena,North Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w304,Shadad IDP camp,North Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w305,Shangil Tobay town,North Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w306,Shangil Tobaya IDP camp,North Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w307,Shearia,South Darfur,SD02113,wfp-nitrition-sites-sudan,Site
+w308,Abushouk,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w309,Azagarfa,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w310,Fasher Rural,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w311,Kul Kul,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w312,Sarafya,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w313,Um Zour,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w314,Umarahik,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w315,Wama,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w316,Zam Zam A,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w317,Zam Zam B,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w318,Zam Zam C,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w319,Zam Zam New Arrivals,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w320,Zam Zam Old,North Darfur,SD02114,wfp-nitrition-sites-sudan,Site
+w321,Adror,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w322,Al Malha town,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w323,Dar Deifa,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w324,Ein Bessaro,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w325,El Hara,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w326,El Hatan,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w327,Hilif Jenub,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w328,Hilif Saniya,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w329,Hilif Shamal,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w330,Jebel Eisa,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w331,Marega,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w332,Marssos,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w333,Um Bayado,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w334,Wadi Osher,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w335,Wakahem,North Darfur,SD02117,wfp-nitrition-sites-sudan,Site
+w336,El Serif,North Darfur,SD02118,wfp-nitrition-sites-sudan,Site
+w337,Saraf Omra,North Darfur,SD02118,wfp-nitrition-sites-sudan,Site
+w338,Abu Liha,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w339,Frog,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w340,Gurbura,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w341,Juktora,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w342,Kurbia,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w343,Lil,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w344,Miski,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w345,Muzbat,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w346,Oriri,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w347,Orschi,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w348,Shegeg Karo,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w349,Ternawdo,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w350,Turba,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w351,Um Haraz,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w352,Um Mahareik,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w353,Um Shidig,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w354,Umbaru,North Darfur,SD02120,wfp-nitrition-sites-sudan,Site
+w355,Kebkabya Town,North Darfur,SD02124,wfp-nitrition-sites-sudan,Site
+w356,Morlong,North Darfur,SD02124,wfp-nitrition-sites-sudan,Site
+w357,Abudelik,North Darfur,SD02126,wfp-nitrition-sites-sudan,Site
+w358,AbdelShakour,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w359,"Algoz Appa, Ex Cemair",North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w360,Almanara (Masri New),North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w361,Amar Jedid,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w362,Amow,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w363,Anka,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w364,Araida,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w365,Argala,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w366,Ba'ashim/Tina,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w367,Bakuri,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w368,Bere,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w369,Beridik,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w370,Birmaza,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w371,Bor Saeed,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w372,Damrat Goba,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w373,Dawa,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w374,Deesa,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w375,Dekelik,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w376,Deliaba,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w377,Durum,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w378,Ein Siro,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w379,El Dur,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w380,ElSheikh A/AlBagi,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w381,Fata Borno,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w382,Goba,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w383,Hashaba Center,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w384,Hashaba North,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w385,Hashaba South,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w386,Jabir,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w387,Jamboli,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w388,Korgay,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w389,Majuor,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w390,Malagat,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w391,Masri (incl Beliga),North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w392,Mustariha,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w393,Nina,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w394,Onyo,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w395,Sayeh,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w396,Um Layona,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w397,Um Rai,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w398,Um Sidr,North Darfur,SD02128,wfp-nitrition-sites-sudan,Site
+w399,Abasi,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w400,Al Aris,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w401,Al janubi,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w402,Aramal,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w403,Argoon,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w404,Daba Toga,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w405,Elneem,East Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w406,Garouna,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w407,Hareiga,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w408,Hilat hamid East,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w409,Jadeyed/Abunoara,South Kordofan,SD02129,wfp-nitrition-sites-sudan,Site
+w410,Kindero,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w411,Mado Shamal,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w412,Mellit IDP's in Camp,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w413,Sani Haye,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w414,Um Ajaja,North Darfur,SD02129,wfp-nitrition-sites-sudan,Site
+w415,Umhaheems,South Kordofan,SD02129,wfp-nitrition-sites-sudan,Site
+w416,Gara Zawia,North Darfur,SD02133,wfp-nitrition-sites-sudan,Site
+w417,Alsatiha,North Darfur,SD02136,wfp-nitrition-sites-sudan,Site
+w418,Umgafala,North Darfur,SD02136,wfp-nitrition-sites-sudan,Site
+w419,Umsidra,North Darfur,SD02136,wfp-nitrition-sites-sudan,Site
+w420,Abu Gamera,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w421,Boba,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w422,Eid Elkhair,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w423,Furawiya,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w424,Jourbokay,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w425,Jurageem,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w426,Kamo,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w427,Muzbat,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w428,Uru,North Darfur,SD02168,wfp-nitrition-sites-sudan,Site
+w429,Arasho,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w430,Argo,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w431,Dali,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w432,Kunjara,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w433,Rwanda A,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w434,Rwanda B,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w435,Um Sayalla - Alein,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w436,Um Sayalla - Salala,North Darfur,SD02170,wfp-nitrition-sites-sudan,Site
+w437,Gasimba,North Darfur,SD02171,wfp-nitrition-sites-sudan,Site
+w438,Hilaliya,North Darfur,SD02171,wfp-nitrition-sites-sudan,Site
+w439,Mulam Elhush,North Darfur,SD03141,wfp-nitrition-sites-sudan,Site
+w440,Duma,East Darfur,SD03145,wfp-nitrition-sites-sudan,Site
+w441,Tulus,South Darfur,SD03149,wfp-nitrition-sites-sudan,Site
+w442,Abou Odam,South Darfur,SD03151,wfp-nitrition-sites-sudan,Site
+w443,Fasha,South Darfur,SD03151,wfp-nitrition-sites-sudan,Site
+w444,Krekeir,South Darfur,SD03151,wfp-nitrition-sites-sudan,Site
+w445,Mereir,South Darfur,SD03151,wfp-nitrition-sites-sudan,Site
+w446,Ditto,South Darfur,SD03153,wfp-nitrition-sites-sudan,Site
+w447,Elnahda,South Darfur,SD03157,wfp-nitrition-sites-sudan,Site
+w448,Abugaradil,Central Darfur,SD03158,wfp-nitrition-sites-sudan,Site
+w449,Jokhana,South Darfur,SD03161,wfp-nitrition-sites-sudan,Site
+w450,Dreige,South Darfur,SD03162,wfp-nitrition-sites-sudan,Site
+w451,El safia,South Darfur,SD03162,wfp-nitrition-sites-sudan,Site
+w452,Dreige,South Darfur,SD03164,wfp-nitrition-sites-sudan,Site
+w453,Manawashi,East Darfur,SD03164,wfp-nitrition-sites-sudan,Site
+w454,North Serif,South Darfur,SD03164,wfp-nitrition-sites-sudan,Site
+w455,Abu Salalah,South Darfur,SD03166,wfp-nitrition-sites-sudan,Site
+w456,Abu ajoura,South Darfur,SD03166,wfp-nitrition-sites-sudan,Site
+w457,Barkatuli,South Darfur,SD03166,wfp-nitrition-sites-sudan,Site
+w458,Bulbul abjazo,South Darfur,SD03166,wfp-nitrition-sites-sudan,Site
+w459,Karere,South Darfur,SD03167,wfp-nitrition-sites-sudan,Site
+w460,Serif,South Darfur,SD03167,wfp-nitrition-sites-sudan,Site
+w461,Arara,West Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w462,Beida,West Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w463,Beida Hospital,Western Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w464,Kango Haraza,West Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w465,Masteri,West Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w466,Masteri Hospital,Western Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w467,Nioro,Western Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w468,Tarbaiba,Western Darfur,SD04111,wfp-nitrition-sites-sudan,Site
+w469,Armankol,West Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w470,El Geneina - Abu Zar IDP Camp,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w471,El Geneina - Ardamata IDP Camp,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w472,El Geneina - Dorti IDP Camp,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w473,El Geneina - Krinding1,West Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w474,El Geneina - Krinding2 IDP Camp,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w475,El Geneina - Riyadh IDP Camp,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w476,El Geneina Hospital,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w477,Gokar,Western Darfur,SD04115,wfp-nitrition-sites-sudan,Site
+w478,For Baranga,West Darfur,SD04121,wfp-nitrition-sites-sudan,Site
+w479,For Baranga Hospital,Western Darfur,SD04121,wfp-nitrition-sites-sudan,Site
+w480,Hajar Bagar,West Darfur,SD04121,wfp-nitrition-sites-sudan,Site
+w481,Habila Hospital,Western Darfur,SD04122,wfp-nitrition-sites-sudan,Site
+w482,Azerni,West Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w483,Krenek,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w484,Mornei Hospital,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w485,Mornei- El Imtidad,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w486,Mornei- El Jabal,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w487,Mornei- El Salam,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w488,Mornei- El Wadi,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w489,Sani dadi,West Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w490,Sisi,Western Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w491,Umtajok,West Darfur,SD04125,wfp-nitrition-sites-sudan,Site
+w492,Hajar Assal,West Darfur,SD04127,wfp-nitrition-sites-sudan,Site
+w493,Kulbus,West Darfur,SD04127,wfp-nitrition-sites-sudan,Site
+w494,Kulbus Hospital,Western Darfur,SD04127,wfp-nitrition-sites-sudan,Site
+w495,Mastura,West Darfur,SD04127,wfp-nitrition-sites-sudan,Site
+w496,Rahad Rahma,West Darfur,SD04127,wfp-nitrition-sites-sudan,Site
+w497,Adilla,East Darfur,SD05139,wfp-nitrition-sites-sudan,Site
+w498,Bakhit,East Darfur,SD05139,wfp-nitrition-sites-sudan,Site
+w499,Dar aslam,East Darfur,SD05139,wfp-nitrition-sites-sudan,Site
+w500,Habib suleiman,East Darfur,SD05139,wfp-nitrition-sites-sudan,Site
+w501,El safa,East Darfur,SD05142,wfp-nitrition-sites-sudan,Site
+w502,khor Omer,East Darfur,SD05142,wfp-nitrition-sites-sudan,Site
+w503,Elban Gadeed,South Darfur,SD05148,wfp-nitrition-sites-sudan,Site
+w504,Um Alkhirat,South Darfur,SD05148,wfp-nitrition-sites-sudan,Site
+w505,Hilal,East Darfur,SD05155,wfp-nitrition-sites-sudan,Site
+w506,Wadjado,East Darfur,SD05155,wfp-nitrition-sites-sudan,Site
+w507,Abu matriq,East Darfur,SD05160,wfp-nitrition-sites-sudan,Site
+w508,Elneem,East Darfur,SD05163,wfp-nitrition-sites-sudan,Site
+w509,Elneem2,East Darfur,SD05163,wfp-nitrition-sites-sudan,Site
+w510,Hospital,East Darfur,SD05163,wfp-nitrition-sites-sudan,Site
+w511,Labadu,South Darfur,SD05165,wfp-nitrition-sites-sudan,Site
+w512,Seleah,East Darfur,SD05165,wfp-nitrition-sites-sudan,Site
+w513,Yassin,East Darfur,SD05165,wfp-nitrition-sites-sudan,Site
+w514,Um Shalaiya,Central Darfur,SD06110,wfp-nitrition-sites-sudan,Site
+w515,Umkhair,Central Darfur,SD06112,wfp-nitrition-sites-sudan,Site
+w516,Umm Jukuty,West Darfur,SD06112,wfp-nitrition-sites-sudan,Site
+w517,Mukjar,Central Darfur,SD06130,wfp-nitrition-sites-sudan,Site
+w518,Niertete - North Camp,Central Darfur,SD06131,wfp-nitrition-sites-sudan,Site
+w519,Niertete - South Camp,Central Darfur,SD06131,wfp-nitrition-sites-sudan,Site
+w520,Niertete Hospital,Central Darfur,SD06131,wfp-nitrition-sites-sudan,Site
+w521,Thur,Central Darfur,SD06131,wfp-nitrition-sites-sudan,Site
+w522,Thur Hospital,Central Darfur,SD06131,wfp-nitrition-sites-sudan,Site
+w523,Kubar,Central Darfur,SD06135,wfp-nitrition-sites-sudan,Site
+w524,Salayle,Central Darfur,SD06135,wfp-nitrition-sites-sudan,Site
+w525,Um-Dukhun,Central Darfur,SD06135,wfp-nitrition-sites-sudan,Site
+w526,Deleig,Central Darfur,SD06137,wfp-nitrition-sites-sudan,Site
+w527,Garsila,Central Darfur,SD06137,wfp-nitrition-sites-sudan,Site
+w528,Garsila Hospital,Central Darfur,SD06137,wfp-nitrition-sites-sudan,Site
+w529,Zalingei - Hamedia IDP Camp,Central Darfur,SD06138,wfp-nitrition-sites-sudan,Site
+w530,Zalingei - Hasahisa IDP Camp,Central Darfur,SD06138,wfp-nitrition-sites-sudan,Site
+w531,Zalingei - Khamsa Dagieg IDP Camp,Central Darfur,SD06138,wfp-nitrition-sites-sudan,Site
+w532,Zalingei Hospital,Central Darfur,SD06138,wfp-nitrition-sites-sudan,Site
+w533,Zalingie- Hisahisa IDP Camp,Central Darfur,SD06138,wfp-nitrition-sites-sudan,Site
+w534,Alglaa,South Kordofan,SD07090,wfp-nitrition-sites-sudan,Site
+w535,Rashad,South Kordofan,SD07090,wfp-nitrition-sites-sudan,Site
+w536,Kabbos,South Kordofan,SD07103,wfp-nitrition-sites-sudan,Site
+w537,Kalugi/H.Eldoum,South Kordofan,SD07103,wfp-nitrition-sites-sudan,Site
+w538,Kalyemo,South Kordofan,SD07103,wfp-nitrition-sites-sudan,Site
+w539,Wakara,South Kordofan,SD07103,wfp-nitrition-sites-sudan,Site
+w540,Abukarshola,South Kordofan,SD07104,wfp-nitrition-sites-sudan,Site
+w541,Elsahal,South Kordofan,SD07104,wfp-nitrition-sites-sudan,Site
+w542,Abu Gebeha,South Kordofan,SD07106,wfp-nitrition-sites-sudan,Site
+w543,Al Bitaira,South Kordofan,SD07106,wfp-nitrition-sites-sudan,Site
+w544,Al janubi,North Darfur,SD07106,wfp-nitrition-sites-sudan,Site
+w545,Alarak,South Kordofan,SD07106,wfp-nitrition-sites-sudan,Site
+w546,Eldebibat,South Kordofan,SD07106,wfp-nitrition-sites-sudan,Site
+w547,Hila Hamid south,North Darfur,SD07106,wfp-nitrition-sites-sudan,Site
+w548,Ketab Shakara,North Darfur,SD07106,wfp-nitrition-sites-sudan,Site
+w549,Lagawa Twon,South Kordofan,SD07106,wfp-nitrition-sites-sudan,Site
+w550,Adrot,Red Sea,SD10063,wfp-nitrition-sites-sudan,Site
+w551,Andreif,Red Sea,SD10063,wfp-nitrition-sites-sudan,Site
+w552,Dordieb Hospital,Red Sea,SD10063,wfp-nitrition-sites-sudan,Site
+w553,Gadamai*,Red Sea,SD10063,wfp-nitrition-sites-sudan,Site
+w554,Abu bakr Elsidig,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w555,Ahmed Gashim,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w556,Al Sadaga,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w557,Al tadgdum,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w558,Alsjany,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w559,Assotriba,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w560,Bagdad,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w561,Dar el Naiem,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w562,Deim Arab,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w563,Deim Mayo,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w564,Diem tigani,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w565,El Higra,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w566,El Margania,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w567,El shifa,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w568,Elwihda,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w569,Engaz A,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w570,Escandaria,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w571,Gadisa,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w572,Lalouba,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w573,Muraba 29,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w574,Ongwap,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w575,Port Sudan Hospital,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w576,Thora Shargi,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w577,Umalgura,Red Sea,SD10064,wfp-nitrition-sites-sudan,Site
+w578,Dolabyai,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w579,Dordeab,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w580,Korait,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w581,Mais,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w582,Odwan,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w583,Tokar Raya,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w584,Tokar hospital,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w585,Waram *,Red Sea,SD10065,wfp-nitrition-sites-sudan,Site
+w586,Ait,Red Sea,SD10066,wfp-nitrition-sites-sudan,Site
+w587,Dungunab,Red Sea,SD10066,wfp-nitrition-sites-sudan,Site
+w588,Eis,Red Sea,SD10066,wfp-nitrition-sites-sudan,Site
+w589,Moh. Goal,Red Sea,SD10066,wfp-nitrition-sites-sudan,Site
+w590,Osief,Red Sea,SD10066,wfp-nitrition-sites-sudan,Site
+w591,Gabiet Almadeen,Red Sea,SD10067,wfp-nitrition-sites-sudan,Site
+w592,Rafaneet,Red Sea,SD10067,wfp-nitrition-sites-sudan,Site
+w593,Sodi,Red Sea,SD10067,wfp-nitrition-sites-sudan,Site
+w594,Althmara,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w595,Ashat,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w596,Halgeet,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w597,Oniel,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w598,Suakin hospital,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w599,Wefag,Red Sea,SD10068,wfp-nitrition-sites-sudan,Site
+w600,Aguamt,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w601,Kadaweib,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w602,Saloom,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w603,Shagar,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w604,Tomala,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w605,Tomoli,Red Sea,SD10069,wfp-nitrition-sites-sudan,Site
+w606,Amrin,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w607,Assot,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w608,Hamasait,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w609,Hayia Hospital,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w610,Hayia Raya,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w611,Musmar*,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w612,Sanganie,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w613,Shediab,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w614,Tahmium,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w615,Tiko,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w616,Tilko,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w617,Tolegreb,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w618,Yoymalal,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w619,adarat,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w620,ayiat *,Red Sea,SD10070,wfp-nitrition-sites-sudan,Site
+w621,Arheb,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w622,Arkweet,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w623,BirAnfi,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w624,Denayait,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w625,Gabiet Alashraf,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w626,Gabiet hospital,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w627,Haleet,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w628,Mayo,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w629,Sinkat el riaya,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w630,Sinkat hospital,Red Sea,SD10071,wfp-nitrition-sites-sudan,Site
+w631,Adobona*,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w632,Agitay*,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w633,Aitrba,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w634,Andel,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w635,Balgigo,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w636,Garora,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w637,Grora,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w638,Marafet,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w639,durheb *,Red Sea,SD10072,wfp-nitrition-sites-sudan,Site
+w640,Albarno,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w641,Alengaz North,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w642,Alhidaya,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w643,Almargania,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w644,Alsawra,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w645,Alshabia,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w646,Ansar elsuna,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w647,Bant,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w648,Garab Algash,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w649,Kassala Hospital,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w650,Kudogly,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w651,Kuwaiti hospital,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w652,Makrum west,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w653,Mansoura,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w654,Mukram Dirwa,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w655,Soriba,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w656,Trawa,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w657,Wau Nur,Kassala,SD11053,wfp-nitrition-sites-sudan,Site
+w658,Degain,Kassala,SD11055,wfp-nitrition-sites-sudan,Site
+w659,Makaly,Kassala,SD11055,wfp-nitrition-sites-sudan,Site
+w660,Alfa,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w661,Awadat,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w662,Demen,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w663,Fedayeeb,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w664,Gulsa,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w665,Hafarat,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w666,Silkyai,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w667,Wad sharifi refugees,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w668,Wadisherfy Village,Kassala,SD11056,wfp-nitrition-sites-sudan,Site
+w669,Hadalya,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w670,Matatieb,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w671,Metateb IDPs camp,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w672,Oleep,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w673,Wagar Birrtani,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w674,Wagar Umelgora,Kassala,SD11057,wfp-nitrition-sites-sudan,Site
+w675,Tahjer,Kassala,SD11059,wfp-nitrition-sites-sudan,Site
+w676,Tawait,Kassala,SD11059,wfp-nitrition-sites-sudan,Site
+w677,Elsiragia,South Kordofan,SD13030,wfp-nitrition-sites-sudan,Site
+w678,Gureer,North Darfur,SD13030,wfp-nitrition-sites-sudan,Site
+w679,Tajmalla,South Kordofan,SD13030,wfp-nitrition-sites-sudan,Site
+w680,Hajar Al Makk,South Kordofan,SD18028,wfp-nitrition-sites-sudan,Site
+w681,Tandik,South Kordofan,SD18028,wfp-nitrition-sites-sudan,Site
+w682,Dilling town,South Kordofan,SD18086,wfp-nitrition-sites-sudan,Site
+w683,Elfarshaya,South Kordofan,SD18086,wfp-nitrition-sites-sudan,Site
+w684,Gadeer,South Kordofan,SD18086,wfp-nitrition-sites-sudan,Site
+w685,Kudil,North Darfur,SD18086,wfp-nitrition-sites-sudan,Site
+w686,Tajor,South Kordofan,SD18086,wfp-nitrition-sites-sudan,Site
+w687,Umgedabo,North Darfur,SD18086,wfp-nitrition-sites-sudan,Site
+w688,Aneldas,North Darfur,SD18087,wfp-nitrition-sites-sudan,Site
+w689,Al Radeef,South Kordofan,SD18092,wfp-nitrition-sites-sudan,Site
+w690,Al Tarter,South Kordofan,SD18092,wfp-nitrition-sites-sudan,Site
+w691,Balola,South Kordofan,SD18092,wfp-nitrition-sites-sudan,Site
+w692,Tossy,South Kordofan,SD18100,wfp-nitrition-sites-sudan,Site
+w693,Umajaja,North Darfur,SD18100,wfp-nitrition-sites-sudan,Site
+w694,Abbassiya,South Kordofan,SD18102,wfp-nitrition-sites-sudan,Site
+w695,Allabora,South Kordofan,SD18102,wfp-nitrition-sites-sudan,Site
+w696,Argoon,North Darfur,SD18102,wfp-nitrition-sites-sudan,Site
+w697,Hellat Barnoo,South Kordofan,SD18102,wfp-nitrition-sites-sudan,Site
+w698,Kegga Teamerow,South Kordofan,SD18102,wfp-nitrition-sites-sudan,Site
+w699,Tabasa,South Kordofan,SD18102,wfp-nitrition-sites-sudan,Site
+w700,Al sreef,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w701,Azagarfa,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w702,Fashar,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w703,Golo C,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w704,Kafooot B,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w705,Korgonoringa,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w706,Mario,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w707,Mazdoub A,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w708,Sarafya,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w709,Shagra A,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w710,Shagra C,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w711,Um Maraheek,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w712,Umhagaleej,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w713,Umzor,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w714,lawabid,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w715,magdoub a,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w716,salogy,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w717,sarafiya,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w718,umhalalij,North Darfur,SD02114,wfp-safe-initiative-assisted-villages,SAFE Village
+w719,Ameria Garib,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w720,Ameria Shamal,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w721,Ameria Sharig,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w722,Ameria Wasate,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w723,Dego,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w724,Dely Eregat,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w725,Dely Gimire,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w726,Dely Nemnja,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w727,Dely Shatia,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w728,EL Wahida,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w729,El Gadida,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w730,El Mustashifa,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w731,El Rayan,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w732,El Shaheed,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w733,El Sharty,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w734,El Shatti,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w735,El Soug,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w736,El Soug Janoub,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w737,El Wadi (Domi),North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w738,El mawashi,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w739,Fuldong,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w740,Moalga,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w741,Numo,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w742,Ora Villages,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w743,Shobha Gogama,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w744,Shobha Mansur Sharig,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w745,Shobha Ruhal,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w746,Shobha Sharifaya,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w747,Sobha Mansur Garib,North Darfur,SD02124,wfp-safe-initiative-assisted-villages,SAFE Village
+w748,Argala,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w749,Frok,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w750,Guba,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w751,Kineen,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w752,Lamina,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w753,Mulagat,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w754,Timtim,North Darfur,SD02128,wfp-safe-initiative-assisted-villages,SAFE Village
+w755,Arjon,North Darfur,SD02129,wfp-safe-initiative-assisted-villages,SAFE Village
+w756,Hajarsari,North Darfur,SD02129,wfp-safe-initiative-assisted-villages,SAFE Village
+w757,Kumaumalgura,North Darfur,SD02129,wfp-safe-initiative-assisted-villages,SAFE Village
+w758,Argo,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w759,Barbojat,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w760,Koiem,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w761,Konjara,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w762,Taalba,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w763,Umbornga,North Darfur,SD02170,wfp-safe-initiative-assisted-villages,SAFE Village
+w764,Fata barno camp,North Darfur,SD04121,wfp-safe-initiative-assisted-villages,SAFE Village
+w765,Ajiro,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w766,Aramba tama,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w767,Arba Buiet,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w768,Arenga,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w769,Beni Mansoor,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w770,Birjanago,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w771,Daday,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w772,Faki yahiya,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w773,Geldama Ajab el dor,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w774,Geldama Hilelat,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w775,Geldama Um Huzara,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w776,Geldama giger,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w777,Geldama ruhal,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w778,Geldama sinjaw,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w779,Geldama un sayala,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w780,Gemiza,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w781,Harra Garib,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w782,Harra Sharik,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w783,Hilelah,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w784,Hsaba,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w785,Jawad El Waika,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w786,Jawarie,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w787,Khartoum Bahri,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w788,Mit Crew,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w789,Morlong,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w790,Sanabeel,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w791,Tamanga,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w792,Um Bildeso,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w793,Um Huzara,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w794,Um Ketero,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w795,Um Shalil,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w796,Um loata,North Darfur,SD06132,wfp-safe-initiative-assisted-villages,SAFE Village
+w797,Copi Al Gadi,North Darfur,SD13025,wfp-safe-initiative-assisted-villages,SAFE Village
+w798,Ustaabdok,North Darfur,SD13025,wfp-safe-initiative-assisted-villages,SAFE Village
+w799,Gogo-Gogo,North Darfur,SD13027,wfp-safe-initiative-assisted-villages,SAFE Village
+w800,Hilllat Hamid,North Darfur,SD13027,wfp-safe-initiative-assisted-villages,SAFE Village

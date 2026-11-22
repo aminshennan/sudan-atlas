@@ -1,0 +1,20 @@
+{
+ "pool": {
+  "wfp-nitrition-sites-sudan": 399,
+  "wfp-safe-initiative-assisted-villages": 101,
+  "darfur-damaged-and-destroyed-villages": 2744
+ },
+ "sample": 800,
+ "skipped": {
+  "no readable coordinates": 37,
+  "no name": 6320,
+  "name in an earlier test": 140,
+  "repeat of a name in the same locality": 95,
+  "point outside Sudan's localities": 5
+ },
+ "by_source": {
+  "darfur-damaged-and-destroyed-villages": 300,
+  "wfp-nitrition-sites-sudan": 399,
+  "wfp-safe-initiative-assisted-villages": 101
+ }
+}

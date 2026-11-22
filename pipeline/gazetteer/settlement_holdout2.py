@@ -76,6 +76,15 @@ def _rows() -> list[dict]:
     return rows
 
 
+def _number(value) -> float | None:
+    """A coordinate as a number, or None when it is missing or unreadable ("31 70 95 .55 6")."""
+    try:
+        x = float(value)
+    except (TypeError, ValueError):
+        return None
+    return None if pd.isna(x) else x
+
+
 def cases() -> dict:
     gazetteer_dir = config.ROOT / "data" / "gazetteer"
     norm = Normaliser(json.loads((gazetteer_dir / "normalisation.json").read_text(encoding="utf-8")))
@@ -87,10 +96,10 @@ def cases() -> dict:
         name = " ".join(str(r["name"]).split()) if isinstance(r["name"], str) else ""
         if not name or not norm.key(name):
             skipped["no name"] += 1
-        elif pd.isna(r["lon"]) or pd.isna(r["lat"]):
-            skipped["no coordinates"] += 1
+        elif _number(r["lon"]) is None or _number(r["lat"]) is None:
+            skipped["no readable coordinates"] += 1
         else:
-            rows.append({**r, "name": name, "lon": float(r["lon"]), "lat": float(r["lat"])})
+            rows.append({**r, "name": name, "lon": _number(r["lon"]), "lat": _number(r["lat"])})
     localities = gpd.read_file(config.BOUNDARIES_DIR / "detailed" / "adm2.geojson")[["pcode", "parent_pcode", "geometry"]]
     points = gpd.GeoDataFrame(rows, geometry=[Point(r["lon"], r["lat"]) for r in rows], crs=4326)
     joined = gpd.sjoin(points, localities, how="left", predicate="within")
